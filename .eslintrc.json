@@ -35,6 +35,14 @@
       "rules": {
         "testing-library/prefer-user-event": "error"
       }
+    },
+    {
+      "files": ["*.stories.@(ts|tsx)"],
+      "extends": ["plugin:storybook/recommended"],
+      "rules": {
+        "storybook/hierarchy-separator": "error",
+        "storybook/default-exports": "off"
+      }
     }
   ]
 }

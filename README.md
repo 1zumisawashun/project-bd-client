@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# project-bd-client
 
-## Getting Started
+project-bdのリポジトリです
 
-First, run the development server:
+## 環境構築の手順
+
+- クローンして VSCodeを開く
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+$ git clone git@github.com:1zumisawashun/project-bd-client.git
+$ cd project-bd-client
+$ code .
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- envファイルを生成する（必要な秘匿情報は[こちら]()から参照してください）
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+$ cp .env.example .env
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- パッケージをインストールする
 
-## Learn More
+```bash
+$ npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+- ローカル開発用 [URL](http://localhost:3000) を開き動作確認をする
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+$ npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+上記の手順で失敗する場合 [Troubleshoot](#Troubleshoot)を確認してください
 
-## Deploy on Vercel
+## ディレクトリ構成
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+See [Configuration Reference](https://github.com/1zumisawashun/folder-structure-template).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## ERD
+
+...
+
+## 使用技術
+
+```
+- frontend : Next.js App Router
+- backend : Next.js Route Handler
+- orm : Prisma
+- database : Supabase
+- ui : Radix UI + CSS Modules
+- auth : NextAuth
+- test : react-testing-library
+- hosting : Vercel
+- other : react-hook-form, zod, tiptap, pathpida, Storybook
+```
+
+## Troubleshoot
+
+### デプロイが失敗する
+
+Supabaseをhobbyプランで使用しているため定期的に稼働させないとロックされます。  
+Supabaseのダッシュボードでリストアさせてください。
+
+### nodeエラーが発生する
+
+nodeのバージョンを本案件のバージョンに合わせてください。  
+nodeのバージョン管理ツールをVoltaに設定している場合は不要です。
+
+## その他ドキュメント
+
+See [Configuration Reference]().

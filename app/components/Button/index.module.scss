@@ -1,4 +1,4 @@
-@import '@radix-ui/colors/violet.css';
+@import '@radix-ui/colors/indigo.css';
 @import '@radix-ui/colors/red.css';
 
 .button {
@@ -30,19 +30,19 @@
 
   &[data-variant='contained'][data-theme='primary'] {
     color: white;
-    background-color: var(--violet-12);
-    border: 1px solid var(--violet-12);
+    background-color: var(--indigo-12);
+    border: 1px solid var(--indigo-12);
     &:focus-visible {
-      outline: 2px solid var(--violet-6);
+      outline: 2px solid var(--indigo-6);
       outline-offset: 2px;
     }
   }
   &[data-variant='outlined'][data-theme='primary'] {
-    color: var(--violet-12);
+    color: var(--indigo-12);
     background-color: white;
-    border: 1px solid var(--violet-12);
+    border: 1px solid var(--indigo-12);
     &:focus-visible {
-      border: 2px solid var(--violet-12);
+      border: 2px solid var(--indigo-12);
     }
   }
   &[data-variant='contained'][data-theme='danger'] {

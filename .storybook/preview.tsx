@@ -7,7 +7,7 @@ import React from 'react'
 const preview: Preview = {
   decorators: [
     (Story) => (
-      <div style={{ width: '576px' }}>
+      <div>
         <Story />
       </div>
     ),

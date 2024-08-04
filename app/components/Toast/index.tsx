@@ -4,7 +4,7 @@
 /* eslint-disable react/function-component-definition */
 import * as RowToast from '@radix-ui/react-toast'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import styles from './index.module.css'
+import styles from './index.module.scss'
 import { Button } from '../Button'
 
 export const Toast = <

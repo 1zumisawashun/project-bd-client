@@ -4,11 +4,10 @@
 
 import clsx from 'clsx'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
-import styles from './index.module.css'
+import styles from './index.module.scss'
 
 type Props = {
-  type?: 'button' | 'submit' | 'reset'
-  theme?: 'primary' | 'secondary' | 'tertiary'
+  theme?: 'primary' | 'secondary' | 'danger'
   variant?: 'contained' | 'outlined' | 'text'
   size?: 'small' | 'medium' | 'large'
   shape?: 'rounded' | 'circle'
@@ -42,13 +41,13 @@ export const Button = forwardRef<Ref, Props>(
     return (
       <button
         {...props}
+        className={clsx(styles['button'], className)}
         type={type}
-        className={clsx(styles['Button'], className)}
         data-variant={variant}
         data-theme={theme}
         data-size={size}
         data-shape={shape}
-        aria-disabled={disabled}
+        disabled={disabled}
         ref={ref}
       >
         {prefix ?? null}

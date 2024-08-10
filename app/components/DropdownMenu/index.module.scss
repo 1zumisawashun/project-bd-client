@@ -1,10 +1,10 @@
 @import '@radix-ui/colors/black-alpha.css';
 @import '@radix-ui/colors/mauve.css';
-@import '@radix-ui/colors/violet.css';
+@import '@radix-ui/colors/indigo.css';
 
 .dropdown-menu-content,
 .dropdown-menu-sub-content {
-  min-width: 220px;
+  min-width: 320px;
   background-color: white;
   border-radius: 6px;
   padding: 5px;
@@ -32,11 +32,10 @@
   animation-name: slideRightAndFade;
 }
 
-.dropdown-menu-item,
-.dropdown-menu-sub-trigger {
+.dropdown-menu-item {
   font-size: 13px;
   line-height: 1;
-  color: var(--violet-11);
+  color: var(--indigo-12);
   border-radius: 3px;
   display: flex;
   align-items: center;
@@ -47,25 +46,21 @@
   user-select: none;
   outline: none;
 }
-.dropdown-menu-sub-trigger[data-state='open'] {
-  background-color: var(--violet-4);
-  color: var(--violet-11);
-}
-.dropdown-menu-item[data-disabled],
-.dropdown-menu-sub-trigger[data-disabled] {
+
+.dropdown-menu-item[data-disabled] {
   color: var(--mauve-8);
   pointer-events: none;
 }
 
-.dropdown-menu-item[data-highlighted],
-.dropdown-menu-sub-trigger[data-highlighted] {
-  background-color: var(--violet-9);
-  color: var(--violet-1);
+.dropdown-menu-item[data-highlighted] {
+  background-color: var(--indigo-12);
+  color: var(--indigo-1);
+  filter: brightness(90%);
 }
 
 .dropdown-menu-separator {
   height: 1px;
-  background-color: var(--violet-6);
+  background-color: var(--indigo-6);
   margin: 5px;
 }
 

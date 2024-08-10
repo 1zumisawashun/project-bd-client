@@ -7,23 +7,23 @@ import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import {
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuRoot,
+  DropdownMenu,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './index'
 
-const meta: Meta<typeof DropdownMenuRoot> = {
+const meta: Meta<typeof DropdownMenu> = {
   title: 'DropdownMenu',
-  component: DropdownMenuRoot,
+  component: DropdownMenu,
 }
 
 export default meta
 
-type Story = StoryObj<typeof DropdownMenuRoot>
+type Story = StoryObj<typeof DropdownMenu>
 
 function Render() {
   return (
-    <DropdownMenuRoot>
+    <DropdownMenu>
       <DropdownMenuTrigger>
         <HamburgerMenuIcon />
       </DropdownMenuTrigger>
@@ -34,7 +34,7 @@ function Render() {
         <DropdownMenuSeparator />
         <DropdownMenuItem disabled>New Private Window</DropdownMenuItem>
       </DropdownMenuContent>
-    </DropdownMenuRoot>
+    </DropdownMenu>
   )
 }
 

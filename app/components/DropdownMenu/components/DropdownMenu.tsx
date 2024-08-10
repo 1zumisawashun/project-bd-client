@@ -4,8 +4,8 @@
 import * as RowDropdownMenu from '@radix-ui/react-dropdown-menu'
 
 type Props = {} & RowDropdownMenu.DropdownMenuProps
-export const DropdownMenuRoot: React.FC<Props> = (props) => {
+export const DropdownMenu: React.FC<Props> = (props) => {
   return <RowDropdownMenu.Root {...props} />
 }
 
-DropdownMenuRoot.displayName = 'DropdownMenuRoot'
+DropdownMenu.displayName = 'DropdownMenu'

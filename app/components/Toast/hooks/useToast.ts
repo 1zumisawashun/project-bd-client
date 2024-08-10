@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 
 export const useToast = () => {
-  const { isOpen, setIsOpen, open, close } = useDisclosure()
+  const { isOpen, open, close } = useDisclosure()
   const eventDateRef = useRef(new Date())
   const timerRef = useRef(0)
 
@@ -25,5 +25,5 @@ export const useToast = () => {
     }, 100)
   }
 
-  return { isOpen, setIsOpen, handleClick }
+  return { isOpen, close, handleClick }
 }

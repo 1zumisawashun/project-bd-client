@@ -14,11 +14,11 @@ export default meta
 type Story = StoryObj<typeof Toast>
 
 function Render() {
-  const { isOpen, setIsOpen, handleClick } = useToast()
+  const { isOpen, close, handleClick } = useToast()
   return (
     <>
       <Button onClick={handleClick}>Click me</Button>
-      <Toast isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Toast isOpen={isOpen} close={close} />
     </>
   )
 }

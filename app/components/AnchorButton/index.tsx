@@ -1,7 +1,3 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/function-component-definition */
-/* eslint-disable import/no-extraneous-dependencies */
-
 import clsx from 'clsx'
 import {
   ElementRef,
@@ -9,32 +5,30 @@ import {
   ComponentPropsWithoutRef,
   ReactNode,
 } from 'react'
+import NextLink, { LinkProps } from 'next/link'
 import styles from './index.module.scss'
 
-type Props = {
+type Props = ComponentPropsWithoutRef<'a'> & {
   theme?: 'primary' | 'secondary' | 'danger'
   variant?: 'contained' | 'outlined' | 'text'
   size?: 'small' | 'medium' | 'large'
   shape?: 'rounded' | 'circle'
-  loading?: boolean
   disabled?: boolean
   className?: string
   prefix?: ReactNode
   suffix?: ReactNode
-} & ComponentPropsWithoutRef<'button'>
+} & LinkProps
 
-type Ref = ElementRef<'button'>
+type Ref = ElementRef<'a'>
 
-export const Button = forwardRef<Ref, Props>(
+export const AnchorButton = forwardRef<Ref, Props>(
   (
     {
-      type = 'button',
       children,
       theme = 'primary',
       variant = 'contained',
       size = 'medium',
       shape,
-      loading,
       disabled,
       className,
       prefix,
@@ -44,23 +38,22 @@ export const Button = forwardRef<Ref, Props>(
     ref,
   ) => {
     return (
-      <button
+      <NextLink
         {...props}
         className={clsx(styles['button'], className)}
-        type={type}
         data-variant={variant}
         data-theme={theme}
         data-size={size}
         data-shape={shape}
-        disabled={disabled}
+        aria-disabled={disabled}
         ref={ref}
       >
         {prefix ?? null}
         {children}
         {suffix ?? null}
-      </button>
+      </NextLink>
     )
   },
 )
 
-Button.displayName = 'Button'
+AnchorButton.displayName = 'AnchorButton'

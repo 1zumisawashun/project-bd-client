@@ -83,7 +83,6 @@ export const PriceInput = forwardRef<Ref, Props>(
         <TextInput
           ref={ref}
           {...rest}
-          type="text"
           value={isPrice ? price : priceWithComma}
           {...priceInputHandler()}
         />

@@ -8,17 +8,17 @@ import styles from './index.module.scss'
 import { Button } from '../Button'
 
 export const Toast = <
-  T extends Pick<ReturnType<typeof useDisclosure>, 'isOpen' | 'setIsOpen'>,
+  T extends Pick<ReturnType<typeof useDisclosure>, 'isOpen' | 'close'>,
 >({
   isOpen,
-  setIsOpen,
+  close,
 }: T) => {
   return (
     <RowToast.Provider swipeDirection="right">
       <RowToast.Root
         className={styles['ToastRoot']}
         open={isOpen}
-        onOpenChange={setIsOpen}
+        onOpenChange={() => close()}
       >
         <RowToast.Title className={styles['ToastTitle']}>
           Scheduled: Catch up
@@ -29,7 +29,7 @@ export const Toast = <
           asChild
           altText="Goto schedule to undo"
         >
-          <Button onClick={() => setIsOpen(false)}>Undo</Button>
+          <Button onClick={() => close()}>Undo</Button>
         </RowToast.Action>
       </RowToast.Root>
       <RowToast.Viewport className={styles['ToastViewport']} />

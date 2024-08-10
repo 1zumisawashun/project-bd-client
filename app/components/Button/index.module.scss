@@ -1,7 +1,6 @@
-@import '@radix-ui/colors/indigo.css';
-@import '@radix-ui/colors/red.css';
-
 .button {
+  composes: base-button from '@/assets/base-button.module.scss';
+  // override the base-button styles
   box-sizing: border-box;
   font-size: 1rem;
   line-height: 1;
@@ -12,54 +11,4 @@
   justify-content: center;
   text-align: center;
   padding: 0.5rem 1rem;
-
-  &:hover {
-    cursor: pointer;
-    filter: brightness(90%);
-    transition: filter 0.3s ease;
-  }
-  &:active {
-    filter: brightness(80%);
-    transition: filter 0.3s ease;
-  }
-  &[disabled] {
-    pointer-events: none;
-    filter: brightness(60%);
-    transition: filter 0.3s ease;
-  }
-
-  &[data-variant='contained'][data-theme='primary'] {
-    color: white;
-    background-color: var(--indigo-12);
-    border: 1px solid var(--indigo-12);
-    &:focus-visible {
-      outline: 2px solid var(--indigo-6);
-      outline-offset: 2px;
-    }
-  }
-  &[data-variant='outlined'][data-theme='primary'] {
-    color: var(--indigo-12);
-    background-color: white;
-    border: 1px solid var(--indigo-12);
-    &:focus-visible {
-      border: 2px solid var(--indigo-12);
-    }
-  }
-  &[data-variant='contained'][data-theme='danger'] {
-    color: white;
-    background-color: var(--red-10);
-    border: 1px solid var(--red-10);
-    &:focus-visible {
-      outline: 2px solid var(--red-6);
-      outline-offset: 2px;
-    }
-  }
-  &[data-variant='outlined'][data-theme='danger'] {
-    color: var(--red-10);
-    background-color: white;
-    border: 1px solid var(--red-10);
-    &:focus-visible {
-      border: 2px solid var(--red-10);
-    }
-  }
 }

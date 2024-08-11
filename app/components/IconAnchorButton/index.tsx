@@ -1,25 +1,18 @@
 import clsx from 'clsx'
-import {
-  ElementRef,
-  forwardRef,
-  ComponentPropsWithoutRef,
-  ReactNode,
-} from 'react'
+import { ElementRef, forwardRef, ComponentPropsWithoutRef } from 'react'
 import NextLink, { LinkProps } from 'next/link'
 import styles from './index.module.scss'
 
-const BLOCK_NAME = 'button'
+const BLOCK_NAME = 'icon-button'
 type Props = ComponentPropsWithoutRef<'a'> & {
   theme?: 'primary' | 'secondary' | 'danger'
   variant?: 'contained' | 'outlined' | 'text'
   size?: 'small' | 'medium' | 'large'
   shape?: 'rounded' | 'circle'
   disabled?: boolean
-  prefix?: ReactNode
-  suffix?: ReactNode
 } & LinkProps
 type Ref = ElementRef<'a'>
-export const AnchorButton = forwardRef<Ref, Props>(
+export const IconAnchorButton = forwardRef<Ref, Props>(
   (
     {
       children,
@@ -29,8 +22,6 @@ export const AnchorButton = forwardRef<Ref, Props>(
       shape,
       disabled,
       className,
-      prefix,
-      suffix,
       ...props
     },
     ref,
@@ -46,12 +37,10 @@ export const AnchorButton = forwardRef<Ref, Props>(
         aria-disabled={disabled}
         ref={ref}
       >
-        {prefix ?? null}
         {children}
-        {suffix ?? null}
       </NextLink>
     )
   },
 )
 
-AnchorButton.displayName = 'AnchorButton'
+IconAnchorButton.displayName = 'IconAnchorButton'

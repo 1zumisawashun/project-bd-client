@@ -11,6 +11,7 @@ import {
 } from 'react'
 import styles from './index.module.scss'
 
+const BLOCK_NAME = 'button'
 type Props = {
   theme?: 'primary' | 'secondary' | 'danger'
   variant?: 'contained' | 'outlined' | 'text'
@@ -18,13 +19,10 @@ type Props = {
   shape?: 'rounded' | 'circle'
   loading?: boolean
   disabled?: boolean
-  className?: string
   prefix?: ReactNode
   suffix?: ReactNode
 } & ComponentPropsWithoutRef<'button'>
-
 type Ref = ElementRef<'button'>
-
 export const Button = forwardRef<Ref, Props>(
   (
     {
@@ -46,7 +44,7 @@ export const Button = forwardRef<Ref, Props>(
     return (
       <button
         {...props}
-        className={clsx(styles['button'], className)}
+        className={clsx(styles[`${BLOCK_NAME}`], className)}
         type={type}
         data-variant={variant}
         data-theme={theme}

@@ -1,57 +1,53 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/function-component-definition */
+/* eslint-disable import/no-extraneous-dependencies */
+
 import clsx from 'clsx'
-import {
-  ElementRef,
-  forwardRef,
-  ComponentPropsWithoutRef,
-  ReactNode,
-} from 'react'
-import NextLink, { LinkProps } from 'next/link'
+import { ElementRef, forwardRef, ComponentPropsWithoutRef } from 'react'
 import styles from './index.module.scss'
 
-const BLOCK_NAME = 'button'
-type Props = ComponentPropsWithoutRef<'a'> & {
+const BLOCK_NAME = 'icon-button'
+type Props = {
   theme?: 'primary' | 'secondary' | 'danger'
   variant?: 'contained' | 'outlined' | 'text'
   size?: 'small' | 'medium' | 'large'
   shape?: 'rounded' | 'circle'
+  loading?: boolean
   disabled?: boolean
-  prefix?: ReactNode
-  suffix?: ReactNode
-} & LinkProps
-type Ref = ElementRef<'a'>
-export const AnchorButton = forwardRef<Ref, Props>(
+} & ComponentPropsWithoutRef<'button'>
+type Ref = ElementRef<'button'>
+export const IconButton = forwardRef<Ref, Props>(
   (
     {
+      type = 'button',
       children,
       theme = 'primary',
       variant = 'contained',
       size = 'medium',
       shape,
+      loading,
       disabled,
       className,
-      prefix,
-      suffix,
       ...props
     },
     ref,
   ) => {
     return (
-      <NextLink
+      <button
         {...props}
         className={clsx(styles[`${BLOCK_NAME}`], className)}
+        type={type}
         data-variant={variant}
         data-theme={theme}
         data-size={size}
         data-shape={shape}
-        aria-disabled={disabled}
+        disabled={disabled}
         ref={ref}
       >
-        {prefix ?? null}
         {children}
-        {suffix ?? null}
-      </NextLink>
+      </button>
     )
   },
 )
 
-AnchorButton.displayName = 'AnchorButton'
+IconButton.displayName = 'IconButton'

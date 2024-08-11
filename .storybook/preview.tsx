@@ -17,6 +17,7 @@ const preview: Preview = {
       hover: '#hover',
       active: '#active',
       focusVisible: '#focus-visible',
+      focus: '#focus',
     },
     nextjs: {
       /**

@@ -18,9 +18,7 @@ type Props = {
   error?: FieldError | undefined
   name: string
 } & Omit<ComponentProps<typeof TextInput>, 'onChange' | 'onBlur' | 'name'>
-
 type Ref = ElementRef<'input'>
-
 type PriceInputHandlerReturnType = {
   onFocus: FocusEventHandler<HTMLInputElement>
   onChange: ChangeEventHandler<HTMLInputElement>
@@ -36,7 +34,6 @@ const transformFullWidthNumbers = (value: string) => {
     (char) => halfWidthNumbers[fullWidthNumbers.indexOf(char)]!,
   )
 }
-
 export const PriceInput = forwardRef<Ref, Props>(
   ({ error, value, name, ...rest }, ref) => {
     const {
@@ -79,7 +76,14 @@ export const PriceInput = forwardRef<Ref, Props>(
     }
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '1rem',
+          alignItems: 'center',
+        }}
+      >
         <TextInput
           ref={ref}
           {...rest}

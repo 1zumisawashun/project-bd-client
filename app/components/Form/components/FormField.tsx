@@ -8,7 +8,6 @@ import styles from '../index.module.scss'
 
 const BLOCK_NAME = 'form'
 type Props = {} & Form.FormFieldProps
-
 type Ref = ElementRef<'div'>
 export const FormField = forwardRef<Ref, Props>(
   ({ className, ...props }, ref) => {

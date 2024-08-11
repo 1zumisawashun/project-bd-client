@@ -2,15 +2,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import type { Meta, StoryObj } from '@storybook/react'
-import * as Form from '@radix-ui/react-form'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { PriceInput } from './index'
-import { FormErrorMessage, FormField } from '../Form'
+import { FormErrorMessage, FormField, Form } from '../Form'
 
 const meta: Meta<typeof PriceInput> = {
-  title: 'forms/PriceInput',
+  title: 'form/PriceInput',
   component: PriceInput,
 }
 export default meta
@@ -32,7 +31,7 @@ function Render() {
     },
   })
   return (
-    <Form.Root>
+    <Form>
       <FormField name="price" serverInvalid={!!errors.price}>
         <Controller
           control={control}
@@ -45,7 +44,7 @@ function Render() {
           <FormErrorMessage>{errors.price.message}</FormErrorMessage>
         )}
       </FormField>
-    </Form.Root>
+    </Form>
   )
 }
 

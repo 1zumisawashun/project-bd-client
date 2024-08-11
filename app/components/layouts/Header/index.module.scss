@@ -1,0 +1,10 @@
+@import '@radix-ui/colors/mauve.css';
+
+.header {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--mauve-6);
+  height: 60px;
+}

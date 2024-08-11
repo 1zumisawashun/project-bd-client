@@ -12,7 +12,7 @@ export const HeaderMenu: React.FC = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <IconButton variant="outlined">
+        <IconButton variant="ghost">
           <HamburgerMenuIcon />
         </IconButton>
       </DropdownMenuTrigger>

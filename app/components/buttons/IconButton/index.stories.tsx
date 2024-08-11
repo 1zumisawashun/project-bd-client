@@ -8,6 +8,7 @@ import {
   HeartFilledIcon,
 } from '@radix-ui/react-icons'
 import { IconButton } from './index'
+import { items } from '../buttons.constant'
 
 const meta: Meta<typeof IconButton> = {
   title: 'button/IconButton',
@@ -19,13 +20,6 @@ export default meta
 type Story = StoryObj<typeof IconButton>
 
 function Render() {
-  const items = [
-    { id: 1, variant: 'contained', theme: 'primary' },
-    { id: 2, variant: 'outlined', theme: 'primary' },
-    { id: 3, variant: 'contained', theme: 'danger' },
-    { id: 4, variant: 'outlined', theme: 'danger' },
-  ] as const
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {items.map((item) => (

@@ -6,7 +6,9 @@ const BLOCK_NAME = 'header'
 export const Header: React.FC = () => {
   return (
     <header className={styles[`${BLOCK_NAME}`]}>
-      <AnchorButton href="/">project-bd-client</AnchorButton>
+      <AnchorButton href="/" variant="ghost">
+        project-bd-client
+      </AnchorButton>
       <HeaderMenu />
     </header>
   )

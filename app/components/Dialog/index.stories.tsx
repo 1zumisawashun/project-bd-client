@@ -1,16 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { Dialog, DialogContent } from './index'
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from './index'
 import { Button } from '../Button'
 
 const meta: Meta<typeof Dialog> = {
   title: 'Dialog',
   component: Dialog,
 }
-
 export default meta
-
 type Story = StoryObj<typeof Dialog>
 
 function Render() {
@@ -21,12 +19,23 @@ function Render() {
       <Dialog open={isOpen} onOpenChange={() => close()}>
         <DialogContent>
           <div
-            style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
           >
-            <h1>Title</h1>
-            <p>description</p>
-            <div>
-              <Button onClick={close}>Close Dialog</Button>
+            <DialogTitle>削除しますか？</DialogTitle>
+            <DialogDescription>本当に削除しますか？</DialogDescription>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
+              <Button theme="danger" variant="outlined" onClick={close}>
+                キャンセル
+              </Button>
+              <Button theme="danger" onClick={() => alert('delete!')}>
+                削除する
+              </Button>
             </div>
           </div>
         </DialogContent>

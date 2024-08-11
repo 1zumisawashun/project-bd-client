@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { AnchorButton } from './index'
 
 const meta: Meta<typeof AnchorButton> = {
-  title: 'AnchorButton',
+  title: 'button/AnchorButton',
   component: AnchorButton,
 }
 

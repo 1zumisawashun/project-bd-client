@@ -10,7 +10,7 @@ import {
 import { IconAnchorButton } from './index'
 
 const meta: Meta<typeof IconAnchorButton> = {
-  title: 'IconAnchorButton',
+  title: 'button/IconAnchorButton',
   component: IconAnchorButton,
 }
 

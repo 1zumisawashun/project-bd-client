@@ -12,7 +12,11 @@ export default meta
 type Story = StoryObj<typeof SubHeader>
 
 function Render() {
-  return <SubHeader>children</SubHeader>
+  return (
+    <SubHeader href="#" title="article list">
+      children
+    </SubHeader>
+  )
 }
 
 export const Default: Story = {

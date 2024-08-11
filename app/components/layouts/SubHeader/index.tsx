@@ -19,6 +19,7 @@ export const SubHeader: React.FC<SubHeaderProps> = ({
       {href ? (
         <AnchorButton
           href={href}
+          variant='ghost'
           className={styles[`${BLOCK_NAME}-back-button`]}
         >
           ← back

@@ -3,8 +3,14 @@
   // override the base-button styles
   line-height: 1;
   align-items: center;
-  border-radius: 100%;
   display: inline-flex;
   justify-content: center;
   padding: 0.5rem;
+
+  &[data-shape='rounded'] {
+    border-radius: 20%;
+  }
+  &[data-shape='circle'] {
+    border-radius: 100%;
+  }
 }

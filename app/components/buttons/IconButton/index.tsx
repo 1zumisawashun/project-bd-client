@@ -23,7 +23,7 @@ export const IconButton = forwardRef<Ref, Props>(
       theme = 'primary',
       variant = 'contained',
       size = 'medium',
-      shape,
+      shape = 'rounded',
       loading,
       disabled,
       className,

@@ -20,7 +20,7 @@ export const IconAnchorButton = forwardRef<Ref, Props>(
       theme = 'primary',
       variant = 'contained',
       size = 'medium',
-      shape,
+      shape = 'rounded',
       disabled,
       className,
       ...props

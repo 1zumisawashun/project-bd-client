@@ -1,16 +1,14 @@
-import { BubbleMenu as BubbleMenuTiptap, Editor } from '@tiptap/react'
+import { BubbleMenu as RowBubbleMenu, Editor } from '@tiptap/react'
 import { useEffect, useState } from 'react'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { useEditor } from '../hooks/useEditor'
-
-export type MenuBubbleProps = {
-  editor: Editor
-}
+import { Tooltip } from '../../Tooltip'
+import { Button } from '../../../buttons/Button'
 
 // NOTE:https://tiptap.dev/api/extensions/bubble-menu
 // NOTE:内部的にtippy.jsを使っているっぽい
 // NOTE:https://atomiks.github.io/tippyjs/
-export const MenuBubble: React.FC<MenuBubbleProps> = ({ editor }) => {
+export const MenuBubble: React.FC<{ editor: Editor }> = ({ editor }) => {
   const {
     bold,
     italic,
@@ -27,14 +25,6 @@ export const MenuBubble: React.FC<MenuBubbleProps> = ({ editor }) => {
     textAlignRight,
     link,
   } = useEditor(editor)
-
-  const [isEditable, setIsEditable] = useState(true)
-
-  useEffect(() => {
-    if (editor) {
-      editor.setEditable(isEditable)
-    }
-  }, [isEditable, editor])
 
   const headingDisclosure = useDisclosure()
   const textAlignDisclosure = useDisclosure()
@@ -79,6 +69,7 @@ export const MenuBubble: React.FC<MenuBubbleProps> = ({ editor }) => {
   const items = [
     headings,
     bold,
+    italic,
     strike,
     lists,
     textAligns,
@@ -92,67 +83,18 @@ export const MenuBubble: React.FC<MenuBubbleProps> = ({ editor }) => {
   const textAlignItems = [textAlignLeft, textAlignCenter, textAlignRight]
 
   return (
-    <BubbleMenuTiptap
+    <RowBubbleMenu
       editor={editor}
       tippyOptions={{
         duration: 100,
         maxWidth: 600,
       }}
     >
-      <div>
-        {/* {items.map((item, index) => (
-          <Tooltip title={item.type} key={index} placement="top" arrow>
-            <div
-              onMouseOver={item?.onMouseOver}
-              onMouseLeave={item?.onMouseLeave}
-              style={{ display: 'relative' }}
-            >
-              <Item onClick={item.onClick} className={item.className}>
-                {item.icon}
-                {!['link', 'blockquote'].includes(item.type)
-                  ? item.label
-                  : null}
-              </Item>
-              {headingDisclosure.isOpen && item.type === 'headings' && (
-                <Popper>
-                  <PopperInner>
-                    {headingItems.map((item) => (
-                      <Item onClick={item.onClick} className={item.className}>
-                        {item.icon}
-                        {item.label}
-                      </Item>
-                    ))}
-                  </PopperInner>
-                </Popper>
-              )}
-              {textAlignDisclosure.isOpen && item.type === 'textAligns' && (
-                <Popper>
-                  <PopperInner>
-                    {textAlignItems.map((item) => (
-                      <Item onClick={item.onClick} className={item.className}>
-                        {item.icon}
-                        {item.label}
-                      </Item>
-                    ))}
-                  </PopperInner>
-                </Popper>
-              )}
-              {listDisclosure.isOpen && item.type === 'lists' && (
-                <Popper>
-                  <PopperInner>
-                    {listItems.map((item) => (
-                      <Item onClick={item.onClick} className={item.className}>
-                        {item.icon}
-                        {item.label}
-                      </Item>
-                    ))}
-                  </PopperInner>
-                </Popper>
-              )}
-            </div>
-          </Tooltip>
-        ))} */}
-      </div>
-    </BubbleMenuTiptap>
+      {items.map((item) => (
+        <Button key={item.type} onClick={item.onClick} variant="ghost">
+          {item.children}
+        </Button>
+      ))}
+    </RowBubbleMenu>
   )
 }

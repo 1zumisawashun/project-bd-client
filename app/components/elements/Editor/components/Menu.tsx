@@ -2,12 +2,11 @@ import { Editor } from '@tiptap/react'
 import { useEditor } from '../hooks/useEditor'
 import { Button } from '../../../buttons/Button'
 
-export type MenuProps = {
+export const Menu: React.FC<{
   editor: Editor
-}
-
-export const Menu: React.FC<MenuProps> = ({ editor }) => {
+}> = ({ editor }) => {
   const {
+    // main
     bold,
     italic,
     strike,
@@ -24,9 +23,19 @@ export const Menu: React.FC<MenuProps> = ({ editor }) => {
     textAlignRight,
     link,
     linkBreak,
+    //sub
+    code,
+    clearMarks,
+    clearNodes,
+    paragraph,
+    codeBlock,
+    hardBreak,
+    undo,
+    redo,
+    textAlignJustify,
   } = useEditor(editor)
 
-  const items = [
+  const mains = [
     bold,
     italic,
     strike,
@@ -45,18 +54,46 @@ export const Menu: React.FC<MenuProps> = ({ editor }) => {
     linkBreak,
   ]
 
+  const subs = [
+    code,
+    clearMarks,
+    clearNodes,
+    paragraph,
+    codeBlock,
+    hardBreak,
+    undo,
+    redo,
+    textAlignJustify,
+  ]
+
   return (
-    <div>
-      {items.map((item) => (
-        <Button
-          key={item.type}
-          onClick={item.onClick}
-          disabled={item.disabled}
-          className={item.className}
-        >
-          {item.children}
-        </Button>
-      ))}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
+        {mains.map((d) => (
+          <Button
+            key={d.type}
+            onClick={d.onClick}
+            disabled={d.disabled}
+            className={d.className}
+            variant="outlined"
+          >
+            {d.children}
+          </Button>
+        ))}
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
+        {subs.map((d) => (
+          <Button
+            key={d.type}
+            onClick={d.onClick}
+            disabled={d.disabled}
+            className={d.className}
+            variant="outlined"
+          >
+            {d.children}
+          </Button>
+        ))}
+      </div>
     </div>
   )
 }

@@ -42,7 +42,7 @@ export const useEditor = (editor: Editor) => {
     className: editor.isActive('bold') ? 'is-active' : '',
     children: <FontBoldIcon />,
     icon: <FontBoldIcon />,
-    label: '',
+    label: '太字',
   }
 
   const italic = {
@@ -54,7 +54,7 @@ export const useEditor = (editor: Editor) => {
     className: editor.isActive('italic') ? 'is-active' : '',
     children: <FontItalicIcon />,
     icon: <FontItalicIcon />,
-    label: '',
+    label: 'イタリック体',
   }
 
   const strike = {
@@ -66,7 +66,7 @@ export const useEditor = (editor: Editor) => {
     className: editor.isActive('strike') ? 'is-active' : '',
     children: <StrikethroughIcon />,
     icon: <StrikethroughIcon />,
-    label: '',
+    label: '取消線',
   }
 
   const trash = {
@@ -78,7 +78,7 @@ export const useEditor = (editor: Editor) => {
     className: '',
     children: <TrashIcon />,
     icon: <TrashIcon />,
-    label: '',
+    label: '削除',
   }
 
   const heading1 = {
@@ -136,7 +136,7 @@ export const useEditor = (editor: Editor) => {
     onMouseLeave: () => null,
     disabled: false,
     className: editor.isActive('orderedList') ? 'is-active' : '',
-    children: null,
+    children: 'orderedList',
     icon: null,
     label: '番号付きリスト',
   }
@@ -304,7 +304,7 @@ export const useEditor = (editor: Editor) => {
     onMouseLeave: () => null,
     disabled: !editor.can().chain().focus().undo().run(),
     className: '',
-    children: null,
+    children: 'undo',
     icon: null,
     label: '',
   }
@@ -316,7 +316,7 @@ export const useEditor = (editor: Editor) => {
     onMouseLeave: () => null,
     disabled: !editor.can().chain().focus().redo().run(),
     className: '',
-    children: null,
+    children: 'redo',
     icon: null,
     label: '',
   }

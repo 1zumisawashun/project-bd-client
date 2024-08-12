@@ -3,12 +3,10 @@ export {
   TextAlign,
   Link,
   Focus,
-  Paragraph,
   Placeholder,
   CharacterCount,
-  Blockquote
-} from "./TiptapClient";
+} from './TiptapClient'
 
-export { CustomNewline, EventHandler } from "./TiptapExtensionClient";
+// export { CustomNewline, EventHandler } from "./TiptapExtensionClient";
 
-export { ExtensionComponent } from "./TiptapNodeClient";
+// export { ExtensionComponent } from "./TiptapNodeClient";

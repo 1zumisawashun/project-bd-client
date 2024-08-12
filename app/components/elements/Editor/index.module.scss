@@ -2,6 +2,15 @@
 @import '@radix-ui/colors/blue.css';
 
 .editor-content {
+  border: 1px solid var(--mauve-12);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  :focus-visible {
+    outline: none;
+  }
+}
+
+.editor-reset {
   // revert reset css
   *:where(
       :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
@@ -96,5 +105,14 @@
     border: none;
     border-top: 1px solid var(--mauve-10);
     margin: 2rem 0;
+  }
+
+  a {
+    color:  var(--blue-8);
+    text-decoration: inherit;
+    cursor: pointer;
+  }
+  a:hover {
+    color: var(--blue-10);
   }
 }

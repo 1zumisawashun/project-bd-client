@@ -1,13 +1,14 @@
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import {
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenu,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../../../elements/DropdownMenu'
 import { IconButton } from '../../../buttons/IconButton'
+import { AnchorButton } from '../../../buttons/AnchorButton'
+import styles from '../index.module.scss'
 
+const BLOCK_NAME = 'header-menu'
 export const HeaderMenu: React.FC = () => {
   return (
     <DropdownMenu>
@@ -18,10 +19,27 @@ export const HeaderMenu: React.FC = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        <DropdownMenuItem>New Tab</DropdownMenuItem>
-        <DropdownMenuItem>New Window</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem disabled>New Private Window</DropdownMenuItem>
+        <AnchorButton
+          variant="ghost"
+          href="#"
+          className={styles[`${BLOCK_NAME}-anchor-button`]}
+        >
+          New Tab 1
+        </AnchorButton>
+        <AnchorButton
+          variant="ghost"
+          href="#"
+          className={styles[`${BLOCK_NAME}-anchor-button`]}
+        >
+          New Tab 2
+        </AnchorButton>
+        <AnchorButton
+          variant="ghost"
+          href="#"
+          className={styles[`${BLOCK_NAME}-anchor-button`]}
+        >
+          New Tab 3
+        </AnchorButton>
       </DropdownMenuContent>
     </DropdownMenu>
   )

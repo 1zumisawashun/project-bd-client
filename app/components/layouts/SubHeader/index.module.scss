@@ -1,0 +1,12 @@
+@import '@radix-ui/colors/mauve.css';
+
+.sub-header-back-button {
+  font-weight: bold;
+}
+
+.sub-header-title {
+  font-size: 0.75rem;
+  margin: 0.5rem 0.75rem 1rem;
+  color: var(--mauve-8);
+  font-weight: bold;
+}

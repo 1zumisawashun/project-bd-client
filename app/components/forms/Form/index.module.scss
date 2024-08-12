@@ -1,0 +1,27 @@
+@import '@radix-ui/colors/indigo.css';
+@import '@radix-ui/colors/red.css';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  &:has([data-invalid]) {
+    .form-error-message {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--red-10);
+    }
+  }
+}
+.form-label {
+  font-size: 1rem;
+  color: var(--indigo-12);
+}
+.form-error-message {
+  display: none;
+}

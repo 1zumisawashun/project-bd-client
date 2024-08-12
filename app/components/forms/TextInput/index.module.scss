@@ -1,0 +1,27 @@
+@import '@radix-ui/colors/indigo.css';
+@import '@radix-ui/colors/red.css';
+
+.text-input {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--indigo-12);
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+
+  &:focus {
+    box-shadow: 0 0 0 1px var(--indigo-12);
+  }
+  &::placeholder {
+    opacity: 0.5;
+  }
+
+  &[data-invalid] {
+    border-color: var(--red-10);
+    &:focus {
+      box-shadow: 0 0 0 1px var(--red-10);
+    }
+  }
+}

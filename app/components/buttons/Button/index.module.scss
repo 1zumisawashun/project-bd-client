@@ -1,0 +1,14 @@
+.button {
+  composes: base-button from '@/assets/base-button.module.scss';
+  // override the base-button styles
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1;
+  align-items: center;
+  border-radius: 0.5em;
+  display: inline-flex;
+  gap: 0.5rem;
+  justify-content: center;
+  text-align: center;
+  padding: 0.5rem 0.75rem;
+}

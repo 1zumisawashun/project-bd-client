@@ -90,11 +90,13 @@ export const MenuBubble: React.FC<{ editor: Editor }> = ({ editor }) => {
         maxWidth: 600,
       }}
     >
-      {items.map((item) => (
-        <Button key={item.type} onClick={item.onClick} variant="ghost">
-          {item.children}
-        </Button>
-      ))}
+      <div style={{ border: '1px solid black' }}>
+        {items.map((item) => (
+          <Button key={item.type} onClick={item.onClick} variant="ghost">
+            {item.children}
+          </Button>
+        ))}
+      </div>
     </RowBubbleMenu>
   )
 }

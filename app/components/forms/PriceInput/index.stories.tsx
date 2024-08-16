@@ -37,9 +37,7 @@ function Render() {
             <PriceInput onChange={onChange} onBlur={onBlur} {...rest} />
           )}
         />
-        {errors.price && (
-          <FormErrorMessage>{errors.price.message}</FormErrorMessage>
-        )}
+        <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
       </FormField>
     </Form>
   )

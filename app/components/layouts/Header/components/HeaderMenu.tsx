@@ -21,24 +21,31 @@ export const HeaderMenu: React.FC = () => {
       <DropdownMenuContent>
         <AnchorButton
           variant="ghost"
-          href="#"
+          href="/tos"
           className={styles[`${BLOCK_NAME}-anchor-button`]}
         >
-          New Tab 1
+          利用規約
         </AnchorButton>
         <AnchorButton
           variant="ghost"
-          href="#"
+          href="/faq"
           className={styles[`${BLOCK_NAME}-anchor-button`]}
         >
-          New Tab 2
+          FAQ
         </AnchorButton>
         <AnchorButton
           variant="ghost"
-          href="#"
+          href="/login"
           className={styles[`${BLOCK_NAME}-anchor-button`]}
         >
-          New Tab 3
+          ログイン
+        </AnchorButton>
+        <AnchorButton
+          variant="ghost"
+          href="/register"
+          className={styles[`${BLOCK_NAME}-anchor-button`]}
+        >
+          新規登録
         </AnchorButton>
       </DropdownMenuContent>
     </DropdownMenu>

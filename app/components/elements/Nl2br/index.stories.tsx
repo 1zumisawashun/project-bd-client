@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Nl2br } from './index'
 
 const meta: Meta<typeof Nl2br> = {
-  title: 'elements/Nl2br',
+  title: 'element/Nl2br',
   component: Nl2br,
 }
 

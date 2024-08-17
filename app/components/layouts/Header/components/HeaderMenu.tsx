@@ -47,6 +47,20 @@ export const HeaderMenu: React.FC = () => {
         >
           新規登録
         </AnchorButton>
+        <AnchorButton
+          variant="ghost"
+          href="/articles"
+          className={styles[`${BLOCK_NAME}-anchor-button`]}
+        >
+          記事一覧
+        </AnchorButton>
+        <AnchorButton
+          variant="ghost"
+          href="/articles/create"
+          className={styles[`${BLOCK_NAME}-anchor-button`]}
+        >
+          記事作成
+        </AnchorButton>
       </DropdownMenuContent>
     </DropdownMenu>
   )

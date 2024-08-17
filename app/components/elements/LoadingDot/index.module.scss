@@ -1,0 +1,31 @@
+.loading-dot {
+  display: flex;
+  justify-content: center;
+}
+
+.loading-dot-left-item,
+.loading-dot-right-item {
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  height: 0.25rem;
+  width: 0.25rem;
+  background-color: var(--indigo-12);
+  border-radius: 9999px;
+}
+
+.loading-dot-center-item {
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  height: 0.25rem;
+  width: 0.25rem;
+  background-color: var(--indigo-12);
+  border-radius: 9999px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

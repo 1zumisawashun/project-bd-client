@@ -1,6 +1,6 @@
 import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react'
 import clsx from 'clsx'
-import { Shape, Theme } from '../../elements.constant'
+import { Shape, Theme } from '../../elements.type'
 import styles from '../index.module.scss'
 
 const BLOCK_NAME = 'card'

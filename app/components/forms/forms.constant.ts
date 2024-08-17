@@ -1,10 +1,5 @@
 export const items = [
-  {
-    value: 'default',
-    label: 'Default',
-  },
-  {
-    value: 'default2',
-    label: 'Default2',
-  },
+  { value: 'item1', label: 'item1' },
+  { value: 'item2', label: 'item2' },
+  { value: 'item3', label: 'item3' },
 ]

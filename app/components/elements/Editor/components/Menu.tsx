@@ -1,5 +1,5 @@
 import { Editor } from '@tiptap/react'
-import { useEditor } from '../hooks/useEditor'
+import { tiptapClient } from '../helpers/tiptapClient'
 import { Button } from '../../../buttons/Button'
 
 export const Menu: React.FC<{
@@ -33,7 +33,7 @@ export const Menu: React.FC<{
     undo,
     redo,
     textAlignJustify,
-  } = useEditor(editor)
+  } = tiptapClient(editor)
 
   const mains = [
     bold,
@@ -69,30 +69,36 @@ export const Menu: React.FC<{
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
       <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
-        {mains.map((d) => (
-          <Button
-            key={d.type}
-            onClick={d.onClick}
-            disabled={d.disabled}
-            className={d.className}
-            variant="outlined"
-          >
-            {d.children}
-          </Button>
-        ))}
+        {mains.map((d) => {
+          const Icon = d.icon ?? null
+          return (
+            <Button
+              key={d.type}
+              onClick={d.onClick}
+              disabled={d.disabled}
+              className={d.className}
+              variant="outlined"
+            >
+              {Icon ? <Icon /> : d.label}
+            </Button>
+          )
+        })}
       </div>
       <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
-        {subs.map((d) => (
-          <Button
-            key={d.type}
-            onClick={d.onClick}
-            disabled={d.disabled}
-            className={d.className}
-            variant="outlined"
-          >
-            {d.children}
-          </Button>
-        ))}
+        {subs.map((d) => {
+          const Icon = d.icon ?? null
+          return (
+            <Button
+              key={d.type}
+              onClick={d.onClick}
+              disabled={d.disabled}
+              className={d.className}
+              variant="outlined"
+            >
+              {Icon ? <Icon /> : d.label}
+            </Button>
+          )
+        })}
       </div>
     </div>
   )

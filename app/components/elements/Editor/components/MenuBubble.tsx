@@ -1,7 +1,7 @@
 import { BubbleMenu as RowBubbleMenu, Editor } from '@tiptap/react'
 import { useEffect, useState } from 'react'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { useEditor } from '../hooks/useEditor'
+import { tiptapClient } from '../helpers/tiptapClient'
 import { Tooltip } from '../../Tooltip'
 import { Button } from '../../../buttons/Button'
 
@@ -24,7 +24,7 @@ export const MenuBubble: React.FC<{ editor: Editor }> = ({ editor }) => {
     textAlignCenter,
     textAlignRight,
     link,
-  } = useEditor(editor)
+  } = tiptapClient(editor)
 
   const headingDisclosure = useDisclosure()
   const textAlignDisclosure = useDisclosure()
@@ -91,11 +91,14 @@ export const MenuBubble: React.FC<{ editor: Editor }> = ({ editor }) => {
       }}
     >
       <div style={{ border: '1px solid black' }}>
-        {items.map((item) => (
-          <Button key={item.type} onClick={item.onClick} variant="ghost">
-            {item.children}
-          </Button>
-        ))}
+        {items.map((d) => {
+          const Icon = d.icon ?? null
+          return (
+            <Button key={d.type} onClick={d.onClick} variant="ghost">
+              {Icon ? <Icon /> : d.label}
+            </Button>
+          )
+        })}
       </div>
     </RowBubbleMenu>
   )

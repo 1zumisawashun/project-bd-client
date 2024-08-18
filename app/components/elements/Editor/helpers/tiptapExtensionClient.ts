@@ -210,8 +210,7 @@ class SelectionSizeTooltip {
 /**
  * state.selectionに関してはこれに詳細書いてある > @see https://benborgers.com/posts/tiptap-selection
  * state.selection.emptyはスクロール選択のこと
- * 参考にしたのは下記
- * @see https://stackoverflow.com/questions/73739904/how-can-i-upload-files-in-tip-tap-editor-for-react
+ * 参考にしたのはこちら -> @see https://stackoverflow.com/questions/73739904/how-can-i-upload-files-in-tip-tap-editor-for-react
  */
 export const EventHandler = Extension.create({
   name: 'eventHandler',

@@ -1,4 +1,5 @@
 import '@/assets/the-new-css-reset.css'
+import '@/assets/global.css'
 import type { Preview } from '@storybook/react'
 
 /** @see https://stackoverflow.com/questions/76933793/how-to-write-decorator-in-typescript-for-storybook */
@@ -6,6 +7,7 @@ import React from 'react'
 
 const preview: Preview = {
   decorators: [
+    // FIXME: components以外はwidthを576pxに固定したい
     (Story) => (
       <div>
         <Story />

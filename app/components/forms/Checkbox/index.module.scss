@@ -1,0 +1,29 @@
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkbox-label {
+  composes: checkbox-label from '@/assets/base-checkbox.module.scss';
+}
+
+.checkbox {
+  composes: checkbox-icon from '@/assets/base-checkbox.module.scss';
+  background-color: white;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.25rem;
+  &[data-state='checked'] {
+    background-color: var(--indigo-3);
+    color: var(--indigo-12);
+  }
+  &[data-state='unchecked'] {
+    background-color: var(--red-3);
+    color: var(--red-12);
+  }
+}
+
+.checkbox-text {
+  composes: checkbox-text from '@/assets/base-checkbox.module.scss';
+}

@@ -1,0 +1,41 @@
+.card {
+  border-radius: 0.5rem;
+
+  // shape
+  &[data-shape='square'] {
+    border-radius: 0.25rem;
+  }
+  &[data-shape='round'] {
+    border-radius: 1rem;
+  }
+
+  // scroll
+  &[data-scroll='true'] {
+    overflow-y: scroll;
+  }
+
+  // panel theme and border
+  &[data-theme='transparent'] {
+    background-color: transparent;
+    color: inherit;
+    &[data-border='true'] {
+      border: 1px solid var(--mauve-6);
+    }
+  }
+
+  // variant and color
+  &[data-theme='danger'] {
+    background-color: var(--red-1);
+    color: var(--red-10);
+    &[data-border='true'] {
+      border: 1px solid var(--red-10);
+    }
+  }
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}

@@ -1,0 +1,12 @@
+/* @see https://twitter.com/tak_dcxi/status/1766517419466793102?s=12&t=0Bs_ltBYiO3nhiiL9YZAEw */
+@for $i from 1 through 10 {
+  ._line-clamp-#{$i} {
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: block-axis;
+    -webkit-line-clamp: #{$i}; /* 表示する最大行数を設定 */
+    contain: content;
+
+    // max-block-size: #{$i}lh; /* lhはline-heightと同じ高さを表す単位 */
+  }
+}

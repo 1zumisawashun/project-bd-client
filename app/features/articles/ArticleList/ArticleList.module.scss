@@ -1,0 +1,46 @@
+.article-list-card-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.article-list-card {
+  gap: 0.5rem;
+  border: 1px solid var(--mauve-6);
+  border-radius: 0.5rem;
+  // NOTE: subgridでランダムな高さを揃える
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 2;
+}
+
+.article-list-card-layer {
+  border-radius: 0.35rem 0.35rem 0 0;
+  background: var(--indigo-3);
+}
+
+.article-list-card-thumbnail {
+  width: 80%;
+  margin: 1rem auto;
+}
+
+.article-list-card-title {
+  font-weight: 600;
+  composes: _line-clamp-3 from '@/assets/line-clump.module.scss';
+  color: var(--mauve-11);
+}
+
+.article-list-card-content {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  padding: 0 10%;
+  align-items: center;
+  margin-bottom: 0.5rem;
+
+  text-align: left;
+  > :is(p, span) {
+    font-size: 0.875rem;
+    color: var(--mauve-10);
+  }
+}

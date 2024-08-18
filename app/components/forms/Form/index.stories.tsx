@@ -38,7 +38,7 @@ function Render() {
       </FormField>
 
       <FormField name="password" serverInvalid={!!errors.password}>
-        <FormLabel>Question</FormLabel>
+        <FormLabel>Password</FormLabel>
         <TextInput {...register('password')} />
         <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
       </FormField>

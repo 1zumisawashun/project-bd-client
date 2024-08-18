@@ -1,12 +1,13 @@
-import { ArticleCard, ArticleCardGroup } from '../components/ArticleCard'
+import { ArticleListCard } from './components/ArticleListCard'
+import { ArticleListCardGroup } from './components/ArticleListCardGroup'
 import { articles } from '../articles.constant'
 
 export const ArticleList: React.FC = () => {
   return (
-    <ArticleCardGroup>
+    <ArticleListCardGroup>
       {articles.map((article) => (
-        <ArticleCard key={article.id} article={article} />
+        <ArticleListCard key={article.id} article={article} />
       ))}
-    </ArticleCardGroup>
+    </ArticleListCardGroup>
   )
 }

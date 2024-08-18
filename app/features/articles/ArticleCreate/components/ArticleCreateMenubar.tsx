@@ -7,7 +7,7 @@ import {
   MenubarTrigger,
 } from '@/components/elements/Menubar'
 import { TextIcon } from '@radix-ui/react-icons'
-import { tiptapClient } from '../../../../components/elements/Editor/helpers/tiptapClient'
+import { tiptapClient } from '@/components/elements/Editor/helpers/tiptapClient'
 
 export const ArticleCreateMenubar: React.FC<{
   editor: Editor

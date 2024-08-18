@@ -7,6 +7,7 @@ import React from 'react'
 
 const preview: Preview = {
   decorators: [
+    // FIXME: components以外はwidthを576pxに固定したい
     (Story) => (
       <div>
         <Story />

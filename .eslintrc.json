@@ -15,18 +15,11 @@
     "no-console": "off",
     "no-alert": "off",
     "arrow-body-style": "off",
-    "no-restricted-syntax": [
-      "error",
-      {
-        "selector": "TSEnumDeclaration",
-        "message": "Don't declare enums"
-      }
-    ], // MEMO: enumを禁止にする
     // eslint-config-airbnb（eslint-plugin-import)
     "import/prefer-default-export": "off",
     // eslint-config-airbnb（eslint-plugin-react）
     "react/require-default-props": "off",
-    "react/function-component-definition": "off", // MEMO: arrow-functionで関数コンポーネントを定義できなくなるのでoff
+    "react/function-component-definition": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
@@ -34,7 +27,15 @@
     "react-hooks/exhaustive-deps": "warn",
     // eslint-config-airbnb-typescript（eslint-typescript）
     "@typescript-eslint/naming-convention": "off",
-    "@typescript-eslint/no-unused-vars": "off"
+    "@typescript-eslint/no-unused-vars": "off",
+    // custom-rules
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "TSEnumDeclaration",
+        "message": "Don't declare enums" // MEMO: enumを禁止にする
+      }
+    ]
   },
   "overrides": [
     {

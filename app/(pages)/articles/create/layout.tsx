@@ -1,23 +1,17 @@
-import { Header } from '@/components/layouts/Header'
-import { LayoutContainer } from '@/components/layouts/LayoutContainer'
+import { SiteWrapper } from '@/components/layouts/SiteWrapper'
 import { SubHeader } from '@/components/layouts/SubHeader'
 import { Metadata } from 'next'
 
-const title = 'article create'
-
+const title = 'Article Create'
 export const metadata: Metadata = {
   title: `Project BD | ${title}`,
 }
-
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <Header />
-      <LayoutContainer>
-        <SubHeader title={title} href="/">
-          {children}
-        </SubHeader>
-      </LayoutContainer>
-    </>
+    <SiteWrapper>
+      <SubHeader title={title} href="/">
+        {children}
+      </SubHeader>
+    </SiteWrapper>
   )
 }

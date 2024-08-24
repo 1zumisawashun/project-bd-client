@@ -12,16 +12,20 @@ import { AnchorButton } from '@/components/buttons/AnchorButton'
 import { TextInput } from '@/components/forms/TextInput'
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Nl2br } from '@/components/elements/Nl2br'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { startTransition, useState } from 'react'
 import { SimpleDialog } from '@/components/elements/SimpleDialog'
-import { tos } from '../tos/Tos.constant'
-import { schema, Schema } from './Register.schema'
-import { signup } from './Register.action'
+import { useRouter } from 'next/navigation'
+import { Toast } from '@/components/elements/Toast'
+import { useToast } from '@/components/elements/Toast/hooks/useToast'
+import { signIn } from './SignIn.action'
+import { schema, Schema } from './SignIn.schema'
 
-export const Register: React.FC = () => {
+export const SignIn: React.FC = () => {
   const dialog = useDisclosure()
+  const router = useRouter()
+  const toast = useToast()
+
   const [errorMessage, setErrorMessage] = useState('')
 
   const {
@@ -39,11 +43,16 @@ export const Register: React.FC = () => {
 
   const onSubmit: SubmitHandler<Schema> = async (data) => {
     startTransition(async () => {
-      const response = await signup(data)
+      const response = await signIn(data)
+
       if (!response?.isSuccess) {
         setErrorMessage(response.error.message)
         dialog.open()
+        return
       }
+
+      toast.handleClick()
+      router.replace('/')
     })
   }
 
@@ -67,30 +76,28 @@ export const Register: React.FC = () => {
               <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
             </FormField>
           </Form>
-          <Card scrollable style={{ height: '150px' }}>
-            <CardBody>
-              <Nl2br>{tos}</Nl2br>
-            </CardBody>
-          </Card>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', gap: '1rem' }}>
               <AnchorButton variant="outlined" href="#" disabled>
                 パスワード忘れ
               </AnchorButton>
-              <AnchorButton variant="outlined" href="/login">
-                ログイン
+              <AnchorButton variant="outlined" href="/sign-up">
+                新規登録
               </AnchorButton>
             </div>
-            <Button onClick={handleSubmit(onSubmit, onError)}>新規登録</Button>
+            <Button onClick={handleSubmit(onSubmit, onError)}>ログイン</Button>
           </div>
         </CardBody>
       </Card>
+
       <SimpleDialog
         isOpen={dialog.isOpen}
         close={dialog.close}
-        title="サインアップに失敗しました"
+        title="ログインに失敗しました"
         description={errorMessage}
       />
+
+      <Toast isOpen={toast.isOpen} close={toast.close} />
     </>
   )
 }

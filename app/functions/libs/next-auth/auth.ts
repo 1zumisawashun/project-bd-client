@@ -5,7 +5,7 @@ import Google from 'next-auth/providers/google'
 import Credentials from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import prisma from '@/functions/libs/prisma-client/prisma'
-import { schema } from '@/features/register/Register.schema'
+import { schema } from '@/features/sign-up/SignUp.schema'
 import { getUserByEmail } from '@/functions/db/user'
 import { isPasswordValid } from '@/functions/helpers/hash'
 

@@ -35,14 +35,14 @@ export const HeaderMenu: React.FC = () => {
         </AnchorButton>
         <AnchorButton
           variant="ghost"
-          href="/login"
+          href="/sign-in"
           className={styles[`${BLOCK_NAME}-anchor-button`]}
         >
           ログイン
         </AnchorButton>
         <AnchorButton
           variant="ghost"
-          href="/register"
+          href="/sign-up"
           className={styles[`${BLOCK_NAME}-anchor-button`]}
         >
           新規登録

@@ -2,7 +2,7 @@ import { LayoutContainer } from '@/components/layouts/LayoutContainer'
 import { SubHeader } from '@/components/layouts/SubHeader'
 import { Metadata } from 'next'
 
-const title = 'Login'
+const title = 'Sign In'
 export const metadata: Metadata = {
   title: `UniFli | ${title}`,
 }

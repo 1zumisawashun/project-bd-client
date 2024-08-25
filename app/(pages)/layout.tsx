@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import '@/assets/the-new-css-reset.css'
 import '@/assets/global.css'
+import AppProviders from '@/providers'
 
 // MEMO: お気に入りのフォントを指定するw
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        <AppProviders>{children}</AppProviders>
+      </body>
     </html>
   )
 }

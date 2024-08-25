@@ -61,6 +61,13 @@ export const HeaderMenu: React.FC = () => {
         >
           記事作成
         </AnchorButton>
+        <AnchorButton
+          variant="ghost"
+          href="/my-page/setting"
+          className={styles[`${BLOCK_NAME}-anchor-button`]}
+        >
+          マイページ
+        </AnchorButton>
       </DropdownMenuContent>
     </DropdownMenu>
   )

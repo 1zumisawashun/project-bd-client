@@ -16,15 +16,12 @@ import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { startTransition, useState } from 'react'
 import { SimpleDialog } from '@/components/elements/SimpleDialog'
 import { useRouter } from 'next/navigation'
-import { Toast } from '@/components/elements/Toast'
-import { useToast } from '@/components/elements/Toast/hooks/useToast'
 import { signIn } from './SignIn.action'
 import { schema, Schema } from './SignIn.schema'
 
 export const SignIn: React.FC = () => {
   const dialog = useDisclosure()
   const router = useRouter()
-  const toast = useToast()
 
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -51,8 +48,7 @@ export const SignIn: React.FC = () => {
         return
       }
 
-      toast.handleClick()
-      router.replace('/')
+      router.push('/')
     })
   }
 
@@ -96,8 +92,6 @@ export const SignIn: React.FC = () => {
         title="ログインに失敗しました"
         description={errorMessage}
       />
-
-      <Toast isOpen={toast.isOpen} close={toast.close} />
     </>
   )
 }

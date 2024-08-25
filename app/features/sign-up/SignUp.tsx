@@ -17,8 +17,7 @@ import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { startTransition, useState } from 'react'
 import { SimpleDialog } from '@/components/elements/SimpleDialog'
 import { useRouter } from 'next/navigation'
-import { Toast } from '@/components/elements/Toast'
-import { useToast } from '@/components/elements/Toast/hooks/useToast'
+import { Checkbox, CheckedState } from '@/components/forms/Checkbox'
 import { tos } from '../tos/Tos.constant'
 import { schema, Schema } from './SignUp.schema'
 import { signUp } from './SignUp.action'
@@ -26,9 +25,9 @@ import { signUp } from './SignUp.action'
 export const SignUp: React.FC = () => {
   const dialog = useDisclosure()
   const router = useRouter()
-  const toast = useToast()
 
   const [errorMessage, setErrorMessage] = useState('')
+  const [checkedState, setCheckedState] = useState<CheckedState>(false)
 
   const {
     register,
@@ -53,8 +52,7 @@ export const SignUp: React.FC = () => {
         return
       }
 
-      toast.handleClick()
-      router.replace('/')
+      router.push('/')
     })
   }
 
@@ -83,6 +81,9 @@ export const SignUp: React.FC = () => {
               <Nl2br>{tos}</Nl2br>
             </CardBody>
           </Card>
+          <Checkbox checked={checkedState} onCheckedChange={setCheckedState}>
+            利用規約に同意する
+          </Checkbox>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', gap: '1rem' }}>
               <AnchorButton variant="outlined" href="#" disabled>
@@ -92,7 +93,12 @@ export const SignUp: React.FC = () => {
                 ログイン
               </AnchorButton>
             </div>
-            <Button onClick={handleSubmit(onSubmit, onError)}>新規登録</Button>
+            <Button
+              onClick={handleSubmit(onSubmit, onError)}
+              disabled={!checkedState}
+            >
+              新規登録
+            </Button>
           </div>
         </CardBody>
       </Card>
@@ -103,8 +109,6 @@ export const SignUp: React.FC = () => {
         title="新規登録に失敗しました"
         description={errorMessage}
       />
-
-      <Toast isOpen={toast.isOpen} close={toast.close} />
     </>
   )
 }

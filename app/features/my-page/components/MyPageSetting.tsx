@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/buttons/Button'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { LogoutDialog } from './components/LogoutDialog'
+import { LogoutDialog } from './LogoutDialog'
 
 export const MyPageSetting: React.FC = () => {
   const dialog = useDisclosure()

@@ -1,4 +1,5 @@
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
+import { routes } from '@/functions/constants/routes'
 import {
   DropdownMenuContent,
   DropdownMenu,
@@ -9,6 +10,7 @@ import { AnchorButton } from '../../../buttons/AnchorButton'
 import styles from '../index.module.scss'
 
 const BLOCK_NAME = 'header-menu'
+
 export const HeaderMenu: React.FC = () => {
   return (
     <DropdownMenu>
@@ -19,55 +21,16 @@ export const HeaderMenu: React.FC = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        <AnchorButton
-          variant="ghost"
-          href="/tos"
-          className={styles[`${BLOCK_NAME}-anchor-button`]}
-        >
-          利用規約
-        </AnchorButton>
-        <AnchorButton
-          variant="ghost"
-          href="/faq"
-          className={styles[`${BLOCK_NAME}-anchor-button`]}
-        >
-          FAQ
-        </AnchorButton>
-        <AnchorButton
-          variant="ghost"
-          href="/sign-in"
-          className={styles[`${BLOCK_NAME}-anchor-button`]}
-        >
-          ログイン
-        </AnchorButton>
-        <AnchorButton
-          variant="ghost"
-          href="/sign-up"
-          className={styles[`${BLOCK_NAME}-anchor-button`]}
-        >
-          新規登録
-        </AnchorButton>
-        <AnchorButton
-          variant="ghost"
-          href="/articles"
-          className={styles[`${BLOCK_NAME}-anchor-button`]}
-        >
-          記事一覧
-        </AnchorButton>
-        <AnchorButton
-          variant="ghost"
-          href="/articles/create"
-          className={styles[`${BLOCK_NAME}-anchor-button`]}
-        >
-          記事作成
-        </AnchorButton>
-        <AnchorButton
-          variant="ghost"
-          href="/my-page/setting"
-          className={styles[`${BLOCK_NAME}-anchor-button`]}
-        >
-          マイページ
-        </AnchorButton>
+        {routes.map((d) => (
+          <AnchorButton
+            key={d.href}
+            variant="ghost"
+            href={d.href}
+            className={styles[`${BLOCK_NAME}-anchor-button`]}
+          >
+            {d.label}
+          </AnchorButton>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   )

@@ -2,7 +2,7 @@ import { SiteWrapper } from '@/components/layouts/SiteWrapper'
 import { SubHeader } from '@/components/layouts/SubHeader'
 import { Metadata } from 'next'
 
-const title = 'My Page Post'
+const title = 'My Page'
 export const metadata: Metadata = {
   title: `Project BD | ${title}`,
 }

@@ -1,7 +1,7 @@
 /**
  * 認証が必要ないルートの配列(これらのルートは認証を必要としません)
  */
-export const publicRoutes: string[] = ['/new-verification']
+export const publicRoutes: string[] = ['/', '/faq', '/tos', '/new-verification']
 
 /**
  * 認証に使用されるルートの配列

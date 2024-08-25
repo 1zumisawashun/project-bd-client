@@ -1,44 +1,8 @@
 /* eslint-disable no-param-reassign */
 import NextAuth, { NextAuthConfig } from 'next-auth'
-import GitHub from 'next-auth/providers/github'
-import Google from 'next-auth/providers/google'
-import Credentials from 'next-auth/providers/credentials'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import prisma from '@/functions/libs/prisma-client/prisma'
-import { schema } from '@/features/sign-up/SignUp.schema'
-import { getUserByEmail } from '@/functions/db/user'
-import { isPasswordValid } from '@/functions/helpers/hash'
-
-const providers = [
-  GitHub,
-  Google,
-  Credentials({
-    // add type to credentials argument
-    credentials: {
-      email: { type: 'text' },
-      password: { type: 'password' },
-    },
-    async authorize(credentials) {
-      const validatedFields = schema.safeParse(credentials)
-
-      if (validatedFields.success) {
-        const { email, password } = validatedFields.data
-
-        const user = await getUserByEmail(email)
-        if (!user?.hashedPassword) return null
-
-        const passwordsMatch = await isPasswordValid(
-          password,
-          user.hashedPassword,
-        )
-
-        if (passwordsMatch) return user
-      }
-
-      return null
-    },
-  }),
-] satisfies NextAuthConfig['providers']
+import authConfig from './auth.config'
 
 /** @see https://next-auth.js.org/configuration/callbacks */
 const callbacks = {
@@ -74,8 +38,8 @@ const callbacks = {
 } satisfies NextAuthConfig['callbacks']
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  providers,
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
   callbacks,
+  ...authConfig,
 })

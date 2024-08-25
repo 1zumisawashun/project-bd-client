@@ -3,9 +3,10 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useArrayState } from '@/functions/hooks/useArrayState'
-import { items } from '../forms.constant'
+import { groupItems, statusItems } from '../forms.constant'
 import { Checkbox, CheckboxGroup } from './index'
 import { FormErrorMessage, FormField, Form } from '../Form'
+import { Card, CardBody } from '../../elements/Card'
 
 const meta: Meta<typeof Checkbox> = {
   title: 'form/Checkbox',
@@ -13,6 +14,31 @@ const meta: Meta<typeof Checkbox> = {
 }
 export default meta
 type Story = StoryObj<typeof Checkbox>
+
+const CheckboxStatusListRender: React.FC = () => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      {statusItems.map((d) => (
+        <Card key={d.value}>
+          <CardBody>
+            <CheckboxGroup>
+              <Checkbox {...d}>default</Checkbox>
+              <Checkbox {...d} id="hover">
+                hover
+              </Checkbox>
+              <Checkbox {...d} id="focus">
+                focus
+              </Checkbox>
+              <Checkbox {...d} disabled>
+                disabled
+              </Checkbox>
+            </CheckboxGroup>
+          </CardBody>
+        </Card>
+      ))}
+    </div>
+  )
+}
 
 const CheckboxGroupControlledRender: React.FC = () => {
   const schema = z.object({
@@ -40,7 +66,7 @@ const CheckboxGroupControlledRender: React.FC = () => {
           name="checkbox"
           render={({ field: { onChange, value, ...props } }) => (
             <CheckboxGroup>
-              {items.map((d) => (
+              {groupItems.map((d) => (
                 <Checkbox
                   key={d.value}
                   {...props}
@@ -50,6 +76,7 @@ const CheckboxGroupControlledRender: React.FC = () => {
                     onChange(checked ? remove(d.value) : add(d.value))
                   }}
                   checked={state.includes(d.value)}
+                  error={!!errors.checkbox}
                 >
                   {d.label}
                 </Checkbox>
@@ -60,18 +87,6 @@ const CheckboxGroupControlledRender: React.FC = () => {
         <FormErrorMessage>{errors.checkbox?.message}</FormErrorMessage>
       </FormField>
     </Form>
-  )
-}
-
-const CheckboxGroupUncontrolledRender: React.FC = () => {
-  return (
-    <CheckboxGroup>
-      {items.map((d) => (
-        <Checkbox key={d.value} value={d.value}>
-          {d.label}
-        </Checkbox>
-      ))}
-    </CheckboxGroup>
   )
 }
 
@@ -102,6 +117,7 @@ const CheckboxControlledRender: React.FC = () => {
               {...props}
               checked={value}
               onCheckedChange={(checked) => onChange(checked)}
+              error={!!errors.checkbox}
             >
               checkbox
             </Checkbox>
@@ -113,8 +129,9 @@ const CheckboxControlledRender: React.FC = () => {
   )
 }
 
-const CheckboxUncontrolledRender: React.FC = () => {
-  return <Checkbox>checkbox</Checkbox>
+export const CheckboxStatusList: Story = {
+  args: {},
+  render: () => <CheckboxStatusListRender />,
 }
 
 export const CheckboxGroupControlled: Story = {
@@ -124,7 +141,15 @@ export const CheckboxGroupControlled: Story = {
 
 export const CheckboxGroupUncontrolled = {
   args: {},
-  render: () => <CheckboxGroupUncontrolledRender />,
+  render: () => (
+    <CheckboxGroup>
+      {groupItems.map((d) => (
+        <Checkbox key={d.value} value={d.value}>
+          {d.label}
+        </Checkbox>
+      ))}
+    </CheckboxGroup>
+  ),
 }
 
 export const CheckboxControlled: Story = {
@@ -134,5 +159,5 @@ export const CheckboxControlled: Story = {
 
 export const CheckboxUncontrolled = {
   args: {},
-  render: () => <CheckboxUncontrolledRender />,
+  render: () => <Checkbox>checkbox</Checkbox>,
 }

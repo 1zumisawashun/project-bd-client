@@ -2,9 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { items } from '../forms.constant'
+import { groupItems, statusItems } from '../forms.constant'
 import { RadioGroup, RadioGroupItem } from './index'
 import { FormErrorMessage, FormField, Form } from '../Form'
+import { Card, CardBody } from '../../elements/Card'
 
 const meta: Meta<typeof RadioGroup> = {
   title: 'form/RadioGroup',
@@ -12,6 +13,31 @@ const meta: Meta<typeof RadioGroup> = {
 }
 export default meta
 type Story = StoryObj<typeof RadioGroup>
+
+const RadioGroupStatusListRender: React.FC = () => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      {statusItems.map((d) => (
+        <Card key={d.value}>
+          <CardBody>
+            <RadioGroup>
+              <RadioGroupItem {...d}>default</RadioGroupItem>
+              <RadioGroupItem {...d} id="hover">
+                hover
+              </RadioGroupItem>
+              <RadioGroupItem {...d} id="focus">
+                focus
+              </RadioGroupItem>
+              <RadioGroupItem {...d} disabled>
+                disabled
+              </RadioGroupItem>
+            </RadioGroup>
+          </CardBody>
+        </Card>
+      ))}
+    </div>
+  )
+}
 
 const RadioGroupControlledRender: React.FC = () => {
   const schema = z.object({
@@ -38,8 +64,8 @@ const RadioGroupControlledRender: React.FC = () => {
           render={({ field: { onChange, ...props } }) => (
             /** @see https://github.com/orgs/react-hook-form/discussions/10246 */
             <RadioGroup {...props} onValueChange={onChange}>
-              {items.map((d) => (
-                <RadioGroupItem key={d.value} value={d.value}>
+              {groupItems.map((d) => (
+                <RadioGroupItem key={d.value} {...d}>
                   {d.label}
                 </RadioGroupItem>
               ))}
@@ -55,13 +81,18 @@ const RadioGroupControlledRender: React.FC = () => {
 const RadioGroupUncontrolledRender: React.FC = () => {
   return (
     <RadioGroup>
-      {items.map((d) => (
-        <RadioGroupItem key={d.value} value={d.value}>
+      {groupItems.map((d) => (
+        <RadioGroupItem key={d.value} {...d}>
           {d.label}
         </RadioGroupItem>
       ))}
     </RadioGroup>
   )
+}
+
+export const RadioGroupStatusList: Story = {
+  args: {},
+  render: () => <RadioGroupStatusListRender />,
 }
 
 export const RadioGroupControlled: Story = {

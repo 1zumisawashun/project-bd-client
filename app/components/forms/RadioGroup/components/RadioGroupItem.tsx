@@ -6,10 +6,10 @@ import { CheckIcon } from '@radix-ui/react-icons'
 import styles from '../index.module.scss'
 
 const BLOCK_NAME = 'radio-group'
-type Props = {} & RowRadioGroup.RadioGroupItemProps
+type Props = { error?: boolean } & RowRadioGroup.RadioGroupItemProps
 type Ref = ElementRef<'button'>
 export const RadioGroupItem = forwardRef<Ref, Props>(
-  ({ className, children, ...props }, ref) => {
+  ({ className, children, error, ...props }, ref) => {
     const id = useId()
     return (
       <label htmlFor={id} className={styles[`${BLOCK_NAME}-item-label`]}>
@@ -17,6 +17,7 @@ export const RadioGroupItem = forwardRef<Ref, Props>(
           className={clsx(styles[`${BLOCK_NAME}-item`], className)}
           id={id}
           ref={ref}
+          data-error={error}
           {...props}
         >
           {/* NOTE: uncheckedの場合、IndicatorはDOMから削除される */}

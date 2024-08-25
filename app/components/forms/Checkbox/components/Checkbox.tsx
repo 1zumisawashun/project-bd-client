@@ -6,10 +6,10 @@ import { CheckIcon } from '@radix-ui/react-icons'
 import styles from '../index.module.scss'
 
 const BLOCK_NAME = 'checkbox'
-type Props = {} & RowCheckbox.CheckboxProps
+type Props = { error?: boolean } & RowCheckbox.CheckboxProps
 type Ref = ElementRef<'button'>
 export const Checkbox = forwardRef<Ref, Props>(
-  ({ className, children, ...props }, ref) => {
+  ({ className, children, error, ...props }, ref) => {
     const id = useId()
     return (
       <label htmlFor={id} className={styles[`${BLOCK_NAME}-label`]}>
@@ -17,6 +17,7 @@ export const Checkbox = forwardRef<Ref, Props>(
           className={clsx(styles[`${BLOCK_NAME}`], className)}
           id={id}
           ref={ref}
+          data-error={error}
           {...props}
         >
           {/* NOTE: uncheckedの場合、IndicatorはDOMから削除される */}

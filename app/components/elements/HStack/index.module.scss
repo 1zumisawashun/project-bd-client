@@ -1,0 +1,22 @@
+$data-gap-multiplier: 0.25rem;
+
+.hstack {
+  display: flex;
+  flex-direction: row;
+
+  @for $i from 1 through 10 {
+    &[data-gap='#{$i}'] {
+      gap: $i * $data-gap-multiplier;
+    }
+  }
+
+  &[data-align='left'] {
+    justify-content: flex-start;
+  }
+  &[data-align='center'] {
+    justify-content: center;
+  }
+  &[data-align='right'] {
+    justify-content: flex-end;
+  }
+}

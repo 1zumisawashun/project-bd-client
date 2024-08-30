@@ -2,13 +2,13 @@
  * 後で修正する
  */
 export const routes = [
-  { href: '/tos', label: '利用規約' },
-  { href: '/faq', label: 'FAQ' },
-  { href: '/sign-in', label: 'ログイン' },
-  { href: '/sign-up', label: '新規登録' },
   { href: '/articles', label: '記事一覧' },
   { href: '/articles/create', label: '記事作成' },
   { href: '/my-page', label: 'マイページ' },
+  { href: '/sign-in', label: 'ログイン' },
+  { href: '/sign-up', label: '新規登録' },
+  { href: '/tos', label: '利用規約' },
+  { href: '/faq', label: 'FAQ' },
 ]
 
 /**

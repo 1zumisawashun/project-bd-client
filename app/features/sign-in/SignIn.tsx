@@ -16,8 +16,8 @@ import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { startTransition, useState } from 'react'
 import { SimpleDialog } from '@/components/elements/SimpleDialog'
 import { useRouter } from 'next/navigation'
-import { signIn } from './SignIn.action'
-import { schema, Schema } from './SignIn.schema'
+import { signIn } from './signIn.action'
+import { schema, Schema } from './signIn.schema'
 
 export const SignIn: React.FC = () => {
   const dialog = useDisclosure()

@@ -5,7 +5,7 @@ import { getUserByEmail } from '@/functions/db/user'
 import prisma from '@/functions/libs/prisma-client/prisma'
 import { hashPassword } from '@/functions/helpers/hash'
 import { ActionsResult } from '@/functions/types'
-import { Schema, schema } from './SignUp.schema'
+import { Schema, schema } from './signUp.schema'
 
 export const signUp = async (values: Schema): Promise<ActionsResult> => {
   const validatedFields = schema.safeParse(values)

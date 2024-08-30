@@ -1,4 +1,4 @@
-import { LayoutContainer } from '@/components/layouts/LayoutContainer'
+import { SiteWrapper } from '@/components/layouts/SiteWrapper'
 import { Metadata } from 'next'
 
 const title = 'Sign Up'
@@ -6,5 +6,5 @@ export const metadata: Metadata = {
   title: `Project BD | ${title}`,
 }
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <LayoutContainer>{children}</LayoutContainer>
+  return <SiteWrapper>{children}</SiteWrapper>
 }

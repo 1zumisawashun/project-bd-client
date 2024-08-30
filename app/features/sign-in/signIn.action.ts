@@ -3,7 +3,7 @@
 import { signIn as NextAuthSignIn } from '@/functions/libs/next-auth/auth'
 import { AuthError } from 'next-auth'
 import { ActionsResult } from '@/functions/types'
-import { Schema } from './SignIn.schema'
+import { Schema } from './signIn.schema'
 
 export const signIn = async ({
   email,

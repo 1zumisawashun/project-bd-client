@@ -1,10 +1,10 @@
 import { AnchorButton } from '@/components/buttons/AnchorButton'
 import { HStack } from '@/components/elements/HStack'
 import { VStack } from '@/components/elements/VStack'
-import styles from './index.module.scss'
+import styles from './TopPage.module.scss'
 
-const BLOCK_NAME = 'index'
-export const Index: React.FC = () => {
+const BLOCK_NAME = 'top-page'
+export const TopPage: React.FC = () => {
   return (
     <VStack gap={6} style={{ paddingTop: '2rem' }}>
       <h2 className={styles[`${BLOCK_NAME}-sub-title`]}>

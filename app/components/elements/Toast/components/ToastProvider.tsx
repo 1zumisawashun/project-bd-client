@@ -1,5 +1,6 @@
-import * as RowToast from '@radix-ui/react-toast'
+'use client'
 
+import * as RowToast from '@radix-ui/react-toast'
 import { ToastDispatchProvider } from './ToastDispatchProvider'
 import { Toast } from './Toast'
 import { useToast } from '../hooks/useToast'

@@ -1,6 +1,6 @@
 import { SiteWrapper } from '@/components/layouts/SiteWrapper'
 import { Metadata } from 'next'
-import { Index } from '@/features/index/index'
+import { TopPage } from '@/features/top-page/TopPage'
 
 const title = 'Top Page'
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <SiteWrapper>
-      <Index />
+      <TopPage />
     </SiteWrapper>
   )
 }

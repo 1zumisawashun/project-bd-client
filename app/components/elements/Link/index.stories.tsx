@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { VStack } from '@/components/elements/VStack'
+import { HStack } from '@/components/elements/HStack'
 import { ExternalLinkIcon } from '@radix-ui/react-icons'
 
 import { Link } from './index'
@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Link>
 
 const Render: React.FC = () => {
   return (
-    <VStack>
+    <HStack>
       <Link href="/">default</Link>
       <Link href="/" id="hover">
         hover
@@ -27,7 +27,7 @@ const Render: React.FC = () => {
       <Link href="/" suffix={<ExternalLinkIcon />}>
         suffix
       </Link>
-    </VStack>
+    </HStack>
   )
 }
 

@@ -5,15 +5,14 @@ import type { Preview } from '@storybook/react'
 /** @see https://stackoverflow.com/questions/76933793/how-to-write-decorator-in-typescript-for-storybook */
 import React from 'react'
 
+const SpWidthDecorator = (Story: any) => (
+  <div style={{ width: '576px' }}>
+    <Story />
+  </div>
+)
+
 const preview: Preview = {
-  decorators: [
-    // FIXME: components以外はwidthを576pxに固定したい
-    (Story) => (
-      <div>
-        <Story />
-      </div>
-    ),
-  ],
+  decorators: [SpWidthDecorator],
   parameters: {
     pseudo: {
       hover: '#hover',

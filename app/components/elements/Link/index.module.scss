@@ -1,4 +1,8 @@
 .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+
   color: var(--blue-10);
   text-decoration: none;
   cursor: pointer;

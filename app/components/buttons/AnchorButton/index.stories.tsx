@@ -2,12 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { VStack } from '@/components/elements/VStack'
 import { HStack } from '@/components/elements/HStack'
+import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
 import { AnchorButton } from './index'
 import { items } from '../buttons.constant'
 
 const meta: Meta<typeof AnchorButton> = {
   title: 'button/AnchorButton',
   component: AnchorButton,
+  decorators: [FullWidthDecorator],
 }
 export default meta
 type Story = StoryObj<typeof AnchorButton>

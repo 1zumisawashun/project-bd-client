@@ -66,10 +66,6 @@ Supabaseのダッシュボードでリストアさせてください。
 nodeのバージョンを本案件のバージョンに合わせてください。  
 nodeのバージョン管理ツールをVoltaに設定している場合は不要です。
 
-### inputにplaceholderは使用しない
-
-FIXME: これESLintとかで縛れないかな
-
 ## その他ドキュメント
 
 See [Configuration Reference]().

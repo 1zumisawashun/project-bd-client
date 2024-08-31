@@ -1,29 +1,21 @@
-import { useRef, useEffect } from 'react'
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { useState, useCallback } from 'react'
+import { genRandomId } from '@/functions/helpers/utils'
+import { ToastDispatchContextParams } from '../components/ToastDispatchProvider'
+import { Toast } from '../../elements.type'
 
 export const useToast = () => {
-  const { isOpen, open, close } = useDisclosure()
-  const eventDateRef = useRef(new Date())
-  const timerRef = useRef(0)
+  const [toasts, setToasts] = useState<Toast[]>([])
 
-  useEffect(() => {
-    return () => clearTimeout(timerRef.current)
+  const openToast = useCallback((params: ToastDispatchContextParams) => {
+    const id = genRandomId()
+    setToasts((prev) => [...prev, { id, isOpen: true, ...params }])
   }, [])
 
-  function oneWeekAway() {
-    const now = new Date()
-    const inOneWeek = now.setDate(now.getDate() + 7)
-    return new Date(inOneWeek)
-  }
+  const closeToast = useCallback((id: string) => {
+    setToasts((prev) =>
+      prev.map((d) => (d.id === id ? { ...d, isOpen: false } : d)),
+    )
+  }, [])
 
-  const handleClick = () => {
-    close()
-    window.clearTimeout(timerRef.current)
-    timerRef.current = window.setTimeout(() => {
-      eventDateRef.current = oneWeekAway()
-      open()
-    }, 100)
-  }
-
-  return { isOpen, close, handleClick }
+  return { toasts, openToast, closeToast }
 }

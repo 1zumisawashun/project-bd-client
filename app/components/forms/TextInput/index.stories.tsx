@@ -13,13 +13,13 @@ function Render() {
   return (
     <Form>
       <FormField name="default">
-        <TextInput placeholder="placeholder" />
+        <TextInput />
       </FormField>
       <FormField name="default focus">
         <TextInput id="focus" value="value" />
       </FormField>
       <FormField name="invalid" serverInvalid>
-        <TextInput placeholder="placeholder" />
+        <TextInput />
       </FormField>
       <FormField name="invalid focus" serverInvalid>
         <TextInput id="focus" value="value" />

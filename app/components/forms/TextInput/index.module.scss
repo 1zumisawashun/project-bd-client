@@ -11,9 +11,6 @@
   &:focus {
     box-shadow: 0 0 0 1px var(--indigo-12);
   }
-  &::placeholder {
-    opacity: 0.5;
-  }
 
   &[data-invalid] {
     border-color: var(--red-10);

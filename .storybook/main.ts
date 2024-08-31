@@ -10,6 +10,7 @@ const config: StorybookConfig = {
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
     'storybook-addon-pseudo-states',
+    '@storybook/addon-designs',
   ],
   /**
    * @see https://github.com/storybookjs/storybook/issues/3916#issuecomment-871283551

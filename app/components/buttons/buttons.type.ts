@@ -1,4 +1,4 @@
-const THEME_OPTIONS = ['primary', 'danger'] as const
+const THEME_OPTIONS = ['primary', 'danger', 'success'] as const
 export type Theme = (typeof THEME_OPTIONS)[number] | (string & {})
 
 const VARIANT_OPTIONS = ['contained', 'outlined', 'ghost'] as const

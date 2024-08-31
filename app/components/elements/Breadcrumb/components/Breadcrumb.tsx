@@ -7,6 +7,8 @@ import styles from '../index.module.scss'
 const BLOCK_NAME = 'breadcrumb'
 type Props = { href?: string } & ComponentPropsWithoutRef<'nav'>
 type Ref = ElementRef<'nav'>
+
+/** @see https://developer.mozilla.org/ja/docs/Web/CSS/Layout_cookbook/Breadcrumb_Navigation */
 export const Breadcrumb = forwardRef<Ref, Props>(
   ({ children, className, href, ...props }, ref) => {
     return (

@@ -2,7 +2,8 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import * as Form from '@radix-ui/react-form'
 import styles from './index.module.scss'
 
-type Props = ComponentPropsWithoutRef<'input'>
+/** @see https://tech.smarthr.jp/entry/2024/03/12/170000 */
+type Props = Omit<ComponentPropsWithoutRef<'input'>, 'placeholder'>
 type Ref = ElementRef<'input'>
 
 const BLOCK_NAME = 'text-input'

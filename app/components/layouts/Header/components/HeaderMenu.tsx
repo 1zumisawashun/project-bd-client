@@ -1,17 +1,27 @@
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
-import { routes } from '@/functions/constants/routes'
+import {
+  authRouteOptions,
+  publicRouteOptions,
+  privateRouteOptions,
+} from '@/functions/constants/routes'
 import {
   DropdownMenuContent,
   DropdownMenu,
   DropdownMenuTrigger,
-} from '../../../elements/DropdownMenu'
-import { IconButton } from '../../../buttons/IconButton'
-import { AnchorButton } from '../../../buttons/AnchorButton'
+} from '@/components/elements/DropdownMenu'
+import { IconButton } from '@/components/buttons/IconButton'
+import { AnchorButton } from '@/components/buttons/AnchorButton'
 import styles from '../index.module.scss'
 
 const BLOCK_NAME = 'header-menu'
 
-export const HeaderMenu: React.FC = () => {
+export const HeaderMenu: React.FC<{ isAuthenticated: boolean }> = ({
+  isAuthenticated,
+}) => {
+  const routes = isAuthenticated
+    ? [...publicRouteOptions, ...privateRouteOptions]
+    : [...authRouteOptions, ...publicRouteOptions]
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

@@ -8,7 +8,7 @@ import {
   FormLabel,
 } from '@/components/forms/Form'
 import { Button } from '@/components/buttons/Button'
-import { AnchorButton } from '@/components/buttons/AnchorButton'
+import { Link } from '@/components/elements/Link'
 import { TextInput } from '@/components/forms/TextInput'
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,6 +16,7 @@ import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { startTransition, useState } from 'react'
 import { SimpleDialog } from '@/components/elements/SimpleDialog'
 import { useRouter } from 'next/navigation'
+import { HStack } from '@/components/elements/HStack'
 import { signIn } from './signIn.action'
 import { schema, Schema } from './signIn.schema'
 
@@ -58,7 +59,7 @@ export const SignIn: React.FC = () => {
     <>
       <Card>
         <CardBody>
-          <h1 style={{ fontSize: '1.5rem' }}>project-bd-client</h1>
+          <h1 style={{ fontSize: '1.5rem' }}>project-bd へようこそ</h1>
           <Form>
             <FormField name="email" serverInvalid={!!errors.email}>
               <FormLabel>メールアドレス</FormLabel>
@@ -72,17 +73,12 @@ export const SignIn: React.FC = () => {
               <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
             </FormField>
           </Form>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <AnchorButton variant="outlined" href="#" disabled>
-                パスワード忘れ
-              </AnchorButton>
-              <AnchorButton variant="outlined" href="/sign-up">
-                新規登録
-              </AnchorButton>
-            </div>
+          <HStack style={{ justifyContent: 'space-between' }}>
+            <HStack>
+              <Link href="/sign-up">新規登録はこちら</Link>
+            </HStack>
             <Button onClick={handleSubmit(onSubmit, onError)}>ログイン</Button>
-          </div>
+          </HStack>
         </CardBody>
       </Card>
 

@@ -18,8 +18,12 @@ export const Index: React.FC = () => {
         ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション
       </p>
       <HStack>
-        <AnchorButton href="/articles/create">Add New</AnchorButton>
-        <AnchorButton href="/articles">View List</AnchorButton>
+        <AnchorButton href="/articles/create" variant="outlined">
+          Add New
+        </AnchorButton>
+        <AnchorButton href="/articles" variant="outlined">
+          View List
+        </AnchorButton>
       </HStack>
     </VStack>
   )

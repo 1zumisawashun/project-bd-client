@@ -8,7 +8,7 @@ import {
   FormLabel,
 } from '@/components/forms/Form'
 import { Button } from '@/components/buttons/Button'
-import { AnchorButton } from '@/components/buttons/AnchorButton'
+import { Link } from '@/components/elements/Link'
 import { TextInput } from '@/components/forms/TextInput'
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -18,6 +18,7 @@ import { startTransition, useState } from 'react'
 import { SimpleDialog } from '@/components/elements/SimpleDialog'
 import { useRouter } from 'next/navigation'
 import { Checkbox, CheckedState } from '@/components/forms/Checkbox'
+import { HStack } from '@/components/elements/HStack'
 import { tos } from '../tos/tos.constant'
 import { schema, Schema } from './signUp.schema'
 import { signUp } from './signUp.action'
@@ -62,7 +63,7 @@ export const SignUp: React.FC = () => {
     <>
       <Card>
         <CardBody>
-          <h1 style={{ fontSize: '1.5rem' }}>project-bd-client</h1>
+          <h1 style={{ fontSize: '1.5rem' }}>project-bd へようこそ</h1>
           <Form>
             <FormField name="email" serverInvalid={!!errors.email}>
               <FormLabel>メールアドレス</FormLabel>
@@ -84,22 +85,17 @@ export const SignUp: React.FC = () => {
           <Checkbox checked={checkedState} onCheckedChange={setCheckedState}>
             利用規約に同意する
           </Checkbox>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <AnchorButton variant="outlined" href="#" disabled>
-                パスワード忘れ
-              </AnchorButton>
-              <AnchorButton variant="outlined" href="/sign-in">
-                ログイン
-              </AnchorButton>
-            </div>
+          <HStack style={{ justifyContent: 'space-between' }}>
+            <HStack>
+              <Link href="/sign-in">ログインはこちら</Link>
+            </HStack>
             <Button
               onClick={handleSubmit(onSubmit, onError)}
               disabled={!checkedState}
             >
               新規登録
             </Button>
-          </div>
+          </HStack>
         </CardBody>
       </Card>
 

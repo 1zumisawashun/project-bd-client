@@ -4,6 +4,8 @@ import { useState } from 'react'
 import styles from './index.module.scss'
 
 const BLOCK_NAME = 'layout-container'
+
+// NOTE: SiteWrapper と同じように、ページの高さを調整するコンポーネント
 export const LayoutContainer: React.FC<{
   children: React.ReactNode
 }> = ({ children }) => {

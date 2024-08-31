@@ -7,45 +7,41 @@ import {
 } from 'react'
 import NextLink, { LinkProps } from 'next/link'
 import styles from './index.module.scss'
-import { Theme, Variant, Size, Shape } from '../buttons.type'
 
-const BLOCK_NAME = 'button'
+const BLOCK_NAME = 'link'
 type Props = Omit<ComponentPropsWithoutRef<'a'>, 'prefix'> & {
-  theme?: Theme
-  variant?: Variant
-  size?: Size
-  shape?: Shape
   disabled?: boolean
+  isExternal?: boolean
   prefix?: ReactNode
   suffix?: ReactNode
 } & LinkProps
 type Ref = ElementRef<'a'>
-export const AnchorButton = forwardRef<Ref, Props>(
+export const Link = forwardRef<Ref, Props>(
   (
     {
       children,
-      theme = 'primary',
-      variant = 'contained',
-      size = 'medium',
-      shape,
-      disabled,
+      disabled = false,
       className,
       prefix,
       suffix,
+      isExternal = false,
       ...props
     },
     ref,
   ) => {
+    const externalProps = isExternal
+      ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        }
+      : {}
     return (
       <NextLink
         {...props}
         className={clsx(styles[`${BLOCK_NAME}`], className)}
-        data-variant={variant}
-        data-theme={theme}
-        data-size={size}
-        data-shape={shape}
         aria-disabled={disabled}
         ref={ref}
+        {...externalProps}
       >
         {prefix ?? null}
         {children}
@@ -55,4 +51,4 @@ export const AnchorButton = forwardRef<Ref, Props>(
   },
 )
 
-AnchorButton.displayName = 'AnchorButton'
+Link.displayName = 'Link'

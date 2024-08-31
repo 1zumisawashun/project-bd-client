@@ -7,6 +7,8 @@ import {
   HeartIcon,
   HeartFilledIcon,
 } from '@radix-ui/react-icons'
+import { VStack } from '@/components/elements/VStack'
+import { HStack } from '@/components/elements/HStack'
 import { IconButton } from './index'
 import { items } from '../buttons.constant'
 
@@ -14,19 +16,14 @@ const meta: Meta<typeof IconButton> = {
   title: 'button/IconButton',
   component: IconButton,
 }
-
 export default meta
-
 type Story = StoryObj<typeof IconButton>
 
-function Render() {
+const Render: React.FC = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <VStack>
       {items.map((item) => (
-        <div
-          style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}
-          key={item.id}
-        >
+        <HStack key={item.id}>
           <IconButton variant={item.variant} theme={item.theme}>
             <Cross1Icon />
           </IconButton>
@@ -46,13 +43,13 @@ function Render() {
           <IconButton variant={item.variant} theme={item.theme} disabled>
             <HeartFilledIcon />
           </IconButton>
-        </div>
+        </HStack>
       ))}
-    </div>
+    </VStack>
   )
 }
 
 export const Default: Story = {
   args: {},
-  render: Render,
+  render: () => <Render />,
 }

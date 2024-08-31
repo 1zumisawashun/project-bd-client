@@ -20,7 +20,7 @@ type Props = {
   disabled?: boolean
   prefix?: ReactNode
   suffix?: ReactNode
-} & ComponentPropsWithoutRef<'button'>
+} & Omit<ComponentPropsWithoutRef<'button'>, 'prefix'>
 type Ref = ElementRef<'button'>
 export const Button = forwardRef<Ref, Props>(
   (

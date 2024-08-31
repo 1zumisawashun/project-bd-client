@@ -4,7 +4,7 @@
 
   &[aria-current='true'] {
     font-weight: bold;
-    pointer-events: none;
+    cursor: not-allowed;
   }
 }
 

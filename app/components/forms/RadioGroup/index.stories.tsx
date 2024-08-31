@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import { VStack } from '@/components/elements/VStack'
 import { groupItems, statusItems } from '../forms.constant'
 import { RadioGroup, RadioGroupItem } from './index'
 import { FormErrorMessage, FormField, Form } from '../Form'
@@ -16,7 +17,7 @@ type Story = StoryObj<typeof RadioGroup>
 
 const RadioGroupStatusListRender: React.FC = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <VStack>
       {statusItems.map((d) => (
         <Card key={d.value}>
           <CardBody>
@@ -35,7 +36,7 @@ const RadioGroupStatusListRender: React.FC = () => {
           </CardBody>
         </Card>
       ))}
-    </div>
+    </VStack>
   )
 }
 

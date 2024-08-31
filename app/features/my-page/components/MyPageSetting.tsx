@@ -3,6 +3,7 @@
 import { Button } from '@/components/buttons/Button'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { Card, CardBody } from '@/components/elements/Card'
+import { VStack } from '@/components/elements/VStack'
 import { LogoutDialog } from './LogoutDialog'
 import styles from '../MyPage.module.scss'
 
@@ -18,7 +19,7 @@ export const MyPageSetting: React.FC = () => {
   const dialog = useDisclosure()
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <VStack gap={6}>
       <Card>
         <CardBody>
           <Title>プロフィールを変更する</Title>
@@ -55,6 +56,6 @@ export const MyPageSetting: React.FC = () => {
         </CardBody>
       </Card>
       <LogoutDialog isOpen={dialog.isOpen} close={dialog.close} />
-    </div>
+    </VStack>
   )
 }

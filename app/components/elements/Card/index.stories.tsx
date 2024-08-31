@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { ComponentProps } from 'react'
 
 import { Card, CardBody } from './index'
 
@@ -7,12 +6,14 @@ const meta: Meta<typeof Card> = {
   title: 'element/Card',
   component: Card,
 }
-
 export default meta
 
 type Story = StoryObj<typeof Card>
 
-const Render = ({ children, ...props }: ComponentProps<typeof Card>) => {
+const Render: React.FC<React.ComponentProps<typeof Card>> = ({
+  children,
+  ...props
+}) => {
   return (
     <Card {...props}>
       <CardBody>{children}</CardBody>

@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
+import { PlusIcon } from '@radix-ui/react-icons'
+import { VStack } from '@/components/elements/VStack'
+import { HStack } from '@/components/elements/HStack'
 import { Button } from './index'
 import { items } from '../buttons.constant'
 
@@ -7,21 +9,30 @@ const meta: Meta<typeof Button> = {
   title: 'button/Button',
   component: Button,
 }
-
 export default meta
-
 type Story = StoryObj<typeof Button>
 
-function Render() {
+const Render: React.FC = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <VStack>
       {items.map((item) => (
-        <div
-          style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}
-          key={item.id}
-        >
+        <HStack key={item.id}>
           <Button variant={item.variant} theme={item.theme}>
             default
+          </Button>
+          <Button
+            variant={item.variant}
+            theme={item.theme}
+            prefix={<PlusIcon />}
+          >
+            prefix
+          </Button>
+          <Button
+            variant={item.variant}
+            theme={item.theme}
+            suffix={<PlusIcon />}
+          >
+            suffix
           </Button>
           <Button variant={item.variant} theme={item.theme} id="hover">
             hover
@@ -35,13 +46,13 @@ function Render() {
           <Button variant={item.variant} theme={item.theme} disabled>
             disabled
           </Button>
-        </div>
+        </HStack>
       ))}
-    </div>
+    </VStack>
   )
 }
 
 export const Default: Story = {
   args: {},
-  render: Render,
+  render: () => <Render />,
 }

@@ -8,6 +8,8 @@ import {
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
+import { VStack } from '@/components/elements/VStack'
+import { HStack } from '@/components/elements/HStack'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']
@@ -24,21 +26,13 @@ export const SimpleDialog: React.FC<Props> = ({
   return (
     <Dialog open={isOpen} onOpenChange={close}>
       <DialogContent>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <VStack align="center">
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
+          <HStack>
             <Button onClick={close}>閉じる</Button>
-          </div>
-        </div>
+          </HStack>
+        </VStack>
       </DialogContent>
     </Dialog>
   )

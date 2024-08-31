@@ -11,13 +11,23 @@ $data-gap-multiplier: 0.25rem;
     }
   }
 
-  &[data-align='left'] {
+  &[data-justify='start'] {
     justify-content: flex-start;
   }
-  &[data-align='center'] {
+  &[data-justify='center'] {
     justify-content: center;
   }
-  &[data-align='right'] {
+  &[data-justify='end'] {
     justify-content: flex-end;
+  }
+
+  &[data-align='start'] {
+    align-items: flex-start;
+  }
+  &[data-align='center'] {
+    align-items: center;
+  }
+  &[data-align='end'] {
+    align-items: flex-end;
   }
 }

@@ -29,9 +29,7 @@ export const signIn = async ({
         default:
           return {
             isSuccess: false,
-            error: {
-              message: 'ログインに失敗しました',
-            },
+            error: { message: 'ログインに失敗しました' },
           }
       }
     }

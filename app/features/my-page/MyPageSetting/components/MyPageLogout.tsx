@@ -1,15 +1,20 @@
+'use client'
+
+import { Button } from '@/components/buttons/Button'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { Card, CardBody } from '@/components/elements/Card'
+import { HStack } from '@/components/elements/HStack'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
-import { Button } from '@/components/buttons/Button'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { VStack } from '@/components/elements/VStack'
-import { HStack } from '@/components/elements/HStack'
+import { Title } from './Title'
+import { Description } from './Description'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']
@@ -41,5 +46,24 @@ export const LogoutDialog: React.FC<Props> = ({ isOpen, close }) => {
         </VStack>
       </DialogContent>
     </Dialog>
+  )
+}
+
+export const MyPageLogout: React.FC = () => {
+  const { isOpen, open, close } = useDisclosure()
+
+  return (
+    <Card>
+      <CardBody>
+        <Title>ログアウトする</Title>
+        <Description>
+          ログアウトするログアウトするログアウトするログアウトするログアウトするログアウトする
+        </Description>
+        <HStack>
+          <Button onClick={open}>ログアウトする</Button>
+        </HStack>
+      </CardBody>
+      <LogoutDialog isOpen={isOpen} close={close} />
+    </Card>
   )
 }

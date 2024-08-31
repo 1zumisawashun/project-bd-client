@@ -1,4 +1,4 @@
-import { faq } from '@/features/faq/Faq.constant'
+import { faq } from '@/features/faq/faq.constant'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Nl2br } from './index'

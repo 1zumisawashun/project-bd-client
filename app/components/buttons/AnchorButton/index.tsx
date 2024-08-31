@@ -10,7 +10,7 @@ import styles from './index.module.scss'
 import { Theme, Variant, Size, Shape } from '../buttons.type'
 
 const BLOCK_NAME = 'button'
-type Props = ComponentPropsWithoutRef<'a'> & {
+type Props = Omit<ComponentPropsWithoutRef<'a'>, 'prefix'> & {
   theme?: Theme
   variant?: Variant
   size?: Size

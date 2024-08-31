@@ -7,6 +7,7 @@ import {
 } from 'react'
 import { FieldError } from 'react-hook-form'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { HStack } from '@/components/elements/HStack'
 import { TextInput } from '../TextInput'
 
 type Props = {
@@ -73,14 +74,7 @@ export const PriceInput = forwardRef<Ref, Props>(
     }
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '1rem',
-          alignItems: 'center',
-        }}
-      >
+      <HStack align="center">
         <TextInput
           ref={ref}
           {...rest}
@@ -88,7 +82,7 @@ export const PriceInput = forwardRef<Ref, Props>(
           {...priceInputHandler()}
         />
         <span>円</span>
-      </div>
+      </HStack>
     )
   },
 )

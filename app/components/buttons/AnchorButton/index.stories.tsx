@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
+import { PlusIcon } from '@radix-ui/react-icons'
+import { VStack } from '@/components/elements/VStack'
+import { HStack } from '@/components/elements/HStack'
 import { AnchorButton } from './index'
 import { items } from '../buttons.constant'
 
@@ -7,21 +9,32 @@ const meta: Meta<typeof AnchorButton> = {
   title: 'button/AnchorButton',
   component: AnchorButton,
 }
-
 export default meta
-
 type Story = StoryObj<typeof AnchorButton>
 
-function Render() {
+const Render: React.FC = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <VStack>
       {items.map((item) => (
-        <div
-          style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}
-          key={item.id}
-        >
+        <HStack key={item.id}>
           <AnchorButton href="#" variant={item.variant} theme={item.theme}>
             default
+          </AnchorButton>
+          <AnchorButton
+            href="#"
+            variant={item.variant}
+            theme={item.theme}
+            prefix={<PlusIcon />}
+          >
+            prefix
+          </AnchorButton>
+          <AnchorButton
+            href="#"
+            variant={item.variant}
+            theme={item.theme}
+            suffix={<PlusIcon />}
+          >
+            suffix
           </AnchorButton>
           <AnchorButton
             href="#"
@@ -55,13 +68,13 @@ function Render() {
           >
             disabled
           </AnchorButton>
-        </div>
+        </HStack>
       ))}
-    </div>
+    </VStack>
   )
 }
 
 export const Default: Story = {
   args: {},
-  render: Render,
+  render: () => <Render />,
 }

@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { VStack } from '@/components/elements/VStack'
+import { HStack } from '@/components/elements/HStack'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from './index'
 import { Button } from '../../buttons/Button'
 
@@ -18,26 +20,18 @@ function Render() {
       <Button onClick={open}>Open Dialog</Button>
       <Dialog open={isOpen} onOpenChange={() => close()}>
         <DialogContent>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <VStack align="center">
             <DialogTitle>削除しますか？</DialogTitle>
             <DialogDescription>本当に削除しますか？</DialogDescription>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
+            <HStack>
               <Button theme="danger" variant="outlined" onClick={close}>
                 キャンセル
               </Button>
               <Button theme="danger" onClick={() => alert('delete!')}>
                 削除する
               </Button>
-            </div>
-          </div>
+            </HStack>
+          </VStack>
         </DialogContent>
       </Dialog>
     </>

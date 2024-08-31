@@ -1,0 +1,15 @@
+.index-title {
+  font-size: 4rem;
+  color: var(--indigo-12);
+}
+
+.index-sub-title {
+  font-weight: 600;
+  composes: _line-clamp-3 from '@/assets/line-clump.module.scss';
+  color: var(--indigo-9);
+}
+
+.index-description {
+  font-size: 0.875rem;
+  color: var(--mauve-10);
+}

@@ -1,13 +1,20 @@
+'use client'
+
+import { Button } from '@/components/buttons/Button'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { Card, CardBody } from '@/components/elements/Card'
+import { HStack } from '@/components/elements/HStack'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
-import { Button } from '@/components/buttons/Button'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { VStack } from '@/components/elements/VStack'
+import { Title } from './Title'
+import { Description } from './Description'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']
@@ -25,27 +32,38 @@ export const LogoutDialog: React.FC<Props> = ({ isOpen, close }) => {
   return (
     <Dialog open={isOpen} onOpenChange={close}>
       <DialogContent>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <VStack align="center">
           <DialogTitle>ログアウトしますか？</DialogTitle>
           <DialogDescription>本当にログアウトしますか？</DialogDescription>
-          <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
+          <HStack>
             <Button theme="danger" variant="outlined" onClick={close}>
               キャンセル
             </Button>
             <Button theme="danger" onClick={logout}>
               ログアウトする
             </Button>
-          </div>
-        </div>
+          </HStack>
+        </VStack>
       </DialogContent>
     </Dialog>
+  )
+}
+
+export const MyPageLogout: React.FC = () => {
+  const { isOpen, open, close } = useDisclosure()
+
+  return (
+    <Card>
+      <CardBody>
+        <Title>ログアウトする</Title>
+        <Description>
+          ログアウトするログアウトするログアウトするログアウトするログアウトするログアウトする
+        </Description>
+        <HStack>
+          <Button onClick={open}>ログアウトする</Button>
+        </HStack>
+      </CardBody>
+      <LogoutDialog isOpen={isOpen} close={close} />
+    </Card>
   )
 }

@@ -73,7 +73,7 @@
 
 .menubar-item[data-disabled] {
   color: var(--mauve-8);
-  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .menubar-separator {

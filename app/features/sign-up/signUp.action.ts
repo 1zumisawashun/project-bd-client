@@ -5,17 +5,15 @@ import { getUserByEmail } from '@/functions/db/user'
 import prisma from '@/functions/libs/prisma-client/prisma'
 import { hashPassword } from '@/functions/helpers/hash'
 import { ActionsResult } from '@/functions/types'
-import { Schema, schema } from './SignUp.schema'
+import { Schema, schema } from './signUp.schema'
 
-export const signUp = async (values: Schema): Promise<ActionsResult> => {
-  const validatedFields = schema.safeParse(values)
+export const signUp = async (data: Schema): Promise<ActionsResult> => {
+  const validatedFields = schema.safeParse(data)
 
   if (!validatedFields.success) {
     return {
       isSuccess: false,
-      error: {
-        message: validatedFields.error.message,
-      },
+      error: { message: validatedFields.error.message },
     }
   }
 
@@ -28,9 +26,7 @@ export const signUp = async (values: Schema): Promise<ActionsResult> => {
     if (existingUser) {
       return {
         isSuccess: false,
-        error: {
-          message: 'このメールアドレスは既に登録されています',
-        },
+        error: { message: 'このメールアドレスは既に登録されています' },
       }
     }
 

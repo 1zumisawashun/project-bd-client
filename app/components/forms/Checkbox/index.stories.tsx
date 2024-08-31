@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useArrayState } from '@/functions/hooks/useArrayState'
+import { VStack } from '@/components/elements/VStack'
 import { groupItems, statusItems } from '../forms.constant'
 import { Checkbox, CheckboxGroup } from './index'
 import { FormErrorMessage, FormField, Form } from '../Form'
@@ -17,7 +18,7 @@ type Story = StoryObj<typeof Checkbox>
 
 const CheckboxStatusListRender: React.FC = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <VStack>
       {statusItems.map((d) => (
         <Card key={d.value}>
           <CardBody>
@@ -36,7 +37,7 @@ const CheckboxStatusListRender: React.FC = () => {
           </CardBody>
         </Card>
       ))}
-    </div>
+    </VStack>
   )
 }
 

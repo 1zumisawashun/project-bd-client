@@ -1,15 +1,15 @@
-import { SubHeader } from '@/components/layouts/SubHeader'
 import { SiteWrapper } from '@/components/layouts/SiteWrapper'
 import { Metadata } from 'next'
+import { Index } from '@/features/index/index'
 
 const title = 'Top Page'
 export const metadata: Metadata = {
   title: `Project BD | ${title}`,
 }
-export default function Page({ children }: { children: React.ReactNode }) {
+export default function Page() {
   return (
     <SiteWrapper>
-      <SubHeader title={title}>{children}</SubHeader>
+      <Index />
     </SiteWrapper>
   )
 }

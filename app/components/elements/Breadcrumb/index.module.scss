@@ -1,0 +1,26 @@
+:is(.breadcrumb-link, .breadcrumb-back-button) {
+  padding: 0.25rem;
+  font-size: 0.875rem;
+
+  &[aria-current='true'] {
+    font-weight: bold;
+    cursor: not-allowed;
+  }
+}
+
+:is(.breadcrumb, .breadcrumb-nav) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.breadcrumb-item {
+  color: var(--mauve-8);
+
+  &:not(:last-child)::after {
+    display: inline-block;
+    margin-left: 0.5rem;
+    content: '/';
+  }
+}

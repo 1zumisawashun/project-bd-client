@@ -1,17 +1,10 @@
-import { LayoutContainer } from '@/components/layouts/LayoutContainer'
-import { SubHeader } from '@/components/layouts/SubHeader'
+import { SiteWrapper } from '@/components/layouts/SiteWrapper'
 import { Metadata } from 'next'
 
 const title = 'Sign In'
 export const metadata: Metadata = {
-  title: `UniFli | ${title}`,
+  title: `Project BD | ${title}`,
 }
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <LayoutContainer>
-      <SubHeader title={title} href="/">
-        {children}
-      </SubHeader>
-    </LayoutContainer>
-  )
+  return <SiteWrapper>{children}</SiteWrapper>
 }

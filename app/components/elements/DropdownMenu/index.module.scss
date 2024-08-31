@@ -43,7 +43,7 @@
 
 .dropdown-menu-item[data-disabled] {
   color: var(--mauve-8);
-  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .dropdown-menu-item[data-highlighted] {

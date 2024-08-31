@@ -1,0 +1,10 @@
+.my-page-setting-title {
+  font-weight: 600;
+  composes: _line-clamp-3 from '@/assets/line-clump.module.scss';
+  color: var(--mauve-11);
+}
+
+.my-page-setting-description {
+  font-size: 0.875rem;
+  color: var(--mauve-10);
+}

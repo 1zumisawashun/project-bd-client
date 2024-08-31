@@ -1,0 +1,13 @@
+.link {
+  color: var(--blue-10);
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+  &[aria-disabled='true'] {
+    color: var(--gray-6);
+    text-decoration: none;
+    cursor: not-allowed;
+  }
+}

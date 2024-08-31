@@ -20,7 +20,7 @@
     transition: filter 0.3s ease;
   }
   &:is([disabled], [aria-disabled]) {
-    pointer-events: none;
+    cursor: not-allowed;
     filter: brightness(80%);
     transition: filter 0.3s ease;
   }

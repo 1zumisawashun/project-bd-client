@@ -18,9 +18,9 @@ import { startTransition, useState } from 'react'
 import { SimpleDialog } from '@/components/elements/SimpleDialog'
 import { useRouter } from 'next/navigation'
 import { Checkbox, CheckedState } from '@/components/forms/Checkbox'
-import { tos } from '../tos/Tos.constant'
-import { schema, Schema } from './SignUp.schema'
-import { signUp } from './SignUp.action'
+import { tos } from '../tos/tos.constant'
+import { schema, Schema } from './signUp.schema'
+import { signUp } from './signUp.action'
 
 export const SignUp: React.FC = () => {
   const dialog = useDisclosure()

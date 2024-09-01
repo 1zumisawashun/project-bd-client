@@ -49,9 +49,9 @@ See [Configuration Reference](https://github.com/1zumisawashun/folder-structure-
 - database : Supabase
 - ui : Radix UI + CSS Modules
 - auth : NextAuth
-- test : react-testing-library
+- test : Jest + react-testing-library
 - hosting : Vercel
-- other : react-hook-form, zod, tiptap, pathpida, Storybook
+- other : react-hook-form, zod, tiptap, Storybook, Chromatic
 ```
 
 ## Troubleshoot

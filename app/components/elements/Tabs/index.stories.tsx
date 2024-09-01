@@ -9,7 +9,7 @@ const meta: Meta<typeof Tabs> = {
 export default meta
 type Story = StoryObj<typeof Tabs>
 
-function Render() {
+const Render: React.FC = () => {
   return (
     <Tabs defaultValue="tab1" orientation="vertical">
       <TabsList>
@@ -26,5 +26,5 @@ function Render() {
 
 export const Default: Story = {
   args: {},
-  render: Render,
+  render: () => <Render />,
 }

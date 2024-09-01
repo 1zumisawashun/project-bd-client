@@ -16,7 +16,7 @@ const schema = z.object({
   price: z.number().max(10000, 'Price must be less than 10000'),
 })
 
-function Render() {
+const Render: React.FC = () => {
   const {
     control,
     formState: { errors },
@@ -44,6 +44,5 @@ function Render() {
 }
 
 export const Default: Story = {
-  args: {},
-  render: (args) => <Render {...args} />,
+  render: () => <Render />,
 }

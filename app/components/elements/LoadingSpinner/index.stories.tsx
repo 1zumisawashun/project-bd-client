@@ -8,4 +8,10 @@ const meta: Meta<typeof LoadingSpinner> = {
 }
 export default meta
 type Story = StoryObj<typeof LoadingSpinner>
-export const Default: Story = {}
+
+const Render: React.FC = () => {
+  return <LoadingSpinner />
+}
+export const Default: Story = {
+  render: () => <Render />,
+}

@@ -17,7 +17,7 @@ const schema = z.object({
   password: z.string().min(1, 'This field is required'),
 })
 
-function Render() {
+const Render: React.FC = () => {
   const {
     register,
     formState: { errors },
@@ -47,6 +47,5 @@ function Render() {
 }
 
 export const Default: Story = {
-  args: {},
-  render: (args) => <Render {...args} />,
+  render: () => <Render />,
 }

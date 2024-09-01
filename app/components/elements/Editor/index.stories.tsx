@@ -15,7 +15,7 @@ const meta: Meta<typeof EditorContent> = {
 export default meta
 type Story = StoryObj<typeof EditorContent>
 
-function Render() {
+const Render: React.FC = () => {
   const { editor } = useEditor()
 
   if (!editor) return null

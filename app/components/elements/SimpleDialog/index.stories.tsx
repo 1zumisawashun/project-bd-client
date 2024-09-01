@@ -11,7 +11,7 @@ const meta: Meta<typeof SimpleDialog> = {
 export default meta
 type Story = StoryObj<typeof SimpleDialog>
 
-function Render() {
+const Render: React.FC = () => {
   const { isOpen, close, open } = useDisclosure()
   return (
     <>
@@ -28,5 +28,5 @@ function Render() {
 
 export const Default: Story = {
   args: {},
-  render: Render,
+  render: () => <Render />,
 }

@@ -1,9 +1,9 @@
 import {
   Extension,
-  Editor,
-  isNodeSelection,
-  isTextSelection,
-  posToDOMRect,
+  // Editor,
+  // isNodeSelection,
+  // isTextSelection,
+  // posToDOMRect,
   getMarkRange,
 } from '@tiptap/react'
 import {
@@ -11,7 +11,7 @@ import {
   PluginKey,
   EditorState,
   TextSelection,
-  NodeSelection,
+  // NodeSelection,
 } from '@tiptap/pm/state'
 import { EditorView } from '@tiptap/pm/view'
 import Paragraph from '@tiptap/extension-paragraph'

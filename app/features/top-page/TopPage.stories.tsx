@@ -12,8 +12,6 @@ type Story = StoryObj<typeof TopPage>
 const Render: React.FC = () => {
   return <TopPage />
 }
-
 export const Default: Story = {
-  args: {},
   render: () => <Render />,
 }

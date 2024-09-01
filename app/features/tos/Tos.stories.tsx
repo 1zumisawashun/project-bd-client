@@ -12,8 +12,6 @@ type Story = StoryObj<typeof Tos>
 const Render: React.FC = () => {
   return <Tos />
 }
-
 export const Default: Story = {
-  args: {},
   render: () => <Render />,
 }

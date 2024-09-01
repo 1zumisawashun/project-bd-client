@@ -11,7 +11,7 @@ const meta: Meta<typeof Tooltip> = {
 export default meta
 type Story = StoryObj<typeof Tooltip>
 
-function Render() {
+const Render: React.FC = () => {
   return (
     <Tooltip content="sample">
       <IconButton>
@@ -23,5 +23,5 @@ function Render() {
 
 export const Default: Story = {
   args: {},
-  render: Render,
+  render: () => <Render />,
 }

@@ -18,7 +18,7 @@ export default meta
 
 type Story = StoryObj<typeof DropdownMenu>
 
-function Render() {
+const Render: React.FC = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -37,5 +37,5 @@ function Render() {
 
 export const Default: Story = {
   args: {},
-  render: Render,
+  render: () => <Render />,
 }

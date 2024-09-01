@@ -1,32 +1,29 @@
 $data-gap-multiplier: 0.25rem;
 
+$alignments: (
+  'start': 'flex-start',
+  'center': 'center',
+  'end': 'flex-end',
+);
+
 .hstack {
   display: flex;
   flex-direction: row;
+  gap: 1rem;
 
   @for $i from 1 through 10 {
     &[data-gap='#{$i}'] {
       gap: $i * $data-gap-multiplier;
     }
   }
-
-  &[data-justify='start'] {
-    justify-content: flex-start;
+  @each $k, $d in $alignments {
+    &[data-justify='#{$k}'] {
+      justify-content: $d;
+    }
   }
-  &[data-justify='center'] {
-    justify-content: center;
-  }
-  &[data-justify='end'] {
-    justify-content: flex-end;
-  }
-
-  &[data-align='start'] {
-    align-items: flex-start;
-  }
-  &[data-align='center'] {
-    align-items: center;
-  }
-  &[data-align='end'] {
-    align-items: flex-end;
+  @each $k, $d in $alignments {
+    &[data-align='#{$k}'] {
+      align-items: $d;
+    }
   }
 }

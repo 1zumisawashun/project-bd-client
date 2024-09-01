@@ -8,4 +8,10 @@ const meta: Meta<typeof LoadingDot> = {
 }
 export default meta
 type Story = StoryObj<typeof LoadingDot>
-export const Default: Story = {}
+
+const Render: React.FC = () => {
+  return <LoadingDot />
+}
+export const Default: Story = {
+  render: () => <Render />,
+}

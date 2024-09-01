@@ -9,8 +9,10 @@ const meta: Meta<typeof MyPageSetting> = {
 }
 export default meta
 type Story = StoryObj<typeof MyPageSetting>
+
+const Render: React.FC = () => {
+  return <MyPageSetting user={mockUser} />
+}
 export const Default: Story = {
-  args: {
-    user: mockUser,
-  },
+  render: () => <Render />,
 }

@@ -12,8 +12,6 @@ type Story = StoryObj<typeof SignIn>
 const Render: React.FC = () => {
   return <SignIn />
 }
-
 export const Default: Story = {
-  args: {},
   render: () => <Render />,
 }

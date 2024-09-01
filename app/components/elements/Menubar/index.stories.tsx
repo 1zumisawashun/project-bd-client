@@ -18,7 +18,7 @@ export default meta
 
 type Story = StoryObj<typeof Menubar>
 
-function Render() {
+const Render: React.FC = () => {
   return (
     <Menubar>
       <MenubarMenu>
@@ -50,5 +50,5 @@ function Render() {
 
 export const Default: Story = {
   args: {},
-  render: Render,
+  render: () => <Render />,
 }

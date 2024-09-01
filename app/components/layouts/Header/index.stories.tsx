@@ -9,9 +9,7 @@ const meta: Meta<typeof Header> = {
   parameters: { layout: 'fullscreen' },
   decorators: [FullWidthDecorator],
 }
-
 export default meta
-
 type Story = StoryObj<typeof Header>
 
 const Render: React.FC = () => {
@@ -19,6 +17,5 @@ const Render: React.FC = () => {
 }
 
 export const Default: Story = {
-  args: {},
   render: () => <Render />,
 }

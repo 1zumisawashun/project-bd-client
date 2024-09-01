@@ -1,6 +1,6 @@
 'use server'
 
-import { handleError } from '@/functions/helpers/handleError'
+import { handleError } from '@/functions/helpers/utils'
 import { ActionsResult } from '@/functions/types'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { updateUser, getUserByEmail } from '@/functions/db/user'

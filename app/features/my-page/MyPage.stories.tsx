@@ -15,6 +15,5 @@ const Render: React.FC = () => {
 }
 
 export const Default: Story = {
-  args: {},
   render: () => <Render />,
 }

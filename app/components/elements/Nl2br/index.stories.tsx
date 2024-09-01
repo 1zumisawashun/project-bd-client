@@ -12,8 +12,9 @@ export default meta
 
 type Story = StoryObj<typeof Nl2br>
 
+const Render: React.FC = () => {
+  return <Nl2br>{faq}</Nl2br>
+}
 export const Default: Story = {
-  args: {
-    children: faq,
-  },
+  render: () => <Render />,
 }

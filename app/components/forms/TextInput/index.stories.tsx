@@ -9,7 +9,7 @@ const meta: Meta<typeof TextInput> = {
 export default meta
 type Story = StoryObj<typeof TextInput>
 
-function Render() {
+const Render: React.FC = () => {
   return (
     <Form>
       <FormField name="default">
@@ -29,6 +29,5 @@ function Render() {
 }
 
 export const Default: Story = {
-  args: {},
-  render: (args) => <Render {...args} />,
+  render: () => <Render />,
 }

@@ -8,4 +8,10 @@ const meta: Meta<typeof ArticleList> = {
 }
 export default meta
 type Story = StoryObj<typeof ArticleList>
-export const Default: Story = {}
+
+const Render: React.FC = () => {
+  return <ArticleList />
+}
+export const Default: Story = {
+  render: () => <Render />,
+}

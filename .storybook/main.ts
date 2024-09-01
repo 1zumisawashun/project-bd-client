@@ -1,6 +1,10 @@
 import type { StorybookConfig } from '@storybook/nextjs'
 const path = require('path')
 
+// @ts-check
+/**
+ * @type { import("@storybook/react/types").StorybookConfig}
+ */
 const config: StorybookConfig = {
   stories: ['../app/**/*.mdx', '../app/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [

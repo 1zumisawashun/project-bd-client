@@ -1,7 +1,8 @@
 .base-button {
   &:hover {
     cursor: pointer;
-    filter: brightness(90%);
+    // filter: brightness(90%);
+    filter: brightness(0.75) contrast(120%); // 0.75 * 120% = 90%
     transition: filter 0.3s ease;
   }
   &:active {

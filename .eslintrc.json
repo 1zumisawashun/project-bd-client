@@ -37,7 +37,9 @@
     "import/no-unresolved": "off",
     // custom-rules
     // "custom-rules/my-first-rule": "warn",
-    "custom-rules/no-bad-literal": "warn",
+    // "custom-rules/no-bad-literal": "warn",
+    // "custom-rules/no-omit-utility-type": "warn",
+    "custom-rules/force-should-dirty": "warn",
     // syntax-rules
     "no-restricted-syntax": [
       "error",

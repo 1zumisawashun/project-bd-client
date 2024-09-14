@@ -18,6 +18,7 @@
     "arrow-body-style": "off",
     // eslint-config-airbnb（eslint-plugin-import)
     "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": "off", // MEMO: 思った以上にエラーが出るので一旦off
     // eslint-config-airbnb（eslint-plugin-react）
     "react/require-default-props": "off",
     "react/function-component-definition": "off",
@@ -29,6 +30,7 @@
     // eslint-config-airbnb-typescript（eslint-typescript）
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-use-before-define": "off", // MEMO: genya3曰メイン情報を上に上げてノイズになる関数は下に配置するとのこと
     // off because typescript already checks these rules @see https://typescript-eslint.io/troubleshooting/typed-linting/performance/#eslint-plugin-import
     "import/named": "off",
     "import/namespace": "off",

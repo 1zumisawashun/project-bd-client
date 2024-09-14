@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import clsx from 'clsx'
 import { forwardRef, ElementRef } from 'react'
 import * as RowDialog from '@radix-ui/react-dialog'

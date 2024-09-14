@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
 'use client'
 
 import { RefObject, useCallback, useEffect } from 'react'

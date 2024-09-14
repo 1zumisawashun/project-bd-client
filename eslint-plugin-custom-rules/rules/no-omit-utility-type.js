@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rule = void 0;
-// eslint-disable-next-line import/no-extraneous-dependencies
 const utils_1 = require("@typescript-eslint/utils");
 const createRule = utils_1.ESLintUtils.RuleCreator((name) => `https://example.com/rule/${name}`);
 exports.rule = createRule({

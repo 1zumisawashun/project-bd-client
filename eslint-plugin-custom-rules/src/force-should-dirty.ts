@@ -1,21 +1,14 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/**
- * これが一番答えに近そう
- * @see https://github.com/andykao1213/eslint-plugin-react-hook-form/blob/f210951a28db93ca456f877832bba479826d7e0b/lib/rules/no-nested-object-setvalue.js
- */
+import { ESLintUtils, TSESTree, AST_NODE_TYPES } from '@typescript-eslint/utils'
+import * as path from 'path'
 
-import { ESLintUtils } from '@typescript-eslint/utils'
+/** @see https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/src/utils.ts */
+const createRule = ESLintUtils.RuleCreator((name) => {
+  const dirname = path.relative(__dirname, path.dirname(name))
+  const basename = path.basename(name, path.extname(name))
+  return `https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/docs/${dirname}/${basename}.md`
+})
 
-// ルールのドキュメントURL
-const createRule = ESLintUtils.RuleCreator(
-  (name) => `https://example.com/rule/${name}`,
-)
-
-//------------------------------------------------------------------------------
-// Rule Definition
-//------------------------------------------------------------------------------
-
+/** @see https://github.com/andykao1213/eslint-plugin-react-hook-form/blob/f210951a28db93ca456f877832bba479826d7e0b/lib/rules/no-nested-object-setvalue.js */
 export const rule = createRule({
   name: 'force-should-dirty',
   defaultOptions: [],
@@ -43,89 +36,133 @@ export const rule = createRule({
     ],
   },
   create(context) {
+    const reportCallExpression = (
+      callExpression: TSESTree.CallExpression,
+    ): void => {
+      context.report({
+        node: callExpression,
+        messageId: 'forceShouldDirty',
+      })
+    }
+
+    const reportObjectExpression = (
+      objectExpression: TSESTree.ObjectExpression,
+    ): void => {
+      const hasShouldDirty = objectExpression.properties.some((p) => {
+        if (
+          p.type === AST_NODE_TYPES.Property &&
+          p.key.type === AST_NODE_TYPES.Identifier
+        ) {
+          return p.key.name === 'shouldDirty'
+        }
+        return false
+      })
+
+      if (hasShouldDirty) return
+
+      const defaultOptions = objectExpression.properties.reduce<
+        Record<string, any>
+      >((acc, cur) => {
+        if (
+          cur.type === AST_NODE_TYPES.Property &&
+          cur.key.type === AST_NODE_TYPES.Identifier &&
+          cur.value.type === AST_NODE_TYPES.Literal
+        ) {
+          acc[cur.key.name] = cur.value.value
+        }
+        return acc
+      }, {})
+
+      const optionsWithShouldDirty = formatObjectToString({
+        ...defaultOptions,
+        shouldDirty: true,
+      })
+
+      context.report({
+        node: objectExpression,
+        messageId: 'forceShouldDirty',
+        fix(fixer) {
+          return fixer.replaceText(
+            objectExpression,
+            `${optionsWithShouldDirty}`,
+          )
+        },
+      })
+    }
+
+    const formatObjectToString = (obj: {}): string => {
+      return JSON.stringify(obj, null, 2)
+        .replace(/"([^"]+)":/g, '$1:')
+        .replace(/"/g, '')
+        .trim()
+    }
+
+    const isUseForm = (node: TSESTree.VariableDeclarator): boolean => {
+      return (
+        node.type === AST_NODE_TYPES.VariableDeclarator &&
+        node.init?.type === AST_NODE_TYPES.CallExpression &&
+        node.init?.callee.type === AST_NODE_TYPES.Identifier &&
+        node.init?.callee.name === 'useForm'
+      )
+    }
+
+    const isUseFormContext = (node: TSESTree.VariableDeclarator): boolean => {
+      return (
+        node.type === AST_NODE_TYPES.VariableDeclarator &&
+        node.init?.type === AST_NODE_TYPES.CallExpression &&
+        node.init?.callee.type === AST_NODE_TYPES.Identifier &&
+        node.init?.callee.name === 'useFormContext'
+      )
+    }
+
+    /** @see https://zenn.dev/cybozu_frontend/articles/ts-eslint-new-syntax */
     return {
       VariableDeclarator: (node) => {
-        const isUseForm =
-          node.type === 'VariableDeclarator' &&
-          node.init?.type === 'CallExpression' &&
-          // @ts-ignore
-          node.init?.callee.name === 'useForm'
-
-        const isUseFormContext =
-          node.type === 'VariableDeclarator' &&
-          node.init?.type === 'CallExpression' &&
-          // @ts-ignore
-          node.init?.callee.name === 'useFormContext'
-
-        // useFormかuseFormContextをサポートする
-        if (isUseForm || isUseFormContext) {
-          // const { setValue } = useForm(); だけをサポートする
-          const setValueProperty = (() => {
-            if (node.id.type === 'ObjectPattern') {
-              // @ts-ignore
-              return node.id.properties.find((p) => p.key.name === 'setValue')
+        // NOTE: useFormかuseFormContextをサポートする
+        if (isUseForm(node) || isUseFormContext(node)) {
+          // NOTE: const { setValue } = useForm(); or const { setValue } = useFormContext(); をサポートする
+          const property = (() => {
+            if (node.id.type === AST_NODE_TYPES.ObjectPattern) {
+              return node.id.properties.find((p) => {
+                if (
+                  p.type === AST_NODE_TYPES.Property &&
+                  p.key.type === AST_NODE_TYPES.Identifier
+                ) {
+                  return p.key.name === 'setValue'
+                }
+                return null
+              })
             }
             return null
           })()
 
-          // Identifierの意味がわからない
-          if (setValueProperty?.value?.type !== 'Identifier') return
+          /**
+           * setValueのnodeを取得する。
+           * const nodeSource = sourceCode.getText(node); でも取得できそう
+           * @see https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/#context.getscope()
+           * @see https://eslint.org/docs/latest/extend/custom-rules#accessing-the-source-text
+           */
+          if (property?.value?.type !== AST_NODE_TYPES.Identifier) return
 
-          // MEMO: setValueのnodeを取得する
           const setValue = context.sourceCode
             .getScope(node)
-            .set.get(setValueProperty.value.name)
+            .set.get(property.value.name)
 
-          if (!setValue) return
+          /**
+           * NOTE: setValueの引数の処理
+           * @see https://eslint.org/docs/latest/extend/custom-rules#scope-variables
+           */
+          setValue?.references.forEach((r) => {
+            if (r.identifier.parent.type === AST_NODE_TYPES.CallExpression) {
+              const callExpression = r.identifier.parent
+              const thirdArgument = callExpression.arguments.at(2)
 
-          // setValueの引数の処理
-          setValue.references.forEach((setValueReference) => {
-            if (setValueReference.identifier.parent.type === 'CallExpression') {
-              const setValueCallExpression = setValueReference.identifier.parent
-              const thirdArgument = setValueCallExpression.arguments.at(2)
-
-              // optionsがない場合
-              if (!thirdArgument) {
-                return context.report({
-                  node: setValueCallExpression,
-                  messageId: 'forceShouldDirty',
-                })
-              }
-
-              // optionsがあるけどshouldDirtyを指定していない場合
-              if (thirdArgument.type === 'ObjectExpression') {
-                const hasShouldDirty = thirdArgument.properties.some(
-                  // @ts-ignore
-                  (p) => p.key.name === 'shouldDirty',
-                )
-
-                const options = thirdArgument.properties.reduce((acc, cur) => {
-                  // @ts-ignore
-                  acc[cur.key.name] = cur.value.value
-                  return acc
-                }, {})
-
-                const optionsWithShouldDirty = formatObjectToString({
-                  ...options,
-                  shouldDirty: true,
-                })
-
-                if (!hasShouldDirty) {
-                  return context.report({
-                    node: thirdArgument,
-                    messageId: 'forceShouldDirty',
-                    fix(fixer) {
-                      return fixer.replaceText(
-                        thirdArgument,
-                        `${optionsWithShouldDirty}`,
-                      )
-                    },
-                  })
-                }
+              if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
+                reportObjectExpression(thirdArgument)
+              } else {
+                reportCallExpression(callExpression)
               }
             }
-
-            return null
           })
         }
       },
@@ -133,10 +170,9 @@ export const rule = createRule({
   },
 })
 
-/** @description オブジェクトを文字列に変換して、適切にフォーマットを整える */
-const formatObjectToString = (obj: {}) => {
-  return JSON.stringify(obj, null, 2) // スペースを含めて整形
-    .replace(/"([^"]+)":/g, '$1:') // キーのダブルクオートを削除
-    .replace(/"/g, '') // 値のダブルクオートを削除
-    .trim() // 余計な空白を除去
-}
+/**
+ * 実装メモ
+ * プロパティアクセスをするためには毎回AST_NODE_TYPESを使ってtypeGuardをする必要がある
+ * そのためにそれぞれのオブジェクトはtypeを持っているのか
+ * getScopeの分割代入での取り出しはngぽい、npm run lint:jsで怒られた、確かそれっぽいドキュメントがあったような気がする
+ */

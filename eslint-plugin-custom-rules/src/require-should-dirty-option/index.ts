@@ -169,10 +169,3 @@ export const rule = createRule({
     }
   },
 })
-
-/**
- * 実装メモ
- * プロパティアクセスをするためには毎回AST_NODE_TYPESを使ってtypeGuardをする必要がある
- * そのためにそれぞれのオブジェクトはtypeを持っているのか
- * getScopeの分割代入での取り出しはngぽい、npm run lint:jsで怒られた、確かそれっぽいドキュメントがあったような気がする
- */

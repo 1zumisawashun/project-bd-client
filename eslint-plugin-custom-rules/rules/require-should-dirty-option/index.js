@@ -82,7 +82,10 @@ exports.rule = createRule({
                 }
                 return acc;
             }, {});
-            const optionsWithShouldDirty = formatObjectToString(Object.assign(Object.assign({}, defaultOptions), { shouldDirty: true }));
+            const optionsWithShouldDirty = formatObjectToString({
+                ...defaultOptions,
+                shouldDirty: true,
+            });
             context.report({
                 node: objectExpression,
                 messageId: 'requireShouldDirtyOption',
@@ -98,23 +101,20 @@ exports.rule = createRule({
                 .trim();
         };
         const isUseForm = (node) => {
-            var _a, _b, _c;
             return (node.type === utils_1.AST_NODE_TYPES.VariableDeclarator &&
-                ((_a = node.init) === null || _a === void 0 ? void 0 : _a.type) === utils_1.AST_NODE_TYPES.CallExpression &&
-                ((_b = node.init) === null || _b === void 0 ? void 0 : _b.callee.type) === utils_1.AST_NODE_TYPES.Identifier &&
-                ((_c = node.init) === null || _c === void 0 ? void 0 : _c.callee.name) === 'useForm');
+                node.init?.type === utils_1.AST_NODE_TYPES.CallExpression &&
+                node.init?.callee.type === utils_1.AST_NODE_TYPES.Identifier &&
+                node.init?.callee.name === 'useForm');
         };
         const isUseFormContext = (node) => {
-            var _a, _b, _c;
             return (node.type === utils_1.AST_NODE_TYPES.VariableDeclarator &&
-                ((_a = node.init) === null || _a === void 0 ? void 0 : _a.type) === utils_1.AST_NODE_TYPES.CallExpression &&
-                ((_b = node.init) === null || _b === void 0 ? void 0 : _b.callee.type) === utils_1.AST_NODE_TYPES.Identifier &&
-                ((_c = node.init) === null || _c === void 0 ? void 0 : _c.callee.name) === 'useFormContext');
+                node.init?.type === utils_1.AST_NODE_TYPES.CallExpression &&
+                node.init?.callee.type === utils_1.AST_NODE_TYPES.Identifier &&
+                node.init?.callee.name === 'useFormContext');
         };
         /** @see https://zenn.dev/cybozu_frontend/articles/ts-eslint-new-syntax */
         return {
             VariableDeclarator: (node) => {
-                var _a;
                 // NOTE: useFormかuseFormContextをサポートする
                 if (isUseForm(node) || isUseFormContext(node)) {
                     // NOTE: const { setValue } = useForm(); or const { setValue } = useFormContext(); をサポートする
@@ -136,7 +136,7 @@ exports.rule = createRule({
                      * @see https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/#context.getscope()
                      * @see https://eslint.org/docs/latest/extend/custom-rules#accessing-the-source-text
                      */
-                    if (((_a = property === null || property === void 0 ? void 0 : property.value) === null || _a === void 0 ? void 0 : _a.type) !== utils_1.AST_NODE_TYPES.Identifier)
+                    if (property?.value?.type !== utils_1.AST_NODE_TYPES.Identifier)
                         return;
                     const setValue = context.sourceCode
                         .getScope(node)
@@ -145,11 +145,11 @@ exports.rule = createRule({
                      * NOTE: setValueの引数の処理
                      * @see https://eslint.org/docs/latest/extend/custom-rules#scope-variables
                      */
-                    setValue === null || setValue === void 0 ? void 0 : setValue.references.forEach((r) => {
+                    setValue?.references.forEach((r) => {
                         if (r.identifier.parent.type === utils_1.AST_NODE_TYPES.CallExpression) {
                             const callExpression = r.identifier.parent;
                             const thirdArgument = callExpression.arguments.at(2);
-                            if ((thirdArgument === null || thirdArgument === void 0 ? void 0 : thirdArgument.type) === utils_1.AST_NODE_TYPES.ObjectExpression) {
+                            if (thirdArgument?.type === utils_1.AST_NODE_TYPES.ObjectExpression) {
                                 reportObjectExpression(thirdArgument);
                             }
                             else {
@@ -162,9 +162,3 @@ exports.rule = createRule({
         };
     },
 });
-/**
- * 実装メモ
- * プロパティアクセスをするためには毎回AST_NODE_TYPESを使ってtypeGuardをする必要がある
- * そのためにそれぞれのオブジェクトはtypeを持っているのか
- * getScopeの分割代入での取り出しはngぽい、npm run lint:jsで怒られた、確かそれっぽいドキュメントがあったような気がする
- */

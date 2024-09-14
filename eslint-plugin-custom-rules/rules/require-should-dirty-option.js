@@ -34,7 +34,7 @@ const createRule = utils_1.ESLintUtils.RuleCreator((name) => {
 });
 /** @see https://github.com/andykao1213/eslint-plugin-react-hook-form/blob/f210951a28db93ca456f877832bba479826d7e0b/lib/rules/no-nested-object-setvalue.js */
 exports.rule = createRule({
-    name: 'force-should-dirty',
+    name: 'require-should-dirty-option',
     defaultOptions: [],
     meta: {
         type: 'problem',
@@ -43,13 +43,13 @@ exports.rule = createRule({
         },
         fixable: 'code',
         messages: {
-            forceShouldDirty: 'You must set shouldDirty: true when calling setValue for optimal performance and state consistency.',
+            requireShouldDirtyOption: 'You must set shouldDirty: true when calling setValue for optimal performance and state consistency.',
         },
         schema: [
             {
                 type: 'object',
                 properties: {
-                    enforceShouldDirty: {
+                    requireShouldDirtyOption: {
                         type: 'boolean',
                         default: true,
                     },
@@ -61,7 +61,7 @@ exports.rule = createRule({
         const reportCallExpression = (callExpression) => {
             context.report({
                 node: callExpression,
-                messageId: 'forceShouldDirty',
+                messageId: 'requireShouldDirtyOption',
             });
         };
         const reportObjectExpression = (objectExpression) => {
@@ -85,17 +85,17 @@ exports.rule = createRule({
             const optionsWithShouldDirty = formatObjectToString(Object.assign(Object.assign({}, defaultOptions), { shouldDirty: true }));
             context.report({
                 node: objectExpression,
-                messageId: 'forceShouldDirty',
+                messageId: 'requireShouldDirtyOption',
                 fix(fixer) {
                     return fixer.replaceText(objectExpression, `${optionsWithShouldDirty}`);
                 },
             });
         };
         const formatObjectToString = (obj) => {
-            return JSON.stringify(obj, null, 2) // NOTE: スペースを含めて整形
-                .replace(/"([^"]+)":/g, '$1:') // NOTE: keyのダブルクオートを削除
-                .replace(/"/g, '') // NOTE: valueのダブルクオートを削除
-                .trim(); // NOTE: 余計な空白を除去
+            return JSON.stringify(obj, null, 2)
+                .replace(/"([^"]+)":/g, '$1:')
+                .replace(/"/g, '')
+                .trim();
         };
         const isUseForm = (node) => {
             var _a, _b, _c;

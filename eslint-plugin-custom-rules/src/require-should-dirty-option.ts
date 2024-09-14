@@ -10,7 +10,7 @@ const createRule = ESLintUtils.RuleCreator((name) => {
 
 /** @see https://github.com/andykao1213/eslint-plugin-react-hook-form/blob/f210951a28db93ca456f877832bba479826d7e0b/lib/rules/no-nested-object-setvalue.js */
 export const rule = createRule({
-  name: 'force-should-dirty',
+  name: 'require-should-dirty-option',
   defaultOptions: [],
   meta: {
     type: 'problem',
@@ -20,14 +20,14 @@ export const rule = createRule({
     },
     fixable: 'code',
     messages: {
-      forceShouldDirty:
+      requireShouldDirtyOption:
         'You must set shouldDirty: true when calling setValue for optimal performance and state consistency.',
     },
     schema: [
       {
         type: 'object',
         properties: {
-          enforceShouldDirty: {
+          requireShouldDirtyOption: {
             type: 'boolean',
             default: true,
           },
@@ -41,7 +41,7 @@ export const rule = createRule({
     ): void => {
       context.report({
         node: callExpression,
-        messageId: 'forceShouldDirty',
+        messageId: 'requireShouldDirtyOption',
       })
     }
 
@@ -80,7 +80,7 @@ export const rule = createRule({
 
       context.report({
         node: objectExpression,
-        messageId: 'forceShouldDirty',
+        messageId: 'requireShouldDirtyOption',
         fix(fixer) {
           return fixer.replaceText(
             objectExpression,

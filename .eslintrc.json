@@ -12,7 +12,6 @@
   "plugins": ["custom-rules"],
   "rules": {
     // eslint-config-airbnb（eslint)
-    "spaced-comment": "off",
     "no-console": "off",
     "no-alert": "off",
     "arrow-body-style": "off",
@@ -38,10 +37,7 @@
     "import/no-named-as-default-member": "off",
     "import/no-unresolved": "off",
     // custom-rules
-    // "custom-rules/my-first-rule": "warn",
-    // "custom-rules/no-bad-literal": "warn",
-    // "custom-rules/no-omit-utility-type": "warn",
-    "custom-rules/force-should-dirty": "warn",
+    "custom-rules/require-should-dirty-option": "warn",
     // syntax-rules
     "no-restricted-syntax": [
       "error",

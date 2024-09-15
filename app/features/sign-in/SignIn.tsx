@@ -29,7 +29,6 @@ export const SignIn: React.FC = () => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<Schema>({
     mode: 'onTouched',
@@ -82,27 +81,6 @@ export const SignIn: React.FC = () => {
           </HStack>
         </CardBody>
       </Card>
-
-      <Button
-        onClick={() => {
-          setValue('email', '', {
-            shouldTouch: true,
-            shouldDirty: true,
-          })
-        }}
-      >
-        test
-      </Button>
-
-      <Button
-        onClick={() => {
-          setValue('email', '', {
-            shouldDirty: true,
-          })
-        }}
-      >
-        test
-      </Button>
 
       <SimpleDialog
         isOpen={dialog.isOpen}

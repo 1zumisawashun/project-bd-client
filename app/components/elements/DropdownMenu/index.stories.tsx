@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
+import { userEvent, within } from '@storybook/test'
 import {
   DropdownMenuContent,
   DropdownMenuItem,
@@ -22,7 +23,7 @@ const Render: React.FC = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <HamburgerMenuIcon />
+        <HamburgerMenuIcon aria-label="hamburger-menu" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
@@ -38,4 +39,8 @@ const Render: React.FC = () => {
 export const Default: Story = {
   args: {},
   render: () => <Render />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByLabelText('hamburger-menu'))
+  },
 }

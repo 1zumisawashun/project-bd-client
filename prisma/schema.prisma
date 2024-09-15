@@ -10,76 +10,55 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "schema.md"
+}
+
 model User {
   id             String    @id @default(cuid())
   name           String?
   email          String?   @unique
   emailVerified  DateTime?
   image          String?
-  accounts       Account[]
-  sessions       Session[]
-  // Optional for WebAuthn support
   hashedPassword String?
+  role           String? //  admin, user
 
-  Authenticator Authenticator[]
+  posts         Article[]
+  likedArticles Article[] @relation(name: "LikedUserToLikedArticle")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
+model Article {
+  id      String @id @default(cuid())
+  title   String
+  content String
+  status  String // draft, published, archived
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  author     User       @relation(fields: [authorId], references: [id])
+  authorId   String
+  likedUsers User[]     @relation(name: "LikedUserToLikedArticle")
+  cetegories Category[]
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@unique([provider, providerAccountId])
+  @@index([authorId])
+  @@map("articles")
 }
 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Category {
+  id   String @id @default(cuid())
+  name String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+  articles Article[]
 
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@unique([identifier, token])
-}
-
-// Optional for WebAuthn support
-model Authenticator {
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([userId, credentialID])
+  @@map("categories")
 }

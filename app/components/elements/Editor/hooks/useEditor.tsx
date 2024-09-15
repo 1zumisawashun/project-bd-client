@@ -1,4 +1,4 @@
-import { useEditor as useRowEditor } from '@tiptap/react'
+import { useEditor as useRowEditor, UseEditorOptions } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import {
   Image,
@@ -8,10 +8,14 @@ import {
   Placeholder,
   CharacterCount,
 } from '../helpers/tiptapExtendClient'
-import { content } from '../index.constant'
+import { content as defaultValue } from '../index.constant'
 
-export const useEditor = () => {
-  const editor = useRowEditor({
+export const useEditor = ({
+  extensions = [],
+  content,
+  ...rest
+}: UseEditorOptions) =>
+  useRowEditor({
     extensions: [
       StarterKit,
       TextAlign,
@@ -20,16 +24,8 @@ export const useEditor = () => {
       Focus,
       Placeholder,
       CharacterCount,
+      ...extensions,
     ],
-    content,
+    content: content || defaultValue,
+    ...rest,
   })
-
-  // NOTE:https://tiptap.dev/guide/output
-  const onSubmit = () => {
-    if (!editor) return
-    const html = editor.getHTML()
-    alert(html)
-  }
-
-  return { editor, onSubmit }
-}

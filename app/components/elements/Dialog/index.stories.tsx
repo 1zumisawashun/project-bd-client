@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { VStack } from '@/components/elements/VStack'
 import { HStack } from '@/components/elements/HStack'
+import { userEvent, within } from '@storybook/test'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from './index'
 import { Button } from '../../buttons/Button'
 
@@ -20,7 +21,7 @@ const Render: React.FC = () => {
       <Button onClick={open}>Open Dialog</Button>
       <Dialog open={isOpen} onOpenChange={() => close()}>
         <DialogContent>
-          <VStack align="center">
+          <VStack justify="center" align="center">
             <DialogTitle>削除しますか？</DialogTitle>
             <DialogDescription>本当に削除しますか？</DialogDescription>
             <HStack>
@@ -41,4 +42,8 @@ const Render: React.FC = () => {
 export const Default: Story = {
   args: {},
   render: () => <Render />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('button'))
+  },
 }

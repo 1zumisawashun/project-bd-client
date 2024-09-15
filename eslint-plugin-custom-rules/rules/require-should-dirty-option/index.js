@@ -30,7 +30,7 @@ const path = __importStar(require("path"));
 const createRule = utils_1.ESLintUtils.RuleCreator((name) => {
     const dirname = path.relative(__dirname, path.dirname(name));
     const basename = path.basename(name, path.extname(name));
-    return `https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/docs/${dirname}/${basename}.md`;
+    return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${basename}/index.md`;
 });
 /** @see https://github.com/andykao1213/eslint-plugin-react-hook-form/blob/f210951a28db93ca456f877832bba479826d7e0b/lib/rules/no-nested-object-setvalue.js */
 exports.rule = createRule({

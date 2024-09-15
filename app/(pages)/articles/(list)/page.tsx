@@ -1,8 +1,10 @@
 import { ArticleList } from '@/features/articles/ArticleList/ArticleList'
-import prisma from '@/functions/libs/prisma-client/prisma'
+import { getArticles } from '@/functions/db/article'
 
 export default async function Page() {
-  const articles = await prisma.article.findMany()
-  
-  return <ArticleList articles={articles}/>
+  const articles = await getArticles()
+
+  if (!articles) return <div>Failed to fetch articles</div>
+
+  return <ArticleList articles={articles} />
 }

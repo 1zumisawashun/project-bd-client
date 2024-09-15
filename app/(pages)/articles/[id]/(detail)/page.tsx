@@ -1,12 +1,8 @@
 import { ArticleDetail } from '@/features/articles/ArticleDetail/ArticleDetail'
-import prisma from '@/functions/libs/prisma-client/prisma'
+import { getArticleById } from '@/functions/db/article'
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const articleId = params.id
-
-  const article = await prisma.article.findUnique({
-    where: { id: articleId },
-  })
+  const article = await getArticleById(params.id)
 
   if (!article) return <div>記事が見つかりませんでした</div>
 

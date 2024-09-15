@@ -7,6 +7,9 @@ import { useEditor } from '@/components/elements/Editor/hooks/useEditor'
 import { VStack } from '@/components/elements/VStack'
 import { ArticleMenuBubble } from './ArticleMenuBubble'
 import { ArticleMenubar } from './ArticleMenubar'
+import styles from '../articles.module.scss'
+
+const BLOCK_NAME = 'articles'
 
 type Props = {
   onChange: (content: string) => void
@@ -23,10 +26,13 @@ export const ArticleEditor: React.FC<Props> = ({ onChange, value }) => {
   if (!editor) return null
 
   return (
-    <VStack>
-      <ArticleMenubar editor={editor} />
+    <VStack className={styles[`${BLOCK_NAME}-editor`]}>
       <ArticleMenuBubble editor={editor} />
-      <EditorContent editor={editor} />
+      <ArticleMenubar editor={editor} />
+      <EditorContent
+        editor={editor}
+        className={styles[`${BLOCK_NAME}-editor-content`]}
+      />
     </VStack>
   )
 }

@@ -11,7 +11,7 @@ export default meta
 type Story = StoryObj<typeof MyPageSetting>
 
 const Render: React.FC = () => {
-  return <MyPageSetting user={mockUser} />
+  return <MyPageSetting user={{ ...mockUser, posts: [] }} />
 }
 export const Default: Story = {
   render: () => <Render />,

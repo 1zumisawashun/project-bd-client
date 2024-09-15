@@ -6,6 +6,7 @@ export const mockUser = {
   image: null,
   hashedPassword:
     '$2a$12$VsPdJQ495FgsOwn.UkBIkO6rJUSBVEzHsGWdBO/9Wzb.UmwP4qOWq',
+  role: 'USER',
   createdAt: new Date('2024-08-31T05:16:36.323Z'),
   updatedAt: new Date('2024-08-31T05:16:36.323Z'),
 }

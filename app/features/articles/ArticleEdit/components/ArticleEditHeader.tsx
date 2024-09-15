@@ -10,6 +10,7 @@ import {
 } from 'react-hook-form'
 import { startTransition } from 'react'
 import { useRouter } from 'next/navigation'
+import { useToastDispatch } from '@/components/elements/Toast'
 import styles from '../articleEdit.module.scss'
 import { Schema } from '../articleEdit.schema'
 import { editArticle } from '../articleEdit.action'
@@ -20,6 +21,7 @@ type Props = {
 }
 export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
   const router = useRouter()
+  const openToast = useToastDispatch()
   const { handleSubmit } = useFormContext<Schema>()
 
   const onSubmit: SubmitHandler<Schema> = async (data) => {
@@ -27,10 +29,19 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
       const response = await editArticle(data, articleId)
 
       if (!response?.isSuccess) {
+        openToast({
+          theme: 'danger',
+          title: 'エラー',
+          description: response?.error?.message ?? 'エラーが発生しました',
+        })
         return
       }
-      // NOTE: 詳細画面に飛ばす
-      router.push('/')
+      openToast({
+        theme: 'success',
+        title: '成功',
+        description: '投稿に成功しました',
+      })
+      router.push(`/articles/${response.data?.id ?? ''}`)
     })
   }
 

@@ -10,6 +10,7 @@ import {
 } from 'react-hook-form'
 import { startTransition } from 'react'
 import { useRouter } from 'next/navigation'
+import { useToastDispatch } from '@/components/elements/Toast'
 import styles from '../ArticleCreate.module.scss'
 import { Schema } from '../articleCreate.schema'
 import { createArticle } from '../articleCreate.action'
@@ -17,6 +18,7 @@ import { createArticle } from '../articleCreate.action'
 const BLOCK_NAME = 'article-create'
 export const ArticleCreateHeader: React.FC = () => {
   const router = useRouter()
+  const openToast = useToastDispatch()
   const { handleSubmit } = useFormContext<Schema>()
 
   const onSubmit: SubmitHandler<Schema> = async (data) => {
@@ -24,10 +26,19 @@ export const ArticleCreateHeader: React.FC = () => {
       const response = await createArticle(data)
 
       if (!response?.isSuccess) {
+        openToast({
+          theme: 'danger',
+          title: 'エラー',
+          description: response?.error?.message ?? 'エラーが発生しました',
+        })
         return
       }
-      // NOTE: 詳細画面に飛ばす
-      router.push('/')
+      openToast({
+        theme: 'success',
+        title: '成功',
+        description: '投稿に成功しました',
+      })
+      router.push(`/articles/${response.data?.id ?? ''}`)
     })
   }
 

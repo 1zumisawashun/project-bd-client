@@ -3,7 +3,7 @@ import * as path from 'path'
 
 /** @see https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/src/utils.ts */
 const createRule = ESLintUtils.RuleCreator((name) => {
-  const dirname = path.relative(__dirname, path.dirname(name))
+  // const dirname = path.relative(__dirname, path.dirname(name))
   const basename = path.basename(name, path.extname(name))
   return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${basename}/index.md`
 })

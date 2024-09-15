@@ -4,6 +4,7 @@ import { handleError } from '@/functions/helpers/utils'
 import { ActionsResult } from '@/functions/types'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { updateUser, getUserByEmail } from '@/functions/db/user'
+import { User } from '@prisma/client'
 import {
   EmailSchema,
   emailSchema,
@@ -13,12 +14,13 @@ import {
 
 export const updateEmail = async (
   data: EmailSchema,
-): Promise<ActionsResult> => {
+): Promise<ActionsResult<User>> => {
   const session = await auth()
 
   if (!session?.user.id) {
     return {
       isSuccess: false,
+      data: null,
       error: { message: 'ログインしてください' },
     }
   }
@@ -28,6 +30,7 @@ export const updateEmail = async (
   if (!validatedFields.success) {
     return {
       isSuccess: false,
+      data: null,
       error: { message: validatedFields.error.message },
     }
   }
@@ -37,15 +40,20 @@ export const updateEmail = async (
   if (existingUser) {
     return {
       isSuccess: false,
+      data: null,
       error: { message: 'このメールアドレスは既に登録されています' },
     }
   }
 
   try {
-    await updateUser({ id: session.user.id, data: validatedFields.data })
+    const response = await updateUser({
+      id: session.user.id,
+      data: validatedFields.data,
+    })
 
     return {
       isSuccess: true,
+      data: response,
       message: '更新に成功しました',
     }
   } catch (error) {
@@ -53,6 +61,7 @@ export const updateEmail = async (
 
     return {
       isSuccess: false,
+      data: null,
       error: { message: '更新に失敗しました' },
     }
   }
@@ -60,12 +69,13 @@ export const updateEmail = async (
 
 export const updateProfile = async (
   data: ProfileSchema,
-): Promise<ActionsResult> => {
+): Promise<ActionsResult<User>> => {
   const session = await auth()
 
   if (!session?.user.id) {
     return {
       isSuccess: false,
+      data: null,
       error: { message: 'ログインしてください' },
     }
   }
@@ -75,15 +85,20 @@ export const updateProfile = async (
   if (!validatedFields.success) {
     return {
       isSuccess: false,
+      data: null,
       error: { message: validatedFields.error.message },
     }
   }
 
   try {
-    await updateUser({ id: session.user.id, data: validatedFields.data })
+    const response = await updateUser({
+      id: session.user.id,
+      data: validatedFields.data,
+    })
 
     return {
       isSuccess: true,
+      data: response,
       message: '更新に成功しました',
     }
   } catch (error) {
@@ -91,6 +106,7 @@ export const updateProfile = async (
 
     return {
       isSuccess: false,
+      data: null,
       error: { message: '更新に失敗しました' },
     }
   }

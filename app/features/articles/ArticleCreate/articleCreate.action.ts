@@ -4,14 +4,18 @@ import { auth } from '@/functions/libs/next-auth/auth'
 import { handleError } from '@/functions/helpers/utils'
 import { ActionsResult } from '@/functions/types'
 import prisma from '@/functions/libs/prisma-client/prisma'
+import { Article } from '@prisma/client'
 import { Schema, schema } from './articleCreate.schema'
 
-export const createArticle = async (data: Schema): Promise<ActionsResult> => {
+export const createArticle = async (
+  data: Schema,
+): Promise<ActionsResult<Article>> => {
   const session = await auth()
 
   if (!session?.user.id) {
     return {
       isSuccess: false,
+      data: null,
       error: { message: 'ログインしてください' },
     }
   }
@@ -21,12 +25,13 @@ export const createArticle = async (data: Schema): Promise<ActionsResult> => {
   if (!validatedFields.success) {
     return {
       isSuccess: false,
+      data: null,
       error: { message: validatedFields.error.message },
     }
   }
 
   try {
-    await prisma.article.create({
+    const response = await prisma.article.create({
       data: {
         ...data,
         status: 'draft',
@@ -36,6 +41,7 @@ export const createArticle = async (data: Schema): Promise<ActionsResult> => {
 
     return {
       isSuccess: true,
+      data: response,
       message: 'ログインに成功しました',
     }
   } catch (error) {
@@ -43,6 +49,7 @@ export const createArticle = async (data: Schema): Promise<ActionsResult> => {
 
     return {
       isSuccess: false,
+      data: null,
       error: { message: '更新に失敗しました' },
     }
   }

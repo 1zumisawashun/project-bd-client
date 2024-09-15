@@ -12,7 +12,7 @@
     "lint:js:build": "npm run lint:js:clean && npx tsc -p ./eslint-plugin-custom-rules/tsconfig.json",
     "format": "prettier \"app/**/*.+(js|json|yml|ts|tsx)\"",
     "format:fix": "prettier --write \"app/**/*.+(js|json|yml|ts|tsx)\"",
-    "compile": "npx tsc",
+    "compile": "npx tsc --noEmit",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "test": "jest",

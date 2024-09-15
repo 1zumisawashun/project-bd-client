@@ -10,7 +10,7 @@ export default meta
 type Story = StoryObj<typeof ArticleList>
 
 const Render: React.FC = () => {
-  return <ArticleList />
+  return <ArticleList articles={[]} />
 }
 export const Default: Story = {
   render: () => <Render />,

@@ -19,7 +19,7 @@ export const MyPage: React.FC<{ user: User }> = ({ user }) => {
         <MyPageSetting user={user} />
       </TabsContent>
       <TabsContent value="post">
-        <MyPagePost />
+        <MyPagePost articles={user.posts} />
       </TabsContent>
     </Tabs>
   )

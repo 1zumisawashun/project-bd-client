@@ -1,9 +1,10 @@
+import { SiteWrapper } from '@/components/layouts/SiteWrapper'
 import { Metadata } from 'next'
 
-const title = 'Article Create'
+const title = 'Article Detail'
 export const metadata: Metadata = {
   title: `Project BD | ${title}`,
 }
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children
+  return <SiteWrapper>{children}</SiteWrapper>
 }

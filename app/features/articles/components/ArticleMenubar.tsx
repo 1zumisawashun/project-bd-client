@@ -9,9 +9,10 @@ import {
 import { TextIcon } from '@radix-ui/react-icons'
 import { tiptapClient } from '@/components/elements/Editor/helpers/tiptapClient'
 
-export const ArticleCreateMenubar: React.FC<{
+type Props = {
   editor: Editor
-}> = ({ editor }) => {
+}
+export const ArticleMenubar: React.FC<Props> = ({ editor }) => {
   const {
     // typography
     bold,

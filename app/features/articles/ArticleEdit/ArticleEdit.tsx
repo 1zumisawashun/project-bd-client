@@ -9,10 +9,33 @@ import {
 } from '@/components/forms/Form'
 import { Controller, useFormContext } from 'react-hook-form'
 import { TextInput } from '@/components/forms/TextInput'
-import { Schema } from './articleCreate.schema'
+import styles from '@/components/layouts/SiteWrapper/index.module.scss'
+import { Footer } from '@/components/layouts/Footer'
+import { Schema } from './articleEdit.schema'
 import { ArticleEditor } from '../components/ArticleEditor'
+import { ArticleEditHeader } from './components/ArticleEditHeader'
+import { ArticleEditProvider } from './components/ArticleEditProvider'
 
-export const ArticleCreate: React.FC = () => {
+const BLOCK_NAME = 'site-wrapper'
+type Props = {
+  articleId: string
+  defaultValues: Schema
+}
+export const ArticleEdit: React.FC<Props> = ({ articleId, defaultValues }) => {
+  return (
+    <ArticleEditProvider defaultValues={defaultValues}>
+      <div className={styles[`${BLOCK_NAME}`]}>
+        <ArticleEditHeader articleId={articleId} />
+        <main className={styles[`${BLOCK_NAME}-inner`]}>
+          <ArticleEditForm />
+        </main>
+        <Footer />
+      </div>
+    </ArticleEditProvider>
+  )
+}
+
+export const ArticleEditForm: React.FC = () => {
   const {
     control,
     register,

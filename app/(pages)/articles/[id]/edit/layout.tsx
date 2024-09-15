@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-const title = 'Article Create'
+const title = 'Article Edit'
 export const metadata: Metadata = {
   title: `Project BD | ${title}`,
 }

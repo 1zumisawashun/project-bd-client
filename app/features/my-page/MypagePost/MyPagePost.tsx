@@ -1,13 +1,19 @@
-import { ArticleListCard } from '@/features/articles/ArticleList/components/ArticleListCard'
-import { ArticleListCardGroup } from '@/features/articles/ArticleList/components/ArticleListCardGroup'
-import { articles } from '@/features/articles/articles.constant'
+import { ArticleCard } from '@/features/articles/components/ArticleCard'
+import { ArticleCardGroup } from '@/features/articles/components/ArticleCardGroup'
+import NextLink from 'next/link'
+import { Article } from '@prisma/client'
 
-export const MyPagePost: React.FC = () => {
+type Props = {
+  articles: Article[]
+}
+export const MyPagePost: React.FC<Props> = ({ articles }) => {
   return (
-    <ArticleListCardGroup>
+    <ArticleCardGroup>
       {articles.map((article) => (
-        <ArticleListCard key={article.id} article={article} />
+        <NextLink href={`/articles/${article.id}`} key={article.id}>
+          <ArticleCard article={article} />
+        </NextLink>
       ))}
-    </ArticleListCardGroup>
+    </ArticleCardGroup>
   )
 }

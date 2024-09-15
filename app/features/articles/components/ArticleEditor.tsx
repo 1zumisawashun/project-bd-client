@@ -5,13 +5,14 @@
 import { EditorContent } from '@/components/elements/Editor'
 import { useEditor } from '@/components/elements/Editor/hooks/useEditor'
 import { VStack } from '@/components/elements/VStack'
-import { ArticleCreateMenuBubble } from './ArticleCreateMenuBubble'
-import { ArticleCreateMenubar } from './ArticleCreateMenubar'
+import { ArticleMenuBubble } from './ArticleMenuBubble'
+import { ArticleMenubar } from './ArticleMenubar'
 
-export const ArticleCreateEditor: React.FC<{
+type Props = {
   onChange: (content: string) => void
   value: string
-}> = ({ onChange, value }) => {
+}
+export const ArticleEditor: React.FC<Props> = ({ onChange, value }) => {
   const editor = useEditor({
     content: value,
     onUpdate: ({ editor }) => {
@@ -23,8 +24,8 @@ export const ArticleCreateEditor: React.FC<{
 
   return (
     <VStack>
-      <ArticleCreateMenubar editor={editor} />
-      <ArticleCreateMenuBubble editor={editor} />
+      <ArticleMenubar editor={editor} />
+      <ArticleMenuBubble editor={editor} />
       <EditorContent editor={editor} />
     </VStack>
   )

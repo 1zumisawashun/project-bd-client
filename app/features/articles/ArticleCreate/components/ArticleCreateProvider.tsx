@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
+import { content } from '@/components/elements/Editor/index.constant'
 import { schema, Schema } from '../articleCreate.schema'
 
 export const ArticleCreateProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -12,7 +13,7 @@ export const ArticleCreateProvider: React.FC<{ children: React.ReactNode }> = ({
     resolver: zodResolver(schema),
     defaultValues: {
       title: '',
-      content: '',
+      content,
     },
   })
 

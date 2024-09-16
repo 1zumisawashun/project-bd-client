@@ -2,9 +2,8 @@
 
 import { auth } from '@/functions/libs/next-auth/auth'
 import { handleError } from '@/functions/helpers/utils'
-import { ActionsResult } from '@/functions/types'
+import { ActionsResult, Article } from '@/functions/types'
 import prisma from '@/functions/libs/prisma-client/prisma'
-import { Article } from '@prisma/client'
 import { Schema, schema } from './articleEdit.schema'
 
 export const editArticle = async (

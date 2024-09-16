@@ -41,11 +41,19 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
         title: '成功',
         description: '投稿に成功しました',
       })
+
       router.push(`/articles/${response.data?.id ?? ''}`)
+      router.refresh()
     })
   }
 
-  const onError: SubmitErrorHandler<Schema> = (error) => console.error(error)
+  const onError: SubmitErrorHandler<Schema> = (error) => {
+    openToast({
+      theme: 'danger',
+      title: 'エラー',
+      description: JSON.stringify(error, null, 2),
+    })
+  }
 
   return (
     <header className={styles[`${BLOCK_NAME}-header`]}>

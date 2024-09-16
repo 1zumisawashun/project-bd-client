@@ -1,4 +1,4 @@
-import { Article } from '@prisma/client'
+import { Article } from '@/functions/types'
 import styles from '../articles.module.scss'
 
 const BLOCK_NAME = 'articles'

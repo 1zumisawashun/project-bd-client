@@ -1,5 +1,5 @@
-import { Article } from '@prisma/client'
 import NextLink from 'next/link'
+import { Article } from '@/functions/types'
 import { ArticleCard } from '../components/ArticleCard'
 import { ArticleCardGroup } from '../components/ArticleCardGroup'
 

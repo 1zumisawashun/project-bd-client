@@ -39,7 +39,7 @@ model Article {
   content String
   status  String // draft, published, archived
 
-  author     User       @relation(fields: [authorId], references: [id])
+  author     User?       @relation(fields: [authorId], references: [id])
   authorId   String
   likedUsers User[]     @relation(name: "LikedUserToLikedArticle")
   cetegories Category[]

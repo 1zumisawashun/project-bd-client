@@ -33,7 +33,7 @@ erDiagram
   
     "users" o{--}o "articles" : "posts"
     "users" o{--}o "articles" : "likedArticles"
-    "articles" o|--|| "users" : "author"
+    "articles" o|--|o "users" : "author"
     "articles" o{--}o "users" : "likedUsers"
     "articles" o{--}o "categories" : "cetegories"
     "categories" o{--}o "articles" : "articles"

@@ -1,7 +1,8 @@
 /* eslint-disable no-await-in-loop */
 import { PrismaClient } from '@prisma/client'
 import { categories } from '@/functions/constants/categories'
-import { users } from '@/functions/constants/users'
+import { prismaUsers } from '@/functions/constants/users'
+import { prismaArticles } from '@/functions/constants/articles'
 
 const prisma = new PrismaClient()
 
@@ -18,9 +19,16 @@ async function main() {
     })
   }
 
-  for (const user of users) {
-    await prisma.user.create({
+  for (const user of prismaUsers) {
+    const response = await prisma.user.create({
       data: user,
+    })
+
+    await prisma.article.createMany({
+      data: prismaArticles.map((d) => ({
+        ...d,
+        authorId: response.id,
+      })),
     })
   }
 }

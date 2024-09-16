@@ -38,7 +38,7 @@ See [Configuration Reference](https://github.com/1zumisawashun/folder-structure-
 
 ## ERD
 
-...
+See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client/blob/main/prisma/schema.md).
 
 ## 使用技術
 

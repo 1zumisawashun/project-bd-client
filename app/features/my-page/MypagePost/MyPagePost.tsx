@@ -1,7 +1,7 @@
 import { ArticleCard } from '@/features/articles/components/ArticleCard'
 import { ArticleCardGroup } from '@/features/articles/components/ArticleCardGroup'
 import NextLink from 'next/link'
-import { Article } from '@prisma/client'
+import { Article } from '@/functions/types'
 
 type Props = {
   articles: Article[]

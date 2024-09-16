@@ -1,10 +1,9 @@
 'use server'
 
 import { handleError } from '@/functions/helpers/utils'
-import { ActionsResult } from '@/functions/types'
+import { ActionsResult, User } from '@/functions/types'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { updateUser, getUserByEmail } from '@/functions/db/user'
-import { User } from '@prisma/client'
 import {
   EmailSchema,
   emailSchema,
@@ -14,7 +13,7 @@ import {
 
 export const updateEmail = async (
   data: EmailSchema,
-): Promise<ActionsResult<User>> => {
+): Promise<ActionsResult<Omit<User, 'posts'>>> => {
   const session = await auth()
 
   if (!session?.user.id) {
@@ -69,7 +68,7 @@ export const updateEmail = async (
 
 export const updateProfile = async (
   data: ProfileSchema,
-): Promise<ActionsResult<User>> => {
+): Promise<ActionsResult<Omit<User, 'posts'>>> => {
   const session = await auth()
 
   if (!session?.user.id) {

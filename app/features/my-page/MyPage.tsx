@@ -4,9 +4,9 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/elements/Tabs'
+import { User } from '@/functions/types'
 import { MyPagePost } from './MypagePost/MyPagePost'
 import { MyPageSetting } from './MyPageSetting/MyPageSetting'
-import { User } from './myPage.type'
 
 export const MyPage: React.FC<{ user: User }> = ({ user }) => {
   return (

@@ -13,8 +13,7 @@ import {
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { VStack } from '@/components/elements/VStack'
-import { Title } from './Title'
-import { Description } from './Description'
+import { Title, Description } from '@/components/elements/Typography'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']
@@ -55,10 +54,12 @@ export const MyPageLogout: React.FC = () => {
   return (
     <Card>
       <CardBody>
-        <Title>ログアウトする</Title>
-        <Description>
-          ログアウトするログアウトするログアウトするログアウトするログアウトするログアウトする
-        </Description>
+        <VStack gap={2}>
+          <Title>ログアウトする</Title>
+          <Description>
+            ログアウトするログアウトするログアウトするログアウトするログアウトするログアウトする
+          </Description>
+        </VStack>
         <HStack>
           <Button onClick={open}>ログアウトする</Button>
         </HStack>

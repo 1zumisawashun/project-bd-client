@@ -15,11 +15,12 @@ import {
 } from '@/components/forms/Form'
 import { VStack } from '@/components/elements/VStack'
 import { startTransition } from 'react'
-import { Title } from './Title'
-import { Description } from './Description'
+import { Title, Description } from '@/components/elements/Typography'
+import { User } from '@/functions/types'
+import { useRouter } from 'next/navigation'
+import { useToastDispatch } from '@/components/elements/Toast'
 import { EmailSchema, emailSchema } from '../myPageSetting.schema'
 import { updateEmail } from '../myPageSetting.action'
-import { User } from '../../myPage.type'
 
 const EmailPreview: React.FC<{ email: string; open: () => void }> = ({
   email,
@@ -39,6 +40,9 @@ const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
   email,
   close,
 }) => {
+  const router = useRouter()
+  const openToast = useToastDispatch()
+
   const {
     register,
     handleSubmit,
@@ -56,16 +60,31 @@ const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
       const response = await updateEmail(data)
 
       if (!response?.isSuccess) {
-        // toast
+        openToast({
+          theme: 'danger',
+          title: 'エラー',
+          description: response?.error?.message ?? 'エラーが発生しました',
+        })
         return
       }
-      // toast
+      openToast({
+        theme: 'success',
+        title: '成功',
+        description: '成功しました',
+      })
+
+      router.refresh()
       close()
     })
   }
 
-  const onError: SubmitErrorHandler<EmailSchema> = (error) =>
-    console.error(error)
+  const onError: SubmitErrorHandler<EmailSchema> = (error) => {
+    openToast({
+      theme: 'danger',
+      title: 'エラー',
+      description: JSON.stringify(error, null, 2),
+    })
+  }
 
   return (
     <VStack>
@@ -86,18 +105,21 @@ const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
 
 export const MyPageEmail: React.FC<{ user: User }> = ({ user }) => {
   const { isOpen, open, close } = useDisclosure()
+  const email = user.email ?? ''
 
   return (
     <Card>
       <CardBody>
-        <Title>メールアドレスを変更する</Title>
-        <Description>
-          メールアドレスを変更するメールアドレスを変更するメールアドレスを変更するメールアドレスを変更するメールアドレスを変更する
-        </Description>
+        <VStack gap={2}>
+          <Title>メールアドレスを変更する</Title>
+          <Description>
+            メールアドレスを変更するメールアドレスを変更するメールアドレスを変更するメールアドレスを変更するメールアドレスを変更する
+          </Description>
+        </VStack>
         {isOpen ? (
-          <EmailEditForm email={user.email ?? ''} close={close} />
+          <EmailEditForm email={email} close={close} />
         ) : (
-          <EmailPreview email={user.email ?? ''} open={open} />
+          <EmailPreview email={email} open={open} />
         )}
       </CardBody>
     </Card>

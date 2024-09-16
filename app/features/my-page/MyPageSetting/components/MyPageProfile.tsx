@@ -15,11 +15,12 @@ import {
 } from '@/components/forms/Form'
 import { VStack } from '@/components/elements/VStack'
 import { startTransition } from 'react'
-import { Title } from './Title'
-import { Description } from './Description'
+import { Title, Description } from '@/components/elements/Typography'
+import { User } from '@/functions/types'
+import { useRouter } from 'next/navigation'
+import { useToastDispatch } from '@/components/elements/Toast'
 import { ProfileSchema, profileSchema } from '../myPageSetting.schema'
 import { updateProfile } from '../myPageSetting.action'
-import { User } from '../../myPage.type'
 
 const ProfilePreview: React.FC<{ name: string; open: () => void }> = ({
   name,
@@ -39,6 +40,9 @@ const ProfileEditForm: React.FC<{
   name: string
   close: () => void
 }> = ({ name, close }) => {
+  const router = useRouter()
+  const openToast = useToastDispatch()
+
   const {
     register,
     handleSubmit,
@@ -53,20 +57,34 @@ const ProfileEditForm: React.FC<{
 
   const onSubmit: SubmitHandler<ProfileSchema> = async (data) => {
     startTransition(async () => {
-      console.log('submit')
       const response = await updateProfile(data)
 
       if (!response?.isSuccess) {
-        // toast
+        openToast({
+          theme: 'danger',
+          title: 'エラー',
+          description: response?.error?.message ?? 'エラーが発生しました',
+        })
         return
       }
-      // toast
+      openToast({
+        theme: 'success',
+        title: '成功',
+        description: '成功しました',
+      })
+
+      router.refresh()
       close()
     })
   }
 
-  const onError: SubmitErrorHandler<ProfileSchema> = (error) =>
-    console.error(error)
+  const onError: SubmitErrorHandler<ProfileSchema> = (error) => {
+    openToast({
+      theme: 'danger',
+      title: 'エラー',
+      description: JSON.stringify(error, null, 2),
+    })
+  }
 
   return (
     <VStack>
@@ -88,18 +106,21 @@ const ProfileEditForm: React.FC<{
 
 export const MyPageProfile: React.FC<{ user: User }> = ({ user }) => {
   const { isOpen, open, close } = useDisclosure()
+  const name = user.name ?? '名無し'
 
   return (
     <Card>
       <CardBody>
-        <Title>プロフィールを変更する</Title>
-        <Description>
-          プロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更する
-        </Description>
+        <VStack gap={2}>
+          <Title>プロフィールを変更する</Title>
+          <Description>
+            プロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更する
+          </Description>
+        </VStack>
         {isOpen ? (
-          <ProfileEditForm name={user.name ?? '名無し'} close={close} />
+          <ProfileEditForm name={name} close={close} />
         ) : (
-          <ProfilePreview name={user.name ?? '名無し'} open={open} />
+          <ProfilePreview name={name} open={open} />
         )}
       </CardBody>
     </Card>

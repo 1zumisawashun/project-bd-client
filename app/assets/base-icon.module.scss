@@ -1,0 +1,13 @@
+$svg-size: 1rem;
+$path-size: 14.13px;
+
+.svg {
+  // base
+  display: block;
+  vertical-align: middle;
+  overflow: visible;
+  // custom
+  margin-top: calc($svg-size - $path-size);
+  width: $svg-size;
+  height: $svg-size;
+}

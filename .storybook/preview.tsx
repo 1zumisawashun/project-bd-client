@@ -1,5 +1,5 @@
 import '@/assets/the-new-css-reset.css'
-import '@/assets/global.css'
+import '@/assets/global.scss'
 import type { Preview } from '@storybook/react'
 
 /** @see https://stackoverflow.com/questions/76933793/how-to-write-decorator-in-typescript-for-storybook */

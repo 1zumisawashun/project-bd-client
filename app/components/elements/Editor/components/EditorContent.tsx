@@ -15,11 +15,7 @@ export const EditorContent = forwardRef<Ref, Props>(
     <RowEditorContent
       {...props}
       ref={ref}
-      className={clsx(
-        styles[`${BLOCK_NAME}-reset`],
-        styles[`${BLOCK_NAME}-content`],
-        className,
-      )}
+      className={clsx(styles[`${BLOCK_NAME}-content`], className)}
     />
   ),
 )

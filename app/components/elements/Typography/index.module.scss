@@ -1,0 +1,24 @@
+$data-font-size-multiplier: 0.25rem;
+
+.typography-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--mauve-12);
+
+  @for $i from 1 through 10 {
+    &[data-font-size='#{$i}'] {
+      font-size: $i * $data-font-size-multiplier;
+    }
+  }
+}
+
+.typography-description {
+  font-size: 0.875rem;
+  color: var(--mauve-10);
+
+  @for $i from 1 through 10 {
+    &[data-font-size='#{$i}'] {
+      font-size: $i * $data-font-size-multiplier;
+    }
+  }
+}

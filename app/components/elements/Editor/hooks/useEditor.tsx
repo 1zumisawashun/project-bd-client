@@ -8,13 +8,8 @@ import {
   Placeholder,
   CharacterCount,
 } from '../helpers/tiptapExtendClient'
-import { content as defaultValue } from '../index.constant'
 
-export const useEditor = ({
-  extensions = [],
-  content,
-  ...rest
-}: UseEditorOptions) =>
+export const useEditor = ({ extensions = [], ...rest }: UseEditorOptions) =>
   useRowEditor({
     extensions: [
       StarterKit,
@@ -26,6 +21,5 @@ export const useEditor = ({
       CharacterCount,
       ...extensions,
     ],
-    content: content || defaultValue,
     ...rest,
   })

@@ -1,0 +1,31 @@
+.status {
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+
+  // variant and color
+  &[data-status='empty'] {
+    background-color: var(--indigo-4);
+    color: var(--indigo-12);
+    border: 1px solid var(--indigo-12);
+  }
+  &[data-theme='error'] {
+    background-color: var(--red-4);
+    color: var(--red-12);
+    border: 1px solid var(--red-12);
+  }
+}
+
+.status-icon {
+  composes: svg from '@/assets/base-icon.module.scss';
+}
+
+.status-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.status-description {
+  font-size: 0.875rem;
+}

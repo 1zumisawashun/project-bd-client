@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import '@/assets/the-new-css-reset.css'
-import '@/assets/global.css'
+import '@/assets/global.scss'
 import AppProviders from '@/providers'
 
 // MEMO: お気に入りのフォントを指定するw

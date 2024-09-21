@@ -4,7 +4,7 @@ import { Button } from '@/components/buttons/Button'
 import { HStack } from './index'
 
 const meta: Meta<typeof HStack> = {
-  title: 'element/HStack',
+  title: 'layout/HStack',
   component: HStack,
 }
 export default meta

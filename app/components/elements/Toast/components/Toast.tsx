@@ -35,7 +35,7 @@ export const Toast: React.FC<Props> = ({ value, onClose }) => {
           shape="circle"
           theme={value.theme}
         >
-          <Cross1Icon />
+          <Cross1Icon width="0.75rem" height="0.75rem" />
         </IconButton>
       </RowToast.Action>
     </RowToast.Root>

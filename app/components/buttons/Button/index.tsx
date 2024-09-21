@@ -7,14 +7,13 @@ import {
   ComponentPropsWithoutRef,
   ReactNode,
 } from 'react'
-import { Theme, Variant, Size, Shape } from '@/functions/types'
+import { Theme, Variant, Shape } from '@/functions/types'
 import styles from './index.module.scss'
 
 const BLOCK_NAME = 'button'
 type Props = {
   theme?: Theme
   variant?: Variant
-  size?: Size
   shape?: Shape
   loading?: boolean
   disabled?: boolean
@@ -29,7 +28,6 @@ export const Button = forwardRef<Ref, Props>(
       children,
       theme = 'primary',
       variant = 'contained',
-      size = 'medium',
       shape,
       loading,
       disabled,
@@ -47,7 +45,6 @@ export const Button = forwardRef<Ref, Props>(
         type={type}
         data-variant={variant}
         data-theme={theme}
-        data-size={size}
         data-shape={shape}
         disabled={disabled}
         ref={ref}

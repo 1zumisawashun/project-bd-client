@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { userEvent, within } from '@storybook/test'
 import { SimpleDialog } from './index'
 import { Button } from '../../buttons/Button'
 
@@ -29,4 +30,8 @@ const Render: React.FC = () => {
 export const Default: Story = {
   args: {},
   render: () => <Render />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('button'))
+  },
 }

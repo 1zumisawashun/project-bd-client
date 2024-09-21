@@ -4,7 +4,7 @@ import { Button } from '@/components/buttons/Button'
 import { VStack } from './index'
 
 const meta: Meta<typeof VStack> = {
-  title: 'element/VStack',
+  title: 'layout/VStack',
   component: VStack,
 }
 export default meta

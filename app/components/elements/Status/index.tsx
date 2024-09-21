@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import styles from './index.module.scss'
 import { HStack } from '../../layouts/HStack'
+import { Description, Title } from '../Typography'
 
 const BLOCK_NAME = 'status'
 type Props = ComponentPropsWithoutRef<'div'> & {
@@ -35,10 +36,10 @@ export const Status = forwardRef<Ref, Props>(
         <HStack align="center" gap={2}>
           <InfoCircledIcon className={styles[`${BLOCK_NAME}-icon`]} />
 
-          <h2 className={styles[`${BLOCK_NAME}-title`]}>{title}</h2>
+          <Title>{title}</Title>
         </HStack>
 
-        <p className={styles[`${BLOCK_NAME}-description`]}>{children}</p>
+        <Description>{children}</Description>
       </div>
     )
   },

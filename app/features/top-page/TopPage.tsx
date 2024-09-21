@@ -1,6 +1,7 @@
 import { AnchorButton } from '@/components/buttons/AnchorButton'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
+import {Description} from "@/components/elements/Typography"
 import styles from './TopPage.module.scss'
 
 const BLOCK_NAME = 'top-page'
@@ -11,12 +12,12 @@ export const TopPage: React.FC = () => {
         サブタイトルサブタイトルサブタイトルサブタイトルサブタイトルサブタイトルサブタイトル
       </h2>
       <h1 className={styles[`${BLOCK_NAME}-title`]}>Project-BD</h1>
-      <p className={styles[`${BLOCK_NAME}-description`]}>
+      <Description className={styles[`${BLOCK_NAME}-description`]}>
         ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション
-      </p>
-      <p className={styles[`${BLOCK_NAME}-description`]}>
+      </Description>
+      <Description className={styles[`${BLOCK_NAME}-description`]}>
         ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション
-      </p>
+      </Description>
       <HStack>
         <AnchorButton href="/articles/create" variant="outlined">
           Add New

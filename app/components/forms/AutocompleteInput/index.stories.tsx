@@ -8,13 +8,13 @@ import {
   FormField,
   FormLabel,
 } from '@/components/forms/Form'
-import { AutocompleteInput } from '.'
+import { AutocompleteInputGroup } from './components/AutocompleteInputGroup'
 import { options } from '../forms.constant'
 
 const meta = {
   title: 'form/AutocompleteInput',
-  component: AutocompleteInput,
-} satisfies Meta<typeof AutocompleteInput>
+  component: AutocompleteInputGroup,
+} satisfies Meta<typeof AutocompleteInputGroup>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -45,7 +45,7 @@ const Render: React.FC = () => {
           control={control}
           name="text"
           render={({ field: { onChange, ...rest } }) => (
-            <AutocompleteInput
+            <AutocompleteInputGroup
               onChange={onChange}
               isDirty={!!dirtyFields.text}
               options={options}

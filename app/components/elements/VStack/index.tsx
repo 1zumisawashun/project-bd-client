@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react'
+import { Align, Justify } from '@/functions/types'
 import styles from './index.module.scss'
-import { Align, Justify } from '../elements.type'
 
 const BLOCK_NAME = 'vstack'
 type Props = {

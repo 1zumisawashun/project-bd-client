@@ -9,6 +9,7 @@ import {
   FormLabel,
 } from '@/components/forms/Form'
 import { AutocompleteInput } from '.'
+import { options } from '../forms.constant'
 
 const meta = {
   title: 'form/AutocompleteInput',
@@ -21,16 +22,6 @@ type Story = StoryObj<typeof meta>
 const schema = z.object({
   text: z.string(),
 })
-
-const options = [
-  { id: 1, text: 'React' },
-  { id: 2, text: 'Ruby on Rails' },
-  { id: 3, text: 'JavaScript' },
-  { id: 4, text: 'TypeScript' },
-  { id: 5, text: 'Go' },
-  { id: 6, text: 'HTML' },
-  { id: 7, text: 'CSS' },
-]
 
 const Render: React.FC = () => {
   const {

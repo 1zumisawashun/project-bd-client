@@ -7,8 +7,8 @@ import {
   ComponentPropsWithoutRef,
   ReactNode,
 } from 'react'
+import { Theme, Variant, Size, Shape } from '@/functions/types'
 import styles from './index.module.scss'
-import { Theme, Variant, Size, Shape } from '../buttons.type'
 
 const BLOCK_NAME = 'button'
 type Props = {

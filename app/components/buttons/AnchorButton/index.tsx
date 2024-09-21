@@ -6,8 +6,8 @@ import {
   ReactNode,
 } from 'react'
 import NextLink, { LinkProps } from 'next/link'
+import { Theme, Variant, Size, Shape } from '@/functions/types'
 import styles from './index.module.scss'
-import { Theme, Variant, Size, Shape } from '../buttons.type'
 
 const BLOCK_NAME = 'button'
 type Props = Omit<ComponentPropsWithoutRef<'a'>, 'prefix'> & {

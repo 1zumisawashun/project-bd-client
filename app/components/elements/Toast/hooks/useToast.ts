@@ -2,8 +2,8 @@
 
 import { useState, useCallback } from 'react'
 import { genRandomId } from '@/functions/helpers/utils'
+import { Toast } from '@/functions/types'
 import { ToastDispatchContextParams } from '../components/ToastDispatchProvider'
-import { Toast } from '../../elements.type'
 
 export const useToast = () => {
   const [toasts, setToasts] = useState<Toast[]>([])

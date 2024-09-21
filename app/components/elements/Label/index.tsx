@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react'
-import { Theme } from '../elements.type'
+import { Theme } from '@/functions/types'
 import styles from './index.module.scss'
 
 const BLOCK_NAME = 'label'

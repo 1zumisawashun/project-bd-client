@@ -30,3 +30,13 @@ export const statusItems = [
     error: true,
   },
 ] as const
+
+export const options = [
+  { id: 1, text: 'React' },
+  { id: 2, text: 'Ruby on Rails' },
+  { id: 3, text: 'JavaScript' },
+  { id: 4, text: 'TypeScript' },
+  { id: 5, text: 'Go' },
+  { id: 6, text: 'HTML' },
+  { id: 7, text: 'CSS' },
+]

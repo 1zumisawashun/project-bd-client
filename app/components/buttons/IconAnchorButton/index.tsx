@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { ElementRef, forwardRef, ComponentPropsWithoutRef } from 'react'
 import NextLink, { LinkProps } from 'next/link'
+import { Theme, Variant, Size, Shape } from '@/functions/types'
 import styles from './index.module.scss'
-import { Theme, Variant, Size, Shape } from '../buttons.type'
 
 const BLOCK_NAME = 'icon-button'
 type Props = ComponentPropsWithoutRef<'a'> & {

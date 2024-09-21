@@ -1,8 +1,8 @@
 import { AnchorButton } from '@/components/buttons/AnchorButton'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
-import {Description} from "@/components/elements/Typography"
-import styles from './TopPage.module.scss'
+import { Description } from '@/components/elements/Typography'
+import styles from './topPage.module.scss'
 
 const BLOCK_NAME = 'top-page'
 export const TopPage: React.FC = () => {

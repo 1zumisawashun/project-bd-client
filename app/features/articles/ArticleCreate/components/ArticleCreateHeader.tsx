@@ -11,7 +11,7 @@ import {
 import { startTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { useToastDispatch } from '@/components/elements/Toast'
-import styles from '../ArticleCreate.module.scss'
+import styles from '../articleCreate.module.scss'
 import { Schema } from '../articleCreate.schema'
 import { createArticle } from '../articleCreate.action'
 
@@ -38,7 +38,7 @@ export const ArticleCreateHeader: React.FC = () => {
         title: '成功',
         description: '投稿に成功しました',
       })
-      
+
       router.push(`/articles/${response.data?.id ?? ''}`)
       router.refresh()
     })

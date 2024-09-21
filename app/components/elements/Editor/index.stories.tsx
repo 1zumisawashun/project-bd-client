@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { content } from '@/functions/constants/content'
 import { EditorContent } from './index'
 import { useEditor } from './hooks/useEditor'
 
@@ -16,7 +17,10 @@ export default meta
 type Story = StoryObj<typeof EditorContent>
 
 const Render: React.FC = () => {
-  const editor = useEditor({})
+  const editor = useEditor({
+    content,
+  })
+  console.log(editor)
 
   if (!editor) return null
 

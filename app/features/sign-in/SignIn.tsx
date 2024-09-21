@@ -16,7 +16,7 @@ import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { startTransition, useState } from 'react'
 import { SimpleDialog } from '@/components/elements/SimpleDialog'
 import { useRouter } from 'next/navigation'
-import { HStack } from '@/components/elements/HStack'
+import { HStack } from '@/components/layouts/HStack'
 import { signIn } from './signIn.action'
 import { schema, Schema } from './signIn.schema'
 

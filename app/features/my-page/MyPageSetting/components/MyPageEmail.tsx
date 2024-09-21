@@ -3,7 +3,7 @@
 import { Button } from '@/components/buttons/Button'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { Card, CardBody } from '@/components/elements/Card'
-import { HStack } from '@/components/elements/HStack'
+import { HStack } from '@/components/layouts/HStack'
 import { TextInput } from '@/components/forms/TextInput'
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,7 +13,7 @@ import {
   FormErrorMessage,
   FormLabel,
 } from '@/components/forms/Form'
-import { VStack } from '@/components/elements/VStack'
+import { VStack } from '@/components/layouts/VStack'
 import { startTransition } from 'react'
 import { Title, Description } from '@/components/elements/Typography'
 import { User } from '@/functions/types'

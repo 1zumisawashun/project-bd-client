@@ -8,8 +8,8 @@ import {
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
-import { VStack } from '@/components/elements/VStack'
-import { HStack } from '@/components/elements/HStack'
+import { VStack } from '@/components/layouts/VStack'
+import { HStack } from '@/components/layouts/HStack'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']

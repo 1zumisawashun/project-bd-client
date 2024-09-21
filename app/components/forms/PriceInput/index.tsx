@@ -7,7 +7,7 @@ import {
 } from 'react'
 import { FieldError } from 'react-hook-form'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { HStack } from '@/components/elements/HStack'
+import { HStack } from '@/components/layouts/HStack'
 import { TextInput } from '../TextInput'
 
 type Props = {

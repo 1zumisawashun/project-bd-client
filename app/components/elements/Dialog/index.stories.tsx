@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { VStack } from '@/components/elements/VStack'
-import { HStack } from '@/components/elements/HStack'
+import { VStack } from '@/components/layouts/VStack'
+import { HStack } from '@/components/layouts/HStack'
 import { userEvent, within } from '@storybook/test'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from './index'
 import { Button } from '../../buttons/Button'

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { HStack } from '@/components/elements/HStack'
+import { HStack } from '@/components/layouts/HStack'
 import { ExternalLinkIcon } from '@radix-ui/react-icons'
 
 import { Link } from './index'

@@ -1,6 +1,6 @@
 import { AnchorButton } from '@/components/buttons/AnchorButton'
-import { HStack } from '@/components/elements/HStack'
-import { VStack } from '@/components/elements/VStack'
+import { HStack } from '@/components/layouts/HStack'
+import { VStack } from '@/components/layouts/VStack'
 import styles from './TopPage.module.scss'
 
 const BLOCK_NAME = 'top-page'

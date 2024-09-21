@@ -3,7 +3,7 @@
 import { Button } from '@/components/buttons/Button'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { Card, CardBody } from '@/components/elements/Card'
-import { HStack } from '@/components/elements/HStack'
+import { HStack } from '@/components/layouts/HStack'
 import {
   Dialog,
   DialogContent,
@@ -12,7 +12,7 @@ import {
 } from '@/components/elements/Dialog'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { VStack } from '@/components/elements/VStack'
+import { VStack } from '@/components/layouts/VStack'
 import { Title, Description } from '@/components/elements/Typography'
 
 type Props = {

@@ -2,7 +2,7 @@ import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react'
 import clsx from 'clsx'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import styles from './index.module.scss'
-import { HStack } from '../HStack'
+import { HStack } from '../../layouts/HStack'
 
 const BLOCK_NAME = 'status'
 type Props = ComponentPropsWithoutRef<'div'> & {

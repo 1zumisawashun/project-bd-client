@@ -4,7 +4,7 @@
 
 import { EditorContent } from '@/components/elements/Editor'
 import { useEditor } from '@/components/elements/Editor/hooks/useEditor'
-import { VStack } from '@/components/elements/VStack'
+import { VStack } from '@/components/layouts/VStack'
 import { ArticleMenuBubble } from './ArticleMenuBubble'
 import { ArticleMenubar } from './ArticleMenubar'
 import styles from '../articles.module.scss'

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from '@/components/buttons/Button'
-import { VStack } from '@/components/elements/VStack'
+import { VStack } from '@/components/layouts/VStack'
 import { ToastProvider, useToastDispatch } from './index'
 import { Toast } from './components/Toast'
 

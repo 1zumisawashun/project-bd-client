@@ -7,8 +7,8 @@ import {
   HeartFilledIcon,
   PlusIcon,
 } from '@radix-ui/react-icons'
-import { VStack } from '@/components/elements/VStack'
-import { HStack } from '@/components/elements/HStack'
+import { VStack } from '@/components/layouts/VStack'
+import { HStack } from '@/components/layouts/HStack'
 import { IconAnchorButton } from './index'
 import { items } from '../buttons.constant'
 

@@ -2,7 +2,7 @@
 
 import { AnchorButton } from '@/components/buttons/AnchorButton'
 import { Article } from '@/functions/types'
-import { VStack } from '@/components/elements/VStack'
+import { VStack } from '@/components/layouts/VStack'
 import { Title } from '@/components/elements/Typography'
 import styles from './articleDetail.module.scss'
 

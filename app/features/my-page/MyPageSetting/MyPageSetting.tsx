@@ -1,6 +1,6 @@
 'use client'
 
-import { VStack } from '@/components/elements/VStack'
+import { VStack } from '@/components/layouts/VStack'
 import { User } from '@/functions/types'
 import { MyPageLogout } from './components/MyPageLogout'
 import { MyPageProfile } from './components/MyPageProfile'

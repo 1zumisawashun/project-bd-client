@@ -15,7 +15,15 @@ type Story = StoryObj<typeof ArticleEdit>
 
 const Render: React.FC = () => {
   return (
-    <ArticleEdit articleId="1" defaultValues={{ title: 'テスト', content }} />
+    <ArticleEdit
+      articleId="1"
+      defaultValues={{
+        title: 'テスト',
+        content,
+        categories: [{ name: 'JavaScript' }],
+      }}
+      categoryOptions={['JavaScript', 'TypeScript', 'React']}
+    />
   )
 }
 export const Default: Story = {

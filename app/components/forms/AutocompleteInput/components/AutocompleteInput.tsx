@@ -43,7 +43,9 @@ export const AutocompleteInput = forwardRef<Ref, Props>(
             }}
             onKeyDown={(e) => {
               const value = handleKeydown(e)
-              onChange(value!)
+              if (value) {
+                onChange(value)
+              }
             }}
             onFocus={onFocus}
             onCompositionStart={onCompositionStart}

@@ -42,7 +42,7 @@ model Article {
   author     User?       @relation(fields: [authorId], references: [id])
   authorId   String
   likedUsers User[]     @relation(name: "LikedUserToLikedArticle")
-  cetegories Category[]
+  categories Category[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -53,7 +53,7 @@ model Article {
 
 model Category {
   id   String @id @default(cuid())
-  name String
+  name String @unique
 
   articles Article[]
 

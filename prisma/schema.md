@@ -35,6 +35,6 @@ erDiagram
     "users" o{--}o "articles" : "likedArticles"
     "articles" o|--|o "users" : "author"
     "articles" o{--}o "users" : "likedUsers"
-    "articles" o{--}o "categories" : "cetegories"
+    "articles" o{--}o "categories" : "categories"
     "categories" o{--}o "articles" : "articles"
 ```

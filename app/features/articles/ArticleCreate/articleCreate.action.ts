@@ -30,12 +30,25 @@ export const createArticle = async (
   }
 
   try {
+    const promises = data.categories.map(async ({ name }) => {
+      const category = await prisma.category.findFirst({ where: { name } })
+      if (!category) {
+        const result = await prisma.category.create({ data: { name } })
+        return { id: result.id }
+      }
+      return { id: category.id }
+    })
+
+    const categoryIds = await Promise.all(promises)
+
     const response = await prisma.article.create({
       data: {
         ...data,
-        status: 'draft',
+        status: 'published',
         author: { connect: { id: session.user.id } },
+        categories: { connect: categoryIds },
       },
+      include: { categories: true },
     })
 
     return {

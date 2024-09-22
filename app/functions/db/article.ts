@@ -11,7 +11,10 @@ export const getArticles = async () => {
 
 export const getArticleById = async (id: string) => {
   try {
-    const article = await prisma.article.findUnique({ where: { id } })
+    const article = await prisma.article.findUnique({
+      where: { id },
+      include: { categories: true },
+    })
     return article
   } catch {
     return null

@@ -11,14 +11,19 @@ const BLOCK_NAME = 'site-wrapper'
 type Props = {
   articleId: string
   defaultValues: Schema
+  categoryOptions: string[]
 }
-export const ArticleEdit: React.FC<Props> = ({ articleId, defaultValues }) => {
+export const ArticleEdit: React.FC<Props> = ({
+  articleId,
+  defaultValues,
+  categoryOptions,
+}) => {
   return (
     <ArticleEditProvider defaultValues={defaultValues}>
       <div className={styles[`${BLOCK_NAME}`]}>
         <ArticleEditHeader articleId={articleId} />
         <main className={styles[`${BLOCK_NAME}-inner`]}>
-          <ArticleEditForm />
+          <ArticleEditForm categoryOptions={categoryOptions} />
         </main>
         <Footer />
       </div>

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
+import { content } from '@/functions/constants/content'
 
 import { ArticleCreate } from './ArticleCreate'
 
@@ -13,7 +14,16 @@ export default meta
 type Story = StoryObj<typeof ArticleCreate>
 
 const Render: React.FC = () => {
-  return <ArticleCreate />
+  return (
+    <ArticleCreate
+      defaultValues={{
+        title: '',
+        content,
+        categories: [],
+      }}
+      categoryOptions={['JavaScript', 'TypeScript', 'React']}
+    />
+  )
 }
 export const Default: Story = {
   render: () => <Render />,

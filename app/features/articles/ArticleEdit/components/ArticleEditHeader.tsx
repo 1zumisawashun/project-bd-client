@@ -11,6 +11,7 @@ import {
 import { startTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { useToastDispatch } from '@/components/elements/Toast'
+import { HStack } from '@/components/layouts/HStack'
 import styles from '../articleEdit.module.scss'
 import { Schema } from '../articleEdit.schema'
 import { editArticle } from '../articleEdit.action'
@@ -60,7 +61,10 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
       <IconAnchorButton href="/" variant="ghost">
         <ChevronLeftIcon />
       </IconAnchorButton>
-      <Button onClick={handleSubmit(onSubmit, onError)}>更新する</Button>
+      <HStack>
+        <Button onClick={() => null}>一時保存する</Button>
+        <Button onClick={handleSubmit(onSubmit, onError)}>更新する</Button>
+      </HStack>
     </header>
   )
 }

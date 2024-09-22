@@ -1,5 +1,6 @@
 import { getUserById } from '@/functions/db/user'
 import { getArticles, getArticleById } from '@/functions/db/article'
+import { getCategories } from '@/functions/db/category'
 
 const THEME_OPTIONS = ['primary', 'danger'] as const
 export type Theme = (typeof THEME_OPTIONS)[number] | (string & {})
@@ -18,6 +19,9 @@ export type Justify = (typeof JUSTIFY_OPTIONS)[number] | (string & {})
 
 const ALIGN_OPTIONS = ['start', 'center', 'end'] as const
 export type Align = (typeof ALIGN_OPTIONS)[number] | (string & {})
+
+const ACTION_OPTIONS = ['delete'] as const
+export type Action = (typeof ACTION_OPTIONS)[number]
 
 export type Toast = {
   id: string
@@ -46,3 +50,5 @@ export type User = NonNullable<Awaited<ReturnType<typeof getUserById>>>
 export type Articles = NonNullable<Awaited<ReturnType<typeof getArticles>>>
 
 export type Article = NonNullable<Awaited<ReturnType<typeof getArticleById>>>
+
+export type Categories = NonNullable<Awaited<ReturnType<typeof getCategories>>>

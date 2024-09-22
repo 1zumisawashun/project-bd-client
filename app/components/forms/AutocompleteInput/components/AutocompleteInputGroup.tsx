@@ -41,8 +41,11 @@ export const AutocompleteInputGroup: React.FC<Props> = ({ onChange, rows }) => {
           autoComplete="off"
           onChange={handleChange} // singleとは挙動が少し異なる
           onKeyDown={(e) => {
-            handleKeydown(e)
-            reset()
+            const value = handleKeydown(e)
+            if (value) {
+              onChange(value)
+              reset()
+            }
           }}
           onFocus={onFocus}
           onCompositionStart={onCompositionStart}

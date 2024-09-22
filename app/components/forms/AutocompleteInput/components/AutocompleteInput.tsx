@@ -5,28 +5,27 @@ import {
   useRef,
   ComponentProps,
   forwardRef,
+  KeyboardEvent,
 } from 'react'
+import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { useOuterClick } from '../hooks/useOuterClick'
+import { useOuterClick } from '@/functions/hooks/useOuterClick'
 import { TextInput } from '../../TextInput'
-import { Button } from '../../../buttons/Button'
-import styles from '../index.module.scss'
 
-const BLOCK_NAME = 'autocomplete-input'
 type Ref = ElementRef<'input'>
 type Props = {
   onChange: (value?: string) => void // react-hook-form's onChange
-  isDirty?: boolean
   options: string[]
 } & Omit<ComponentProps<typeof TextInput>, 'onChange'>
 
 export const AutocompleteInput = forwardRef<Ref, Props>(
-  ({ onChange, onBlur, isDirty = false, options, ...rest }, ref) => {
+  ({ onChange, onBlur, options, ...rest }, ref) => {
     const { isOpen, open, close } = useDisclosure()
 
     const referenceRef = useRef<ElementRef<'div'>>(null)
 
     const [suggestions, setSuggestions] = useState<string[]>([])
+    const [isPending, setIsPending] = useState<boolean>(false)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target
@@ -42,20 +41,29 @@ export const AutocompleteInput = forwardRef<Ref, Props>(
       onChange(value)
     }
 
+    const handleFocus = () => {
+      setSuggestions(options)
+      open()
+    }
+
     const handleClick = (value: string) => {
       setSuggestions(options.filter((d) => d.startsWith(value)))
       onChange(value)
     }
 
-    const handleFocus = () => {
-      if (!isDirty) {
-        setSuggestions(options)
-      } else {
-        setSuggestions(
-          options.filter((d) => d.startsWith(rest.value as string)),
-        )
+    const handleKeydown = (e: KeyboardEvent<Ref>) => {
+      if (!isPending && e.key === 'Enter') {
+        e.preventDefault()
+        const { value } = e.target as HTMLInputElement
+
+        if (!value) {
+          close()
+          return
+        }
+
+        setSuggestions(options.filter((d) => d.startsWith(value)))
+        onChange(value)
       }
-      open()
     }
 
     useOuterClick([referenceRef], () => {
@@ -63,31 +71,29 @@ export const AutocompleteInput = forwardRef<Ref, Props>(
     })
 
     return (
-      <div className={styles[`${BLOCK_NAME}-wrapper`]}>
+      <Menu isOpen={isOpen} open={open} close={close}>
         <div ref={referenceRef}>
           <TextInput
             type="text"
+            autoComplete="off"
             onChange={handleChange}
             onFocus={handleFocus}
+            onKeyDown={handleKeydown}
+            onCompositionStart={() => setIsPending(true)}
+            onCompositionEnd={() => setIsPending(false)}
             ref={ref}
             {...rest}
           />
         </div>
-        {isOpen && (
-          <div className={styles[`${BLOCK_NAME}-list`]}>
-            {suggestions?.map((d) => (
-              <Button
-                key={d}
-                onClick={() => handleClick(d)}
-                variant="ghost"
-                className={styles[`${BLOCK_NAME}-item`]}
-              >
-                {d}
-              </Button>
-            ))}
-          </div>
-        )}
-      </div>
+
+        <MenuContent>
+          {suggestions.map((d) => (
+            <MenuItem key={d} onClick={() => handleClick(d)}>
+              {d}
+            </MenuItem>
+          ))}
+        </MenuContent>
+      </Menu>
     )
   },
 )

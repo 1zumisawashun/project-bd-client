@@ -1,0 +1,42 @@
+.menu {
+  position: relative;
+}
+
+.menu-content {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.menu-item {
+  &:first-child {
+    > .menu-item-button {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+  }
+  &:last-child {
+    > .menu-item-separator {
+      border-bottom: none;
+    }
+    > .menu-item-button {
+      border-bottom-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+  }
+}
+
+// 詳細度をあげてスタイルを上書きする
+.menu-item-button.menu-item-button {
+  width: 100%;
+  justify-content: flex-start;
+  border-radius: 0;
+}
+
+.menu-item-separator {
+  border-bottom: 1px solid var(--mauve-6);
+}

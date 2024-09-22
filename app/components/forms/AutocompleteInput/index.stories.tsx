@@ -51,7 +51,7 @@ const Single: React.FC = () => {
           render={({ field: { onChange, ...rest } }) => (
             <AutocompleteInput
               onChange={onChange}
-              options={options}
+              rows={options}
               {...rest}
             />
           )}
@@ -65,7 +65,7 @@ const Single: React.FC = () => {
 export const AutocompleteInputSingle: Story = {
   args: {
     onChange: () => {},
-    options: [],
+    rows: [],
   },
   render: () => <Single />,
 }
@@ -124,7 +124,7 @@ const Multiple: React.FC = () => {
 export const AutocompleteInputMultiple: Story = {
   args: {
     onChange: () => {},
-    options: [],
+    rows: [],
   },
   render: () => <Multiple />,
 }

@@ -1,94 +1,67 @@
-import {
-  useState,
-  ChangeEvent,
-  ElementRef,
-  useRef,
-  ComponentProps,
-  forwardRef,
-  KeyboardEvent,
-} from 'react'
+import { ElementRef, useRef, ComponentProps, forwardRef } from 'react'
 import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { useOuterClick } from '@/functions/hooks/useOuterClick'
 import { TextInput } from '../../TextInput'
+import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
 type Ref = ElementRef<'input'>
 type Props = {
   onChange: (value?: string) => void // react-hook-form's onChange
-  options: string[]
+  rows: string[]
 } & Omit<ComponentProps<typeof TextInput>, 'onChange'>
-
 export const AutocompleteInput = forwardRef<Ref, Props>(
-  ({ onChange, onBlur, options, ...rest }, ref) => {
-    const { isOpen, open, close } = useDisclosure()
+  ({ onChange, onBlur, rows, ...rest }, ref) => {
+    const {
+      menu,
+      suggestions,
+      handleChange,
+      handleClick,
+      handleKeydown,
+      onFocus,
+      onCompositionStart,
+      onCompositionEnd,
+    } = useAutocompleteInput({ rows })
+
+    // eslint-disable-next-line no-underscore-dangle
+    const _suggestions = suggestions.filter((d) => d !== rest.value)
 
     const referenceRef = useRef<ElementRef<'div'>>(null)
 
-    const [suggestions, setSuggestions] = useState<string[]>([])
-    const [isPending, setIsPending] = useState<boolean>(false)
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target
-
-      if (value.length > 0) {
-        setSuggestions(options.filter((d) => d.startsWith(value)))
-        open()
-      } else {
-        setSuggestions(options.filter((d) => d.startsWith(value)))
-        close()
-      }
-
-      onChange(value)
-    }
-
-    const handleFocus = () => {
-      setSuggestions(options)
-      open()
-    }
-
-    const handleClick = (value: string) => {
-      setSuggestions(options.filter((d) => d.startsWith(value)))
-      onChange(value)
-    }
-
-    const handleKeydown = (e: KeyboardEvent<Ref>) => {
-      if (!isPending && e.key === 'Enter') {
-        e.preventDefault()
-        const { value } = e.target as HTMLInputElement
-
-        if (!value) {
-          close()
-          return
-        }
-
-        setSuggestions(options.filter((d) => d.startsWith(value)))
-        onChange(value)
-      }
-    }
-
     useOuterClick([referenceRef], () => {
-      close()
+      menu.close()
     })
 
     return (
-      <Menu isOpen={isOpen} open={open} close={close}>
+      <Menu isOpen={menu.isOpen} open={menu.open} close={menu.close}>
         <div ref={referenceRef}>
           <TextInput
             type="text"
             autoComplete="off"
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onKeyDown={handleKeydown}
-            onCompositionStart={() => setIsPending(true)}
-            onCompositionEnd={() => setIsPending(false)}
+            onChange={(e) => {
+              const value = handleChange(e)
+              onChange(value)
+            }}
+            onKeyDown={(e) => {
+              const value = handleKeydown(e)
+              onChange(value!)
+            }}
+            onFocus={onFocus}
+            onCompositionStart={onCompositionStart}
+            onCompositionEnd={onCompositionEnd}
             ref={ref}
             {...rest}
           />
         </div>
 
         <MenuContent>
-          {suggestions.map((d) => (
-            <MenuItem key={d} onClick={() => handleClick(d)}>
+          {_suggestions.map((d) => (
+            <MenuItem
+              key={d}
+              onClick={() => {
+                const value = handleClick(d)
+                onChange(value)
+              }}
+            >
               {d}
             </MenuItem>
           ))}

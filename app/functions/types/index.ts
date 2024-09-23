@@ -31,6 +31,9 @@ export type Toast = {
   isOpen: boolean
 }
 
+const ARTICLE_STATUS_OPTIONS = ['PUBLISHED', 'DRAFT'] as const
+export type ArticleStatus = (typeof ARTICLE_STATUS_OPTIONS)[number]
+
 export type ActionsResult<T> =
   | {
       isSuccess: true

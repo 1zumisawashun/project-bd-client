@@ -58,7 +58,7 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
 
   return (
     <header className={styles[`${BLOCK_NAME}-header`]}>
-      <IconAnchorButton href="/" variant="ghost">
+      <IconAnchorButton href={`/articles/${articleId}`} variant="ghost">
         <ChevronLeftIcon />
       </IconAnchorButton>
       <HStack>

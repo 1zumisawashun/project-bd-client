@@ -2,14 +2,14 @@
 
 import { auth } from '@/functions/libs/next-auth/auth'
 import { handleError } from '@/functions/helpers/utils'
-import { ActionsResult, Article } from '@/functions/types'
+import { ActionsResult, Article, Articles } from '@/functions/types'
 import prisma from '@/functions/libs/prisma-client/prisma'
 import { Schema, schema } from './articleEdit.schema'
 
 export const editArticle = async (
   data: Schema,
   id: string,
-): Promise<ActionsResult<Article>> => {
+): Promise<ActionsResult<Article | Articles[number]>> => {
   const session = await auth()
 
   if (!session?.user.id) {
@@ -46,17 +46,16 @@ export const editArticle = async (
       where: { id },
       data: {
         ...data,
-        status: 'draft',
+        status: 'DRAFT',
         author: { connect: { id: session.user.id } },
         categories: { connect: categoryIds },
       },
-      include: { categories: true },
     })
 
     return {
       isSuccess: true,
       data: response,
-      message: 'ログインに成功しました',
+      message: '変更に成功しました',
     }
   } catch (error) {
     handleError(error)

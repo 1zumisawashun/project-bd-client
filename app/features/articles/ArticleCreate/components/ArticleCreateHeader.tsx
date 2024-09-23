@@ -24,7 +24,7 @@ export const ArticleCreateHeader: React.FC = () => {
 
   const onSubmit: SubmitHandler<Schema> = async (data) => {
     startTransition(async () => {
-      const response = await createArticle(data)
+      const response = await createArticle({ data, status: 'PUBLISHED' })
 
       if (!response?.isSuccess) {
         openToast({

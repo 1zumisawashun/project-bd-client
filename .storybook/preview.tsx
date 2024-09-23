@@ -1,15 +1,10 @@
 import '@/assets/the-new-css-reset.css'
 import '@/assets/global.scss'
 import type { Preview } from '@storybook/react'
+import { SpWidthDecorator } from '../app/functions/libs/storybook/decorators'
 
 /** @see https://stackoverflow.com/questions/76933793/how-to-write-decorator-in-typescript-for-storybook */
 import React from 'react'
-
-const SpWidthDecorator = (Story: any) => (
-  <div style={{ width: '576px' }}>
-    <Story />
-  </div>
-)
 
 const preview: Preview = {
   decorators: [SpWidthDecorator],

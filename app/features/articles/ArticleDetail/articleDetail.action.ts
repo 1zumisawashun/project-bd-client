@@ -5,9 +5,12 @@ import { handleError } from '@/functions/helpers/utils'
 import { ActionsResult, Article, Articles } from '@/functions/types'
 import prisma from '@/functions/libs/prisma-client/prisma'
 
-export const deleteArticle = async (
-  id: string,
-): Promise<ActionsResult<Article | Articles[number]>> => {
+type Props = {
+  id: string
+}
+export const deleteArticle = async ({
+  id,
+}: Props): Promise<ActionsResult<Article | Articles[number]>> => {
   const session = await auth()
 
   if (!session?.user.id) {

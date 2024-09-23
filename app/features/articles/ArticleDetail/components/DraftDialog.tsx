@@ -32,7 +32,11 @@ export const DraftDialog: React.FC<Props> = ({
     const data = {} as any
 
     startTransition(async () => {
-      const response = await editArticle(data, articleId)
+      const response = await editArticle({
+        data,
+        id: articleId,
+        status: 'DRAFT',
+      })
 
       if (!response?.isSuccess) {
         openToast({

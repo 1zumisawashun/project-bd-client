@@ -10,9 +10,21 @@ const meta: Meta<typeof ArticleDetail> = {
 export default meta
 type Story = StoryObj<typeof ArticleDetail>
 
-const Render: React.FC = () => {
-  return <ArticleDetail article={mockArticles[0]!} />
+const IsUserRender: React.FC = () => {
+  return <ArticleDetail article={mockArticles.at(1)!} isAuthor={false} />
 }
-export const Default: Story = {
-  render: () => <Render />,
+const IsAuthorPublishRender: React.FC = () => {
+  return <ArticleDetail article={mockArticles.at(1)!} isAuthor />
+}
+const IsAuthorDraftRender: React.FC = () => {
+  return <ArticleDetail article={mockArticles.at(-1)!} isAuthor />
+}
+export const IsUser: Story = {
+  render: () => <IsUserRender />,
+}
+export const IsAuthorPublish: Story = {
+  render: () => <IsAuthorPublishRender />,
+}
+export const IsAuthorDraft: Story = {
+  render: () => <IsAuthorDraftRender />,
 }

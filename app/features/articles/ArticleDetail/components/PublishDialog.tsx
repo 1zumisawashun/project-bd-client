@@ -13,14 +13,14 @@ import { HStack } from '@/components/layouts/HStack'
 import { startTransition } from 'react'
 import { useToastDispatch } from '@/components/elements/Toast'
 import { useRouter } from 'next/navigation'
-import { deleteArticle } from '../articleDetail.action'
+import { editArticle } from '../../ArticleEdit/articleEdit.action'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']
   onClose: ReturnType<typeof useDisclosure>['close']
   articleId: string
 }
-export const DeleteDialog: React.FC<Props> = ({
+export const PublishDialog: React.FC<Props> = ({
   isOpen,
   onClose,
   articleId,
@@ -28,9 +28,15 @@ export const DeleteDialog: React.FC<Props> = ({
   const openToast = useToastDispatch()
   const router = useRouter()
 
-  const handleDelete = () => {
+  const handleDraft = () => {
+    const data = {} as any
+
     startTransition(async () => {
-      const response = await deleteArticle({ id: articleId })
+      const response = await editArticle({
+        data,
+        id: articleId,
+        status: 'PUBLISHED',
+      })
 
       if (!response?.isSuccess) {
         openToast({
@@ -55,15 +61,15 @@ export const DeleteDialog: React.FC<Props> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         <VStack align="center">
-          <DialogTitle>記事を削除します</DialogTitle>
-          <DialogDescription>一度削除すると復元ができません</DialogDescription>
+          <DialogTitle>記事を公開します</DialogTitle>
+          <DialogDescription>
+            記事が一覧から取り除かれます。マイページの下書きから閲覧可能です。
+          </DialogDescription>
           <HStack>
-            <Button theme="danger" variant="outlined" onClick={onClose}>
+            <Button variant="outlined" onClick={onClose}>
               キャンセル
             </Button>
-            <Button theme="danger" onClick={handleDelete}>
-              削除する
-            </Button>
+            <Button onClick={handleDraft}>公開する</Button>
           </HStack>
         </VStack>
       </DialogContent>

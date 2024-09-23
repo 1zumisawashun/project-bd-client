@@ -2,13 +2,23 @@
 
 import { auth } from '@/functions/libs/next-auth/auth'
 import { handleError } from '@/functions/helpers/utils'
-import { ActionsResult, Article, Articles } from '@/functions/types'
+import {
+  ActionsResult,
+  Article,
+  Articles,
+  ArticleStatus,
+} from '@/functions/types'
 import prisma from '@/functions/libs/prisma-client/prisma'
 import { Schema, schema } from './articleCreate.schema'
 
-export const createArticle = async (
-  data: Schema,
-): Promise<ActionsResult<Article | Articles[number]>> => {
+type Props = {
+  data: Schema
+  status: ArticleStatus
+}
+export const createArticle = async ({
+  data,
+  status,
+}: Props): Promise<ActionsResult<Article | Articles[number]>> => {
   const session = await auth()
 
   if (!session?.user.id) {
@@ -44,7 +54,7 @@ export const createArticle = async (
     const response = await prisma.article.create({
       data: {
         ...data,
-        status: 'PUBLISHED',
+        status,
         author: { connect: { id: session.user.id } },
         categories: { connect: categoryIds },
       },

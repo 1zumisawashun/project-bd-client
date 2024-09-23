@@ -27,7 +27,11 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
 
   const onSubmit: SubmitHandler<Schema> = async (data) => {
     startTransition(async () => {
-      const response = await editArticle(data, articleId)
+      const response = await editArticle({
+        data,
+        id: articleId,
+        status: 'PUBLISHED',
+      })
 
       if (!response?.isSuccess) {
         openToast({

@@ -3,10 +3,10 @@
 import { useState } from 'react'
 import styles from './index.module.scss'
 
-const BLOCK_NAME = 'layout-container'
+const BLOCK_NAME = 'layout-wrapper'
 
 // NOTE: SiteWrapper と同じように、ページの高さを調整するコンポーネント
-export const LayoutContainer: React.FC<{
+export const LayoutWrapper: React.FC<{
   children: React.ReactNode
 }> = ({ children }) => {
   const [top, setTop] = useState(0)

@@ -8,5 +8,5 @@
   flex: 1;
   overflow-x: hidden;
   // override the layout-container styles
-  composes: layout-container from '@/components/layouts/LayoutContainer/index.module.scss';
+  composes: layout-container from '@/components/layouts/LayoutWrapper/index.module.scss';
 }

@@ -1,7 +1,8 @@
 'use client'
 
 import styles from '@/components/layouts/SiteWrapper/index.module.scss'
-import { Footer } from '@/components/layouts/Footer'
+import { Footer } from '@/components/elements/Footer'
+import { StickyWrapper } from '@/components/layouts/StickyWrapper'
 import { ArticleCreateForm } from './components/ArticleCreateForm'
 import { ArticleCreateHeader } from './components/ArticleCreateHeader'
 import { ArticleCreateProvider } from './components/ArticleCreateProvider'
@@ -19,7 +20,9 @@ export const ArticleCreate: React.FC<Props> = ({
   return (
     <ArticleCreateProvider defaultValues={defaultValues}>
       <div className={styles[`${BLOCK_NAME}`]}>
-        <ArticleCreateHeader />
+        <StickyWrapper>
+          <ArticleCreateHeader />
+        </StickyWrapper>
         <main className={styles[`${BLOCK_NAME}-inner`]}>
           <ArticleCreateForm categoryOptions={categoryOptions} />
         </main>

@@ -1,10 +1,10 @@
 import NextLink from 'next/link'
-import { Article } from '@/functions/types'
+import { Articles } from '@/functions/types'
 import { ArticleCard } from '../components/ArticleCard'
 import { ArticleCardGroup } from '../components/ArticleCardGroup'
 
 type Props = {
-  articles: Article[]
+  articles: Articles
 }
 export const ArticleList: React.FC<Props> = ({ articles }) => {
   return (

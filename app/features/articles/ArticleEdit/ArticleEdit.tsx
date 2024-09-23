@@ -1,7 +1,8 @@
 'use client'
 
 import styles from '@/components/layouts/SiteWrapper/index.module.scss'
-import { Footer } from '@/components/layouts/Footer'
+import { Footer } from '@/components/elements/Footer'
+import { StickyWrapper } from '@/components/layouts/StickyWrapper'
 import { Schema } from './articleEdit.schema'
 import { ArticleEditForm } from './components/ArticleEditForm'
 import { ArticleEditHeader } from './components/ArticleEditHeader'
@@ -21,7 +22,9 @@ export const ArticleEdit: React.FC<Props> = ({
   return (
     <ArticleEditProvider defaultValues={defaultValues}>
       <div className={styles[`${BLOCK_NAME}`]}>
-        <ArticleEditHeader articleId={articleId} />
+        <StickyWrapper>
+          <ArticleEditHeader articleId={articleId} />
+        </StickyWrapper>
         <main className={styles[`${BLOCK_NAME}-inner`]}>
           <ArticleEditForm categoryOptions={categoryOptions} />
         </main>

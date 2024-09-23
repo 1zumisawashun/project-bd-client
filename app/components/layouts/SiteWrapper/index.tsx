@@ -1,5 +1,5 @@
-import { Header } from '../Header'
-import { Footer } from '../Footer'
+import { Header } from '../../elements/Header'
+import { Footer } from '../../elements/Footer'
 import styles from './index.module.scss'
 
 const BLOCK_NAME = 'site-wrapper'

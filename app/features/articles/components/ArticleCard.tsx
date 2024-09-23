@@ -1,9 +1,9 @@
-import { Article } from '@/functions/types'
+import { Article, User } from '@/functions/types'
 import styles from '../articles.module.scss'
 
 const BLOCK_NAME = 'articles'
 type Props = {
-  article: Article
+  article: Article | User['posts'][number]
 }
 export const ArticleCard: React.FC<Props> = ({ article }) => {
   const { title, createdAt } = article

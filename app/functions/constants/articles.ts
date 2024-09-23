@@ -1,9 +1,11 @@
-import { Prisma, Article } from '@prisma/client'
+import { Prisma } from '@prisma/client'
+import { Article } from '@/functions/types'
 import { content } from './content'
+import { mockCategories } from './categories'
 
 const id = 'cm07vrx4y00002vwkx0koma0j'
 
-export const baseArticles = [
+export const mockArticles = [
   {
     id: `post1-${id}`,
     title: 'テクノロジー',
@@ -12,6 +14,7 @@ export const baseArticles = [
     authorId: `user-${id}`,
     createdAt: new Date('2024-08-31T05:16:36.323Z'),
     updatedAt: new Date('2024-08-31T05:16:36.323Z'),
+    categories: mockCategories,
   },
   {
     id: `post2-${id}`,
@@ -21,6 +24,7 @@ export const baseArticles = [
     authorId: `user-${id}`,
     createdAt: new Date('2024-08-31T05:16:36.323Z'),
     updatedAt: new Date('2024-08-31T05:16:36.323Z'),
+    categories: mockCategories,
   },
   {
     id: `post3-${id}`,
@@ -30,6 +34,7 @@ export const baseArticles = [
     authorId: `user-${id}`,
     createdAt: new Date('2024-08-31T05:16:36.323Z'),
     updatedAt: new Date('2024-08-31T05:16:36.323Z'),
+    categories: mockCategories,
   },
   {
     id: `post4-${id}`,
@@ -39,6 +44,7 @@ export const baseArticles = [
     authorId: `user-${id}`,
     createdAt: new Date('2024-08-31T05:16:36.323Z'),
     updatedAt: new Date('2024-08-31T05:16:36.323Z'),
+    categories: mockCategories,
   },
   {
     id: `post5-${id}`,
@@ -48,6 +54,7 @@ export const baseArticles = [
     authorId: `user-${id}`,
     createdAt: new Date('2024-08-31T05:16:36.323Z'),
     updatedAt: new Date('2024-08-31T05:16:36.323Z'),
+    categories: mockCategories,
   },
   {
     id: `post6-${id}`,
@@ -57,10 +64,11 @@ export const baseArticles = [
     authorId: `user-${id}`,
     createdAt: new Date('2024-08-31T05:16:36.323Z'),
     updatedAt: new Date('2024-08-31T05:16:36.323Z'),
+    categories: mockCategories,
   },
 ] satisfies Article[]
 
-export const prismaArticles: Prisma.ArticleCreateInput[] = baseArticles.map(
+export const prismaArticles: Prisma.ArticleCreateInput[] = mockArticles.map(
   (d) => {
     return {
       title: d.title,

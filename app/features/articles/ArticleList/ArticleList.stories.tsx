@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { mockUsers } from '@/functions/constants/users'
+import { mockArticles } from '@/functions/constants/articles'
 import { ArticleList } from './ArticleList'
 
 const meta: Meta<typeof ArticleList> = {
@@ -11,7 +11,7 @@ export default meta
 type Story = StoryObj<typeof ArticleList>
 
 const Render: React.FC = () => {
-  return <ArticleList articles={mockUsers[0]?.posts ?? []} />
+  return <ArticleList articles={mockArticles} />
 }
 export const Default: Story = {
   render: () => <Render />,

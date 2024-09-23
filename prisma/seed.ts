@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import { PrismaClient } from '@prisma/client'
-import { categories } from '@/functions/constants/categories'
+import { prismaCategories } from '@/functions/constants/categories'
 import { prismaUsers } from '@/functions/constants/users'
 import { prismaArticles } from '@/functions/constants/articles'
 
@@ -13,7 +13,7 @@ async function main() {
   await prisma.article.deleteMany()
 
   // seeding
-  for (const category of categories) {
+  for (const category of prismaCategories) {
     await prisma.category.create({
       data: category,
     })

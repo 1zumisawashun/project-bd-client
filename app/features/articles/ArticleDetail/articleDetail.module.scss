@@ -1,3 +1,8 @@
 .article-detail-content {
   composes: editor-reset from '@/assets/base-editor.module.scss';
 }
+
+// override the base-button styles
+.article-detail-button.article-detail-button {
+  justify-content: flex-start;
+}

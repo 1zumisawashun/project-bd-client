@@ -4,7 +4,7 @@ import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
 import { Footer } from './index'
 
 const meta: Meta<typeof Footer> = {
-  title: 'layout/Footer',
+  title: 'element/Footer',
   component: Footer,
   parameters: { layout: 'fullscreen' },
   decorators: [FullWidthDecorator],

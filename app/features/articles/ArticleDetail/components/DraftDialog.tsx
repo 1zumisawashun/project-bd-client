@@ -52,7 +52,6 @@ export const DraftDialog: React.FC<Props> = ({
         description: '削除に成功しました',
       })
 
-      router.push(`/articles`)
       router.refresh()
     })
   }

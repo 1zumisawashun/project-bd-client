@@ -19,14 +19,20 @@ export const MyPageSetting: Story = {
   render: () => <Render />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByRole('tab', { name: /setting/ }))
+    await userEvent.click(canvas.getByRole('tab', { name: /設定/ }))
   },
 }
-
-export const MyPagePost: Story = {
+export const MyPagePublish: Story = {
   render: () => <Render />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByRole('tab', { name: /post/ }))
+    await userEvent.click(canvas.getByRole('tab', { name: /公開中/ }))
+  },
+}
+export const MyPageDraft: Story = {
+  render: () => <Render />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('tab', { name: /下書き/ }))
   },
 }

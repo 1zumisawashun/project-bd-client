@@ -28,7 +28,7 @@ export const PublishDialog: React.FC<Props> = ({
   const openToast = useToastDispatch()
   const router = useRouter()
 
-  const handleDraft = () => {
+  const handlePublish = () => {
     const data = {} as any
 
     startTransition(async () => {
@@ -52,7 +52,6 @@ export const PublishDialog: React.FC<Props> = ({
         description: '削除に成功しました',
       })
 
-      router.push(`/articles`)
       router.refresh()
     })
   }
@@ -63,13 +62,13 @@ export const PublishDialog: React.FC<Props> = ({
         <VStack align="center">
           <DialogTitle>記事を公開します</DialogTitle>
           <DialogDescription>
-            記事が一覧から取り除かれます。マイページの下書きから閲覧可能です。
+            記事を公開します。執筆お疲れ様でした！
           </DialogDescription>
           <HStack>
             <Button variant="outlined" onClick={onClose}>
               キャンセル
             </Button>
-            <Button onClick={handleDraft}>公開する</Button>
+            <Button onClick={handlePublish}>公開する</Button>
           </HStack>
         </VStack>
       </DialogContent>

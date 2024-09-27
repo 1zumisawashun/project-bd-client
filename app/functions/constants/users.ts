@@ -5,7 +5,7 @@ import { mockArticles } from './articles'
 const id = 'cm07vrx4y00002vwkx0koma0j'
 
 const hashedPassword =
-  '$2a$12$e5k13fMVSLEvm3IYMndk4uBWE71w3kXRgEiZP99J53BYC29UcNTWy' // Test1234
+  '$2a$12$rPoIPJ1G9UfhP7awiq6CYu2inajTrnWHFopVguF0kvEqkSu8q93A6' // Test1234!
 
 export const mockUsers = [
   {

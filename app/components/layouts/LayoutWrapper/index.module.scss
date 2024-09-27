@@ -1,7 +1,7 @@
 .layout-container {
-  width: 576px;
+  max-width: 576px;
   margin: auto;
-  border-right: 1px solid var(--mauve-6);
-  border-left: 1px solid var(--mauve-6);
+  // border-right: 1px solid var(--mauve-6);
+  // border-left: 1px solid var(--mauve-6);
   padding: 1rem;
 }

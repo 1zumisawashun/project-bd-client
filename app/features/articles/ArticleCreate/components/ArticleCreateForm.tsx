@@ -46,14 +46,16 @@ export const ArticleCreateForm: React.FC<Props> = ({ categoryOptions }) => {
           onChange={(value) => append({ name: value })}
           rows={rows}
         />
-        <HStack gap={2} style={{ margin: '0.5rem', flexWrap: 'wrap' }}>
-          {fields?.map((d, index) => (
-            <Label key={d.id}>
-              {d.name}
-              <LabelAction onClick={() => remove(index)} />
-            </Label>
-          ))}
-        </HStack>
+        {fields?.length > 0 && (
+          <HStack gap={2} style={{ flexWrap: 'wrap' }}>
+            {fields?.map((d, index) => (
+              <Label key={d.id}>
+                {d.name}
+                <LabelAction onClick={() => remove(index)} />
+              </Label>
+            ))}
+          </HStack>
+        )}
         <FormErrorMessage>{errors.categories?.message}</FormErrorMessage>
       </FormField>
 

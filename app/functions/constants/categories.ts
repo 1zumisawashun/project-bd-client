@@ -64,6 +64,5 @@ export const mockCategories = [
   },
 ] satisfies Categories
 
-export const prismaCategories: Prisma.CategoryCreateInput[] = mockCategories.map(
-  (d) => ({ name: d.name }),
-)
+export const prismaCategories: Prisma.CategoryCreateInput[] =
+  mockCategories.map((d) => ({ id: d.id, name: d.name }))

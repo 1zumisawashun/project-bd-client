@@ -17,10 +17,34 @@ export const mockArticle = {
   likedUsers: [],
 } satisfies Article
 
+export const mockArticlePublish = {
+  id: `post1-${id}`,
+  title: 'テクノロジー',
+  content,
+  status: 'PUBLISHED',
+  authorId: `user-${id}`,
+  createdAt: new Date('2024-08-31T05:16:36.323Z'),
+  updatedAt: new Date('2024-08-31T05:16:36.323Z'),
+  categories: mockCategories,
+  likedUsers: [],
+} satisfies Article
+
+export const mockArticleDraft = {
+  id: `post1-${id}`,
+  title: 'テクノロジー',
+  content,
+  status: 'DRAFT',
+  authorId: `user-${id}`,
+  createdAt: new Date('2024-08-31T05:16:36.323Z'),
+  updatedAt: new Date('2024-08-31T05:16:36.323Z'),
+  categories: mockCategories,
+  likedUsers: [],
+} satisfies Article
+
 export const mockArticles = [
   {
     id: `post1-${id}`,
-    title: 'テクノロジー',
+    title: 'テクノロジーテクノロジーテクノロジー',
     content,
     status: 'PUBLISHED',
     authorId: `user-${id}`,
@@ -30,7 +54,7 @@ export const mockArticles = [
   },
   {
     id: `post2-${id}`,
-    title: 'ファッション',
+    title: 'ファッションファッションファッション',
     content,
     status: 'PUBLISHED',
     authorId: `user-${id}`,
@@ -40,7 +64,7 @@ export const mockArticles = [
   },
   {
     id: `post3-${id}`,
-    title: '食品と飲料',
+    title: '食品と飲料食品と飲料食品と飲料',
     content,
     status: 'PUBLISHED',
     authorId: `user-${id}`,
@@ -50,7 +74,7 @@ export const mockArticles = [
   },
   {
     id: `post4-${id}`,
-    title: '健康とウェルネス',
+    title: '健康とウェルネス健康とウェルネス健康とウェルネス',
     content,
     status: 'DRAFT',
     authorId: `user-${id}`,
@@ -60,7 +84,7 @@ export const mockArticles = [
   },
   {
     id: `post5-${id}`,
-    title: 'スポーツ',
+    title: 'スポーツスポーツスポーツ',
     content,
     status: 'DRAFT',
     authorId: `user-${id}`,
@@ -70,7 +94,7 @@ export const mockArticles = [
   },
   {
     id: `post6-${id}`,
-    title: 'エンターテイメント',
+    title: 'エンターテイメントエンターテイメントエンターテイメント',
     content,
     status: 'DRAFT',
     authorId: `user-${id}`,

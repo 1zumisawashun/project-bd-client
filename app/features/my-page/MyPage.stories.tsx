@@ -11,28 +11,59 @@ const meta: Meta<typeof MyPage> = {
 export default meta
 type Story = StoryObj<typeof MyPage>
 
-const Render: React.FC = () => {
+const RenderDefault: React.FC = () => {
   return <MyPage user={mockUsers[0]!} />
+}
+const RenderEmpty: React.FC = () => {
+  return <MyPage user={mockUsers[1]!} />
 }
 
 export const MyPageSetting: Story = {
-  render: () => <Render />,
+  render: () => <RenderDefault />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await userEvent.click(canvas.getByRole('tab', { name: /設定/ }))
   },
 }
 export const MyPagePublish: Story = {
-  render: () => <Render />,
+  render: () => <RenderDefault />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await userEvent.click(canvas.getByRole('tab', { name: /公開中/ }))
   },
 }
 export const MyPageDraft: Story = {
-  render: () => <Render />,
+  render: () => <RenderDefault />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await userEvent.click(canvas.getByRole('tab', { name: /下書き/ }))
+  },
+}
+export const MyPageLike: Story = {
+  render: () => <RenderDefault />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('tab', { name: /お気に入り/ }))
+  },
+}
+export const MyPagePublishEmpty: Story = {
+  render: () => <RenderEmpty />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('tab', { name: /公開中/ }))
+  },
+}
+export const MyPageDraftEmpty: Story = {
+  render: () => <RenderEmpty />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('tab', { name: /下書き/ }))
+  },
+}
+export const MyPageLikeEmpty: Story = {
+  render: () => <RenderEmpty />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await userEvent.click(canvas.getByRole('tab', { name: /お気に入り/ }))
   },
 }

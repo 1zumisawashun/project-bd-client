@@ -11,6 +11,8 @@ import { KebabMenu } from '@/components/elements/KebabMenu'
 import { HStack } from '@/components/layouts/HStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { Status } from '@/components/elements/Status'
+import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
+import { Label } from '@/components/elements/Label'
 import { DeleteDialog } from './components/DeleteDialog'
 import styles from './articleDetail.module.scss'
 import { DraftDialog } from './components/DraftDialog'
@@ -46,8 +48,9 @@ export const ArticleDetail: React.FC<Props> = ({
       <Title as="h1" fontSize={6}>
         {article.title}
       </Title>
+
       <HStack align="center" style={{ justifyContent: 'space-between' }}>
-        {article.createdAt.toDateString()}
+        公開日 {formatDateToJapaneseDate(new Date(article.createdAt))}
         <HStack>
           {isLike ? (
             <LikeButton userId={userId} articleId={article.id} />
@@ -95,6 +98,12 @@ export const ArticleDetail: React.FC<Props> = ({
             />
           )}
         </HStack>
+      </HStack>
+
+      <HStack style={{ flexWrap: 'wrap' }} gap={2}>
+        {article.categories.map((category) => (
+          <Label key={category.id}>{category.name}</Label>
+        ))}
       </HStack>
 
       <DeleteDialog

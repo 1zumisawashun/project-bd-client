@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const defaultValues = {
     title: article?.title ?? '',
     content: article?.content ?? '',
-    categories: categories?.map((category) => ({ name: category.name })) ?? [],
+    categories: article?.categories?.map((category) => ({ name: category.name })) ?? [],
   }
 
   return (

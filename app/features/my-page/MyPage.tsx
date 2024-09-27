@@ -14,7 +14,10 @@ type Props = {
 export const MyPage: React.FC<Props> = ({ user }) => {
   const published =
     user?.posts?.filter((post) => post.status === 'PUBLISHED') ?? []
+
   const draft = user?.posts?.filter((post) => post.status === 'DRAFT') ?? []
+
+  const liked = user?.likedArticles ?? []
 
   return (
     <Tabs defaultValue="setting">
@@ -22,6 +25,7 @@ export const MyPage: React.FC<Props> = ({ user }) => {
         <TabsTrigger value="setting">設定</TabsTrigger>
         <TabsTrigger value="published">公開中</TabsTrigger>
         <TabsTrigger value="draft">下書き</TabsTrigger>
+        <TabsTrigger value="like">お気に入り</TabsTrigger>
       </TabsList>
       <TabsContent value="setting">
         <MyPageSetting user={user} />
@@ -31,6 +35,9 @@ export const MyPage: React.FC<Props> = ({ user }) => {
       </TabsContent>
       <TabsContent value="draft">
         <MyPagePost articles={draft} />
+      </TabsContent>
+      <TabsContent value="like">
+        <MyPagePost articles={liked} />
       </TabsContent>
     </Tabs>
   )

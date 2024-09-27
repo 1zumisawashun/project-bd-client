@@ -26,3 +26,5 @@ export const schema = z.object({
       message: '大文字を含む半角英数字と記号を含めてください。',
     }),
 })
+
+export type Schema = z.infer<typeof schema>

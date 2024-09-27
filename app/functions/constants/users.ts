@@ -19,6 +19,7 @@ export const mockUsers = [
     createdAt: new Date('2024-08-31T05:16:36.323Z'),
     updatedAt: new Date('2024-08-31T05:16:36.323Z'),
     posts: mockArticles,
+    likedArticles: mockArticles,
   },
   {
     id: `user-${id}`,
@@ -31,9 +32,10 @@ export const mockUsers = [
     createdAt: new Date('2024-08-31T05:16:36.323Z'),
     updatedAt: new Date('2024-08-31T05:16:36.323Z'),
     posts: mockArticles,
+    likedArticles: mockArticles,
   },
 ] satisfies User[]
 
 export const prismaUsers: Prisma.UserCreateInput[] = mockUsers.map(
-  ({ posts, ...rest }) => rest,
+  ({ posts, likedArticles, ...rest }) => rest,
 )

@@ -13,7 +13,10 @@ export const getUserById = async (id: string) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id },
-      include: { posts: true },
+      include: {
+        posts: { include: { author: { select: { name: true } } } },
+        likedArticles: { include: { author: { select: { name: true } } } },
+      },
     })
     return user
   } catch (e) {

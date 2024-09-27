@@ -7,9 +7,18 @@ export default async function Page({ params }: { params: { id: string } }) {
   const article = await getArticleById(params.id)
   const session = await auth()
 
-  const isAuthor = article?.authorId === session?.user?.id
+  const userId = session?.user?.id ?? ''
+  const isAuthor = article?.authorId === userId
+  const isLike = article?.likedUsers.some((d) => d.id === userId) ?? false
 
   if (!article) return <NotFound />
 
-  return <ArticleDetail article={article} isAuthor={isAuthor} />
+  return (
+    <ArticleDetail
+      article={article}
+      isAuthor={isAuthor}
+      userId={userId}
+      isLike={isLike}
+    />
+  )
 }

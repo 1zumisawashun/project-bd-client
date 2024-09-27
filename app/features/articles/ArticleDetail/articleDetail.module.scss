@@ -6,3 +6,7 @@
 .article-detail-button.article-detail-button {
   justify-content: flex-start;
 }
+
+.article-detail-like-icon {
+  composes: svg from '@/assets/base-icon.module.scss';
+}

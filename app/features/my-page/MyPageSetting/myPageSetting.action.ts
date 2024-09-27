@@ -13,7 +13,7 @@ import {
 
 export const updateEmail = async (
   data: EmailSchema,
-): Promise<ActionsResult<Omit<User, 'posts'>>> => {
+): Promise<ActionsResult<Omit<User, 'posts' | 'likedArticles'>>> => {
   const session = await auth()
 
   if (!session?.user.id) {
@@ -68,7 +68,7 @@ export const updateEmail = async (
 
 export const updateProfile = async (
   data: ProfileSchema,
-): Promise<ActionsResult<Omit<User, 'posts'>>> => {
+): Promise<ActionsResult<Omit<User, 'posts' | 'likedArticles'>>> => {
   const session = await auth()
 
   if (!session?.user.id) {

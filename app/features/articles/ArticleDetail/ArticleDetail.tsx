@@ -15,13 +15,22 @@ import { DeleteDialog } from './components/DeleteDialog'
 import styles from './articleDetail.module.scss'
 import { DraftDialog } from './components/DraftDialog'
 import { PublishDialog } from './components/PublishDialog'
+import { LikeButton } from './components/LikeButton'
+import { DislikeButton } from './components/DislikeButton'
 
 const BLOCK_NAME = 'article-detail'
 type Props = {
   article: Article
   isAuthor: boolean
+  userId: string
+  isLike: boolean
 }
-export const ArticleDetail: React.FC<Props> = ({ article, isAuthor }) => {
+export const ArticleDetail: React.FC<Props> = ({
+  article,
+  isAuthor,
+  userId,
+  isLike,
+}) => {
   const deleteDialog = useDisclosure()
   const draftDialog = useDisclosure()
   const publishDialog = useDisclosure()
@@ -39,45 +48,53 @@ export const ArticleDetail: React.FC<Props> = ({ article, isAuthor }) => {
       </Title>
       <HStack align="center" style={{ justifyContent: 'space-between' }}>
         {article.createdAt.toDateString()}
-        {isAuthor && (
-          <KebabMenu
-            render={() => (
-              <>
-                <AnchorButton
-                  variant="ghost"
-                  href={`/articles/${article.id}/edit`}
-                  className={styles[`${BLOCK_NAME}-button`]}
-                >
-                  変更する
-                </AnchorButton>
-                <Button
-                  variant="ghost"
-                  className={styles[`${BLOCK_NAME}-button`]}
-                  onClick={deleteDialog.open}
-                >
-                  削除する
-                </Button>
-                {article.status === 'DRAFT' ? (
+        <HStack>
+          {isLike ? (
+            <LikeButton userId={userId} articleId={article.id} />
+          ) : (
+            <DislikeButton userId={userId} articleId={article.id} />
+          )}
+
+          {isAuthor && (
+            <KebabMenu
+              render={() => (
+                <>
+                  <AnchorButton
+                    variant="ghost"
+                    href={`/articles/${article.id}/edit`}
+                    className={styles[`${BLOCK_NAME}-button`]}
+                  >
+                    変更する
+                  </AnchorButton>
                   <Button
                     variant="ghost"
                     className={styles[`${BLOCK_NAME}-button`]}
-                    onClick={publishDialog.open}
+                    onClick={deleteDialog.open}
                   >
-                    公開する
+                    削除する
                   </Button>
-                ) : (
-                  <Button
-                    variant="ghost"
-                    className={styles[`${BLOCK_NAME}-button`]}
-                    onClick={draftDialog.open}
-                  >
-                    下書きに戻す
-                  </Button>
-                )}
-              </>
-            )}
-          />
-        )}
+                  {article.status === 'DRAFT' ? (
+                    <Button
+                      variant="ghost"
+                      className={styles[`${BLOCK_NAME}-button`]}
+                      onClick={publishDialog.open}
+                    >
+                      公開する
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      className={styles[`${BLOCK_NAME}-button`]}
+                      onClick={draftDialog.open}
+                    >
+                      下書きに戻す
+                    </Button>
+                  )}
+                </>
+              )}
+            />
+          )}
+        </HStack>
       </HStack>
 
       <DeleteDialog

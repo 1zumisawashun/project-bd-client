@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google'
 import '@/assets/the-new-css-reset.css'
 import '@/assets/global.scss'
 import AppProviders from '@/providers'
+import { Analytics } from '@vercel/analytics/react'
 
 // MEMO: お気に入りのフォントを指定するw
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={montserrat.className}>
         <AppProviders>{children}</AppProviders>
+        <Analytics />
       </body>
     </html>
   )

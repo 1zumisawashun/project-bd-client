@@ -20,7 +20,11 @@ const BLOCK_NAME = 'article-create'
 export const ArticleCreateHeader: React.FC = () => {
   const router = useRouter()
   const openToast = useToastDispatch()
-  const { handleSubmit, setValue } = useFormContext<Schema>()
+  const {
+    handleSubmit,
+    setValue,
+    formState: { isDirty },
+  } = useFormContext<Schema>()
 
   const onSubmit: SubmitHandler<Schema> = async (data) => {
     startTransition(async () => {
@@ -64,6 +68,7 @@ export const ArticleCreateHeader: React.FC = () => {
             setValue('status', 'DRAFT', { shouldDirty: true })
             handleSubmit(onSubmit, onError)(e)
           }}
+          disabled={!isDirty}
         >
           一時保存する
         </Button>
@@ -72,6 +77,7 @@ export const ArticleCreateHeader: React.FC = () => {
             setValue('status', 'PUBLISHED', { shouldDirty: true })
             handleSubmit(onSubmit, onError)(e)
           }}
+          disabled={!isDirty}
         >
           投稿する
         </Button>

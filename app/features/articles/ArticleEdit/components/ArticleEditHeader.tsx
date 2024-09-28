@@ -23,7 +23,11 @@ type Props = {
 export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
   const router = useRouter()
   const openToast = useToastDispatch()
-  const { handleSubmit, setValue } = useFormContext<Schema>()
+  const {
+    handleSubmit,
+    setValue,
+    formState: { isDirty },
+  } = useFormContext<Schema>()
 
   const onSubmit: SubmitHandler<Schema> = async (data) => {
     startTransition(async () => {
@@ -67,6 +71,7 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
             setValue('status', 'DRAFT', { shouldDirty: true })
             handleSubmit(onSubmit, onError)(e)
           }}
+          disabled={!isDirty}
         >
           一時保存する
         </Button>
@@ -75,6 +80,7 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
             setValue('status', 'PUBLISHED', { shouldDirty: true })
             handleSubmit(onSubmit, onError)(e)
           }}
+          disabled={!isDirty}
         >
           更新する
         </Button>

@@ -13,7 +13,7 @@ import { HStack } from '@/components/layouts/HStack'
 import { startTransition } from 'react'
 import { useToastDispatch } from '@/components/elements/Toast'
 import { useRouter } from 'next/navigation'
-import { editArticle } from '../../ArticleEdit/articleEdit.action'
+import { publishArticle } from '../articleDetail.action'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']
@@ -29,27 +29,21 @@ export const PublishDialog: React.FC<Props> = ({
   const router = useRouter()
 
   const handlePublish = () => {
-    const data = {} as any
-
     startTransition(async () => {
-      const response = await editArticle({
-        data,
-        id: articleId,
-        status: 'PUBLISHED',
-      })
+      const response = await publishArticle({ id: articleId })
 
       if (!response?.isSuccess) {
         openToast({
           theme: 'danger',
-          title: 'エラー',
-          description: response?.error?.message ?? 'エラーが発生しました',
+          title: 'エラーが発生しました',
+          description: response.error.message ?? 'エラーが発生しました',
         })
         return
       }
       openToast({
         theme: 'success',
-        title: '成功',
-        description: '削除に成功しました',
+        title: '成功しました',
+        description: response.message ?? '成功しました',
       })
 
       router.refresh()

@@ -24,8 +24,8 @@ export const LikeButton: React.FC<Props> = ({ articleId, userId }) => {
       if (!response?.isSuccess) {
         openToast({
           theme: 'danger',
-          title: 'エラー',
-          description: response?.error?.message ?? 'エラーが発生しました',
+          title: 'エラーが発生しました',
+          description: response.error.message ?? 'エラーが発生しました',
         })
         return
       }

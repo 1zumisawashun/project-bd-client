@@ -1,74 +1,48 @@
 'use server'
 
 import { auth } from '@/functions/libs/next-auth/auth'
-import { handleError } from '@/functions/helpers/utils'
-import { ActionsResult, Article, ArticleStatus } from '@/functions/types'
-import prisma from '@/functions/libs/prisma-client/prisma'
+import { actionResult } from '@/functions/helpers/utils'
+import { ActionsResult, Article } from '@/functions/types'
+import { createArticle as _createArticle } from '@/functions/db/article'
+import { createCategory, getCategoryByName } from '@/functions/db/category'
 import { Schema, schema } from './articleCreate.schema'
 
-type Props = {
-  data: Schema
-  status: ArticleStatus
-}
-export const createArticle = async ({
-  data,
-  status,
-}: Props): Promise<
-  ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
-> => {
-  const session = await auth()
-
-  if (!session?.user.id) {
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: 'ログインしてください' },
-    }
-  }
-
-  const validatedFields = schema.safeParse(data)
-
-  if (!validatedFields.success) {
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: validatedFields.error.message },
-    }
-  }
-
+type Return = ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
+type Props = { data: Schema }
+export const createArticle = async ({ data }: Props): Promise<Return> => {
   try {
+    const session = await auth()
+
+    if (!session?.user?.id) {
+      actionResult.end('ログインしてください')
+    }
+
+    const validatedFields = schema.safeParse(data)
+
+    if (!validatedFields.success) {
+      actionResult.end(validatedFields.error.message)
+    }
+
     const promises = data.categories.map(async ({ name }) => {
-      const category = await prisma.category.findFirst({ where: { name } })
+      const category = await getCategoryByName(name)
       if (!category) {
-        const result = await prisma.category.create({ data: { name } })
-        return { id: result.id }
+        const response = await createCategory(name)
+        return { id: response.id }
       }
       return { id: category.id }
     })
 
     const categoryIds = await Promise.all(promises)
 
-    const response = await prisma.article.create({
-      data: {
-        ...data,
-        status,
-        author: { connect: { id: session.user.id } },
-        categories: { connect: categoryIds },
-      },
-    })
-
-    return {
-      isSuccess: true,
-      data: response,
-      message: '投稿に成功しました',
+    const params = {
+      ...data,
+      author: { connect: { id: session!.user.id } },
+      categories: { connect: categoryIds },
     }
+
+    const response = await _createArticle(params)
+    return actionResult.success(response)
   } catch (error) {
-    handleError(error)
-
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: '更新に失敗しました' },
-    }
+    return actionResult.error(error)
   }
 }

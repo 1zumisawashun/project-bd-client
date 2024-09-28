@@ -20,24 +20,24 @@ const BLOCK_NAME = 'article-create'
 export const ArticleCreateHeader: React.FC = () => {
   const router = useRouter()
   const openToast = useToastDispatch()
-  const { handleSubmit } = useFormContext<Schema>()
+  const { handleSubmit, setValue } = useFormContext<Schema>()
 
   const onSubmit: SubmitHandler<Schema> = async (data) => {
     startTransition(async () => {
-      const response = await createArticle({ data, status: 'PUBLISHED' })
+      const response = await createArticle({ data })
 
       if (!response?.isSuccess) {
         openToast({
           theme: 'danger',
-          title: 'エラー',
+          title: 'エラーが発生しました',
           description: response?.error?.message ?? 'エラーが発生しました',
         })
         return
       }
       openToast({
         theme: 'success',
-        title: '成功',
-        description: '投稿に成功しました',
+        title: '成功しました',
+        description: response.message ?? '成功しました',
       })
 
       router.push(`/articles/${response.data?.id ?? ''}`)
@@ -48,7 +48,7 @@ export const ArticleCreateHeader: React.FC = () => {
   const onError: SubmitErrorHandler<Schema> = (error) => {
     openToast({
       theme: 'danger',
-      title: 'エラー',
+      title: 'エラーが発生しました',
       description: JSON.stringify(error, null, 2),
     })
   }
@@ -59,8 +59,22 @@ export const ArticleCreateHeader: React.FC = () => {
         <ChevronLeftIcon />
       </IconAnchorButton>
       <HStack>
-        <Button onClick={() => null}>一時保存する</Button>
-        <Button onClick={handleSubmit(onSubmit, onError)}>投稿する</Button>
+        <Button
+          onClick={() => {
+            setValue('status', 'DRAFT', { shouldDirty: true })
+            handleSubmit(onSubmit, onError)
+          }}
+        >
+          一時保存する
+        </Button>
+        <Button
+          onClick={() => {
+            setValue('status', 'PUBLISHED', { shouldDirty: true })
+            handleSubmit(onSubmit, onError)
+          }}
+        >
+          投稿する
+        </Button>
       </HStack>
     </header>
   )

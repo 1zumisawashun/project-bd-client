@@ -11,6 +11,7 @@ export default async function Page() {
     title: '',
     content,
     categories: [],
+    status: 'PUBLISHED' as const,
   }
 
   return (

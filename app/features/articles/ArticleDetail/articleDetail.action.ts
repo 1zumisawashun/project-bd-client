@@ -1,43 +1,31 @@
 'use server'
 
 import { auth } from '@/functions/libs/next-auth/auth'
-import { handleError } from '@/functions/helpers/utils'
+import { actionResult } from '@/functions/helpers/utils'
 import { ActionsResult, Article } from '@/functions/types'
-import prisma from '@/functions/libs/prisma-client/prisma'
+import {
+  deleteArticle as _deleteArticle,
+  updateArticle,
+} from '@/functions/db/article'
+
+type Return = ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
 
 export const deleteArticle = async ({
   id,
 }: {
   id: string
-}): Promise<ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>> => {
-  const session = await auth()
-
-  if (!session?.user.id) {
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: 'ログインしてください' },
-    }
-  }
-
+}): Promise<Return> => {
   try {
-    const response = await prisma.article.delete({
-      where: { id },
-    })
+    const session = await auth()
 
-    return {
-      isSuccess: true,
-      data: response,
-      message: '削除に成功しました',
+    if (!session?.user.id) {
+      actionResult.end('ログインしてください')
     }
+
+    const response = await _deleteArticle(id)
+    return actionResult.success(response)
   } catch (error) {
-    handleError(error)
-
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: '更新に失敗しました' },
-    }
+    return actionResult.error(error)
   }
 }
 
@@ -47,38 +35,19 @@ export const likeArticle = async ({
 }: {
   articleId: string
   userId: string
-}): Promise<ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>> => {
-  const session = await auth()
-
-  if (!session?.user.id) {
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: 'ログインしてください' },
-    }
-  }
-
+}): Promise<Return> => {
   try {
-    const response = await prisma.article.update({
-      where: { id: articleId },
-      data: {
-        likedUsers: { connect: { id: userId } },
-      },
-    })
+    const session = await auth()
 
-    return {
-      isSuccess: true,
-      data: response,
-      message: '投稿に成功しました',
+    if (!session?.user.id) {
+      actionResult.end('ログインしてください')
     }
+
+    const params = { likedUsers: { connect: { id: userId } } }
+    const response = await updateArticle(articleId, params)
+    return actionResult.success(response)
   } catch (error) {
-    handleError(error)
-
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: '更新に失敗しました' },
-    }
+    return actionResult.error(error)
   }
 }
 
@@ -88,37 +57,54 @@ export const dislikeArticle = async ({
 }: {
   articleId: string
   userId: string
-}): Promise<ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>> => {
-  const session = await auth()
-
-  if (!session?.user.id) {
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: 'ログインしてください' },
-    }
-  }
-
+}): Promise<Return> => {
   try {
-    const response = await prisma.article.update({
-      where: { id: articleId },
-      data: {
-        likedUsers: { disconnect: { id: userId } },
-      },
-    })
+    const session = await auth()
 
-    return {
-      isSuccess: true,
-      data: response,
-      message: '投稿に成功しました',
+    if (!session?.user.id) {
+      actionResult.end('ログインしてください')
     }
+
+    const params = { likedUsers: { disconnect: { id: userId } } }
+    const response = await updateArticle(articleId, params)
+    return actionResult.success(response)
   } catch (error) {
-    handleError(error)
+    return actionResult.error(error)
+  }
+}
 
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: '更新に失敗しました' },
+export const draftArticle = async ({ id }: { id: string }): Promise<Return> => {
+  try {
+    const session = await auth()
+
+    if (!session?.user.id) {
+      actionResult.end('ログインしてください')
     }
+
+    const params = { status: 'DRAFT' }
+    const response = await updateArticle(id, params)
+    return actionResult.success(response)
+  } catch (error) {
+    return actionResult.error(error)
+  }
+}
+
+export const publishArticle = async ({
+  id,
+}: {
+  id: string
+}): Promise<Return> => {
+  try {
+    const session = await auth()
+
+    if (!session?.user.id) {
+      actionResult.end('ログインしてください')
+    }
+
+    const params = { status: 'PUBLISHED' }
+    const response = await updateArticle(id, params)
+    return actionResult.success(response)
+  } catch (error) {
+    return actionResult.error(error)
   }
 }

@@ -35,15 +35,15 @@ export const DeleteDialog: React.FC<Props> = ({
       if (!response?.isSuccess) {
         openToast({
           theme: 'danger',
-          title: 'エラー',
-          description: response?.error?.message ?? 'エラーが発生しました',
+          title: 'エラーが発生しました',
+          description: response.error.message ?? 'エラーが発生しました',
         })
         return
       }
       openToast({
         theme: 'success',
-        title: '成功',
-        description: '削除に成功しました',
+        title: '成功しました',
+        description: response.message ?? '成功しました',
       })
 
       router.push(`/articles`)

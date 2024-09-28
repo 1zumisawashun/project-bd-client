@@ -1,6 +1,6 @@
 'use server'
 
-import { handleError } from '@/functions/helpers/utils'
+import { actionResult } from '@/functions/helpers/utils'
 import { ActionsResult, User } from '@/functions/types'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { updateUser, getUserByEmail } from '@/functions/db/user'
@@ -11,102 +11,66 @@ import {
   profileSchema,
 } from './myPageSetting.schema'
 
-export const updateEmail = async (
-  data: EmailSchema,
-): Promise<ActionsResult<Omit<User, 'posts' | 'likedArticles'>>> => {
-  const session = await auth()
-
-  if (!session?.user.id) {
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: 'ログインしてください' },
-    }
-  }
-
-  const validatedFields = emailSchema.safeParse(data)
-
-  if (!validatedFields.success) {
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: validatedFields.error.message },
-    }
-  }
-
-  const existingUser = await getUserByEmail(validatedFields.data.email)
-
-  if (existingUser) {
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: 'このメールアドレスは既に登録されています' },
-    }
-  }
-
+type Return = ActionsResult<Omit<User, 'posts' | 'likedArticles'>>
+export const updateEmail = async ({
+  data,
+}: {
+  data: EmailSchema
+}): Promise<Return> => {
   try {
+    const session = await auth()
+
+    if (!session?.user.id) {
+      return actionResult.end('ログインしてください')
+    }
+
+    const validatedFields = emailSchema.safeParse(data)
+
+    if (!validatedFields.success) {
+      return actionResult.end(validatedFields.error.message)
+    }
+
+    const existingUser = await getUserByEmail(validatedFields.data.email)
+
+    if (existingUser) {
+      actionResult.end('このメールアドレスは既に登録されています')
+    }
+
     const response = await updateUser({
       id: session.user.id,
       data: validatedFields.data,
     })
-
-    return {
-      isSuccess: true,
-      data: response,
-      message: '更新に成功しました',
-    }
+    return actionResult.success(response)
   } catch (error) {
-    handleError(error)
-
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: '更新に失敗しました' },
-    }
+    return actionResult.error(error)
   }
 }
 
-export const updateProfile = async (
-  data: ProfileSchema,
-): Promise<ActionsResult<Omit<User, 'posts' | 'likedArticles'>>> => {
-  const session = await auth()
-
-  if (!session?.user.id) {
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: 'ログインしてください' },
-    }
-  }
-
-  const validatedFields = profileSchema.safeParse(data)
-
-  if (!validatedFields.success) {
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: validatedFields.error.message },
-    }
-  }
-
+export const updateProfile = async ({
+  data,
+}: {
+  data: ProfileSchema
+}): Promise<Return> => {
   try {
+    const session = await auth()
+
+    if (!session?.user.id) {
+      return actionResult.end('ログインしてください')
+    }
+
+    const validatedFields = profileSchema.safeParse(data)
+
+    if (!validatedFields.success) {
+      return actionResult.end(validatedFields.error.message)
+    }
+
     const response = await updateUser({
       id: session.user.id,
       data: validatedFields.data,
     })
 
-    return {
-      isSuccess: true,
-      data: response,
-      message: '更新に成功しました',
-    }
+    return actionResult.success(response)
   } catch (error) {
-    handleError(error)
-
-    return {
-      isSuccess: false,
-      data: null,
-      error: { message: '更新に失敗しました' },
-    }
+    return actionResult.error(error)
   }
 }

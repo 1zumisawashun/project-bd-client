@@ -57,20 +57,20 @@ const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
 
   const onSubmit: SubmitHandler<EmailSchema> = async (data) => {
     startTransition(async () => {
-      const response = await updateEmail(data)
+      const response = await updateEmail({ data })
 
       if (!response?.isSuccess) {
         openToast({
           theme: 'danger',
-          title: 'エラー',
-          description: response?.error?.message ?? 'エラーが発生しました',
+          title: 'エラーが発生しました',
+          description: response.error.message ?? 'エラーが発生しました',
         })
         return
       }
       openToast({
         theme: 'success',
-        title: '成功',
-        description: '成功しました',
+        title: '成功しました',
+        description: response.message ?? '成功しました',
       })
 
       router.refresh()
@@ -81,7 +81,7 @@ const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
   const onError: SubmitErrorHandler<EmailSchema> = (error) => {
     openToast({
       theme: 'danger',
-      title: 'エラー',
+      title: 'エラーが発生しました',
       description: JSON.stringify(error, null, 2),
     })
   }

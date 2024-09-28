@@ -1,6 +1,7 @@
 import { ArticleEdit } from '@/features/articles/ArticleEdit/ArticleEdit'
 import { getArticleById } from '@/functions/db/article'
 import { getCategories } from '@/functions/db/category'
+import { ArticleStatus } from '@/functions/types'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const categories = await getCategories()
@@ -12,7 +13,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   const defaultValues = {
     title: article?.title ?? '',
     content: article?.content ?? '',
-    categories: article?.categories?.map((category) => ({ name: category.name })) ?? [],
+    categories:
+      article?.categories?.map((category) => ({ name: category.name })) ?? [],
+    status: (article?.status ?? 'PUBLISHED') as ArticleStatus,
   }
 
   return (

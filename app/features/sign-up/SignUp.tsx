@@ -45,7 +45,7 @@ export const SignUp: React.FC = () => {
 
   const onSubmit: SubmitHandler<Schema> = async (data) => {
     startTransition(async () => {
-      const response = await signUp(data)
+      const response = await signUp({ data })
 
       if (!response?.isSuccess) {
         setErrorMessage(response.error.message)

@@ -14,13 +14,13 @@ export const createArticle = async ({ data }: Props): Promise<Return> => {
     const session = await auth()
 
     if (!session?.user?.id) {
-      actionResult.end('ログインしてください')
+      return actionResult.end('ログインしてください')
     }
 
     const validatedFields = schema.safeParse(data)
 
     if (!validatedFields.success) {
-      actionResult.end(validatedFields.error.message)
+      return actionResult.end(validatedFields.error.message)
     }
 
     const promises = data.categories.map(async ({ name }) => {
@@ -36,7 +36,7 @@ export const createArticle = async ({ data }: Props): Promise<Return> => {
 
     const params = {
       ...data,
-      author: { connect: { id: session!.user.id } },
+      author: { connect: { id: session.user.id } },
       categories: { connect: categoryIds },
     }
 

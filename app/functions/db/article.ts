@@ -1,4 +1,5 @@
 import prisma from '@/functions/libs/prisma-client/prisma'
+import { Prisma } from '@prisma/client'
 
 export const getArticles = async () => {
   try {
@@ -10,7 +11,6 @@ export const getArticles = async () => {
     return null
   }
 }
-
 export const getArticleById = async (id: string) => {
   try {
     const article = await prisma.article.findUnique({
@@ -20,5 +20,32 @@ export const getArticleById = async (id: string) => {
     return article
   } catch {
     return null
+  }
+}
+export const createArticle = async (data: Prisma.ArticleCreateInput) => {
+  try {
+    const article = await prisma.article.create({ data })
+    return article
+  } catch {
+    throw new Error('Failed to create article')
+  }
+}
+export const deleteArticle = async (id: string) => {
+  try {
+    const article = await prisma.article.delete({ where: { id } })
+    return article
+  } catch {
+    throw new Error('Failed to delete article')
+  }
+}
+export const updateArticle = async (
+  id: string,
+  data: Prisma.ArticleUpdateInput,
+) => {
+  try {
+    const article = await prisma.article.update({ where: { id }, data })
+    return article
+  } catch {
+    throw new Error('Failed to update article')
   }
 }

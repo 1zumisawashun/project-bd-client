@@ -40,7 +40,7 @@ export const likeArticle = async ({
     const session = await auth()
 
     if (!session?.user.id) {
-      actionResult.end('ログインしてください')
+      return actionResult.end('ログインしてください')
     }
 
     const params = { likedUsers: { connect: { id: userId } } }
@@ -62,7 +62,7 @@ export const dislikeArticle = async ({
     const session = await auth()
 
     if (!session?.user.id) {
-      actionResult.end('ログインしてください')
+      return actionResult.end('ログインしてください')
     }
 
     const params = { likedUsers: { disconnect: { id: userId } } }
@@ -78,7 +78,7 @@ export const draftArticle = async ({ id }: { id: string }): Promise<Return> => {
     const session = await auth()
 
     if (!session?.user.id) {
-      actionResult.end('ログインしてください')
+      return actionResult.end('ログインしてください')
     }
 
     const params = { status: 'DRAFT' }
@@ -98,7 +98,7 @@ export const publishArticle = async ({
     const session = await auth()
 
     if (!session?.user.id) {
-      actionResult.end('ログインしてください')
+      return actionResult.end('ログインしてください')
     }
 
     const params = { status: 'PUBLISHED' }

@@ -21,6 +21,7 @@ const Render: React.FC = () => {
         title: 'テスト',
         content,
         categories: [{ name: 'JavaScript' }],
+        status: 'PUBLISHED',
       }}
       categoryOptions={['JavaScript', 'TypeScript', 'React']}
     />

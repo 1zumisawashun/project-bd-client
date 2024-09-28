@@ -63,17 +63,17 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
       </IconAnchorButton>
       <HStack>
         <Button
-          onClick={() => {
+          onClick={(e) => {
             setValue('status', 'DRAFT', { shouldDirty: true })
-            handleSubmit(onSubmit, onError)
+            handleSubmit(onSubmit, onError)(e)
           }}
         >
           一時保存する
         </Button>
         <Button
-          onClick={() => {
+          onClick={(e) => {
             setValue('status', 'PUBLISHED', { shouldDirty: true })
-            handleSubmit(onSubmit, onError)
+            handleSubmit(onSubmit, onError)(e)
           }}
         >
           更新する

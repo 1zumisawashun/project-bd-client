@@ -46,6 +46,7 @@ export const DraftDialog: React.FC<Props> = ({
         description: response.message ?? '成功しました',
       })
 
+      onClose()
       router.refresh()
     })
   }

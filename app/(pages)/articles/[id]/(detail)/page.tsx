@@ -4,7 +4,7 @@ import { NotFound } from '@/components/elements/NotFound'
 import { auth } from '@/functions/libs/next-auth/auth'
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const article = await getArticleById(params.id)
+  const article = await getArticleById({ id: params.id })
   const session = await auth()
 
   const userId = session?.user?.id ?? ''

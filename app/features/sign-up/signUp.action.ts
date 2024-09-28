@@ -18,7 +18,9 @@ export const signUp = async ({ data }: Props): Promise<Return> => {
       return actionResult.end(validatedFields.error.message)
     }
 
-    const existingUser = await getUserByEmail(validatedFields.data.email)
+    const existingUser = await getUserByEmail({
+      email: validatedFields.data.email,
+    })
 
     if (existingUser) {
       return actionResult.end('このメールアドレスは既に登録されています')

@@ -8,8 +8,7 @@ export const getCategories = async () => {
     return null
   }
 }
-
-export const getCategoryByName = async (name: string) => {
+export const getCategoryByName = async ({ name }: { name: string }) => {
   try {
     const category = await prisma.category.findFirst({ where: { name } })
     return category
@@ -17,8 +16,7 @@ export const getCategoryByName = async (name: string) => {
     throw new Error('Failed to get category')
   }
 }
-
-export const createCategory = async (name: string) => {
+export const createCategory = async ({ name }: { name: string }) => {
   try {
     const category = await prisma.category.create({ data: { name } })
     return category

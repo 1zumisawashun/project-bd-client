@@ -24,9 +24,9 @@ export const editArticle = async ({ data, id }: Props): Promise<Return> => {
     }
 
     const promises = data.categories.map(async ({ name }) => {
-      const category = await getCategoryByName(name)
+      const category = await getCategoryByName({ name })
       if (!category) {
-        const response = await createCategory(name)
+        const response = await createCategory({ name })
         return { id: response.id }
       }
       return { id: category.id }
@@ -40,7 +40,7 @@ export const editArticle = async ({ data, id }: Props): Promise<Return> => {
       categories: { connect: categoryIds },
     }
 
-    const response = await updateArticle(id, params)
+    const response = await updateArticle({ id, data: params })
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)

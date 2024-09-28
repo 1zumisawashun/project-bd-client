@@ -30,7 +30,9 @@ export const updateEmail = async ({
       return actionResult.end(validatedFields.error.message)
     }
 
-    const existingUser = await getUserByEmail(validatedFields.data.email)
+    const existingUser = await getUserByEmail({
+      email: validatedFields.data.email,
+    })
 
     if (existingUser) {
       actionResult.end('このメールアドレスは既に登録されています')

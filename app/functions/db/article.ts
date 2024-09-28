@@ -11,7 +11,7 @@ export const getArticles = async () => {
     return null
   }
 }
-export const getArticleById = async (id: string) => {
+export const getArticleById = async ({ id }: { id: string }) => {
   try {
     const article = await prisma.article.findUnique({
       where: { id },
@@ -22,7 +22,11 @@ export const getArticleById = async (id: string) => {
     return null
   }
 }
-export const createArticle = async (data: Prisma.ArticleCreateInput) => {
+export const createArticle = async ({
+  data,
+}: {
+  data: Prisma.ArticleCreateInput
+}) => {
   try {
     const article = await prisma.article.create({ data })
     return article
@@ -30,7 +34,7 @@ export const createArticle = async (data: Prisma.ArticleCreateInput) => {
     throw new Error('Failed to create article')
   }
 }
-export const deleteArticle = async (id: string) => {
+export const deleteArticle = async ({ id }: { id: string }) => {
   try {
     const article = await prisma.article.delete({ where: { id } })
     return article
@@ -38,10 +42,13 @@ export const deleteArticle = async (id: string) => {
     throw new Error('Failed to delete article')
   }
 }
-export const updateArticle = async (
-  id: string,
-  data: Prisma.ArticleUpdateInput,
-) => {
+export const updateArticle = async ({
+  id,
+  data,
+}: {
+  id: string
+  data: Prisma.ArticleUpdateInput
+}) => {
   try {
     const article = await prisma.article.update({ where: { id }, data })
     return article

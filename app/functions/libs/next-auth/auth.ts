@@ -25,7 +25,7 @@ const providers = [
       if (validatedFields.success) {
         const { email, password } = validatedFields.data
 
-        const user = await getUserByEmail(email)
+        const user = await getUserByEmail({ email })
         if (!user?.hashedPassword) return null
 
         const passwordsMatch = await isPasswordValid(

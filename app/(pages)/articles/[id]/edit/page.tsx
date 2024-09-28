@@ -8,7 +8,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const categoryOptions = categories?.map((category) => category.name) ?? []
 
-  const article = await getArticleById(params.id)
+  const article = await getArticleById({ id: params.id })
 
   const defaultValues = {
     title: article?.title ?? '',

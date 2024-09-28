@@ -22,7 +22,7 @@ export const deleteArticle = async ({
       actionResult.end('ログインしてください')
     }
 
-    const response = await _deleteArticle(id)
+    const response = await _deleteArticle({ id })
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
@@ -44,7 +44,7 @@ export const likeArticle = async ({
     }
 
     const params = { likedUsers: { connect: { id: userId } } }
-    const response = await updateArticle(articleId, params)
+    const response = await updateArticle({ id: articleId, data: params })
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
@@ -66,7 +66,7 @@ export const dislikeArticle = async ({
     }
 
     const params = { likedUsers: { disconnect: { id: userId } } }
-    const response = await updateArticle(articleId, params)
+    const response = await updateArticle({ id: articleId, data: params })
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
@@ -82,7 +82,7 @@ export const draftArticle = async ({ id }: { id: string }): Promise<Return> => {
     }
 
     const params = { status: 'DRAFT' }
-    const response = await updateArticle(id, params)
+    const response = await updateArticle({ id, data: params })
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
@@ -102,7 +102,7 @@ export const publishArticle = async ({
     }
 
     const params = { status: 'PUBLISHED' }
-    const response = await updateArticle(id, params)
+    const response = await updateArticle({ id, data: params })
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)

@@ -6,8 +6,8 @@ export default async function Page() {
   const session = await auth()
   if (!session?.user.id) return null
 
-  const user = await getUserById(session.user.id)
-  if(!user) return null
+  const user = await getUserById({ id: session.user.id })
+  if (!user) return null
 
   return <MyPage user={user} />
 }

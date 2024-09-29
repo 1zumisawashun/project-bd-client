@@ -1,4 +1,6 @@
 /* eslint-disable no-promise-executor-return */
+import { z } from 'zod'
+
 export const delay = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -25,4 +27,16 @@ export const actionResult = {
       error: { message: (error as Error)?.message ?? '失敗しました' },
     }
   },
+}
+
+/** @see https://x.com/sujjeeee/status/1837412263432511929?s=12&t=0Bs_ltBYiO3nhiiL9YZAEw */
+export const getErrorMessage = (error: unknown) => {
+  if (error instanceof z.ZodError) {
+    const errors = error.issues.map((i) => i.message)
+    return errors.join('\n')
+  }
+  if (error instanceof Error) {
+    return error.message
+  }
+  return 'Something went wrong. Please try again later.'
 }

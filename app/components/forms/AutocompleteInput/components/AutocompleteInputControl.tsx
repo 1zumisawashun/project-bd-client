@@ -1,6 +1,6 @@
-import { ElementRef, useRef, ComponentProps, forwardRef } from 'react'
+/* eslint-disable react/no-array-index-key */
+import { ElementRef, ComponentProps, forwardRef } from 'react'
 import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
-import { useOuterClick } from '@/functions/hooks/useOuterClick'
 import { TextInput } from '../../TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
@@ -10,30 +10,11 @@ type Props = {
   options: string[]
 } & Omit<ComponentProps<typeof TextInput>, 'onChange'>
 export const AutocompleteInputControl = forwardRef<Ref, Props>((props, ref) => {
-  const {
-    menu,
-    suggestions,
-    onChange,
-    onClick,
-    onKeyDown,
-    onFocus,
-    onCompositionStart,
-    onCompositionEnd,
-  } = useAutocompleteInput({ options: props.options, value: props.value })
-
-  const referenceRef = useRef<ElementRef<'div'>>(null)
-
-  useOuterClick([referenceRef], () => {
-    menu.close()
-  })
+  const { menu, suggestions, onChange, onClick, onKeyDown, onFocus } =
+    useAutocompleteInput({ options: props.options, value: props.value })
 
   return (
-    <Menu
-      isOpen={menu.isOpen}
-      open={menu.open}
-      close={menu.close}
-      ref={referenceRef}
-    >
+    <Menu isOpen={menu.isOpen} open={menu.open} close={menu.close}>
       <TextInput
         type="text"
         autoComplete="off"
@@ -44,19 +25,16 @@ export const AutocompleteInputControl = forwardRef<Ref, Props>((props, ref) => {
           props.onChange(value)
         }}
         onKeyDown={(e) => {
-          onKeyDown(e, (value) => {
-            props.onChange(value)
-          })
+          // NOTE: submitされるのでブロックする
+          onKeyDown(e, () => {})
         }}
         onFocus={onFocus}
-        onCompositionStart={onCompositionStart}
-        onCompositionEnd={onCompositionEnd}
         ref={ref}
       />
       <MenuContent>
-        {suggestions.map((d) => (
+        {suggestions.map((d, index) => (
           <MenuItem
-            key={d}
+            key={index}
             onClick={() => {
               onClick()
               props.onChange(d)

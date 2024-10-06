@@ -1,6 +1,6 @@
+/* eslint-disable react/no-array-index-key */
 import { ElementRef, useRef, ComponentProps, forwardRef } from 'react'
 import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
-import { useOuterClick } from '@/functions/hooks/useOuterClick'
 import { useMergeRef } from '@/functions/hooks/useMergeRef'
 import { TextInput } from '../../TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
@@ -22,7 +22,6 @@ export const AutocompleteInputGroup = forwardRef<Ref, Props>((props, ref) => {
     onCompositionEnd,
   } = useAutocompleteInput({ options: props.options, value: props.value })
 
-  const referenceRef = useRef<ElementRef<'div'>>(null)
   const inputRef = useRef<Ref>(null!)
 
   const mergeRef = useMergeRef(inputRef, ref)
@@ -31,17 +30,8 @@ export const AutocompleteInputGroup = forwardRef<Ref, Props>((props, ref) => {
     inputRef.current.value = value
   }
 
-  useOuterClick([referenceRef], () => {
-    menu.close()
-  })
-
   return (
-    <Menu
-      isOpen={menu.isOpen}
-      open={menu.open}
-      close={menu.close}
-      ref={referenceRef}
-    >
+    <Menu isOpen={menu.isOpen} open={menu.open} close={menu.close}>
       <TextInput
         type="text"
         autoComplete="off"
@@ -58,9 +48,9 @@ export const AutocompleteInputGroup = forwardRef<Ref, Props>((props, ref) => {
         ref={mergeRef}
       />
       <MenuContent>
-        {suggestions.map((d) => (
+        {suggestions.map((d, index) => (
           <MenuItem
-            key={d}
+            key={index}
             onClick={() => {
               onClick()
               props.onChange(d)

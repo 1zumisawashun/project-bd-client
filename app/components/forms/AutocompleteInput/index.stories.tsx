@@ -14,6 +14,7 @@ import {
   AutocompleteInputGroup,
   AutocompleteInputControl,
   AutocompleteInput,
+  AutocompleteInputUnControl,
 } from '.'
 import { options } from '../forms.constant'
 
@@ -27,10 +28,10 @@ type Story = StoryObj<typeof meta>
 
 /**
  * ================================================
- * AutocompleteInputSingleUnControl
+ * AutocompleteInputDefault
  * ================================================
  */
-const SingleUnControl: React.FC = () => {
+const DefaultRender: React.FC = () => {
   const schema = z.object({
     category: z.string(),
   })
@@ -63,20 +64,69 @@ const SingleUnControl: React.FC = () => {
   )
 }
 
-export const AutocompleteInputSingleUnControl: Story = {
+export const Default: Story = {
   args: {
     onChange: () => {},
     options: [],
   },
-  render: () => <SingleUnControl />,
+  render: () => <DefaultRender />,
 }
 
 /**
  * ================================================
- * AutocompleteInputSingleControl
+ * AutocompleteInputUnControl
  * ================================================
  */
-const SingleControl: React.FC = () => {
+const UnControlRender: React.FC = () => {
+  const schema = z.object({
+    category: z.string(),
+  })
+
+  type Schema = z.infer<typeof schema>
+
+  const {
+    control,
+    register,
+    formState: { errors },
+  } = useForm<Schema>({
+    mode: 'onTouched',
+    resolver: zodResolver(schema),
+    defaultValues: {
+      category: '',
+    },
+  })
+
+  const preview = useWatch({ control, name: 'category' }) ?? '-----'
+
+  return (
+    <Form>
+      <p>Preview: {preview}</p>
+      <FormField name="category" serverInvalid={!!errors.category}>
+        <FormLabel>Content</FormLabel>
+        <AutocompleteInputUnControl
+          options={options}
+          {...register('category')}
+        />
+        <FormErrorMessage>{errors.category?.message}</FormErrorMessage>
+      </FormField>
+    </Form>
+  )
+}
+
+export const UnControl: Story = {
+  args: {
+    onChange: () => {},
+    options: [],
+  },
+  render: () => <UnControlRender />,
+}
+
+/**
+ * ================================================
+ * AutocompleteInputControl
+ * ================================================
+ */
+const ControlRender: React.FC = () => {
   const schema = z.object({
     category: z.string(),
   })
@@ -118,12 +168,12 @@ const SingleControl: React.FC = () => {
   )
 }
 
-export const AutocompleteInputSingleControl: Story = {
+export const Control: Story = {
   args: {
     onChange: () => {},
     options: [],
   },
-  render: () => <SingleControl />,
+  render: () => <ControlRender />,
 }
 
 /**
@@ -131,7 +181,7 @@ export const AutocompleteInputSingleControl: Story = {
  * AutocompleteInputMultiple
  * ================================================
  */
-const Multiple: React.FC = () => {
+const MultipleRender: React.FC = () => {
   const schema = z.object({
     categories: z
       .object({ name: z.string() })
@@ -181,10 +231,10 @@ const Multiple: React.FC = () => {
   )
 }
 
-export const AutocompleteInputMultiple: Story = {
+export const Multiple: Story = {
   args: {
     onChange: () => {},
     options: [],
   },
-  render: () => <Multiple />,
+  render: () => <MultipleRender />,
 }

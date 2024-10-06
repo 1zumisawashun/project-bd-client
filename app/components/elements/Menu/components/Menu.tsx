@@ -1,6 +1,11 @@
 'use client'
 
-import { createContext } from 'react'
+import {
+  createContext,
+  forwardRef,
+  ElementRef,
+  ComponentPropsWithoutRef,
+} from 'react'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import styles from '../index.module.scss'
 
@@ -14,18 +19,17 @@ export const MenuContext = createContext<MenuContextParams | undefined>(
 )
 
 const MenuProvider = MenuContext.Provider
-type MenuProps = {
-  children: React.ReactNode
-} & MenuContextParams
-export const Menu: React.FC<MenuProps> = ({
-  children,
-  isOpen,
-  open,
-  close,
-}) => {
-  return (
-    <MenuProvider value={{ isOpen, open, close }}>
-      <div className={styles[`${BLOCK_NAME}`]}>{children}</div>
-    </MenuProvider>
-  )
-}
+type Props = MenuContextParams & ComponentPropsWithoutRef<'div'>
+type Ref = ElementRef<'div'>
+
+export const Menu = forwardRef<Ref, Props>(
+  ({ isOpen, open, close, ...rest }, ref) => {
+    return (
+      <MenuProvider value={{ isOpen, open, close }}>
+        <div className={styles[`${BLOCK_NAME}`]} {...rest} ref={ref} />
+      </MenuProvider>
+    )
+  },
+)
+
+Menu.displayName = 'Menu'

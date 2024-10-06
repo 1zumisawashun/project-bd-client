@@ -1,38 +1,45 @@
 import { useState, ChangeEvent, ElementRef, KeyboardEvent } from 'react'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 
+type Props = {
+  options: string[]
+  value: string | number | readonly string[] | undefined
+}
 type Ref = ElementRef<'input'>
-export const useAutocompleteInput = ({ rows }: { rows: string[] }) => {
+export const useAutocompleteInput = (props: Props) => {
   const menu = useDisclosure()
 
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [isPending, setIsPending] = useState<boolean>(false)
+  const [isFirstFocus, setIsFirstFocus] = useState<boolean>(true)
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
 
+    setSuggestions(props.options.filter((d) => d.startsWith(value)))
+
     if (value.length > 0) {
-      setSuggestions(rows.filter((d) => d.startsWith(value)))
       menu.open()
     } else {
-      setSuggestions(rows.filter((d) => d.startsWith(value)))
       menu.close()
     }
-
-    return value
   }
 
   const onFocus = () => {
-    setSuggestions(rows)
+    if (isFirstFocus) {
+      setIsFirstFocus(false)
+      setSuggestions(props.options)
+    }
     menu.open()
   }
 
-  const handleClick = (value: string) => {
-    setSuggestions(rows.filter((d) => d.startsWith(value)))
-    return value
+  const onClick = () => {
+    setSuggestions([])
+    menu.close()
   }
 
-  const handleKeydown = (e: KeyboardEvent<Ref>) => {
+  // カリー化でeを隠蔽してもいいかも
+  const onKeyDown = (e: KeyboardEvent<Ref>, cb: (value: string) => void) => {
     if (!isPending && e.key === 'Enter') {
       e.preventDefault()
       const { value } = e.target as Ref
@@ -40,13 +47,11 @@ export const useAutocompleteInput = ({ rows }: { rows: string[] }) => {
       // 未入力の場合はメニューを閉じる
       if (!value) {
         menu.close()
-        return null
+        return
       }
-
-      setSuggestions(rows.filter((d) => d.startsWith(value)))
-      return value
+      setSuggestions(props.options.filter((d) => d.startsWith(value)))
+      cb(value)
     }
-    return null
   }
 
   const onCompositionStart = () => {
@@ -58,10 +63,10 @@ export const useAutocompleteInput = ({ rows }: { rows: string[] }) => {
 
   return {
     menu,
-    suggestions,
-    handleChange,
-    handleClick,
-    handleKeydown,
+    suggestions: suggestions.filter((d) => d !== props.value),
+    onChange,
+    onClick,
+    onKeyDown,
     onFocus,
     onCompositionStart,
     onCompositionEnd,

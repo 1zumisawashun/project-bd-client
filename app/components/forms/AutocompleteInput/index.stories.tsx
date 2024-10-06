@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { useForm, useFieldArray, Controller } from 'react-hook-form'
+import { useForm, useFieldArray, Controller, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import {
@@ -10,18 +10,27 @@ import {
 } from '@/components/forms/Form'
 import { Label, LabelAction } from '@/components/elements/Label'
 import { HStack } from '@/components/layouts/HStack'
-import { AutocompleteInputGroup, AutocompleteInput } from '.'
+import {
+  AutocompleteInputGroup,
+  AutocompleteInputControl,
+  AutocompleteInput,
+} from '.'
 import { options } from '../forms.constant'
 
 const meta = {
   title: 'form/AutocompleteInput',
-  component: AutocompleteInput,
-} satisfies Meta<typeof AutocompleteInput>
+  component: AutocompleteInputControl,
+} satisfies Meta<typeof AutocompleteInputControl>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-const Single: React.FC = () => {
+/**
+ * ================================================
+ * AutocompleteInputSingleUnControl
+ * ================================================
+ */
+const SingleUnControl: React.FC = () => {
   const schema = z.object({
     category: z.string(),
   })
@@ -30,28 +39,75 @@ const Single: React.FC = () => {
 
   const {
     control,
-    watch,
+    register,
     formState: { errors },
   } = useForm<Schema>({
     mode: 'onTouched',
     resolver: zodResolver(schema),
     defaultValues: {
-      category: 'JavaScript',
+      category: '',
     },
   })
 
+  const preview = useWatch({ control, name: 'category' }) ?? '-----'
+
   return (
     <Form>
-      <p>Preview: {watch('category') ? watch('category') : '-----'}</p>
+      <p>Preview: {preview}</p>
+      <FormField name="category" serverInvalid={!!errors.category}>
+        <FormLabel>Content</FormLabel>
+        <AutocompleteInput options={options} {...register('category')} />
+        <FormErrorMessage>{errors.category?.message}</FormErrorMessage>
+      </FormField>
+    </Form>
+  )
+}
+
+export const AutocompleteInputSingleUnControl: Story = {
+  args: {
+    onChange: () => {},
+    options: [],
+  },
+  render: () => <SingleUnControl />,
+}
+
+/**
+ * ================================================
+ * AutocompleteInputSingleControl
+ * ================================================
+ */
+const SingleControl: React.FC = () => {
+  const schema = z.object({
+    category: z.string(),
+  })
+
+  type Schema = z.infer<typeof schema>
+
+  const {
+    control,
+    formState: { errors },
+  } = useForm<Schema>({
+    mode: 'onTouched',
+    resolver: zodResolver(schema),
+    defaultValues: {
+      category: '',
+    },
+  })
+
+  const preview = useWatch({ control, name: 'category' }) ?? '-----'
+
+  return (
+    <Form>
+      <p>Preview: {preview}</p>
       <FormField name="category" serverInvalid={!!errors.category}>
         <FormLabel>Content</FormLabel>
         <Controller
           control={control}
           name="category"
           render={({ field: { onChange, ...rest } }) => (
-            <AutocompleteInput
+            <AutocompleteInputControl
               onChange={onChange}
-              rows={options}
+              options={options}
               {...rest}
             />
           )}
@@ -62,14 +118,19 @@ const Single: React.FC = () => {
   )
 }
 
-export const AutocompleteInputSingle: Story = {
+export const AutocompleteInputSingleControl: Story = {
   args: {
     onChange: () => {},
-    rows: [],
+    options: [],
   },
-  render: () => <Single />,
+  render: () => <SingleControl />,
 }
 
+/**
+ * ================================================
+ * AutocompleteInputMultiple
+ * ================================================
+ */
 const Multiple: React.FC = () => {
   const schema = z.object({
     categories: z
@@ -97,7 +158,6 @@ const Multiple: React.FC = () => {
   })
 
   const names = fields.map((d) => d.name)
-  const rows = options.filter((d) => !names.includes(d))
 
   return (
     <Form>
@@ -105,7 +165,7 @@ const Multiple: React.FC = () => {
         <FormLabel>カテゴリー</FormLabel>
         <AutocompleteInputGroup
           onChange={(value) => append({ name: value })}
-          rows={rows}
+          options={options.filter((d) => !names.includes(d))}
         />
         <HStack gap={2} style={{ margin: '0.5rem', flexWrap: 'wrap' }}>
           {fields?.map((d, index) => (
@@ -124,7 +184,7 @@ const Multiple: React.FC = () => {
 export const AutocompleteInputMultiple: Story = {
   args: {
     onChange: () => {},
-    rows: [],
+    options: [],
   },
   render: () => <Multiple />,
 }

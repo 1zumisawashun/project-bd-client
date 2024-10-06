@@ -1,20 +1,15 @@
-/* eslint-disable react/no-array-index-key */
-import {
-  ElementRef,
-  useRef,
-  ComponentProps,
-  forwardRef,
-  ChangeEvent,
-} from 'react'
+import { ElementRef, useRef, ComponentProps, forwardRef } from 'react'
 import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
 import { useOuterClick } from '@/functions/hooks/useOuterClick'
-import { useMergeRef } from '@/functions/hooks/useMergeRef'
 import { TextInput } from '../../TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
 type Ref = ElementRef<'input'>
-type Props = { options: string[] } & ComponentProps<typeof TextInput>
-export const AutocompleteInput = forwardRef<Ref, Props>((props, ref) => {
+type Props = {
+  onChange: (value?: string) => void // react-hook-form's onChange
+  options: string[]
+} & Omit<ComponentProps<typeof TextInput>, 'onChange'>
+export const AutocompleteInputControl = forwardRef<Ref, Props>((props, ref) => {
   const {
     menu,
     suggestions,
@@ -27,13 +22,6 @@ export const AutocompleteInput = forwardRef<Ref, Props>((props, ref) => {
   } = useAutocompleteInput({ options: props.options, value: props.value })
 
   const referenceRef = useRef<ElementRef<'div'>>(null)
-  const inputRef = useRef<Ref>(null!)
-
-  const mergeRef = useMergeRef(inputRef, ref)
-
-  const updateInputRef = (value: string) => {
-    inputRef.current.value = value
-  }
 
   useOuterClick([referenceRef], () => {
     menu.close()
@@ -51,34 +39,27 @@ export const AutocompleteInput = forwardRef<Ref, Props>((props, ref) => {
         autoComplete="off"
         {...props}
         onChange={(e) => {
+          const { value } = e.target
           onChange(e)
-          props.onChange?.(e)
+          props.onChange(value)
         }}
         onKeyDown={(e) => {
           onKeyDown(e, (value) => {
-            const event = {
-              target: { value, name: props.name },
-            } as ChangeEvent<HTMLInputElement>
-            props.onChange?.(event)
+            props.onChange(value)
           })
         }}
         onFocus={onFocus}
         onCompositionStart={onCompositionStart}
         onCompositionEnd={onCompositionEnd}
-        ref={mergeRef}
+        ref={ref}
       />
-
       <MenuContent>
-        {suggestions.map((d, index) => (
+        {suggestions.map((d) => (
           <MenuItem
-            key={index}
+            key={d}
             onClick={() => {
               onClick()
-              const e = {
-                target: { value: d, name: props.name },
-              } as ChangeEvent<HTMLInputElement>
-              props.onChange?.(e)
-              updateInputRef(d)
+              props.onChange(d)
             }}
           >
             {d}
@@ -89,4 +70,4 @@ export const AutocompleteInput = forwardRef<Ref, Props>((props, ref) => {
   )
 })
 
-AutocompleteInput.displayName = 'AutocompleteInput'
+AutocompleteInputControl.displayName = 'AutocompleteInputControl'

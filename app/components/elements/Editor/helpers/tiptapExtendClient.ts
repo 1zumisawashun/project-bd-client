@@ -10,10 +10,12 @@ import TiptapCharacterCount from '@tiptap/extension-character-count'
 // NOTE:https://tiptap.dev/api/nodes/image
 // NOTE:https://codesandbox.io/s/tiptap-image-forked-bvchsz?file=/src/Editor.jsx:409-416
 export const Image = TiptapImage.extend({
-  defaultOptions: {
-    ...TiptapImage.options,
-    sizes: ['inline', 'block', 'left', 'right'],
-    allowBase64: true,
+  addOptions() {
+    return {
+      ...TiptapImage.options,
+      sizes: ['inline', 'block', 'left', 'right'],
+      allowBase64: true,
+    }
   },
   // NOTE:components/Component.tsx見るといいかも
   renderHTML({ HTMLAttributes }) {

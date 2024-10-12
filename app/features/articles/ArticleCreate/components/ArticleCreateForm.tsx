@@ -30,7 +30,7 @@ export const ArticleCreateForm: React.FC<Props> = ({ categoryOptions }) => {
   })
 
   const names = fields.map((d) => d.name)
-  const rows = categoryOptions.filter((d) => !names.includes(d))
+  const options = categoryOptions.filter((d) => !names.includes(d))
 
   return (
     <Form>
@@ -44,7 +44,7 @@ export const ArticleCreateForm: React.FC<Props> = ({ categoryOptions }) => {
         <FormLabel>カテゴリー</FormLabel>
         <AutocompleteInputGroup
           onChange={(value) => append({ name: value })}
-          rows={rows}
+          options={options}
         />
         {fields?.length > 0 && (
           <HStack gap={2} style={{ flexWrap: 'wrap' }}>

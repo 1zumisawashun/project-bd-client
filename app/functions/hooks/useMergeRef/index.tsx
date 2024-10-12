@@ -1,14 +1,12 @@
-import { useMemo, MutableRefObject, ForwardedRef } from 'react'
+import { useMemo, ForwardedRef } from 'react'
 
 /**
  * 骨子として以下の記事を参考にしている
  * @see https://zenn.dev/remon/articles/28af13312d55e5
+ * @see https://stackoverflow.com/questions/62238716/using-ref-current-in-react-forwardref
  */
 
-export function assignRef<T = HTMLDivElement>(
-  ref: MutableRefObject<T> | ((instance: T) => void) | null | undefined,
-  node: T,
-) {
+function assignRef<T = HTMLElement>(ref: ForwardedRef<T>, node: T) {
   if (!node) return
   // NOTE: 親コンポーネントからのrefがある場合は、それも適用する
   if (typeof ref === 'function') {
@@ -19,9 +17,7 @@ export function assignRef<T = HTMLDivElement>(
   }
 }
 
-export function useMergeRef<T>(
-  ...refs: (MutableRefObject<T> | ForwardedRef<T> | null | undefined)[]
-) {
+export function useMergeRef<T>(...refs: ForwardedRef<T>[]) {
   return useMemo(() => {
     if (refs.every((ref) => ref == null)) {
       return null

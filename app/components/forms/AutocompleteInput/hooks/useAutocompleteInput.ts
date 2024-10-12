@@ -45,12 +45,12 @@ export const useAutocompleteInput = (props: Props) => {
       const { value } = e.target as Ref
 
       // 未入力の場合はメニューを閉じる
-      if (!value) {
-        menu.close()
-        return
-      }
+      if (!value) return
+
       setSuggestions(props.options.filter((d) => d.startsWith(value)))
       cb(value)
+
+      menu.close()
     }
   }
 

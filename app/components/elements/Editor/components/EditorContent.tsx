@@ -16,7 +16,6 @@ export const EditorContent = forwardRef<Ref, Props>(
       {...props}
       ref={ref}
       className={clsx(styles[`${BLOCK_NAME}-content`], className)}
-      readOnly={false}
     />
   ),
 )

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: `Project BD | ${title}`,
 }
 export default function Page() {
-  redirect("/articles")
+  redirect('/articles')
   // return (
   //   <SiteWrapper>
   //     <TopPage />

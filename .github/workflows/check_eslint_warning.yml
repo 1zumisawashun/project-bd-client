@@ -1,0 +1,51 @@
+name: check-eslint-warning
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: setup Node.js
+        uses: actions/setup-node@v3
+      - name: npm ci
+        run: npm ci
+      - name: npm run lint:js
+        id: lint
+        run: |
+          result=$(npm run lint:js)
+          echo "result<<EOF" >> $GITHUB_OUTPUT
+          echo "$result" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      - name: echo result
+        run: |
+          echo "${{ steps.lint.outputs.result }}"
+      - name: Post to a Slack channel
+        id: slack
+        if: steps.lint.outputs.result != '0'
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          channel-id: 'C07UDB7HK3Q'
+          payload: |
+            {
+              "text": "lintでWarningが出ています。修正をお願いします！\n${{ github.event.pull_request.html_url }}"
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      - name: Post to a Slack channel thread
+        if: steps.lint.outputs.result != '0'
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          channel-id: 'C07UDB7HK3Q'
+          # https://github.com/slackapi/slack-github-action/issues/116
+          payload: |
+            {
+              "thread_ts": "${{ steps.slack.outputs.ts }}", 
+              "text": ${{ toJSON(steps.lint.outputs.result) }}
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

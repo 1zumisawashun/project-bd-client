@@ -48,8 +48,11 @@ jobs:
           channel-id: 'C07UDB7HK3Q'
           payload: |
             {
-              "thread_ts": "${{ steps.slack.outputs.ts }}",
-              "text": "${{ steps.lint.outputs.result }}"
+              "thread_ts": "${{ steps.slack.outputs.ts }}", 
+              "text": ${{ toJSON(steps.lint.outputs.resulte) }}
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+          # ${{ steps.lint.outputs.result }}だとJSON判定になるのか？
+          # https://github.com/slackapi/slack-github-action/issues/116

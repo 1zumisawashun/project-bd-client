@@ -20,7 +20,7 @@ jobs:
           echo "$result" | tr '　' '\n'
       - name: debug lint
         run: |
-          echo ${{ steps.lint.outputs.result }} | tr '　' '\n'
+          echo "${{ steps.lint.outputs.result }}" | tr '　' '\n'
       - name: check lint
         if: contains(steps.lint.outputs.result, 'Warning')
         run: |

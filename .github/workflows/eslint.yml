@@ -21,7 +21,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
       - name: debug lint
         run: |
-          echo ${{ steps.lint.outputs.result }}
+          echo "${{ steps.lint.outputs.result }}"
       - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.27.0

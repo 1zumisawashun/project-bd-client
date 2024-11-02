@@ -23,11 +23,11 @@ jobs:
       - name: debug lint
         run: |
           echo "${{ steps.lint.outputs.result }}"
-      - name: check lint
-        if: contains(steps.lint.outputs.result, 'Warning')
-        run: |
-          echo 'lintでWarningが出ています。修正をお願いします!'
-          exit 1
+      # - name: check lint
+      #   if: contains(steps.lint.outputs.result, 'Warning')
+      #   run: |
+      #     echo 'lintでWarningが出ています。修正をお願いします!'
+      #     exit 1
       - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.27.0

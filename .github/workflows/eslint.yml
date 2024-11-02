@@ -15,9 +15,11 @@ jobs:
       - name: npm run lint:js
         id: lint
         run: |
-          result=$( npm run lint:js | tr '\n' '　')
-          echo "result=$result" >> $GITHUB_OUTPUT
-          echo "$result" | tr '　' '\n'
+          result=$(npm run lint --no-color | tr '\n' ' ')
+          echo "result<<EOF" >> $GITHUB_OUTPUT
+          echo "$result" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "$result" | tr ' ' '\n'
       - name: debug lint
         run: |
           echo "${{ steps.lint.outputs.result }}" | tr '　' '\n'

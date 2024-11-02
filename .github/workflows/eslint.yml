@@ -1,4 +1,4 @@
-name: pr-test
+name: check-eslint-warning
 
 on:
   pull_request:
@@ -8,8 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: setup Node.js
+        uses: actions/setup-node@v3
       - name: npm ci
         run: npm ci
       - name: npm run lint:js
@@ -19,7 +21,7 @@ jobs:
           echo "result<<EOF" >> $GITHUB_OUTPUT
           echo "$result" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-      - name: debug lint
+      - name: echo result
         run: |
           echo "${{ steps.lint.outputs.result }}"
       - name: Post to a Slack channel
@@ -29,23 +31,15 @@ jobs:
           channel-id: 'C07UDB7HK3Q'
           payload: |
             {
-              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                  }
-                }
-              ]
+              "text": "lintでWarningが出ています。修正をお願いします！\n${{ github.event.pull_request.html_url }}",
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      - name: Post to a Slack channel
+      - name: Post to a Slack channel thread
         uses: slackapi/slack-github-action@v1.27.0
         with:
           channel-id: 'C07UDB7HK3Q'
+          # https://github.com/slackapi/slack-github-action/issues/116
           payload: |
             {
               "thread_ts": "${{ steps.slack.outputs.ts }}", 
@@ -53,6 +47,3 @@ jobs:
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-
-          # ${{ steps.lint.outputs.result }}だとJSON判定になるのか？
-          # https://github.com/slackapi/slack-github-action/issues/116

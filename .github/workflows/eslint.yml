@@ -15,7 +15,7 @@ jobs:
       - name: npm run lint:js
         id: lint
         run: |
-          result=$(npm run lint | tr '\n' '　')
+          result=$( npm run lint:js | tr '\n' '　')
           echo "result=$result" >> $GITHUB_OUTPUT
           echo "$result" | tr '　' '\n'
       - name: check lint

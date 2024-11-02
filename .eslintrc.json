@@ -12,7 +12,7 @@
   "plugins": ["custom-rules"],
   "rules": {
     // eslint-config-airbnb（eslint)
-    "no-console": "off",
+    "no-console": "warn",
     "no-alert": "off",
     "arrow-body-style": "off",
     // eslint-config-airbnb（eslint-plugin-import)

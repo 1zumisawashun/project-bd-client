@@ -18,6 +18,9 @@ jobs:
           result=$( npm run lint:js | tr '\n' '　')
           echo "result=$result" >> $GITHUB_OUTPUT
           echo "$result" | tr '　' '\n'
+      - name: debug lint
+        run: |
+          echo {{ steps.lint.outputs.result }}
       - name: check lint
         if: contains(steps.lint.outputs.result, 'Warning')
         run: |

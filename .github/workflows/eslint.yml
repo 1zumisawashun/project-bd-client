@@ -15,12 +15,12 @@ jobs:
       - name: npm run lint:js
         id: lint
         run: |
-          result=$(npm run lint:js)
+          result=$( npm run lint:js | tr '\n' '　')
           echo "result=$result" >> $GITHUB_OUTPUT
           echo "$result" | tr '　' '\n'
       - name: debug lint
         run: |
-          echo ${{ steps.lint.outputs.result }}
+          echo ${{ steps.lint.outputs.result }} | tr '　' '\n'
       - name: check lint
         if: contains(steps.lint.outputs.result, 'Warning')
         run: |

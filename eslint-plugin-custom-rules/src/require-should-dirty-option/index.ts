@@ -1,12 +1,12 @@
-import { ESLintUtils, TSESTree, AST_NODE_TYPES } from '@typescript-eslint/utils'
-import * as path from 'path'
+import { TSESTree, AST_NODE_TYPES } from '@typescript-eslint/utils'
 
-/** @see https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/src/utils.ts */
-const createRule = ESLintUtils.RuleCreator((name) => {
-  // const dirname = path.relative(__dirname, path.dirname(name))
-  const basename = path.basename(name, path.extname(name))
-  return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${basename}/index.md`
-})
+import {
+  createRule,
+  isUseForm,
+  isUseFormContext,
+  reportCallExpression,
+  reportObjectExpression,
+} from './utils'
 
 /** @see https://github.com/andykao1213/eslint-plugin-react-hook-form/blob/f210951a28db93ca456f877832bba479826d7e0b/lib/rules/no-nested-object-setvalue.js */
 export const rule = createRule({
@@ -36,90 +36,43 @@ export const rule = createRule({
     ],
   },
   create(context) {
-    const reportCallExpression = (
-      callExpression: TSESTree.CallExpression,
-    ): void => {
-      context.report({
-        node: callExpression,
-        messageId: 'requireShouldDirtyOption',
-      })
-    }
-
-    const reportObjectExpression = (
-      objectExpression: TSESTree.ObjectExpression,
-    ): void => {
-      const hasShouldDirty = objectExpression.properties.some((p) => {
-        if (
-          p.type === AST_NODE_TYPES.Property &&
-          p.key.type === AST_NODE_TYPES.Identifier
-        ) {
-          return p.key.name === 'shouldDirty'
-        }
-        return false
-      })
-
-      if (hasShouldDirty) return
-
-      const defaultOptions = objectExpression.properties.reduce<
-        Record<string, any>
-      >((acc, cur) => {
-        if (
-          cur.type === AST_NODE_TYPES.Property &&
-          cur.key.type === AST_NODE_TYPES.Identifier &&
-          cur.value.type === AST_NODE_TYPES.Literal
-        ) {
-          acc[cur.key.name] = cur.value.value
-        }
-        return acc
-      }, {})
-
-      const optionsWithShouldDirty = formatObjectToString({
-        ...defaultOptions,
-        shouldDirty: true,
-      })
-
-      context.report({
-        node: objectExpression,
-        messageId: 'requireShouldDirtyOption',
-        fix(fixer) {
-          return fixer.replaceText(
-            objectExpression,
-            `${optionsWithShouldDirty}`,
-          )
-        },
-      })
-    }
-
-    const formatObjectToString = (obj: {}): string => {
-      return JSON.stringify(obj, null, 2)
-        .replace(/"([^"]+)":/g, '$1:')
-        .replace(/"/g, '')
-        .trim()
-    }
-
-    const isUseForm = (node: TSESTree.VariableDeclarator): boolean => {
-      return (
-        node.type === AST_NODE_TYPES.VariableDeclarator &&
-        node.init?.type === AST_NODE_TYPES.CallExpression &&
-        node.init?.callee.type === AST_NODE_TYPES.Identifier &&
-        node.init?.callee.name === 'useForm'
-      )
-    }
-
-    const isUseFormContext = (node: TSESTree.VariableDeclarator): boolean => {
-      return (
-        node.type === AST_NODE_TYPES.VariableDeclarator &&
-        node.init?.type === AST_NODE_TYPES.CallExpression &&
-        node.init?.callee.type === AST_NODE_TYPES.Identifier &&
-        node.init?.callee.name === 'useFormContext'
-      )
-    }
-
     /** @see https://zenn.dev/cybozu_frontend/articles/ts-eslint-new-syntax */
     return {
-      VariableDeclarator: (node) => {
-        // NOTE: useFormかuseFormContextをサポートする
+      VariableDeclarator(node) {
+        // `methods`が`useForm`で初期化されているか確認
         if (isUseForm(node) || isUseFormContext(node)) {
+          // `methods`が`useForm`の呼び出し結果であることが確認できた
+          const methodsScope = context.sourceCode.getScope(node)
+          const methods = methodsScope.set.get('methods')
+
+          if (methods) {
+            // `methods`の参照を見つけた場合、次に進む
+            methods.references.forEach((reference) => {
+              // ここがCallExpressionではないのかー
+              if (
+                // parentはマジで可変なのかー
+                reference.identifier.parent.type ===
+                AST_NODE_TYPES.MemberExpression
+              ) {
+                // ここからsetValueのargementを拾う必要がある
+                const memberExpression = reference.identifier.parent
+                if (
+                  memberExpression.parent.type === AST_NODE_TYPES.CallExpression
+                ) {
+                  const callExpression = memberExpression.parent
+
+                  // referenceってことはmethodsから派生している場所が対象になるってことか
+                  const thirdArgument = callExpression.arguments.at(2)
+                  if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
+                    reportObjectExpression(context, thirdArgument)
+                  } else {
+                    reportCallExpression(context, callExpression)
+                  }
+                }
+              }
+            })
+          }
+
           // NOTE: const { setValue } = useForm(); or const { setValue } = useFormContext(); をサポートする
           const property = (() => {
             if (node.id.type === AST_NODE_TYPES.ObjectPattern) {
@@ -142,6 +95,7 @@ export const rule = createRule({
            * @see https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/#context.getscope()
            * @see https://eslint.org/docs/latest/extend/custom-rules#accessing-the-source-text
            */
+          // 結局この中には"setValue"が入っているのかー
           if (property?.value?.type !== AST_NODE_TYPES.Identifier) return
 
           const setValue = context.sourceCode
@@ -158,9 +112,9 @@ export const rule = createRule({
               const thirdArgument = callExpression.arguments.at(2)
 
               if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
-                reportObjectExpression(thirdArgument)
+                reportObjectExpression(context, thirdArgument)
               } else {
-                reportCallExpression(callExpression)
+                reportCallExpression(context, callExpression)
               }
             }
           })

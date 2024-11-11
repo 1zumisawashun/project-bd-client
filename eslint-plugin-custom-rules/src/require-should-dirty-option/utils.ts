@@ -10,12 +10,9 @@ export const createRule = ESLintUtils.RuleCreator((name) => {
 
 type Context = Parameters<ReturnType<typeof createRule>['create']>[number]
 
-export const reportCallExpression = (
-  context: Context,
-  callExpression: TSESTree.CallExpression,
-): void => {
+export const reportNode = (context: Context, node: TSESTree.Node): void => {
   context.report({
-    node: callExpression,
+    node,
     messageId: 'requireShouldDirtyOption',
   })
 }

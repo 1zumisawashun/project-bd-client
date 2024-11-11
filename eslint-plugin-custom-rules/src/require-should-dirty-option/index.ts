@@ -1,14 +1,29 @@
-import { TSESTree, AST_NODE_TYPES } from '@typescript-eslint/utils'
+import { AST_NODE_TYPES } from '@typescript-eslint/utils'
 
 import {
   createRule,
   isUseForm,
   isUseFormContext,
-  reportCallExpression,
   reportObjectExpression,
+  reportNode,
 } from './utils'
 
-/** @see https://github.com/andykao1213/eslint-plugin-react-hook-form/blob/f210951a28db93ca456f877832bba479826d7e0b/lib/rules/no-nested-object-setvalue.js */
+/**
+ * NOTE: setValueの引数の処理
+ * @see https://eslint.org/docs/latest/extend/custom-rules#scope-variables
+ */
+
+/**
+ * setValueのnodeを取得する。
+ * const nodeSource = sourceCode.getText(node); でも取得できそう
+ * @see https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/#context.getscope()
+ * @see https://eslint.org/docs/latest/extend/custom-rules#accessing-the-source-text
+ */
+
+/**
+ * @see https://github.com/andykao1213/eslint-plugin-react-hook-form/blob/f210951a28db93ca456f877832bba479826d7e0b/lib/rules/no-nested-object-setvalue.js
+ * @see https://zenn.dev/cybozu_frontend/articles/ts-eslint-new-syntax
+ */
 export const rule = createRule({
   name: 'require-should-dirty-option',
   defaultOptions: [],
@@ -36,44 +51,36 @@ export const rule = createRule({
     ],
   },
   create(context) {
-    /** @see https://zenn.dev/cybozu_frontend/articles/ts-eslint-new-syntax */
     return {
       VariableDeclarator(node) {
-        // `methods`が`useForm`で初期化されているか確認
+        // `useForm`または`useFormContext`で初期化されていた場合、次に進む
         if (isUseForm(node) || isUseFormContext(node)) {
-          // `methods`が`useForm`の呼び出し結果であることが確認できた
-          const methodsScope = context.sourceCode.getScope(node)
-          const methods = methodsScope.set.get('methods')
+          // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
+          if (node.id.type === AST_NODE_TYPES.Identifier) {
+            const methodsScope = context.sourceCode.getScope(node)
+            const methods = methodsScope.set.get(node.id.name)
+            // reportNode(context, node)
 
-          if (methods) {
-            // `methods`の参照を見つけた場合、次に進む
-            methods.references.forEach((reference) => {
-              // ここがCallExpressionではないのかー
+            // `methods`の参照を見つけた場合、次に進む ex) methods.setValue(), methods.getValues() etc.
+            methods?.references.forEach((r) => {
+              const memberExpression = r.identifier.parent
+              // reportNode(context, memberExpression)
               if (
-                // parentはマジで可変なのかー
-                reference.identifier.parent.type ===
-                AST_NODE_TYPES.MemberExpression
+                memberExpression.type === AST_NODE_TYPES.MemberExpression &&
+                memberExpression.parent.type === AST_NODE_TYPES.CallExpression
               ) {
-                // ここからsetValueのargementを拾う必要がある
-                const memberExpression = reference.identifier.parent
-                if (
-                  memberExpression.parent.type === AST_NODE_TYPES.CallExpression
-                ) {
-                  const callExpression = memberExpression.parent
+                const callExpression = memberExpression.parent
+                const thirdArgument = callExpression.arguments.at(2)
 
-                  // referenceってことはmethodsから派生している場所が対象になるってことか
-                  const thirdArgument = callExpression.arguments.at(2)
-                  if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
-                    reportObjectExpression(context, thirdArgument)
-                  } else {
-                    reportCallExpression(context, callExpression)
-                  }
+                if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
+                  reportObjectExpression(context, thirdArgument)
+                } else {
+                  reportNode(context, callExpression)
                 }
               }
             })
           }
 
-          // NOTE: const { setValue } = useForm(); or const { setValue } = useFormContext(); をサポートする
           const property = (() => {
             if (node.id.type === AST_NODE_TYPES.ObjectPattern) {
               return node.id.properties.find((p) => {
@@ -89,35 +96,26 @@ export const rule = createRule({
             return null
           })()
 
-          /**
-           * setValueのnodeを取得する。
-           * const nodeSource = sourceCode.getText(node); でも取得できそう
-           * @see https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/#context.getscope()
-           * @see https://eslint.org/docs/latest/extend/custom-rules#accessing-the-source-text
-           */
-          // 結局この中には"setValue"が入っているのかー
-          if (property?.value?.type !== AST_NODE_TYPES.Identifier) return
+          // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
+          if (property?.value?.type === AST_NODE_TYPES.Identifier) {
+            const setValueScope = context.sourceCode.getScope(node)
+            const setValue = setValueScope.set.get(property.value.name)
+            // reportNode(context, node)
 
-          const setValue = context.sourceCode
-            .getScope(node)
-            .set.get(property.value.name)
+            // `setValue`の参照を見つけた場合、次に進む
+            setValue?.references.forEach((r) => {
+              if (r.identifier.parent.type === AST_NODE_TYPES.CallExpression) {
+                const callExpression = r.identifier.parent
+                const thirdArgument = callExpression.arguments.at(2)
 
-          /**
-           * NOTE: setValueの引数の処理
-           * @see https://eslint.org/docs/latest/extend/custom-rules#scope-variables
-           */
-          setValue?.references.forEach((r) => {
-            if (r.identifier.parent.type === AST_NODE_TYPES.CallExpression) {
-              const callExpression = r.identifier.parent
-              const thirdArgument = callExpression.arguments.at(2)
-
-              if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
-                reportObjectExpression(context, thirdArgument)
-              } else {
-                reportCallExpression(context, callExpression)
+                if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
+                  reportObjectExpression(context, thirdArgument)
+                } else {
+                  reportNode(context, callExpression)
+                }
               }
-            }
-          })
+            })
+          }
         }
       },
     }

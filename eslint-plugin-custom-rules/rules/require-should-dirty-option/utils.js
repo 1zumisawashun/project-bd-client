@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isUseFormContext = exports.isUseForm = exports.formatObjectToString = exports.reportObjectExpression = exports.reportCallExpression = exports.createRule = void 0;
+exports.isUseFormContext = exports.isUseForm = exports.formatObjectToString = exports.reportObjectExpression = exports.reportNode = exports.createRule = void 0;
 const utils_1 = require("@typescript-eslint/utils");
 const path = __importStar(require("path"));
 /** @see https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/src/utils.ts */
@@ -32,13 +32,13 @@ exports.createRule = utils_1.ESLintUtils.RuleCreator((name) => {
     const basename = path.basename(name, path.extname(name));
     return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${basename}/index.md`;
 });
-const reportCallExpression = (context, callExpression) => {
+const reportNode = (context, node) => {
     context.report({
-        node: callExpression,
+        node,
         messageId: 'requireShouldDirtyOption',
     });
 };
-exports.reportCallExpression = reportCallExpression;
+exports.reportNode = reportNode;
 const reportObjectExpression = (context, objectExpression) => {
     const hasShouldDirty = objectExpression.properties.some((p) => {
         if (p.type === utils_1.AST_NODE_TYPES.Property &&

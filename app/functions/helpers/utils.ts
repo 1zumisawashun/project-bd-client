@@ -4,6 +4,15 @@ import { z } from 'zod'
 export const delay = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))
 
+export const resolve = async <T>(promise: Promise<T>) => {
+  try {
+    const result = await promise
+    return [result, null]
+  } catch (error) {
+    return [null, error]
+  }
+}
+
 export const genRandomId = () => Math.random().toString(32).substring(2)
 
 export const actionResult = {

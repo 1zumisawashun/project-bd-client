@@ -13,6 +13,7 @@ import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { Status } from '@/components/elements/Status'
 import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import { Label } from '@/components/elements/Label'
+import DOMPurify from 'dompurify'
 import { DeleteDialog } from './components/DeleteDialog'
 import styles from './articleDetail.module.scss'
 import { DraftDialog } from './components/DraftDialog'
@@ -36,6 +37,8 @@ export const ArticleDetail: React.FC<Props> = ({
   const deleteDialog = useDisclosure()
   const draftDialog = useDisclosure()
   const publishDialog = useDisclosure()
+
+  const clean = DOMPurify.sanitize(article.content)
 
   return (
     <VStack>
@@ -124,7 +127,7 @@ export const ArticleDetail: React.FC<Props> = ({
 
       <div
         className={styles[`${BLOCK_NAME}-content`]}
-        dangerouslySetInnerHTML={{ __html: article.content }}
+        dangerouslySetInnerHTML={{ __html: clean }}
       />
     </VStack>
   )

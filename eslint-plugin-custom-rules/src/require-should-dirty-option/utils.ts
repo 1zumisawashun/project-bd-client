@@ -9,30 +9,22 @@ export const createRule = ESLintUtils.RuleCreator((name) => {
 })
 
 type Context = Parameters<ReturnType<typeof createRule>['create']>[number]
+export type Fixer = Parameters<Context['report']>[number]['fix']
 
-export const reportNode = (context: Context, node: TSESTree.Node): void => {
+const reportNoThirdArgument = (
+  context: Context,
+  loc: TSESTree.Node['loc'],
+): void => {
   context.report({
-    node,
+    loc,
     messageId: 'requireShouldDirtyOption',
   })
 }
 
-export const reportObjectExpression = (
+const reportNoShouldDirty = (
   context: Context,
   objectExpression: TSESTree.ObjectExpression,
 ): void => {
-  const hasShouldDirty = objectExpression.properties.some((p) => {
-    if (
-      p.type === AST_NODE_TYPES.Property &&
-      p.key.type === AST_NODE_TYPES.Identifier
-    ) {
-      return p.key.name === 'shouldDirty'
-    }
-    return false
-  })
-
-  if (hasShouldDirty) return
-
   const defaultOptions = objectExpression.properties.reduce<
     Record<string, any>
   >((acc, cur) => {
@@ -55,16 +47,49 @@ export const reportObjectExpression = (
     node: objectExpression,
     messageId: 'requireShouldDirtyOption',
     fix(fixer) {
-      return fixer.replaceText(objectExpression, `${optionsWithShouldDirty}`)
+      return fixer.replaceText(objectExpression, optionsWithShouldDirty)
     },
   })
 }
 
-export const formatObjectToString = (obj: {}): string => {
-  return JSON.stringify(obj, null, 2)
-    .replace(/"([^"]+)":/g, '$1:')
-    .replace(/"/g, '')
-    .trim()
+export const checkSetValue = (
+  context: Context,
+  callExpression: TSESTree.CallExpression,
+) => {
+  const firstArgument = callExpression.arguments.at(0)
+  const secondArgument = callExpression.arguments.at(1)
+  const thirdArgument = callExpression.arguments.at(2)
+
+  const loc = {
+    start: firstArgument!.loc.start,
+    end: secondArgument!.loc.end,
+  }
+
+  if (secondArgument && !thirdArgument) {
+    reportNoThirdArgument(context, loc)
+  }
+
+  if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
+    if (!hasShouldDirty(thirdArgument)) {
+      reportNoShouldDirty(context, thirdArgument)
+    }
+  }
+}
+
+const formatObjectToString = (obj: {}): string => {
+  return JSON.stringify(obj).replace(/"([^"]+)":/g, '$1:')
+}
+
+const hasShouldDirty = (objectExpression: TSESTree.ObjectExpression) => {
+  return objectExpression.properties.some((p) => {
+    if (
+      p.type === AST_NODE_TYPES.Property &&
+      p.key.type === AST_NODE_TYPES.Identifier
+    ) {
+      return p.key.name === 'shouldDirty'
+    }
+    return false
+  })
 }
 
 export const isUseForm = (node: TSESTree.VariableDeclarator): boolean => {

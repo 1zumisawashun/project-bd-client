@@ -50,21 +50,13 @@ exports.rule = (0, utils_2.createRule)({
                     if (node.id.type === utils_1.AST_NODE_TYPES.Identifier) {
                         const methodsScope = context.sourceCode.getScope(node);
                         const methods = methodsScope.set.get(node.id.name);
-                        // reportNode(context, node)
                         // `methods`の参照を見つけた場合、次に進む ex) methods.setValue(), methods.getValues() etc.
                         methods?.references.forEach((r) => {
                             const memberExpression = r.identifier.parent;
-                            // reportNode(context, memberExpression)
                             if (memberExpression.type === utils_1.AST_NODE_TYPES.MemberExpression &&
                                 memberExpression.parent.type === utils_1.AST_NODE_TYPES.CallExpression) {
                                 const callExpression = memberExpression.parent;
-                                const thirdArgument = callExpression.arguments.at(2);
-                                if (thirdArgument?.type === utils_1.AST_NODE_TYPES.ObjectExpression) {
-                                    (0, utils_2.reportObjectExpression)(context, thirdArgument);
-                                }
-                                else {
-                                    (0, utils_2.reportNode)(context, callExpression);
-                                }
+                                (0, utils_2.checkSetValue)(context, callExpression);
                             }
                         });
                     }
@@ -88,13 +80,7 @@ exports.rule = (0, utils_2.createRule)({
                         setValue?.references.forEach((r) => {
                             if (r.identifier.parent.type === utils_1.AST_NODE_TYPES.CallExpression) {
                                 const callExpression = r.identifier.parent;
-                                const thirdArgument = callExpression.arguments.at(2);
-                                if (thirdArgument?.type === utils_1.AST_NODE_TYPES.ObjectExpression) {
-                                    (0, utils_2.reportObjectExpression)(context, thirdArgument);
-                                }
-                                else {
-                                    (0, utils_2.reportNode)(context, callExpression);
-                                }
+                                (0, utils_2.checkSetValue)(context, callExpression);
                             }
                         });
                     }

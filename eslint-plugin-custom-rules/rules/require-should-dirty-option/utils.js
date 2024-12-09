@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isUseFormContext = exports.isUseForm = exports.formatObjectToString = exports.reportObjectExpression = exports.reportNode = exports.createRule = void 0;
+exports.isUseFormContext = exports.isUseForm = exports.checkSetValue = exports.createRule = void 0;
 const utils_1 = require("@typescript-eslint/utils");
 const path = __importStar(require("path"));
 /** @see https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/src/utils.ts */
@@ -32,23 +32,13 @@ exports.createRule = utils_1.ESLintUtils.RuleCreator((name) => {
     const basename = path.basename(name, path.extname(name));
     return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${basename}/index.md`;
 });
-const reportNode = (context, node) => {
+const reportNoThirdArgument = (context, loc) => {
     context.report({
-        node,
+        loc,
         messageId: 'requireShouldDirtyOption',
     });
 };
-exports.reportNode = reportNode;
-const reportObjectExpression = (context, objectExpression) => {
-    const hasShouldDirty = objectExpression.properties.some((p) => {
-        if (p.type === utils_1.AST_NODE_TYPES.Property &&
-            p.key.type === utils_1.AST_NODE_TYPES.Identifier) {
-            return p.key.name === 'shouldDirty';
-        }
-        return false;
-    });
-    if (hasShouldDirty)
-        return;
+const reportNoShouldDirty = (context, objectExpression) => {
     const defaultOptions = objectExpression.properties.reduce((acc, cur) => {
         if (cur.type === utils_1.AST_NODE_TYPES.Property &&
             cur.key.type === utils_1.AST_NODE_TYPES.Identifier &&
@@ -57,7 +47,7 @@ const reportObjectExpression = (context, objectExpression) => {
         }
         return acc;
     }, {});
-    const optionsWithShouldDirty = (0, exports.formatObjectToString)({
+    const optionsWithShouldDirty = formatObjectToString({
         ...defaultOptions,
         shouldDirty: true,
     });
@@ -65,18 +55,40 @@ const reportObjectExpression = (context, objectExpression) => {
         node: objectExpression,
         messageId: 'requireShouldDirtyOption',
         fix(fixer) {
-            return fixer.replaceText(objectExpression, `${optionsWithShouldDirty}`);
+            return fixer.replaceText(objectExpression, optionsWithShouldDirty);
         },
     });
 };
-exports.reportObjectExpression = reportObjectExpression;
-const formatObjectToString = (obj) => {
-    return JSON.stringify(obj, null, 2)
-        .replace(/"([^"]+)":/g, '$1:')
-        .replace(/"/g, '')
-        .trim();
+const checkSetValue = (context, callExpression) => {
+    const firstArgument = callExpression.arguments.at(0);
+    const secondArgument = callExpression.arguments.at(1);
+    const thirdArgument = callExpression.arguments.at(2);
+    const loc = {
+        start: firstArgument.loc.start,
+        end: secondArgument.loc.end,
+    };
+    if (secondArgument && !thirdArgument) {
+        reportNoThirdArgument(context, loc);
+    }
+    if (thirdArgument?.type === utils_1.AST_NODE_TYPES.ObjectExpression) {
+        if (!hasShouldDirty(thirdArgument)) {
+            reportNoShouldDirty(context, thirdArgument);
+        }
+    }
 };
-exports.formatObjectToString = formatObjectToString;
+exports.checkSetValue = checkSetValue;
+const formatObjectToString = (obj) => {
+    return JSON.stringify(obj).replace(/"([^"]+)":/g, '$1:');
+};
+const hasShouldDirty = (objectExpression) => {
+    return objectExpression.properties.some((p) => {
+        if (p.type === utils_1.AST_NODE_TYPES.Property &&
+            p.key.type === utils_1.AST_NODE_TYPES.Identifier) {
+            return p.key.name === 'shouldDirty';
+        }
+        return false;
+    });
+};
 const isUseForm = (node) => {
     return (node.type === utils_1.AST_NODE_TYPES.VariableDeclarator &&
         node.init?.type === utils_1.AST_NODE_TYPES.CallExpression &&

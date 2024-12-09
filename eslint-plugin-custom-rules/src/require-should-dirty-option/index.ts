@@ -1,12 +1,6 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/utils'
 
-import {
-  createRule,
-  isUseForm,
-  isUseFormContext,
-  reportObjectExpression,
-  reportNode,
-} from './utils'
+import { createRule, isUseForm, isUseFormContext, checkSetValue } from './utils'
 
 /**
  * NOTE: setValueの引数の処理
@@ -59,24 +53,16 @@ export const rule = createRule({
           if (node.id.type === AST_NODE_TYPES.Identifier) {
             const methodsScope = context.sourceCode.getScope(node)
             const methods = methodsScope.set.get(node.id.name)
-            // reportNode(context, node)
 
             // `methods`の参照を見つけた場合、次に進む ex) methods.setValue(), methods.getValues() etc.
             methods?.references.forEach((r) => {
               const memberExpression = r.identifier.parent
-              // reportNode(context, memberExpression)
               if (
                 memberExpression.type === AST_NODE_TYPES.MemberExpression &&
                 memberExpression.parent.type === AST_NODE_TYPES.CallExpression
               ) {
                 const callExpression = memberExpression.parent
-                const thirdArgument = callExpression.arguments.at(2)
-
-                if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
-                  reportObjectExpression(context, thirdArgument)
-                } else {
-                  reportNode(context, callExpression)
-                }
+                checkSetValue(context, callExpression)
               }
             })
           }
@@ -100,19 +86,12 @@ export const rule = createRule({
           if (property?.value?.type === AST_NODE_TYPES.Identifier) {
             const setValueScope = context.sourceCode.getScope(node)
             const setValue = setValueScope.set.get(property.value.name)
-            // reportNode(context, node)
 
             // `setValue`の参照を見つけた場合、次に進む
             setValue?.references.forEach((r) => {
               if (r.identifier.parent.type === AST_NODE_TYPES.CallExpression) {
                 const callExpression = r.identifier.parent
-                const thirdArgument = callExpression.arguments.at(2)
-
-                if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
-                  reportObjectExpression(context, thirdArgument)
-                } else {
-                  reportNode(context, callExpression)
-                }
+                checkSetValue(context, callExpression)
               }
             })
           }

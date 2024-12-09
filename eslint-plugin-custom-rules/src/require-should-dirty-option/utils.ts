@@ -1,6 +1,11 @@
 import { ESLintUtils, TSESTree, AST_NODE_TYPES } from '@typescript-eslint/utils'
 import * as path from 'path'
 
+type Context = Parameters<ReturnType<typeof createRule>['create']>[number]
+export type Fixer = Parameters<
+  NonNullable<Parameters<Context['report']>[number]['fix']>
+>[number]
+
 /** @see https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/src/utils.ts */
 export const createRule = ESLintUtils.RuleCreator((name) => {
   // const dirname = path.relative(__dirname, path.dirname(name))
@@ -8,8 +13,38 @@ export const createRule = ESLintUtils.RuleCreator((name) => {
   return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${basename}/index.md`
 })
 
-type Context = Parameters<ReturnType<typeof createRule>['create']>[number]
-export type Fixer = Parameters<Context['report']>[number]['fix']
+const fixNoShouldDirty =
+  (objectExpression: TSESTree.ObjectExpression) => (fixer: Fixer) => {
+    const defaultOptions = objectExpression.properties.reduce<
+      Record<string, any>
+    >((acc, cur) => {
+      if (
+        cur.type === AST_NODE_TYPES.Property &&
+        cur.key.type === AST_NODE_TYPES.Identifier &&
+        cur.value.type === AST_NODE_TYPES.Literal
+      ) {
+        acc[cur.key.name] = cur.value.value
+      }
+      return acc
+    }, {})
+
+    const optionsWithShouldDirty = formatObjectToString({
+      ...defaultOptions,
+      shouldDirty: true,
+    })
+    return fixer.replaceText(objectExpression, optionsWithShouldDirty)
+  }
+
+const reportNoShouldDirty = (
+  context: Context,
+  objectExpression: TSESTree.ObjectExpression,
+): void => {
+  context.report({
+    node: objectExpression,
+    messageId: 'requireShouldDirtyOption',
+    fix: fixNoShouldDirty(objectExpression),
+  })
+}
 
 const reportNoThirdArgument = (
   context: Context,
@@ -18,37 +53,6 @@ const reportNoThirdArgument = (
   context.report({
     loc, // 第1引数〜第2引数の間を指定
     messageId: 'requireShouldDirtyOption',
-  })
-}
-
-const reportNoShouldDirty = (
-  context: Context,
-  objectExpression: TSESTree.ObjectExpression,
-): void => {
-  const defaultOptions = objectExpression.properties.reduce<
-    Record<string, any>
-  >((acc, cur) => {
-    if (
-      cur.type === AST_NODE_TYPES.Property &&
-      cur.key.type === AST_NODE_TYPES.Identifier &&
-      cur.value.type === AST_NODE_TYPES.Literal
-    ) {
-      acc[cur.key.name] = cur.value.value
-    }
-    return acc
-  }, {})
-
-  const optionsWithShouldDirty = formatObjectToString({
-    ...defaultOptions,
-    shouldDirty: true,
-  })
-
-  context.report({
-    node: objectExpression,
-    messageId: 'requireShouldDirtyOption',
-    fix(fixer) {
-      return fixer.replaceText(objectExpression, optionsWithShouldDirty)
-    },
   })
 }
 

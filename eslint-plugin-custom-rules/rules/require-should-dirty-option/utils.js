@@ -32,13 +32,7 @@ exports.createRule = utils_1.ESLintUtils.RuleCreator((name) => {
     const basename = path.basename(name, path.extname(name));
     return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${basename}/index.md`;
 });
-const reportNoThirdArgument = (context, loc) => {
-    context.report({
-        loc, // 第1引数〜第2引数の間を指定
-        messageId: 'requireShouldDirtyOption',
-    });
-};
-const reportNoShouldDirty = (context, objectExpression) => {
+const fixNoShouldDirty = (objectExpression) => (fixer) => {
     const defaultOptions = objectExpression.properties.reduce((acc, cur) => {
         if (cur.type === utils_1.AST_NODE_TYPES.Property &&
             cur.key.type === utils_1.AST_NODE_TYPES.Identifier &&
@@ -51,12 +45,19 @@ const reportNoShouldDirty = (context, objectExpression) => {
         ...defaultOptions,
         shouldDirty: true,
     });
+    return fixer.replaceText(objectExpression, optionsWithShouldDirty);
+};
+const reportNoShouldDirty = (context, objectExpression) => {
     context.report({
         node: objectExpression,
         messageId: 'requireShouldDirtyOption',
-        fix(fixer) {
-            return fixer.replaceText(objectExpression, optionsWithShouldDirty);
-        },
+        fix: fixNoShouldDirty(objectExpression),
+    });
+};
+const reportNoThirdArgument = (context, loc) => {
+    context.report({
+        loc, // 第1引数〜第2引数の間を指定
+        messageId: 'requireShouldDirtyOption',
     });
 };
 const checkSetValue = (context, callExpression) => {

@@ -34,7 +34,7 @@ exports.createRule = utils_1.ESLintUtils.RuleCreator((name) => {
 });
 const reportNoThirdArgument = (context, loc) => {
     context.report({
-        loc,
+        loc, // 第1引数〜第2引数の間を指定
         messageId: 'requireShouldDirtyOption',
     });
 };

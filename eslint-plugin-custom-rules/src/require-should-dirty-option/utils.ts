@@ -16,7 +16,7 @@ const reportNoThirdArgument = (
   loc: TSESTree.Node['loc'],
 ): void => {
   context.report({
-    loc,
+    loc, // 第1引数〜第2引数の間を指定
     messageId: 'requireShouldDirtyOption',
   })
 }

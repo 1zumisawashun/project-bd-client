@@ -7,11 +7,8 @@ type Fix = NonNullable<Parameters<Context['report']>[number]['fix']>
 type RuleFix = ReturnType<Fix>
 type Fixer = Parameters<Fix>[number]
 
-/** @see https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/src/utils.ts */
 export const createRule = ESLintUtils.RuleCreator((name) => {
-  const dirname = path.relative(__dirname, path.dirname(name))
-  const basename = path.basename(name, path.extname(name))
-  return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${dirname}/${basename}.md`
+  return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/requireShouldDirty.md`
 })
 
 const formatObjectToString = (obj: {}): string => {

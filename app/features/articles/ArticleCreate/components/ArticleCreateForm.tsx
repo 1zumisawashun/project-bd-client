@@ -22,6 +22,7 @@ export const ArticleCreateForm: React.FC<Props> = ({ categoryOptions }) => {
     control,
     register,
     formState: { errors },
+    setValue,
   } = useFormContext<Schema>()
 
   const { fields, append, remove } = useFieldArray({
@@ -34,6 +35,9 @@ export const ArticleCreateForm: React.FC<Props> = ({ categoryOptions }) => {
 
   return (
     <Form>
+      <button type="button" onClick={() => setValue('content', 'test')}>
+        Click me
+      </button>
       <FormField name="title" serverInvalid={!!errors.title}>
         <FormLabel>タイトル</FormLabel>
         <TextInput {...register('title')} />

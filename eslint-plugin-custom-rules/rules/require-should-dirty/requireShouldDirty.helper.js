@@ -30,6 +30,8 @@ const path = __importStar(require("path"));
 exports.createRule = utils_1.ESLintUtils.RuleCreator((name) => {
     const dirname = path.relative(__dirname, path.dirname(name));
     const basename = path.basename(name, path.extname(name));
+    console.log(dirname, basename);
+    console.log(name);
     return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${dirname}/${basename}.md`;
 });
 const formatObjectToString = (obj) => {

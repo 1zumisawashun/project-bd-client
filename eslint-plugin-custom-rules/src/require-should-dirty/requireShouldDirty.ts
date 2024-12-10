@@ -1,25 +1,15 @@
 import { AST_NODE_TYPES } from '@typescript-eslint/utils'
 
-import { createRule, isUseForm, isUseFormContext, checkSetValue } from './utils'
+import {
+  createRule,
+  isUseForm,
+  isUseFormContext,
+  checkSetValue,
+} from './requireShouldDirty.helper'
 
-/**
- * NOTE: setValueの引数の処理
- * @see https://eslint.org/docs/latest/extend/custom-rules#scope-variables
- */
-
-/**
- * setValueのnodeを取得する。
- * const nodeSource = sourceCode.getText(node); でも取得できそう
- * @see https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/#context.getscope()
- * @see https://eslint.org/docs/latest/extend/custom-rules#accessing-the-source-text
- */
-
-/**
- * @see https://github.com/andykao1213/eslint-plugin-react-hook-form/blob/f210951a28db93ca456f877832bba479826d7e0b/lib/rules/no-nested-object-setvalue.js
- * @see https://zenn.dev/cybozu_frontend/articles/ts-eslint-new-syntax
- */
+/** @see https://github.com/andykao1213/eslint-plugin-react-hook-form */
 export const rule = createRule({
-  name: 'require-should-dirty-option',
+  name: 'require-should-dirty',
   defaultOptions: [],
   meta: {
     type: 'problem',
@@ -29,14 +19,14 @@ export const rule = createRule({
     },
     fixable: 'code',
     messages: {
-      requireShouldDirtyOption:
-        'You must set shouldDirty: true when calling setValue for optimal performance and state consistency.',
+      requireShouldDirty:
+        'You must set shouldDirty when calling setValue for optimal performance and state consistency.',
     },
     schema: [
       {
         type: 'object',
         properties: {
-          requireShouldDirtyOption: {
+          requireShouldDirty: {
             type: 'boolean',
             default: true,
           },

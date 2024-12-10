@@ -1,6 +1,6 @@
 import { RuleTester } from '@typescript-eslint/rule-tester'
 
-import { rule } from './index'
+import { rule } from './requireShouldDirty'
 
 /**
  * @typescript-eslint/rule-tester v8から languageOptions が追加されたりしている
@@ -10,7 +10,7 @@ const ruleTester = new RuleTester({
   parser: '@typescript-eslint/parser',
 })
 
-ruleTester.run('require-should-dirty-option', rule, {
+ruleTester.run('require-should-dirty', rule, {
   valid: [
     {
       code: `
@@ -53,44 +53,36 @@ ruleTester.run('require-should-dirty-option', rule, {
   invalid: [
     {
       code: `
-          const { setValue } = useForm()
-          setValue('', '', {})
-          `,
+      const { setValue } = useForm()
+      setValue('', '', {})
+      `,
       output: `
-          const { setValue } = useForm()
-          setValue('', '', {
-  shouldDirty: true
-})
-          `,
-      errors: [{ messageId: 'requireShouldDirtyOption' }],
+      const { setValue } = useForm()
+      setValue('', '', {shouldDirty:true})
+      `,
+      errors: [{ messageId: 'requireShouldDirty' }],
     },
     {
       code: `
-          const { setValue } = useForm()
-          setValue('', '', { shouldValidate: true })
-          `,
+      const { setValue } = useForm()
+      setValue('', '', { shouldValidate:true })
+      `,
       output: `
-          const { setValue } = useForm()
-          setValue('', '', {
-  shouldValidate: true,
-  shouldDirty: true
-})
-          `,
-      errors: [{ messageId: 'requireShouldDirtyOption' }],
+      const { setValue } = useForm()
+      setValue('', '', {shouldValidate:true,shouldDirty:true})
+      `,
+      errors: [{ messageId: 'requireShouldDirty' }],
     },
     {
       code: `
-          const { setValue } = useForm()
-          setValue('', '', { shouldTouch: true })
-          `,
+      const { setValue } = useForm()
+      setValue('', '', { shouldTouch: true })
+      `,
       output: `
-          const { setValue } = useForm()
-          setValue('', '', {
-  shouldTouch: true,
-  shouldDirty: true
-})
-          `,
-      errors: [{ messageId: 'requireShouldDirtyOption' }],
+      const { setValue } = useForm()
+      setValue('', '', {shouldTouch:true,shouldDirty:true})
+      `,
+      errors: [{ messageId: 'requireShouldDirty' }],
     },
   ],
 })

@@ -28,11 +28,14 @@ const utils_1 = require("@typescript-eslint/utils");
 const path = __importStar(require("path"));
 /** @see https://github.com/mkpoli/eslint-plugin-no-array-concat/blob/master/src/utils.ts */
 exports.createRule = utils_1.ESLintUtils.RuleCreator((name) => {
-    // const dirname = path.relative(__dirname, path.dirname(name))
+    const dirname = path.relative(__dirname, path.dirname(name));
     const basename = path.basename(name, path.extname(name));
-    return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${basename}/index.md`;
+    return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/${dirname}/${basename}.md`;
 });
-const fixNoShouldDirty = (objectExpression) => (fixer) => {
+const formatObjectToString = (obj) => {
+    return JSON.stringify(obj).replace(/"([^"]+)":/g, '$1:');
+};
+const fixShouldDirty = (objectExpression) => (fixer) => {
     const defaultOptions = objectExpression.properties.reduce((acc, cur) => {
         if (cur.type === utils_1.AST_NODE_TYPES.Property &&
             cur.key.type === utils_1.AST_NODE_TYPES.Identifier &&
@@ -47,39 +50,18 @@ const fixNoShouldDirty = (objectExpression) => (fixer) => {
     });
     return fixer.replaceText(objectExpression, optionsWithShouldDirty);
 };
-const reportNoShouldDirty = (context, objectExpression) => {
+const reportShouldDirty = (context, objectExpression) => {
     context.report({
         node: objectExpression,
-        messageId: 'requireShouldDirtyOption',
-        fix: fixNoShouldDirty(objectExpression),
+        messageId: 'requireShouldDirty',
+        fix: fixShouldDirty(objectExpression),
     });
 };
-const reportNoThirdArgument = (context, loc) => {
+const reportThirdArgument = (context, node) => {
     context.report({
-        loc, // 第1引数〜第2引数の間を指定
-        messageId: 'requireShouldDirtyOption',
+        node,
+        messageId: 'requireShouldDirty',
     });
-};
-const checkSetValue = (context, callExpression) => {
-    const firstArgument = callExpression.arguments.at(0);
-    const secondArgument = callExpression.arguments.at(1);
-    const thirdArgument = callExpression.arguments.at(2);
-    const loc = {
-        start: firstArgument.loc.start,
-        end: secondArgument.loc.end,
-    };
-    if (secondArgument && !thirdArgument) {
-        reportNoThirdArgument(context, loc);
-    }
-    if (thirdArgument?.type === utils_1.AST_NODE_TYPES.ObjectExpression) {
-        if (!hasShouldDirty(thirdArgument)) {
-            reportNoShouldDirty(context, thirdArgument);
-        }
-    }
-};
-exports.checkSetValue = checkSetValue;
-const formatObjectToString = (obj) => {
-    return JSON.stringify(obj).replace(/"([^"]+)":/g, '$1:');
 };
 const hasShouldDirty = (objectExpression) => {
     return objectExpression.properties.some((p) => {
@@ -90,6 +72,19 @@ const hasShouldDirty = (objectExpression) => {
         return false;
     });
 };
+const checkSetValue = (context, callExpression) => {
+    const secondArgument = callExpression.arguments.at(1);
+    const thirdArgument = callExpression.arguments.at(2);
+    if (secondArgument && !thirdArgument) {
+        reportThirdArgument(context, callExpression);
+    }
+    if (thirdArgument?.type === utils_1.AST_NODE_TYPES.ObjectExpression) {
+        if (!hasShouldDirty(thirdArgument)) {
+            reportShouldDirty(context, thirdArgument);
+        }
+    }
+};
+exports.checkSetValue = checkSetValue;
 const isUseForm = (node) => {
     return (node.type === utils_1.AST_NODE_TYPES.VariableDeclarator &&
         node.init?.type === utils_1.AST_NODE_TYPES.CallExpression &&

@@ -2,23 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rule = void 0;
 const utils_1 = require("@typescript-eslint/utils");
-const utils_2 = require("./utils");
-/**
- * NOTE: setValueの引数の処理
- * @see https://eslint.org/docs/latest/extend/custom-rules#scope-variables
- */
-/**
- * setValueのnodeを取得する。
- * const nodeSource = sourceCode.getText(node); でも取得できそう
- * @see https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/#context.getscope()
- * @see https://eslint.org/docs/latest/extend/custom-rules#accessing-the-source-text
- */
-/**
- * @see https://github.com/andykao1213/eslint-plugin-react-hook-form/blob/f210951a28db93ca456f877832bba479826d7e0b/lib/rules/no-nested-object-setvalue.js
- * @see https://zenn.dev/cybozu_frontend/articles/ts-eslint-new-syntax
- */
-exports.rule = (0, utils_2.createRule)({
-    name: 'require-should-dirty-option',
+const requireShouldDirty_helper_1 = require("./requireShouldDirty.helper");
+/** @see https://github.com/andykao1213/eslint-plugin-react-hook-form */
+exports.rule = (0, requireShouldDirty_helper_1.createRule)({
+    name: 'require-should-dirty',
     defaultOptions: [],
     meta: {
         type: 'problem',
@@ -27,13 +14,13 @@ exports.rule = (0, utils_2.createRule)({
         },
         fixable: 'code',
         messages: {
-            requireShouldDirtyOption: 'You must set shouldDirty: true when calling setValue for optimal performance and state consistency.',
+            requireShouldDirty: 'You must set shouldDirty when calling setValue for optimal performance and state consistency.',
         },
         schema: [
             {
                 type: 'object',
                 properties: {
-                    requireShouldDirtyOption: {
+                    requireShouldDirty: {
                         type: 'boolean',
                         default: true,
                     },
@@ -45,7 +32,7 @@ exports.rule = (0, utils_2.createRule)({
         return {
             VariableDeclarator(node) {
                 // `useForm`または`useFormContext`で初期化されていた場合、次に進む
-                if ((0, utils_2.isUseForm)(node) || (0, utils_2.isUseFormContext)(node)) {
+                if ((0, requireShouldDirty_helper_1.isUseForm)(node) || (0, requireShouldDirty_helper_1.isUseFormContext)(node)) {
                     // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
                     if (node.id.type === utils_1.AST_NODE_TYPES.Identifier) {
                         const methodsScope = context.sourceCode.getScope(node);
@@ -56,7 +43,7 @@ exports.rule = (0, utils_2.createRule)({
                             if (memberExpression.type === utils_1.AST_NODE_TYPES.MemberExpression &&
                                 memberExpression.parent.type === utils_1.AST_NODE_TYPES.CallExpression) {
                                 const callExpression = memberExpression.parent;
-                                (0, utils_2.checkSetValue)(context, callExpression);
+                                (0, requireShouldDirty_helper_1.checkSetValue)(context, callExpression);
                             }
                         });
                     }
@@ -80,7 +67,7 @@ exports.rule = (0, utils_2.createRule)({
                         setValue?.references.forEach((r) => {
                             if (r.identifier.parent.type === utils_1.AST_NODE_TYPES.CallExpression) {
                                 const callExpression = r.identifier.parent;
-                                (0, utils_2.checkSetValue)(context, callExpression);
+                                (0, requireShouldDirty_helper_1.checkSetValue)(context, callExpression);
                             }
                         });
                     }

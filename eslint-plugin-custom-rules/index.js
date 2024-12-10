@@ -1,6 +1,6 @@
 module.exports = {
   rules: {
-    'require-should-dirty-option':
-      require('./rules/require-should-dirty-option').rule,
+    'require-should-dirty':
+      require('./rules/require-should-dirty/requireShouldDirty').rule,
   },
 }

@@ -37,7 +37,7 @@
     "import/no-named-as-default-member": "off",
     "import/no-unresolved": "off",
     // custom-rules
-    "custom-rules/require-should-dirty-option": "error",
+    "custom-rules/require-should-dirty": "error",
     // syntax-rules
     "no-restricted-syntax": [
       "error",

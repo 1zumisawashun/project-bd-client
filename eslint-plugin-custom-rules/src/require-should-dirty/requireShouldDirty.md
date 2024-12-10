@@ -1,62 +1,45 @@
-# Prevent using Array.prototype.concat() for Array concatenation. (no-array-concat)
+# require-should-dirty ルール
 
-It's difficult to see Array.prototype.concat() if it's in a long chain of function-style map(), filter(), forEach() etc (See the following example).
+このカスタムESLintルールは、`react-hook-form`ライブラリを使用する際に、`setValue`関数の第3引数に `shouldDirty` を設定することを強制します。これにより、状態管理のパフォーマンスと一貫性が向上します。
 
-```javascript
-someVeryLongVariable
-  .filter((a) => someCheckFunction(a))
-  .concat(someVeryLongVariableB)
-  .forEach((a, i) => {
-    doSomething(a, i)
-  })
+## ルールの目的
+
+`react-hook-form`を使用する際、`setValue`関数を呼び出すときに `shouldDirty` オプションを設定することで、フォームの状態が適切に管理されます。このルールは、`shouldDirty` オプションが設定されていない場合に警告を表示し、コードの修正を提案します。
+
+## ルールの詳細
+
+このルールは、以下の条件を満たす場合に適用されます：
+
+1. `useForm` または `useFormContext` フックが使用されている。
+2. `setValue` 関数が呼び出されている。
+3. `setValue` 関数の第3引数に `shouldDirty` が設定されていない。
+
+### 例
+
+#### 正しいコード例
+
+```typescript
+const { setValue } = useForm()
+setValue('fieldName', value, { shouldDirty: true })
 ```
 
-In addition, Even if it's not in the chains, since array concatenation is adding up two arrays, it should be a symmetrical operation, such as 1 + 2 or plus(1, 2), rather than 1.plus(2).
+#### 間違ったコード例
 
-The alternative way is to concat using Array destructuring:
-
-```javascript
-;[
-  ...someVeryLongVariable.filter((a) => someCheckFunction(a)),
-  ...someVeryLongVariableB,
-].forEach((a, i) => {
-  doSomething(a, i)
-})
+```typescript
+const { setValue } = useForm()
+setValue('fieldName', value)
 ```
 
-or
+## 実装の詳細
 
-```javascript
-const concatenatedVariable = [
-  ...someVeryLongVariable.filter((a) => someCheckFunction(a)),
-  ...someVeryLongVariableB,
-]
-for (const [i, a] of concatenatedVariable.entries()) {
-  doSometing(i, a)
-}
-```
+このルールは、以下の手順で実装されています：
 
-## Rule Details
+1. `useForm` または `useFormContext` フックの呼び出しを検出します。
+2. これらのフックから返される `methods` オブジェクトを追跡します。
+3. `methods` オブジェクトの `setValue` 関数の呼び出しを検出します。
+4. `setValue` 関数の第3引数に `shouldDirty` が設定されているかどうかを確認します。
+5. 設定されていない場合、警告メッセージを表示し、修正を提案します。
 
-This rule aims to reduce human error where people may miss the Array.prototype.concat() call.
+## 参考リンク
 
-Examples of **incorrect** code for this rule:
-
-```js
-a.concat(b)
-```
-
-Examples of **correct** code for this rule:
-
-```js
-;[...a, ...b]
-```
-
-## When Not To Use It
-
-If your environment does not support ES6+ syntax and you are not using any transpilers.
-
-## Resources
-
-- [Rule Source](../../lib/rules/no-array-concat.js)
-- [Test Source](../../tests/lib/rules/no-array-concat.js)
+- [react-hook-form ドキュメント](https://react-hook-form.com/)

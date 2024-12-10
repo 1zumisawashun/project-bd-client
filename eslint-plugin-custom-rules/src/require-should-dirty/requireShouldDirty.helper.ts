@@ -1,5 +1,4 @@
 import { ESLintUtils, TSESTree, AST_NODE_TYPES } from '@typescript-eslint/utils'
-import * as path from 'path'
 
 type Create = ReturnType<typeof createRule>['create']
 type Context = Parameters<Create>[number]
@@ -7,7 +6,7 @@ type Fix = NonNullable<Parameters<Context['report']>[number]['fix']>
 type RuleFix = ReturnType<Fix>
 type Fixer = Parameters<Fix>[number]
 
-export const createRule = ESLintUtils.RuleCreator((name) => {
+export const createRule = ESLintUtils.RuleCreator(() => {
   return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/requireShouldDirty.md`
 })
 

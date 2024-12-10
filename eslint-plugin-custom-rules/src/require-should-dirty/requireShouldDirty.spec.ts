@@ -15,37 +15,37 @@ ruleTester.run('require-should-dirty', rule, {
     {
       code: `
       const { setValue } = useForm();
-      setValue('', '', { shouldDirty: true });
+      setValue('fieldName', value, { shouldDirty: true });
       `,
     },
     {
       code: `
       const { setValue } = useForm()
-      setValue('', '', { shouldDirty: true, shouldTouch: true })
+      setValue('fieldName', value, { shouldDirty: true, shouldTouch: true })
       `,
     },
     {
       code: `
       const { setValue } = useForm()
-      setValue('', '', { shouldDirty: true, shouldValidate: true })
+      setValue('fieldName', value, { shouldDirty: true, shouldValidate: true })
       `,
     },
     {
       code: `
       const { setValue } = useFormContext();
-      setValue('', '', { shouldDirty: true });
+      setValue('fieldName', value, { shouldDirty: true });
       `,
     },
     {
       code: `
       const { setValue } = useFormContext()
-      setValue('', '', { shouldDirty: true, shouldTouch: true })
+      setValue('fieldName', value, { shouldDirty: true, shouldTouch: true })
       `,
     },
     {
       code: `
       const { setValue } = useFormContext()
-      setValue('', '', { shouldDirty: true, shouldValidate: true })
+      setValue('fieldName', value, { shouldDirty: true, shouldValidate: true })
       `,
     },
   ],
@@ -54,33 +54,33 @@ ruleTester.run('require-should-dirty', rule, {
     {
       code: `
       const { setValue } = useForm()
-      setValue('', '', {})
+      setValue('fieldName', value, {})
       `,
       output: `
       const { setValue } = useForm()
-      setValue('', '', {shouldDirty:true})
+      setValue('fieldName', value, {shouldDirty:true})
       `,
       errors: [{ messageId: 'requireShouldDirty' }],
     },
     {
       code: `
       const { setValue } = useForm()
-      setValue('', '', { shouldValidate:true })
+      setValue('fieldName', value, { shouldValidate:true })
       `,
       output: `
       const { setValue } = useForm()
-      setValue('', '', {shouldValidate:true,shouldDirty:true})
+      setValue('fieldName', value, {shouldValidate:true,shouldDirty:true})
       `,
       errors: [{ messageId: 'requireShouldDirty' }],
     },
     {
       code: `
       const { setValue } = useForm()
-      setValue('', '', { shouldTouch: true })
+      setValue('fieldName', value, { shouldTouch: true })
       `,
       output: `
       const { setValue } = useForm()
-      setValue('', '', {shouldTouch:true,shouldDirty:true})
+      setValue('fieldName', value, {shouldTouch:true,shouldDirty:true})
       `,
       errors: [{ messageId: 'requireShouldDirty' }],
     },

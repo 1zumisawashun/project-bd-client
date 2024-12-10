@@ -1,10 +1,10 @@
-# require-should-dirty ルール
+# require-should-dirty
 
-このカスタムESLintルールは、`react-hook-form`ライブラリを使用する際に、`setValue`関数の第3引数に `shouldDirty` を設定することを強制します。これにより、状態管理のパフォーマンスと一貫性が向上します。
+このカスタムESLintルールは、`react-hook-form` ライブラリを使用する際に、`setValue` 関数の第3引数に `shouldDirty` を設定することを強制します。
 
 ## ルールの目的
 
-`react-hook-form`を使用する際、`setValue`関数を呼び出すときに `shouldDirty` オプションを設定することで、フォームの状態が適切に管理されます。このルールは、`shouldDirty` オプションが設定されていない場合に警告を表示し、コードの修正を提案します。
+`react-hook-form` を使用する際、`setValue` 関数を呼び出すときに  `shouldDirty` オプションを設定することで、フォームの状態（ `isDirty` ）が適切に管理されます。このルールは、`shouldDirty` オプションが設定されていない場合に警告を表示し、コードの修正を提案します。
 
 ## ルールの詳細
 

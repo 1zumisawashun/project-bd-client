@@ -55,3 +55,5 @@ export type Articles = NonNullable<Awaited<ReturnType<typeof getArticles>>>
 export type Article = NonNullable<Awaited<ReturnType<typeof getArticleById>>>
 
 export type Categories = NonNullable<Awaited<ReturnType<typeof getCategories>>>
+
+

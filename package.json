@@ -98,8 +98,6 @@
     "@typescript-eslint/utils": "^7.18.0",
     "chromatic": "^11.7.1",
     "eslint": "^8.57.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-custom-rules": "file:eslint-plugin-custom-rules",

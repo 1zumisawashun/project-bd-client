@@ -1,8 +1,9 @@
 import pluginImport from 'eslint-plugin-import'
 
 /** @type {import("eslint").Linter.Config[]} */
-export const importConfig = [
+export default [
   {
+    name: 'import recommended',
     files: ['**/*.{ts,tsx}'],
     plugins: pluginImport.flatConfigs.recommended.plugins,
     rules: {

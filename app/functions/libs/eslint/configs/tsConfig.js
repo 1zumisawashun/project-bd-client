@@ -1,6 +1,6 @@
 import tseslint from 'typescript-eslint'
 
-export const tsConfig = [
+export default [
   ...tseslint.configs.recommended.map((conf) => ({
     ...conf, // base, eslint-recommended, recommended
   })),

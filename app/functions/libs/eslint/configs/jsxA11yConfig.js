@@ -1,7 +1,7 @@
 import pluginJsxA11y from 'eslint-plugin-jsx-a11y'
 
 /** @type {import("eslint").Linter.Config[]} */
-export const jsxA11yConfig = [
+export default [
   {
     plugins: pluginJsxA11y.flatConfigs.recommended.plugins,
     rules: {

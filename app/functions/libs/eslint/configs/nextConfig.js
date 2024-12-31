@@ -1,7 +1,7 @@
 import pluginNext from '@next/eslint-plugin-next'
 
 /** @type {import("eslint").Linter.Config[]} */
-export const nextConfig = [
+export default [
   {
     name: 'next recommended + core-web-vitals',
     files: ['**/*.{ts,tsx}'],

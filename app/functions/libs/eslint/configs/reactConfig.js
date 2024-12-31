@@ -1,7 +1,7 @@
 import pluginReact from 'eslint-plugin-react'
 
 /** @type {import("eslint").Linter.Config[]} */
-export const reactConfig = [
+export default [
   {
     name: 'react recommended',
     files: ['**/*.{ts,tsx}'],

@@ -11,16 +11,17 @@ export const reactConfig = [
         version: 'detect',
       },
     },
-    ...pluginReact.configs.flat?.['recommended'],
+    ...pluginReact.configs.flat.recommended,
   },
   {
     name: 'react recommended override',
     rules: {
-      ...pluginReact.configs['jsx-runtime'].rules,
+      ...pluginReact.configs.flat['jsx-runtime'].rules,
       'react/require-default-props': 'off',
       'react/function-component-definition': 'off',
       'react/prop-types': 'off',
       'react/jsx-props-no-spreading': 'off',
+      'react/react-in-jsx-scope': 'off',
     },
   },
 ]

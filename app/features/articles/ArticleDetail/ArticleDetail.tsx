@@ -1,5 +1,3 @@
-/* eslint-disable react/no-danger */
-
 'use client'
 
 import { AnchorButton } from '@/components/buttons/AnchorButton'

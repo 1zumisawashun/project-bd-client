@@ -1,6 +1,5 @@
 'use client'
 
-/* eslint-disable no-param-reassign */
 import styles from './index.module.scss'
 
 const BLOCK_NAME = 'footer'

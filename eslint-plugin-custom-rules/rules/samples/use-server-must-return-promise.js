@@ -42,7 +42,6 @@ exports.default = {
                                 declaration.init.type === 'FunctionExpression') ||
                             declaration.init.body.type !== 'BlockStatement' ||
                             declaration.id.type !== 'Identifier') {
-                            // eslint-disable-next-line no-continue
                             continue;
                         }
                         const isAsync = declaration.init.async;

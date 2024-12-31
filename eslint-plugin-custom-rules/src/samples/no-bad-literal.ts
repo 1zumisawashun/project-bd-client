@@ -10,7 +10,7 @@ export default {
 
   create(context: Rule.RuleContext) {
     return {
-      Literal(node: any) {
+      Literal(node) {
         if (node.value && typeof node.value === 'string') {
           if (node.value.includes('bad')) {
             context.report({

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import clsx from 'clsx'
 import { forwardRef, ElementRef, useId } from 'react'
 import * as RowRadioGroup from '@radix-ui/react-radio-group'

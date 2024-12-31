@@ -1,5 +1,3 @@
-/* eslint-disable react/button-has-type */
-
 import clsx from 'clsx'
 import { ElementRef, forwardRef, ComponentPropsWithoutRef } from 'react'
 import { Theme, Variant, Shape } from '@/functions/types'

@@ -29,7 +29,6 @@ export const StickyWrapper = forwardRef<Ref, Props>(
           if (typeof ref === 'function') {
             ref(node)
           } else if (ref) {
-            // eslint-disable-next-line no-param-reassign
             ref.current = node
           }
         }}

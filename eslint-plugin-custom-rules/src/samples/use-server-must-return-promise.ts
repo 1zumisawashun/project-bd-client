@@ -1,4 +1,3 @@
-/* eslint-disable import/no-default-export */
 import type { Rule } from 'eslint'
 
 /**
@@ -54,7 +53,6 @@ export default {
               declaration.init.body.type !== 'BlockStatement' ||
               declaration.id.type !== 'Identifier'
             ) {
-              // eslint-disable-next-line no-continue
               continue
             }
 

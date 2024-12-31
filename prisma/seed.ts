@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 import { PrismaClient } from '@prisma/client'
 import { prismaCategories } from '@/functions/constants/categories'
 import { prismaUsers } from '@/functions/constants/users'

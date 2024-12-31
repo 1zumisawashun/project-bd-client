@@ -1,5 +1,3 @@
-/* eslint-disable react/no-array-index-key */
-
 type Props = {
   children: string
 }

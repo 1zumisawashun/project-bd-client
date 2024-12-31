@@ -1,7 +1,7 @@
 import eslint from '@eslint/js'
 
 /** @type {import("eslint").Linter.Config[]} */
-export const jsConfig = [
+const jsConfig = [
   {
     name: 'js recommended',
     files: ['**/*.ts'],
@@ -22,3 +22,5 @@ export const jsConfig = [
     },
   },
 ]
+
+module.exports = jsConfig

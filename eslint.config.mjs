@@ -1,4 +1,4 @@
-import { jsConfig } from './eslint-plugin-custom-rules/configs/jsConfig'
+import jsConfig from './eslint-plugin-custom-rules/configs/jsConfig'
 import { tsConfig } from './eslint-plugin-custom-rules/configs/tsConfig'
 import { reactConfig } from './eslint-plugin-custom-rules/configs/reactConfig'
 import { reactHooksConfig } from './eslint-plugin-custom-rules/configs/reactHooksConfig'

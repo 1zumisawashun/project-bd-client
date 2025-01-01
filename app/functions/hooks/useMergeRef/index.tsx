@@ -12,7 +12,6 @@ function assignRef<T = HTMLElement>(ref: ForwardedRef<T>, node: T) {
   if (typeof ref === 'function') {
     ref(node)
   } else if (ref) {
-    // eslint-disable-next-line no-param-reassign
     ref.current = node
   }
 }

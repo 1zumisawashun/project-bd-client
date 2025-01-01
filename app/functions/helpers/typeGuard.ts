@@ -2,7 +2,7 @@ const isString = (value: unknown): value is string => {
   return typeof value === 'string'
 }
 
-function isNumber(value: any): value is number {
+function isNumber(value: unknown): value is number {
   return typeof value === 'number'
 }
 

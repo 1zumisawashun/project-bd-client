@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import { ElementRef, ComponentProps, forwardRef } from 'react'
 import { TextInput } from '../../TextInput'
 

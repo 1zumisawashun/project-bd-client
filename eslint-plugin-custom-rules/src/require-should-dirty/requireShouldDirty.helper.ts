@@ -10,7 +10,7 @@ export const createRule = ESLintUtils.RuleCreator(() => {
   return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/requireShouldDirty.md`
 })
 
-const formatObjectToString = (obj: {}): string => {
+const formatObjectToString = (obj: unknown): string => {
   return JSON.stringify(obj).replace(/"([^"]+)":/g, '$1:')
 }
 
@@ -18,7 +18,7 @@ const fixShouldDirty =
   (objectExpression: TSESTree.ObjectExpression) =>
   (fixer: Fixer): RuleFix => {
     const defaultOptions = objectExpression.properties.reduce<
-      Record<string, any>
+      Record<string, unknown>
     >((acc, cur) => {
       if (
         cur.type === AST_NODE_TYPES.Property &&

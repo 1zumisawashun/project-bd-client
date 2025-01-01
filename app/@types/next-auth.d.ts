@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { DefaultSession } from 'next-auth'
 import 'next-auth/jwt'
 

@@ -1,6 +1,7 @@
 'use client'
 
 import { EditorProvider, useCurrentEditor } from '@tiptap/react'
+/* eslint-disable import/no-named-as-default */
 import StarterKit from '@tiptap/starter-kit'
 import React from 'react'
 import { Button } from '@/components/buttons/Button'

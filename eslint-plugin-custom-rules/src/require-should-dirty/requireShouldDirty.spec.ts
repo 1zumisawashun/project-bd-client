@@ -2,13 +2,7 @@ import { RuleTester } from '@typescript-eslint/rule-tester'
 
 import { rule } from './requireShouldDirty'
 
-/**
- * @typescript-eslint/rule-tester v8から languageOptions が追加されたりしている
- * v7 に下げないと何故かテストが走らない
- */
-const ruleTester = new RuleTester({
-  parser: '@typescript-eslint/parser',
-})
+const ruleTester = new RuleTester()
 
 ruleTester.run('require-should-dirty', rule, {
   valid: [

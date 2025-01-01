@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-
 'use client'
 
 import { EditorContent } from '@/components/elements/Editor'

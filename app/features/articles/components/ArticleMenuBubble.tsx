@@ -16,6 +16,7 @@ export const ArticleMenuBubble: React.FC<Props> = ({ editor }) => {
   return (
     <MenuBubble
       editor={editor}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       className={styles[`${BLOCK_NAME}-menu-bubble`] as any}
     >
       {items.map((d) => {

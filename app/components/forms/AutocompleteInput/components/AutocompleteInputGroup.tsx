@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import { ElementRef, useRef, ComponentProps, forwardRef } from 'react'
 import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
 import { useMergeRef } from '@/functions/hooks/useMergeRef'

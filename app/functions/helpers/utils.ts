@@ -1,4 +1,3 @@
-/* eslint-disable no-promise-executor-return */
 import { z } from 'zod'
 
 export const delay = (ms: number) =>

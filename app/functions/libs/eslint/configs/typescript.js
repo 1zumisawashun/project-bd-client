@@ -1,11 +1,11 @@
 import tseslint from 'typescript-eslint'
 
+/** @type {import("eslint").Linter.Config[]} */
 export default [
-  ...tseslint.configs.recommended.map((conf) => ({
-    ...conf, // base, eslint-recommended, recommended
-  })),
+  ...tseslint.configs.recommended, // base, eslint-recommended, recommended
   {
     name: 'ts recommended override',
+    files: ['**/*.{ts,tsx}'],
     rules: {
       '@typescript-eslint/naming-convention': 'off',
       '@typescript-eslint/no-unused-vars': 'off',

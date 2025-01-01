@@ -1,14 +1,11 @@
-import jsConfig from './app/functions/libs/eslint/configs/jsConfig.js'
-import tsConfig from './app/functions/libs/eslint/configs/tsConfig.js'
-import reactConfig from './app/functions/libs/eslint/configs/reactConfig.js'
-import reactHooksConfig from './app/functions/libs/eslint/configs/reactHooksConfig.js'
-import nextConfig from './app/functions/libs/eslint/configs/nextConfig.js'
-import jsxA11yConfig from './app/functions/libs/eslint/configs/jsxA11yConfig.js'
-import importConfig from './app/functions/libs/eslint/configs/importConfig.js'
-import storybookConfig from './app/functions/libs/eslint/configs/storybookConfig.js'
-import testingLibraryConfig from './app/functions/libs/eslint/configs/testingLibraryConfig.js'
-import customRulesConfig from './app/functions/libs/eslint/configs/customRulesConfig.js'
-import prettier from 'eslint-config-prettier'
+import eslint from './app/functions/libs/eslint/configs/eslint.js'
+import prettier from './app/functions/libs/eslint/configs/prettier.js'
+import typescript from './app/functions/libs/eslint/configs/typescript.js'
+import react from './app/functions/libs/eslint/configs/react.js'
+import next from './app/functions/libs/eslint/configs/next.js'
+import storybook from './app/functions/libs/eslint/configs/storybook.js'
+import testingLibrary from './app/functions/libs/eslint/configs/testingLibrary.js'
+import customRules from './app/functions/libs/eslint/configs/customRules.js'
 
 const ignores = [
   '**/node_modules/',
@@ -31,25 +28,14 @@ const ignores = [
   '**/.storybook/**',
 ]
 
-/**
- * NOTE: jsConfig, tsConfig は ts ファイルで宣言できるが、jsxA11yConfig は ts ファイルで宣言できない（型ファイルが存在しない）
- * これはルール作成の際に js で書いているためだと思われる。
- *
- * NOTE: mjsへ切り出してnpx eslint --inspect-configしても即時反映されない、おそらく見ている範囲がeslint.config.mjsなのでインポート先までは
- * 見てくれなさそう。リント走らせると即時反映されているのがわかるのでGUIだけ反応しない
- */
-
 export default [
   { ignores },
-  ...jsConfig,
-  ...tsConfig,
-  ...nextConfig,
-  ...reactConfig,
-  ...reactHooksConfig,
-  ...jsxA11yConfig,
-  ...importConfig,
-  ...storybookConfig,
-  ...testingLibraryConfig,
-  ...customRulesConfig,
-  prettier,
+  ...eslint,
+  ...prettier,
+  ...typescript,
+  ...react,
+  ...next,
+  ...storybook,
+  ...testingLibrary,
+  ...customRules,
 ]

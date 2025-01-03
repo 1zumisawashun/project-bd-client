@@ -2,21 +2,21 @@
 
 import { Button } from '@/components/buttons/Button'
 import { IconAnchorButton } from '@/components/buttons/IconAnchorButton'
-import { ChevronLeftIcon } from '@radix-ui/react-icons'
-import {
-  useFormContext,
-  SubmitHandler,
-  SubmitErrorHandler,
-} from 'react-hook-form'
-import { startTransition } from 'react'
-import { useRouter } from 'next/navigation'
 import { useToastDispatch } from '@/components/elements/Toast'
 import { HStack } from '@/components/layouts/HStack'
-import styles from '../articleCreate.module.scss'
-import { Schema } from '../articleCreate.schema'
-import { createArticle } from '../articleCreate.action'
+import { ChevronLeftIcon } from '@radix-ui/react-icons'
+import { useRouter } from 'next/navigation'
+import { startTransition } from 'react'
+import {
+  SubmitErrorHandler,
+  SubmitHandler,
+  useFormContext,
+} from 'react-hook-form'
+import { Schema } from '../../articleCreate.schema'
+import { createArticle } from './articleCreateHeader.action'
+import styles from './articleCreateHeader.module.scss'
 
-const BLOCK_NAME = 'article-create'
+const BLOCK_NAME = 'articleCreateHeader'
 export const ArticleCreateHeader: React.FC = () => {
   const router = useRouter()
   const openToast = useToastDispatch()
@@ -58,7 +58,7 @@ export const ArticleCreateHeader: React.FC = () => {
   }
 
   return (
-    <header className={styles[`${BLOCK_NAME}-header`]}>
+    <header className={styles[`${BLOCK_NAME}`]}>
       <IconAnchorButton href="/" variant="ghost">
         <ChevronLeftIcon />
       </IconAnchorButton>

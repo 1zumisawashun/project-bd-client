@@ -13,7 +13,7 @@ import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { useRouter } from 'next/navigation'
 import { startTransition } from 'react'
-import { deleteArticle } from '../../articleDetail.action'
+import { deleteArticle } from './deleteDialog.action'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']

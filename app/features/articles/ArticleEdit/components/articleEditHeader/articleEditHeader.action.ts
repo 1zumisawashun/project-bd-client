@@ -5,7 +5,7 @@ import { actionResult } from '@/functions/helpers/utils'
 import { ActionsResult, Article } from '@/functions/types'
 import { updateArticle } from '@/functions/db/article'
 import { createCategory, getCategoryByName } from '@/functions/db/category'
-import { Schema, schema } from './articleEdit.schema'
+import { Schema, schema } from '../../articleEdit.schema'
 
 type Return = ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
 type Props = { data: Schema; id: string }

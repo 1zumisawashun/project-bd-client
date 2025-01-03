@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
-import { schema, Schema } from '../articleEdit.schema'
+import { schema, Schema } from '../../articleEdit.schema'
 
 type Props = {
   children: React.ReactNode

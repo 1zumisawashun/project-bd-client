@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
-import { schema, Schema } from '../articleCreate.schema'
+import { schema, Schema } from '../../articleCreate.schema'
 
 export const ArticleCreateProvider: React.FC<{
   children: React.ReactNode

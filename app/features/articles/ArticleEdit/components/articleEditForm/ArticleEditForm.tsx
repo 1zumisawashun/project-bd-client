@@ -11,13 +11,13 @@ import { TextInput } from '@/components/forms/TextInput'
 import { AutocompleteInputGroup } from '@/components/forms/AutocompleteInput'
 import { Label, LabelAction } from '@/components/elements/Label'
 import { HStack } from '@/components/layouts/HStack'
-import { Schema } from '../articleCreate.schema'
-import { ArticleEditor } from '../../components/ArticleEditor'
+import { ArticleEditor } from '../../../components/ArticleEditor'
+import { Schema } from '../../articleEdit.schema'
 
 type Props = {
   categoryOptions: string[]
 }
-export const ArticleCreateForm: React.FC<Props> = ({ categoryOptions }) => {
+export const ArticleEditForm: React.FC<Props> = ({ categoryOptions }) => {
   const {
     control,
     register,

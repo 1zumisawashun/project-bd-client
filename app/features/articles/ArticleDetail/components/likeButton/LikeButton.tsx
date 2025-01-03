@@ -5,7 +5,7 @@ import { useToastDispatch } from '@/components/elements/Toast'
 import { HeartFilledIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
 import { startTransition } from 'react'
-import { dislikeArticle } from '../../articleDetail.action'
+import { dislikeArticle } from './likeButton.action'
 import styles from './likeButton.module.scss'
 
 const BLOCK_NAME = 'likeButton'

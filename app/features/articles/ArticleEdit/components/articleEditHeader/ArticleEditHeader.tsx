@@ -2,21 +2,21 @@
 
 import { Button } from '@/components/buttons/Button'
 import { IconAnchorButton } from '@/components/buttons/IconAnchorButton'
-import { ChevronLeftIcon } from '@radix-ui/react-icons'
-import {
-  useFormContext,
-  SubmitHandler,
-  SubmitErrorHandler,
-} from 'react-hook-form'
-import { startTransition } from 'react'
-import { useRouter } from 'next/navigation'
 import { useToastDispatch } from '@/components/elements/Toast'
 import { HStack } from '@/components/layouts/HStack'
-import styles from '../articleEdit.module.scss'
-import { Schema } from '../articleEdit.schema'
-import { editArticle } from '../articleEdit.action'
+import { ChevronLeftIcon } from '@radix-ui/react-icons'
+import { useRouter } from 'next/navigation'
+import { startTransition } from 'react'
+import {
+  SubmitErrorHandler,
+  SubmitHandler,
+  useFormContext,
+} from 'react-hook-form'
+import { Schema } from '../../articleEdit.schema'
+import { editArticle } from './articleEditHeader.action'
+import styles from './articleEditHeader.module.scss'
 
-const BLOCK_NAME = 'article-edit'
+const BLOCK_NAME = 'articleEditHeader'
 type Props = {
   articleId: string
 }
@@ -61,7 +61,7 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
   }
 
   return (
-    <header className={styles[`${BLOCK_NAME}-header`]}>
+    <header className={styles[`${BLOCK_NAME}`]}>
       <IconAnchorButton href={`/articles/${articleId}`} variant="ghost">
         <ChevronLeftIcon />
       </IconAnchorButton>

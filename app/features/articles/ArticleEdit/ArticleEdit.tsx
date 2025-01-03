@@ -1,12 +1,12 @@
 'use client'
 
-import styles from '@/components/layouts/SiteWrapper/index.module.scss'
 import { Footer } from '@/components/elements/Footer'
+import styles from '@/components/layouts/SiteWrapper/index.module.scss'
 import { StickyWrapper } from '@/components/layouts/StickyWrapper'
 import { Schema } from './articleEdit.schema'
-import { ArticleEditForm } from './components/ArticleEditForm'
-import { ArticleEditHeader } from './components/ArticleEditHeader'
-import { ArticleEditProvider } from './components/ArticleEditProvider'
+import { ArticleEditForm } from './components/articleEditForm/ArticleEditForm'
+import { ArticleEditHeader } from './components/articleEditHeader/ArticleEditHeader'
+import { ArticleEditProvider } from './components/articleEditProvider/ArticleEditProvider'
 
 const BLOCK_NAME = 'site-wrapper'
 type Props = {

@@ -1,12 +1,12 @@
 'use client'
 
-import styles from '@/components/layouts/SiteWrapper/index.module.scss'
 import { Footer } from '@/components/elements/Footer'
+import styles from '@/components/layouts/SiteWrapper/index.module.scss'
 import { StickyWrapper } from '@/components/layouts/StickyWrapper'
-import { ArticleCreateForm } from './components/ArticleCreateForm'
-import { ArticleCreateHeader } from './components/ArticleCreateHeader'
-import { ArticleCreateProvider } from './components/ArticleCreateProvider'
 import { Schema } from './articleCreate.schema'
+import { ArticleCreateForm } from './components/articleCreateForm/ArticleCreateForm'
+import { ArticleCreateHeader } from './components/articleCreateHeader/ArticleCreateHeader'
+import { ArticleCreateProvider } from './components/articleCreateProvider/ArticleCreateProvider'
 
 const BLOCK_NAME = 'site-wrapper'
 type Props = {

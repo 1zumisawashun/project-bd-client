@@ -1,11 +1,10 @@
-import type { Metadata } from 'next'
-import { Montserrat } from 'next/font/google'
-import '@/assets/the-new-css-reset.css'
 import '@/assets/global.scss'
+import '@/assets/the-new-css-reset.css'
 import AppProviders from '@/providers'
 import { Analytics } from '@vercel/analytics/react'
+import type { Metadata } from 'next'
+import { Montserrat } from 'next/font/google'
 
-// MEMO: お気に入りのフォントを指定するw
 const montserrat = Montserrat({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Create Next App',

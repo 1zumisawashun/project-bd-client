@@ -1,25 +1,25 @@
 'use client'
 
 import { IconButton } from '@/components/buttons/IconButton'
-import { HeartIcon } from '@radix-ui/react-icons'
-import { startTransition } from 'react'
-import { useRouter } from 'next/navigation'
 import { useToastDispatch } from '@/components/elements/Toast'
+import { HeartFilledIcon } from '@radix-ui/react-icons'
+import { useRouter } from 'next/navigation'
+import { startTransition } from 'react'
+import { dislikeArticle } from '../../articleDetail.action'
 import styles from '../articleDetail.module.scss'
-import { likeArticle } from '../articleDetail.action'
 
 const BLOCK_NAME = 'article-detail'
 type Props = {
   articleId: string
   userId: string
 }
-export const DislikeButton: React.FC<Props> = ({ articleId, userId }) => {
+export const LikeButton: React.FC<Props> = ({ articleId, userId }) => {
   const router = useRouter()
   const openToast = useToastDispatch()
 
-  const handleLike = async () => {
+  const handleDislike = async () => {
     startTransition(async () => {
-      const response = await likeArticle({ articleId, userId })
+      const response = await dislikeArticle({ articleId, userId })
 
       if (!response?.isSuccess) {
         openToast({
@@ -34,8 +34,8 @@ export const DislikeButton: React.FC<Props> = ({ articleId, userId }) => {
   }
 
   return (
-    <IconButton shape="circle" variant="outlined" onClick={handleLike}>
-      <HeartIcon className={styles[`${BLOCK_NAME}-like-icon`]} />
+    <IconButton shape="circle" variant="outlined" onClick={handleDislike}>
+      <HeartFilledIcon className={styles[`${BLOCK_NAME}-like-icon`]} />
     </IconButton>
   )
 }

@@ -1,6 +1,6 @@
+import pluginJsxA11y from 'eslint-plugin-jsx-a11y'
 import pluginReact from 'eslint-plugin-react'
 import pluginReactHooks from 'eslint-plugin-react-hooks'
-import pluginJsxA11y from 'eslint-plugin-jsx-a11y'
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [
@@ -15,6 +15,7 @@ export default [
       'react/function-component-definition': 'off',
       'react/prop-types': 'off',
       'react/jsx-props-no-spreading': 'off',
+      'react/self-closing-comp': 'error',
     },
     // https://github.com/jsx-eslint/eslint-plugin-react#configuration
     settings: {

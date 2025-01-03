@@ -3,7 +3,8 @@
   "scss.validate": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit"
+    "source.fixAll.stylelint": "explicit",
+    "source.organizeImports": "explicit"
   },
   "editor.guides.bracketPairs": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

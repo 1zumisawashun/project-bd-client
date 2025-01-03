@@ -10,9 +10,9 @@ import { BaseArticleDetail } from '../baseArticleDetail/BaseArticleDetail'
 import { DeleteDialog } from '../deleteDialog/DeleteDialog'
 import { DraftDialog } from '../draftDialog/DraftDialog'
 import { PublishDialog } from '../publishDialog/PublishDialog'
-import styles from './articleDetail.module.scss'
+import styles from './authorArticleDetail.module.scss'
 
-const BLOCK_NAME = 'article-detail'
+const BLOCK_NAME = 'authorArticleDetail'
 
 const buttonProps = {
   variant: 'ghost',

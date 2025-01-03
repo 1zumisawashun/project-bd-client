@@ -6,9 +6,9 @@ import { HeartFilledIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
 import { startTransition } from 'react'
 import { dislikeArticle } from '../../articleDetail.action'
-import styles from '../articleDetail.module.scss'
+import styles from './likeButton.module.scss'
 
-const BLOCK_NAME = 'article-detail'
+const BLOCK_NAME = 'likeButton'
 type Props = {
   articleId: string
   userId: string
@@ -35,7 +35,7 @@ export const LikeButton: React.FC<Props> = ({ articleId, userId }) => {
 
   return (
     <IconButton shape="circle" variant="outlined" onClick={handleDislike}>
-      <HeartFilledIcon className={styles[`${BLOCK_NAME}-like-icon`]} />
+      <HeartFilledIcon className={styles[`${BLOCK_NAME}-icon`]} />
     </IconButton>
   )
 }

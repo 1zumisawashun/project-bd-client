@@ -7,9 +7,9 @@ import { VStack } from '@/components/layouts/VStack'
 import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import { Article } from '@/functions/types'
 import DOMPurify from 'dompurify'
-import styles from './articleDetail.module.scss'
+import styles from './baseArticleDetail.module.scss'
 
-const BLOCK_NAME = 'article-detail'
+const BLOCK_NAME = 'baseArticleDetail'
 type Props = {
   article: Article
   status: React.ReactNode

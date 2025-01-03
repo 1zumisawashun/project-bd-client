@@ -1,34 +1,34 @@
 'use client'
 
 import { Button } from '@/components/buttons/Button'
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { Card, CardBody } from '@/components/elements/Card'
-import { HStack } from '@/components/layouts/HStack'
-import { TextInput } from '@/components/forms/TextInput'
-import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useToastDispatch } from '@/components/elements/Toast'
+import { Description, Title } from '@/components/elements/Typography'
 import {
   Form,
-  FormField,
   FormErrorMessage,
+  FormField,
   FormLabel,
 } from '@/components/forms/Form'
+import { TextInput } from '@/components/forms/TextInput'
+import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
-import { startTransition } from 'react'
-import { Title, Description } from '@/components/elements/Typography'
+import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { User } from '@/functions/types'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { useToastDispatch } from '@/components/elements/Toast'
-import { ProfileSchema, profileSchema } from '../myPageSetting.schema'
-import { updateProfile } from '../myPageSetting.action'
+import { startTransition } from 'react'
+import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
+import { updateEmail } from './myPageEmail.action'
+import { EmailSchema, emailSchema } from './myPageEmail.schema'
 
-const ProfilePreview: React.FC<{ name: string; open: () => void }> = ({
-  name,
+const EmailPreview: React.FC<{ email: string; open: () => void }> = ({
+  email,
   open,
 }) => {
   return (
     <VStack>
-      <p>現在の名前: {name}</p>
+      <p>現在のメールアドレス: {email}</p>
       <HStack>
         <Button onClick={open}>変更する</Button>
       </HStack>
@@ -36,10 +36,10 @@ const ProfilePreview: React.FC<{ name: string; open: () => void }> = ({
   )
 }
 
-const ProfileEditForm: React.FC<{
-  name: string
-  close: () => void
-}> = ({ name, close }) => {
+const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
+  email,
+  close,
+}) => {
   const router = useRouter()
   const openToast = useToastDispatch()
 
@@ -47,17 +47,17 @@ const ProfileEditForm: React.FC<{
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProfileSchema>({
+  } = useForm<EmailSchema>({
     mode: 'onTouched',
-    resolver: zodResolver(profileSchema),
+    resolver: zodResolver(emailSchema),
     defaultValues: {
-      name,
+      email,
     },
   })
 
-  const onSubmit: SubmitHandler<ProfileSchema> = async (data) => {
+  const onSubmit: SubmitHandler<EmailSchema> = async (data) => {
     startTransition(async () => {
-      const response = await updateProfile({ data })
+      const response = await updateEmail({ data })
 
       if (!response?.isSuccess) {
         openToast({
@@ -78,7 +78,7 @@ const ProfileEditForm: React.FC<{
     })
   }
 
-  const onError: SubmitErrorHandler<ProfileSchema> = (error) => {
+  const onError: SubmitErrorHandler<EmailSchema> = (error) => {
     openToast({
       theme: 'danger',
       title: 'エラーが発生しました',
@@ -89,13 +89,12 @@ const ProfileEditForm: React.FC<{
   return (
     <VStack>
       <Form>
-        <FormField name="name" serverInvalid={!!errors.name}>
-          <FormLabel>名前</FormLabel>
-          <TextInput {...register('name')} />
-          <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+        <FormField name="email" serverInvalid={!!errors.email}>
+          <FormLabel>メールアドレス</FormLabel>
+          <TextInput {...register('email')} />
+          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
         </FormField>
       </Form>
-
       <HStack>
         <Button onClick={close}>キャンセル</Button>
         <Button onClick={handleSubmit(onSubmit, onError)}>変更する</Button>
@@ -104,23 +103,23 @@ const ProfileEditForm: React.FC<{
   )
 }
 
-export const MyPageProfile: React.FC<{ user: User }> = ({ user }) => {
+export const MyPageEmail: React.FC<{ user: User }> = ({ user }) => {
   const { isOpen, open, close } = useDisclosure()
-  const name = user.name ?? '名無し'
+  const email = user.email ?? ''
 
   return (
     <Card>
       <CardBody>
         <VStack gap={2}>
-          <Title>プロフィールを変更する</Title>
+          <Title>メールアドレスを変更する</Title>
           <Description>
-            プロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更する
+            メールアドレスを変更するメールアドレスを変更するメールアドレスを変更するメールアドレスを変更するメールアドレスを変更する
           </Description>
         </VStack>
         {isOpen ? (
-          <ProfileEditForm name={name} close={close} />
+          <EmailEditForm email={email} close={close} />
         ) : (
-          <ProfilePreview name={name} open={open} />
+          <EmailPreview email={email} open={open} />
         )}
       </CardBody>
     </Card>

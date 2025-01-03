@@ -1,17 +1,17 @@
 'use client'
 
+import { Label, LabelAction } from '@/components/elements/Label'
+import { AutocompleteInputGroup } from '@/components/forms/AutocompleteInput'
 import {
   Form,
   FormErrorMessage,
   FormField,
   FormLabel,
 } from '@/components/forms/Form'
-import { Controller, useFormContext, useFieldArray } from 'react-hook-form'
 import { TextInput } from '@/components/forms/TextInput'
-import { AutocompleteInputGroup } from '@/components/forms/AutocompleteInput'
-import { Label, LabelAction } from '@/components/elements/Label'
 import { HStack } from '@/components/layouts/HStack'
-import { ArticleEditor } from '../../../components/ArticleEditor'
+import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
+import { ArticleEditor } from '../../../components/articleEditor/ArticleEditor'
 import { Schema } from '../../articleEdit.schema'
 
 type Props = {

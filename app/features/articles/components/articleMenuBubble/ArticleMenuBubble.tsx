@@ -1,10 +1,10 @@
-import { tiptapClient } from '@/components/elements/Editor/helpers/tiptapClient'
-import { MenuBubble } from '@/components/elements/Editor'
 import { Button } from '@/components/buttons/Button'
+import { MenuBubble } from '@/components/elements/Editor'
+import { tiptapClient } from '@/components/elements/Editor/helpers/tiptapClient'
 import { Editor } from '@tiptap/react'
-import styles from '../articles.module.scss'
+import styles from './articleMenuBubble.module.scss'
 
-const BLOCK_NAME = 'articles'
+const BLOCK_NAME = 'articleMenuBubble'
 type Props = {
   editor: Editor
 }
@@ -17,7 +17,7 @@ export const ArticleMenuBubble: React.FC<Props> = ({ editor }) => {
     <MenuBubble
       editor={editor}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      className={styles[`${BLOCK_NAME}-menu-bubble`] as any}
+      className={styles[`${BLOCK_NAME}`] as any}
     >
       {items.map((d) => {
         const Icon = d.icon ?? null

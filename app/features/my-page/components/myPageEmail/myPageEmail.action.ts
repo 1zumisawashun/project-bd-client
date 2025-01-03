@@ -1,15 +1,10 @@
 'use server'
 
+import { getUserByEmail, updateUser } from '@/functions/db/user'
 import { actionResult } from '@/functions/helpers/utils'
-import { ActionsResult, User } from '@/functions/types'
 import { auth } from '@/functions/libs/next-auth/auth'
-import { updateUser, getUserByEmail } from '@/functions/db/user'
-import {
-  EmailSchema,
-  emailSchema,
-  ProfileSchema,
-  profileSchema,
-} from './myPageSetting.schema'
+import { ActionsResult, User } from '@/functions/types'
+import { EmailSchema, emailSchema } from './myPageEmail.schema'
 
 type Return = ActionsResult<Omit<User, 'posts' | 'likedArticles'>>
 export const updateEmail = async ({
@@ -42,35 +37,6 @@ export const updateEmail = async ({
       id: session.user.id,
       data: validatedFields.data,
     })
-    return actionResult.success(response)
-  } catch (error) {
-    return actionResult.error(error)
-  }
-}
-
-export const updateProfile = async ({
-  data,
-}: {
-  data: ProfileSchema
-}): Promise<Return> => {
-  try {
-    const session = await auth()
-
-    if (!session?.user.id) {
-      return actionResult.end('ログインしてください')
-    }
-
-    const validatedFields = profileSchema.safeParse(data)
-
-    if (!validatedFields.success) {
-      return actionResult.end(validatedFields.error.message)
-    }
-
-    const response = await updateUser({
-      id: session.user.id,
-      data: validatedFields.data,
-    })
-
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)

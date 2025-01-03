@@ -1,7 +1,7 @@
-import NextLink from 'next/link'
 import { Articles } from '@/functions/types'
-import { ArticleCard } from '../components/ArticleCard'
-import { ArticleCardGroup } from '../components/ArticleCardGroup'
+import NextLink from 'next/link'
+import { ArticleCard } from '../components/articleCard/ArticleCard'
+import { ArticleCardGroup } from '../components/articleCardGroup/ArticleCardGroup'
 
 type Props = {
   articles: Articles

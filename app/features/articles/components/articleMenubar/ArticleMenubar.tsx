@@ -8,9 +8,9 @@ import {
 } from '@/components/elements/Menubar'
 import { TextIcon } from '@radix-ui/react-icons'
 import { tiptapClient } from '@/components/elements/Editor/helpers/tiptapClient'
-import styles from '../articles.module.scss'
+import styles from './articleMenubar.module.scss'
 
-const BLOCK_NAME = 'articles'
+const BLOCK_NAME = 'articleMenubar'
 type Props = {
   editor: Editor
 }
@@ -80,7 +80,7 @@ export const ArticleMenubar: React.FC<Props> = ({ editor }) => {
   const groupedItems = Object.groupBy(items, (item) => item.type)
 
   return (
-    <Menubar className={styles[`${BLOCK_NAME}-menubar`]}>
+    <Menubar className={styles[`${BLOCK_NAME}`]}>
       {Object.entries(groupedItems).map(([key, value]) => {
         const Icon =
           key === 'typography' ? TextIcon : (value?.[0]?.icon ?? TextIcon)

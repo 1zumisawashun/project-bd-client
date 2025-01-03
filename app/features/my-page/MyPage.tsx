@@ -5,8 +5,8 @@ import {
   TabsTrigger,
 } from '@/components/elements/Tabs'
 import { User } from '@/functions/types'
-import { MyPagePost } from './MypagePost/MyPagePost'
-import { MyPageSetting } from './MyPageSetting/MyPageSetting'
+import { MyPageArticleCard } from './components/myPageArticleCard/MyPageArticleCard'
+import { MyPageSetting } from './components/myPageSetting/MyPageSetting'
 
 type Props = {
   user: User
@@ -31,13 +31,13 @@ export const MyPage: React.FC<Props> = ({ user }) => {
         <MyPageSetting user={user} />
       </TabsContent>
       <TabsContent value="published">
-        <MyPagePost articles={published} />
+        <MyPageArticleCard articles={published} />
       </TabsContent>
       <TabsContent value="draft">
-        <MyPagePost articles={draft} />
+        <MyPageArticleCard articles={draft} />
       </TabsContent>
       <TabsContent value="like">
-        <MyPagePost articles={liked} />
+        <MyPageArticleCard articles={liked} />
       </TabsContent>
     </Tabs>
   )

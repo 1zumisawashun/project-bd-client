@@ -2,9 +2,9 @@
 
 import { VStack } from '@/components/layouts/VStack'
 import { User } from '@/functions/types'
-import { MyPageLogout } from './components/MyPageLogout'
-import { MyPageProfile } from './components/MyPageProfile'
-import { MyPageEmail } from './components/MyPageEmail'
+import { MyPageEmail } from '../myPageEmail/MyPageEmail'
+import { MyPageLogout } from '../myPageLogout/MyPageLogout'
+import { MyPageProfile } from '../myPageProfile/MyPageProfile'
 
 type Props = {
   user: User

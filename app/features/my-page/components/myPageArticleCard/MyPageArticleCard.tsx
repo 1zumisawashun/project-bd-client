@@ -1,13 +1,13 @@
-import { ArticleCard } from '@/features/articles/components/ArticleCard'
-import { ArticleCardGroup } from '@/features/articles/components/ArticleCardGroup'
-import NextLink from 'next/link'
-import { User } from '@/functions/types'
 import { NotFound } from '@/components/elements/NotFound'
+import { ArticleCard } from '@/features/articles/components/articleCard/ArticleCard'
+import { ArticleCardGroup } from '@/features/articles/components/articleCardGroup/ArticleCardGroup'
+import { User } from '@/functions/types'
+import NextLink from 'next/link'
 
 type Props = {
   articles: User['posts']
 }
-export const MyPagePost: React.FC<Props> = ({ articles }) => {
+export const MyPageArticleCard: React.FC<Props> = ({ articles }) => {
   if (articles.length === 0) {
     return <NotFound />
   }

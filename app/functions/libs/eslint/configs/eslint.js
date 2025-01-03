@@ -23,6 +23,7 @@ export default [
     files: ['**/*.{ts,tsx}'],
     rules: {
       ...pluginImport.flatConfigs.recommended.rules,
+      // NOTE: https://typescript-eslint.io/troubleshooting/typed-linting/performance/#eslint-plugin-import
       'import/named': 'off',
       'import/namespace': 'off',
       'import/default': 'off',

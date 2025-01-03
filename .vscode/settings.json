@@ -12,6 +12,5 @@
   "typescript.referencesCodeLens.enabled": true,
   "editor.stickyScroll.enabled": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "json.schemaDownload.enable": true,
-  "eslint.useFlatConfig": true
+  "json.schemaDownload.enable": true
 }

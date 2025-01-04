@@ -1,12 +1,12 @@
-import { auth } from '@/functions/libs/next-auth/auth'
 import {
   authRouteOptions,
-  publicRouteOptions,
   privateRouteOptions,
+  publicRouteOptions,
 } from '@/functions/constants/routes'
-import styles from './index.module.scss'
-import { HamburgerMenu } from '../HamburgerMenu'
+import { auth } from '@/functions/libs/next-auth/auth'
 import { AnchorButton } from '../../buttons/AnchorButton'
+import { HamburgerMenu } from '../HamburgerMenu'
+import styles from './index.module.scss'
 
 const BLOCK_NAME = 'header'
 
@@ -16,7 +16,7 @@ export const Header: React.FC = async () => {
   const isAuthenticated = !!session
 
   const routes = isAuthenticated
-    ? [...publicRouteOptions, ...privateRouteOptions]
+    ? [...privateRouteOptions, ...publicRouteOptions]
     : [...authRouteOptions, ...publicRouteOptions]
 
   return (

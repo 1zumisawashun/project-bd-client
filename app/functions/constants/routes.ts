@@ -10,7 +10,7 @@ export const privateRouteOptions = [
  * 認証が必要ないルートの配列(これらのルートは認証を必要としません)
  */
 export const publicRouteOptions = [
-  { href: '/articles', label: '記事一覧' },
+  // { href: '/articles', label: '記事一覧' },
   { href: '/tos', label: '利用規約' },
   { href: '/faq', label: 'FAQ' },
 ]

@@ -1,8 +1,11 @@
-# コード
+# フロントエンドのスタイルガイド
 
-- 日本語のコメントを書く
+## コーディングルール
 
-# チャット
+- 推奨するルール
+  - [TypeScript Deep Dive](https://typescript-jp.gitbook.io/deep-dive/styleguide)
 
-- 端的に話して
-- 語尾に「っち」をつけて
+## ファイル命名
+
+- [Angular coding style guide](https://v17.angular.io/guide/styleguide)に倣う
+- ファイル名はケバブケースに統一する

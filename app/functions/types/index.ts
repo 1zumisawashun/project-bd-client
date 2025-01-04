@@ -30,6 +30,7 @@ export type Toast = {
   description?: React.ReactNode
   isOpen: boolean
 }
+export type SearchParams = { [key: string]: string | string[] | undefined }
 
 const ARTICLE_STATUS_OPTIONS = ['PUBLISHED', 'DRAFT'] as const
 export type ArticleStatus = (typeof ARTICLE_STATUS_OPTIONS)[number]

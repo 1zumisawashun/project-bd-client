@@ -7,6 +7,7 @@ import { VStack } from '@/components/layouts/VStack'
 import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import { Article } from '@/functions/types'
 import DOMPurify from 'dompurify'
+import NextLink from 'next/link'
 import styles from './baseArticleDetail.module.scss'
 
 const BLOCK_NAME = 'baseArticleDetail'
@@ -42,7 +43,12 @@ export const BaseArticleDetail: React.FC<Props> = ({
 
       <HStack style={{ flexWrap: 'wrap' }} gap={2}>
         {article.categories.map((category) => (
-          <Label key={category.id}>{category.name}</Label>
+          <NextLink
+            key={category.id}
+            href={`/articles?category=${category.name}`}
+          >
+            <Label>{category.name}</Label>
+          </NextLink>
         ))}
       </HStack>
 

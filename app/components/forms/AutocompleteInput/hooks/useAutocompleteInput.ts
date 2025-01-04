@@ -1,5 +1,5 @@
-import { useState, ChangeEvent, ElementRef, KeyboardEvent } from 'react'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { ChangeEvent, ElementRef, KeyboardEvent, useState } from 'react'
 
 type Props = {
   options: string[]

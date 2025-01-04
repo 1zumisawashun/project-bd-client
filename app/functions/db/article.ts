@@ -1,9 +1,14 @@
 import prisma from '@/functions/libs/prisma-client/prisma'
 import { Prisma } from '@prisma/client'
 
-export const getArticles = async () => {
+export const getArticles = async ({ categories }: { categories: string[] }) => {
+  const where = {
+    categories:
+      categories.length !== 0 ? { some: { name: { in: categories } } } : {},
+  }
   try {
     const articles = await prisma.article.findMany({
+      where,
       include: { author: { select: { name: true } } },
     })
     return articles

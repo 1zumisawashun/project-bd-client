@@ -11,7 +11,13 @@ export default meta
 type Story = StoryObj<typeof ArticleList>
 
 const Render: React.FC = () => {
-  return <ArticleList articles={mockArticles} />
+  return (
+    <ArticleList
+      articles={mockArticles}
+      categoryOptions={[]}
+      defaultValues={[]}
+    />
+  )
 }
 export const Default: Story = {
   render: () => <Render />,

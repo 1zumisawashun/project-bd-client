@@ -38,19 +38,4 @@ export default [
   ...storybook,
   ...testingLibrary,
   ...customRules,
-  {
-    name: 'override eslintConfig for `**/*.{ts,tsx}`',
-    files: ['**/*.{ts,tsx}'],
-    rules: {
-      'no-restricted-syntax': [
-        'error',
-        {
-          // Component で子要素 = children を受け取る場合は PropsWithChildren を利用する
-          selector:
-            "TSTypeLiteral > TSPropertySignature[key.name='children'][typeAnnotation.typeAnnotation.typeName.name='ReactNode']",
-          message: 'Use PropsWithChildren instead of manually typing children.',
-        },
-      ],
-    },
-  },
 ]

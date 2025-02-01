@@ -4,9 +4,11 @@ import styles from '../index.module.scss'
 const BLOCK_NAME = 'menu'
 type Props = {
   onClick: () => void
-  children: React.ReactNode
 }
-export const MenuItem: React.FC<Props> = ({ onClick, children }) => {
+export const MenuItem: React.FC<React.PropsWithChildren<Props>> = ({
+  onClick,
+  children,
+}) => {
   return (
     <div className={styles[`${BLOCK_NAME}-item`]}>
       <Button

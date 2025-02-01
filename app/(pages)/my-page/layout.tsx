@@ -5,6 +5,6 @@ const title = 'My Page'
 export const metadata: Metadata = {
   title: `Project BD | ${title}`,
 }
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: React.PropsWithChildren) {
   return <SiteWrapper>{children}</SiteWrapper>
 }

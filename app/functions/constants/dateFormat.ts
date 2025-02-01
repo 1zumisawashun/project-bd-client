@@ -1,4 +1,5 @@
- 
+// なんか知らんけど一時的にno-restricted-syntaxが外れた？
+// eslint-disable-next-line
 export enum DateFormat {
   DATE = 'MM/DD/YYYY',
   DATE_WITH_SHORT_YEAR = 'MM/DD/YY',

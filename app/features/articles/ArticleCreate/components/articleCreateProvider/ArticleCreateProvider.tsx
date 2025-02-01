@@ -4,10 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import { schema, Schema } from '../../articleCreate.schema'
 
-export const ArticleCreateProvider: React.FC<{
-  children: React.ReactNode
+type Props = {
   defaultValues: Schema
-}> = ({ children, defaultValues }) => {
+}
+
+export const ArticleCreateProvider: React.FC<
+  React.PropsWithChildren<Props>
+> = ({ children, defaultValues }) => {
   const methods = useForm<Schema>({
     mode: 'onTouched',
     resolver: zodResolver(schema),

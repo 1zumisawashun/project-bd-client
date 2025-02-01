@@ -5,10 +5,9 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { schema, Schema } from '../../articleEdit.schema'
 
 type Props = {
-  children: React.ReactNode
   defaultValues: Schema
 }
-export const ArticleEditProvider: React.FC<Props> = ({
+export const ArticleEditProvider: React.FC<React.PropsWithChildren<Props>> = ({
   children,
   defaultValues,
 }) => {

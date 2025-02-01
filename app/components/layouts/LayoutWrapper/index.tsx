@@ -6,9 +6,9 @@ import styles from './index.module.scss'
 const BLOCK_NAME = 'layout-wrapper'
 
 // NOTE: SiteWrapper と同じように、ページの高さを調整するコンポーネント
-export const LayoutWrapper: React.FC<{
-  children: React.ReactNode
-}> = ({ children }) => {
+export const LayoutWrapper: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   const [top, setTop] = useState(0)
 
   return (

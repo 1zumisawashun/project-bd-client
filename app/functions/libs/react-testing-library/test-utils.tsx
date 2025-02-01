@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider'
 
 /** @description renderに必要なProviderはここでまとめて提供する */
-function AllTheProviders({ children }: { children: React.ReactNode }) {
+function AllTheProviders({ children }: React.PropsWithChildren) {
   /**
    * @description next/linkのモックを提供する
    * @see https://www.npmjs.com/package/next-router-mock

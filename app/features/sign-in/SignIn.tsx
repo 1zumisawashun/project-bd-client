@@ -1,22 +1,22 @@
 'use client'
 
+import { Button } from '@/components/buttons/Button'
 import { Card, CardBody } from '@/components/elements/Card'
+import { Link } from '@/components/elements/Link'
+import { SimpleDialog } from '@/components/elements/SimpleDialog'
 import {
   Form,
   FormErrorMessage,
   FormField,
   FormLabel,
 } from '@/components/forms/Form'
-import { Button } from '@/components/buttons/Button'
-import { Link } from '@/components/elements/Link'
 import { TextInput } from '@/components/forms/TextInput'
-import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { startTransition, useState } from 'react'
-import { SimpleDialog } from '@/components/elements/SimpleDialog'
-import { useRouter } from 'next/navigation'
 import { HStack } from '@/components/layouts/HStack'
+import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { startTransition, useState } from 'react'
+import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
 import { signIn } from './signIn.action'
 import { schema, Schema } from './signIn.schema'
 
@@ -39,7 +39,7 @@ export const SignIn: React.FC = () => {
     },
   })
 
-  const onSubmit: SubmitHandler<Schema> = async (data) => {
+  const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
       const response = await signIn({ data })
 
@@ -77,7 +77,9 @@ export const SignIn: React.FC = () => {
             <HStack>
               <Link href="/sign-up">新規登録はこちら</Link>
             </HStack>
-            <Button onClick={handleSubmit(onSubmit, onError)}>ログイン</Button>
+            <Button onClick={(e) => void handleSubmit(onSubmit, onError)(e)}>
+              ログイン
+            </Button>
           </HStack>
         </CardBody>
       </Card>

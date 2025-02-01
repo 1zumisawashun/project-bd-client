@@ -1,11 +1,11 @@
+import { Shape, Theme, Variant } from '@/functions/types'
 import clsx from 'clsx'
 import {
+  ComponentPropsWithoutRef,
   ElementRef,
   forwardRef,
-  ComponentPropsWithoutRef,
   ReactNode,
 } from 'react'
-import { Theme, Variant, Shape } from '@/functions/types'
 import styles from './index.module.scss'
 
 const BLOCK_NAME = 'button'
@@ -27,7 +27,7 @@ export const Button = forwardRef<Ref, Props>(
       theme = 'primary',
       variant = 'contained',
       shape,
-      loading,
+      // loading,
       disabled,
       className,
       prefix,

@@ -29,7 +29,7 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
     formState: { isDirty },
   } = useFormContext<Schema>()
 
-  const onSubmit: SubmitHandler<Schema> = async (data) => {
+  const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
       const response = await editArticle({ data, id: articleId })
 
@@ -69,7 +69,7 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
         <Button
           onClick={(e) => {
             setValue('status', 'DRAFT', { shouldDirty: true })
-            handleSubmit(onSubmit, onError)(e)
+            void handleSubmit(onSubmit, onError)(e)
           }}
           disabled={!isDirty}
         >
@@ -78,7 +78,7 @@ export const ArticleEditHeader: React.FC<Props> = ({ articleId }) => {
         <Button
           onClick={(e) => {
             setValue('status', 'PUBLISHED', { shouldDirty: true })
-            handleSubmit(onSubmit, onError)(e)
+            void handleSubmit(onSubmit, onError)(e)
           }}
           disabled={!isDirty}
         >

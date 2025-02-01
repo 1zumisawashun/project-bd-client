@@ -19,7 +19,7 @@ export const getUserById = async ({ id }: { id: string }) => {
       },
     })
     return user
-  } catch (e) {
+  } catch {
     return null
   }
 }
@@ -33,7 +33,7 @@ export const updateUser = async ({
   try {
     const user = await prisma.user.update({ where: { id }, data })
     return user
-  } catch (e) {
+  } catch {
     throw new Error('Failed to update user')
   }
 }

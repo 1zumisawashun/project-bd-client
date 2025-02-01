@@ -1,27 +1,27 @@
-import { getUserById } from '@/functions/db/user'
-import { getArticles, getArticleById } from '@/functions/db/article'
+import { getArticleById, getArticles } from '@/functions/db/article'
 import { getCategories } from '@/functions/db/category'
+import { getUserById } from '@/functions/db/user'
 
-const THEME_OPTIONS = ['primary', 'danger'] as const
-export type Theme = (typeof THEME_OPTIONS)[number] | (string & {})
+const _THEME_OPTIONS = ['primary', 'danger'] as const
+export type Theme = (typeof _THEME_OPTIONS)[number] | (string & {})
 
-const VARIANT_OPTIONS = ['contained', 'outlined', 'ghost'] as const
-export type Variant = (typeof VARIANT_OPTIONS)[number] | (string & {})
+const _VARIANT_OPTIONS = ['contained', 'outlined', 'ghost'] as const
+export type Variant = (typeof _VARIANT_OPTIONS)[number] | (string & {})
 
-const SIZE_OPTIONS = ['sm', 'md', 'lg'] as const
-export type Size = (typeof SIZE_OPTIONS)[number] | (string & {})
+const _SIZE_OPTIONS = ['sm', 'md', 'lg'] as const
+export type Size = (typeof _SIZE_OPTIONS)[number] | (string & {})
 
-const SHAPE_OPTIONS = ['rounded', 'circle'] as const
-export type Shape = (typeof SHAPE_OPTIONS)[number] | (string & {})
+const _SHAPE_OPTIONS = ['rounded', 'circle'] as const
+export type Shape = (typeof _SHAPE_OPTIONS)[number] | (string & {})
 
-const JUSTIFY_OPTIONS = ['start', 'center', 'end'] as const
-export type Justify = (typeof JUSTIFY_OPTIONS)[number] | (string & {})
+const _JUSTIFY_OPTIONS = ['start', 'center', 'end'] as const
+export type Justify = (typeof _JUSTIFY_OPTIONS)[number] | (string & {})
 
-const ALIGN_OPTIONS = ['start', 'center', 'end'] as const
-export type Align = (typeof ALIGN_OPTIONS)[number] | (string & {})
+const _ALIGN_OPTIONS = ['start', 'center', 'end'] as const
+export type Align = (typeof _ALIGN_OPTIONS)[number] | (string & {})
 
-const ACTION_OPTIONS = ['delete'] as const
-export type Action = (typeof ACTION_OPTIONS)[number]
+const _ACTION_OPTIONS = ['delete'] as const
+export type Action = (typeof _ACTION_OPTIONS)[number]
 
 export type Toast = {
   id: string
@@ -30,10 +30,10 @@ export type Toast = {
   description?: React.ReactNode
   isOpen: boolean
 }
-export type SearchParams = { [key: string]: string | string[] | undefined }
+export type SearchParams = Record<string, string | string[] | undefined>
 
-const ARTICLE_STATUS_OPTIONS = ['PUBLISHED', 'DRAFT'] as const
-export type ArticleStatus = (typeof ARTICLE_STATUS_OPTIONS)[number]
+const _ARTICLE_STATUS_OPTIONS = ['PUBLISHED', 'DRAFT'] as const
+export type ArticleStatus = (typeof _ARTICLE_STATUS_OPTIONS)[number]
 
 export type ActionsResult<T> =
   | {
@@ -56,5 +56,3 @@ export type Articles = NonNullable<Awaited<ReturnType<typeof getArticles>>>
 export type Article = NonNullable<Awaited<ReturnType<typeof getArticleById>>>
 
 export type Categories = NonNullable<Awaited<ReturnType<typeof getCategories>>>
-
-

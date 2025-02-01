@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import mockRouter from 'next-router-mock'
 import { createDynamicRouteParser } from 'next-router-mock/dynamic-routes'
 

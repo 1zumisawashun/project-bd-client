@@ -1,11 +1,12 @@
 import { mergeAttributes } from '@tiptap/react'
+import { HTMLAttributes } from 'react'
 
-import TiptapImage from '@tiptap/extension-image'
-import TiptapTextAlign from '@tiptap/extension-text-align'
-import TiptapLink from '@tiptap/extension-link'
-import TiptapFocus from '@tiptap/extension-focus'
-import TiptapPlaceholder from '@tiptap/extension-placeholder'
 import TiptapCharacterCount from '@tiptap/extension-character-count'
+import TiptapFocus from '@tiptap/extension-focus'
+import TiptapImage from '@tiptap/extension-image'
+import TiptapLink from '@tiptap/extension-link'
+import TiptapPlaceholder from '@tiptap/extension-placeholder'
+import TiptapTextAlign from '@tiptap/extension-text-align'
 
 // NOTE:https://tiptap.dev/api/nodes/image
 // NOTE:https://codesandbox.io/s/tiptap-image-forked-bvchsz?file=/src/Editor.jsx:409-416
@@ -19,7 +20,7 @@ export const Image = TiptapImage.extend({
   },
   // NOTE:components/Component.tsx見るといいかも
   renderHTML({ HTMLAttributes }) {
-    const { style } = HTMLAttributes
+    const { style } = HTMLAttributes as HTMLAttributes<Record<string, never>>
     return [
       'figure',
       { style },

@@ -1,5 +1,5 @@
-import { ElementRef, ComponentProps, forwardRef } from 'react'
 import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
+import { ComponentProps, ElementRef, forwardRef } from 'react'
 import { TextInput } from '../../TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
@@ -25,7 +25,7 @@ export const AutocompleteInputControl = forwardRef<Ref, Props>((props, ref) => {
         }}
         onKeyDown={(e) => {
           // NOTE: submitされるのでブロックする
-          onKeyDown(e, () => {})
+          onKeyDown(e, () => null)
         }}
         onFocus={onFocus}
         ref={ref}

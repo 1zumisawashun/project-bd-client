@@ -20,7 +20,7 @@ describe('useArrayState', () => {
     // NOTE:ここでresultを展開するとadd, removeが更新されなくなる
 
     // act
-    act(() => result.current[1].add('grape'))
+    act(() => void result.current[1].add('grape'))
     // assert
     expect(result.current[0].length).toBe(4)
   })
@@ -30,7 +30,7 @@ describe('useArrayState', () => {
     const initial = fruits
     const { result } = renderHook(() => useArrayState<string>(initial))
     // act
-    act(() => result.current[1].remove(1))
+    act(() => void result.current[1].remove(1))
     // assert
     expect(result.current[0].length).toBe(2)
   })

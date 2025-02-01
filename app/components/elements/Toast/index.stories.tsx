@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from '@/components/buttons/Button'
 import { VStack } from '@/components/layouts/VStack'
-import { ToastProvider, useToastDispatch } from './index'
 import { Toast } from './components/Toast'
+import { ToastProvider, useToastDispatch } from './index'
 
 const meta: Meta<typeof Toast> = {
   title: 'element/Toast',
@@ -32,7 +32,7 @@ const ToastStatusListRender: React.FC = () => {
           description: 'ディスクリプションディスクリプション',
           isOpen: true,
         }}
-        onClose={() => {}}
+        onClose={() => null}
       />
       <Toast
         value={{
@@ -42,7 +42,7 @@ const ToastStatusListRender: React.FC = () => {
           description: 'ディスクリプションディスクリプション',
           isOpen: true,
         }}
-        onClose={() => {}}
+        onClose={() => null}
       />
       <Toast
         value={{
@@ -52,7 +52,7 @@ const ToastStatusListRender: React.FC = () => {
           description: 'ディスクリプションディスクリプション',
           isOpen: true,
         }}
-        onClose={() => {}}
+        onClose={() => null}
       />
     </VStack>
   )

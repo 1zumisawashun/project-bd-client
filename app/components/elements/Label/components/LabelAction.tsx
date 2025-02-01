@@ -17,7 +17,7 @@ export const LabelAction: React.FC<Props> = ({
   className,
   ...rest
 }) => {
-  const Icon = icons[action!]
+  const Icon = icons[action]
   return (
     <IconButton
       className={clsx(styles[`${BLOCK_NAME}-button`], className)}

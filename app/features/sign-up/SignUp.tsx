@@ -1,27 +1,27 @@
 'use client'
 
+import { Button } from '@/components/buttons/Button'
 import { Card, CardBody } from '@/components/elements/Card'
+import { Link } from '@/components/elements/Link'
+import { Nl2br } from '@/components/elements/Nl2br'
+import { SimpleDialog } from '@/components/elements/SimpleDialog'
+import { Checkbox, CheckedState } from '@/components/forms/Checkbox'
 import {
   Form,
   FormErrorMessage,
   FormField,
   FormLabel,
 } from '@/components/forms/Form'
-import { Button } from '@/components/buttons/Button'
-import { Link } from '@/components/elements/Link'
 import { TextInput } from '@/components/forms/TextInput'
-import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Nl2br } from '@/components/elements/Nl2br'
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { startTransition, useState } from 'react'
-import { SimpleDialog } from '@/components/elements/SimpleDialog'
-import { useRouter } from 'next/navigation'
-import { Checkbox, CheckedState } from '@/components/forms/Checkbox'
 import { HStack } from '@/components/layouts/HStack'
+import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { startTransition, useState } from 'react'
+import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
 import { tos } from '../tos/tos.constant'
-import { schema, Schema } from './signUp.schema'
 import { signUp } from './signUp.action'
+import { schema, Schema } from './signUp.schema'
 
 export const SignUp: React.FC = () => {
   const dialog = useDisclosure()
@@ -43,7 +43,7 @@ export const SignUp: React.FC = () => {
     },
   })
 
-  const onSubmit: SubmitHandler<Schema> = async (data) => {
+  const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
       const response = await signUp({ data })
 
@@ -90,7 +90,7 @@ export const SignUp: React.FC = () => {
               <Link href="/sign-in">ログインはこちら</Link>
             </HStack>
             <Button
-              onClick={handleSubmit(onSubmit, onError)}
+              onClick={(e) => void handleSubmit(onSubmit, onError)(e)}
               disabled={!checkedState}
             >
               新規登録

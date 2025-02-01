@@ -12,13 +12,10 @@ export const ArticleMenuBubble: React.FC<Props> = ({ editor }) => {
   const { bold, italic, strike, trash, link } = tiptapClient(editor)
 
   const items = [bold, italic, strike, link, trash]
+  const className = styles[`${BLOCK_NAME}`]!
 
   return (
-    <MenuBubble
-      editor={editor}
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      className={styles[`${BLOCK_NAME}`] as any}
-    >
+    <MenuBubble editor={editor} className={className}>
       {items.map((d) => {
         const Icon = d.icon ?? null
         return (

@@ -55,7 +55,7 @@ const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
     },
   })
 
-  const onSubmit: SubmitHandler<EmailSchema> = async (data) => {
+  const onSubmit: SubmitHandler<EmailSchema> = (data) => {
     startTransition(async () => {
       const response = await updateEmail({ data })
 
@@ -97,7 +97,9 @@ const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
       </Form>
       <HStack>
         <Button onClick={close}>キャンセル</Button>
-        <Button onClick={handleSubmit(onSubmit, onError)}>変更する</Button>
+        <Button onClick={(e) => void handleSubmit(onSubmit, onError)(e)}>
+          変更する
+        </Button>
       </HStack>
     </VStack>
   )

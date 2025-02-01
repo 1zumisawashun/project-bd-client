@@ -1,12 +1,12 @@
-import {
-  ElementRef,
-  useRef,
-  ComponentProps,
-  forwardRef,
-  ChangeEvent,
-} from 'react'
 import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
 import { useMergeRef } from '@/functions/hooks/useMergeRef'
+import {
+  ChangeEvent,
+  ComponentProps,
+  ElementRef,
+  forwardRef,
+  useRef,
+} from 'react'
 import { TextInput } from '../../TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
@@ -37,7 +37,7 @@ export const AutocompleteInputUnControl = forwardRef<Ref, Props>(
           }}
           onKeyDown={(e) => {
             // NOTE: submitされるのでブロックする
-            onKeyDown(e, () => {})
+            onKeyDown(e, () => null)
           }}
           onFocus={onFocus}
           ref={mergeRef}

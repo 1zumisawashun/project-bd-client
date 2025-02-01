@@ -1,19 +1,19 @@
 'use client'
 
 import { Button } from '@/components/buttons/Button'
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { Card, CardBody } from '@/components/elements/Card'
-import { HStack } from '@/components/layouts/HStack'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
+import { Description, Title } from '@/components/elements/Typography'
+import { HStack } from '@/components/layouts/HStack'
+import { VStack } from '@/components/layouts/VStack'
+import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { VStack } from '@/components/layouts/VStack'
-import { Title, Description } from '@/components/elements/Typography'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']
@@ -38,7 +38,7 @@ export const LogoutDialog: React.FC<Props> = ({ isOpen, close }) => {
             <Button theme="danger" variant="outlined" onClick={close}>
               キャンセル
             </Button>
-            <Button theme="danger" onClick={logout}>
+            <Button theme="danger" onClick={() => void logout()}>
               ログアウトする
             </Button>
           </HStack>

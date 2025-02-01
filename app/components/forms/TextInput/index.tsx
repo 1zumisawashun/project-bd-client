@@ -1,5 +1,5 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import * as Form from '@radix-ui/react-form'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import styles from './index.module.scss'
 
 /** @see https://tech.smarthr.jp/entry/2024/03/12/170000 */
@@ -8,7 +8,7 @@ type Ref = ElementRef<'input'>
 
 const BLOCK_NAME = 'text-input'
 export const TextInput = forwardRef<Ref, Props>(
-  ({ className, disabled, width, ...props }, ref) => {
+  ({ className: _className, disabled, width: _width, ...props }, ref) => {
     return (
       <Form.Control asChild>
         <input

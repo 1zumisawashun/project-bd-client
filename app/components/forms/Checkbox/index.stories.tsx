@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { useArrayState } from '@/functions/hooks/useArrayState'
 import { VStack } from '@/components/layouts/VStack'
+import { useArrayState } from '@/functions/hooks/useArrayState'
+import { zodResolver } from '@hookform/resolvers/zod'
+import type { Meta, StoryObj } from '@storybook/react'
+import { Controller, useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { Card, CardBody } from '../../elements/Card'
+import { Form, FormErrorMessage, FormField } from '../Form'
 import { groupItems, statusItems } from '../forms.constant'
 import { Checkbox, CheckboxGroup } from './index'
-import { FormErrorMessage, FormField, Form } from '../Form'
-import { Card, CardBody } from '../../elements/Card'
 
 const meta: Meta<typeof Checkbox> = {
   title: 'form/Checkbox',
@@ -65,7 +65,7 @@ const CheckboxGroupControlledRender: React.FC = () => {
         <Controller
           control={control}
           name="checkbox"
-          render={({ field: { onChange, value, ...props } }) => (
+          render={({ field: { onChange, value: _value, ...props } }) => (
             <CheckboxGroup>
               {groupItems.map((d) => (
                 <Checkbox

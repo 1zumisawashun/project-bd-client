@@ -1,19 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { useForm, useFieldArray, Controller, useWatch } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
+import { Label, LabelAction } from '@/components/elements/Label'
 import {
   Form,
   FormErrorMessage,
   FormField,
   FormLabel,
 } from '@/components/forms/Form'
-import { Label, LabelAction } from '@/components/elements/Label'
 import { HStack } from '@/components/layouts/HStack'
+import { zodResolver } from '@hookform/resolvers/zod'
+import type { Meta, StoryObj } from '@storybook/react'
+import { Controller, useFieldArray, useForm, useWatch } from 'react-hook-form'
+import * as z from 'zod'
 import {
-  AutocompleteInputGroup,
-  AutocompleteInputControl,
   AutocompleteInput,
+  AutocompleteInputControl,
+  AutocompleteInputGroup,
   AutocompleteInputUnControl,
 } from '.'
 import { options } from '../forms.constant'
@@ -66,7 +66,7 @@ const DefaultRender: React.FC = () => {
 
 export const Default: Story = {
   args: {
-    onChange: () => {},
+    onChange: () => null,
     options: [],
   },
   render: () => <DefaultRender />,
@@ -115,7 +115,7 @@ const UnControlRender: React.FC = () => {
 
 export const UnControl: Story = {
   args: {
-    onChange: () => {},
+    onChange: () => null,
     options: [],
   },
   render: () => <UnControlRender />,
@@ -170,7 +170,7 @@ const ControlRender: React.FC = () => {
 
 export const Control: Story = {
   args: {
-    onChange: () => {},
+    onChange: () => null,
     options: [],
   },
   render: () => <ControlRender />,
@@ -233,7 +233,7 @@ const MultipleRender: React.FC = () => {
 
 export const Multiple: Story = {
   args: {
-    onChange: () => {},
+    onChange: () => null,
     options: [],
   },
   render: () => <MultipleRender />,

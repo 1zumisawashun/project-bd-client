@@ -1,22 +1,22 @@
 import type { Editor } from '@tiptap/core'
 
 import {
-  Link1Icon,
-  LinkBreak1Icon,
-  DividerHorizontalIcon,
-  QuoteIcon,
-  TrashIcon,
   CodeIcon,
-  TextAlignJustifyIcon,
-  TextAlignLeftIcon,
-  TextAlignCenterIcon,
-  TextAlignRightIcon,
+  DividerHorizontalIcon,
   FontBoldIcon,
   FontItalicIcon,
-  StrikethroughIcon,
-  ListBulletIcon,
-  TextIcon,
   HeadingIcon,
+  Link1Icon,
+  LinkBreak1Icon,
+  ListBulletIcon,
+  QuoteIcon,
+  StrikethroughIcon,
+  TextAlignCenterIcon,
+  TextAlignJustifyIcon,
+  TextAlignLeftIcon,
+  TextAlignRightIcon,
+  TextIcon,
+  TrashIcon,
 } from '@radix-ui/react-icons'
 
 export const tiptapClient = (editor: Editor | null) => {
@@ -306,7 +306,10 @@ export const tiptapClient = (editor: Editor | null) => {
 }
 
 const setLink = (editor: Editor | null) => {
-  const previousUrl = editor?.getAttributes('link')['href']
+  const link = editor?.getAttributes('link') as { href: string } | undefined
+  if (!link) return
+
+  const previousUrl = link.href
   const url = window.prompt('URL', previousUrl)
 
   // cancelled

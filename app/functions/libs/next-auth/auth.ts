@@ -1,12 +1,12 @@
-import NextAuth, { NextAuthConfig } from 'next-auth'
-import { PrismaAdapter } from '@auth/prisma-adapter'
-import prisma from '@/functions/libs/prisma-client/prisma'
-import GitHub from 'next-auth/providers/github'
-import Google from 'next-auth/providers/google'
-import Credentials from 'next-auth/providers/credentials'
 import { schema } from '@/features/sign-up/signUp.schema'
 import { getUserByEmail } from '@/functions/db/user'
 import { isPasswordValid } from '@/functions/helpers/hash'
+import prisma from '@/functions/libs/prisma-client/prisma'
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import NextAuth, { NextAuthConfig } from 'next-auth'
+import Credentials from 'next-auth/providers/credentials'
+import GitHub from 'next-auth/providers/github'
+import Google from 'next-auth/providers/google'
 
 const providers = [
   GitHub,
@@ -41,10 +41,10 @@ const providers = [
 
 /** @see https://next-auth.js.org/configuration/callbacks */
 const callbacks = {
-  async signIn() {
+  signIn() {
     return true
   },
-  async redirect({ baseUrl }) {
+  redirect({ baseUrl }) {
     return baseUrl
   },
   /**
@@ -55,7 +55,7 @@ const callbacks = {
    * 公式ドキュメントでも触れられているぽい（This means that the expires value is stripped away from session in Server Components.）
    * @see https://next-auth.js.org/configuration/nextjs#in-app-directory
    */
-  async session({ session, token }) {
+  session({ session, token }) {
     session.user.id = token.id
     session.user.role = token.role
     session.user.expires = session.expires
@@ -67,7 +67,7 @@ const callbacks = {
    * @param {any} token 「最初に呼び出されたときのみ」以降の呼び出しではtokenが使用可能。そのためuserをsessionでも使用したい場合はtokenにuserを追加する必要がある
    * あーだからここでtokenを作るのか、トークン=永続化するための情報を組んでくれってことね
    */
-  async jwt({ token, user }) {
+  jwt({ token, user }) {
     return { ...token, ...user }
   },
 } satisfies NextAuthConfig['callbacks']

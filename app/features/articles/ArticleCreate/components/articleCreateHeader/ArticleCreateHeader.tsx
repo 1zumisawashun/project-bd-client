@@ -26,7 +26,7 @@ export const ArticleCreateHeader: React.FC = () => {
     formState: { isDirty },
   } = useFormContext<Schema>()
 
-  const onSubmit: SubmitHandler<Schema> = async (data) => {
+  const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
       const response = await createArticle({ data })
 
@@ -66,7 +66,7 @@ export const ArticleCreateHeader: React.FC = () => {
         <Button
           onClick={(e) => {
             setValue('status', 'DRAFT', { shouldDirty: true })
-            handleSubmit(onSubmit, onError)(e)
+            void handleSubmit(onSubmit, onError)(e)
           }}
           disabled={!isDirty}
         >
@@ -75,7 +75,7 @@ export const ArticleCreateHeader: React.FC = () => {
         <Button
           onClick={(e) => {
             setValue('status', 'PUBLISHED', { shouldDirty: true })
-            handleSubmit(onSubmit, onError)(e)
+            void handleSubmit(onSubmit, onError)(e)
           }}
           disabled={!isDirty}
         >

@@ -17,7 +17,7 @@ export const LikeButton: React.FC<Props> = ({ articleId, userId }) => {
   const router = useRouter()
   const openToast = useToastDispatch()
 
-  const handleDislike = async () => {
+  const handleDislike = () => {
     startTransition(async () => {
       const response = await dislikeArticle({ articleId, userId })
 

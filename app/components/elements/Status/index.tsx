@@ -13,7 +13,7 @@ type Props = ComponentPropsWithoutRef<'div'> & {
 }
 type Ref = ElementRef<'div'>
 
-const STATUS_OPTIONS = [
+const _STATUS_OPTIONS = [
   'empty',
   'loading',
   'error',
@@ -22,7 +22,7 @@ const STATUS_OPTIONS = [
   'info',
 ] as const
 
-export type _Status = (typeof STATUS_OPTIONS)[number] | (string & {})
+export type _Status = (typeof _STATUS_OPTIONS)[number] | (string & {})
 
 export const Status = forwardRef<Ref, Props>(
   ({ className, status = 'empty', title, children, ...props }, ref) => {

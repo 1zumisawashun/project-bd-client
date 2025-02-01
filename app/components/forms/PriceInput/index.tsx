@@ -1,13 +1,13 @@
+import { HStack } from '@/components/layouts/HStack'
+import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import {
-  FocusEventHandler,
   ChangeEventHandler,
-  forwardRef,
   ComponentProps,
   ElementRef,
+  FocusEventHandler,
+  forwardRef,
 } from 'react'
 import { FieldError } from 'react-hook-form'
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { HStack } from '@/components/layouts/HStack'
 import { TextInput } from '../TextInput'
 
 type Props = {
@@ -33,7 +33,7 @@ const transformFullWidthNumbers = (value: string) => {
   )
 }
 export const PriceInput = forwardRef<Ref, Props>(
-  ({ error, value, name, ...rest }, ref) => {
+  ({ error: _error, value, name: _name, ...rest }, ref) => {
     const {
       isOpen: isPrice,
       open: showPrice,

@@ -55,7 +55,7 @@ const ProfileEditForm: React.FC<{
     },
   })
 
-  const onSubmit: SubmitHandler<ProfileSchema> = async (data) => {
+  const onSubmit: SubmitHandler<ProfileSchema> = (data) => {
     startTransition(async () => {
       const response = await updateProfile({ data })
 
@@ -98,7 +98,9 @@ const ProfileEditForm: React.FC<{
 
       <HStack>
         <Button onClick={close}>キャンセル</Button>
-        <Button onClick={handleSubmit(onSubmit, onError)}>変更する</Button>
+        <Button onClick={(e) => void handleSubmit(onSubmit, onError)(e)}>
+          変更する
+        </Button>
       </HStack>
     </VStack>
   )

@@ -1,5 +1,5 @@
-import { Prisma } from '@prisma/client'
 import { User } from '@/functions/types'
+import { Prisma } from '@prisma/client'
 import { mockArticles } from './articles'
 
 const id = 'cm07vrx4y00002vwkx0koma0j'
@@ -37,5 +37,5 @@ export const mockUsers = [
 ] satisfies User[]
 
 export const prismaUsers: Prisma.UserCreateInput[] = mockUsers.map(
-  ({ posts, likedArticles, ...rest }) => rest,
+  ({ posts: _post, likedArticles: _likedArticles, ...rest }) => rest,
 )

@@ -19,7 +19,6 @@ export default [
             "TSTypeLiteral > TSPropertySignature[key.name='children'] > TSTypeAnnotation > TSTypeReference:matches([typeName.name='ReactNode'], [typeName.left.name='React'][typeName.right.name='ReactNode'])", // React.ReactNode && ReactNode
           // "TSTypeLiteral > TSPropertySignature[key.name='children'][typeAnnotation.typeAnnotation.typeName.left.name='React'][typeAnnotation.typeAnnotation.typeName.right.name='ReactNode']", // React.ReactNode
           // "TSTypeLiteral > TSPropertySignature[key.name='children'][typeAnnotation.typeAnnotation.typeName.name='ReactNode']", // ReactNode
-
           message: 'Use PropsWithChildren instead of manually typing children.',
         },
       ],

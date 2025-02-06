@@ -1,6 +1,5 @@
 {
   "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": { "outDir": "./rules", "rootDir": "./src" },
-  "include": ["src"],
-  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts", "src/**/*.md"]
+  "include": ["src"]
 }

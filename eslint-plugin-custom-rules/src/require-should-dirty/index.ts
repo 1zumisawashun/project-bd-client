@@ -86,7 +86,7 @@ const reportShouldDirty = (
 }
 
 const reportThirdArgument = (context: Context, node: TSESTree.Node): void => {
-  context.report({ node, messageId: 'requireShouldDirty' })
+  context.report({ node, messageId: 'requireThirdArgument' })
 }
 
 const checkSetValue = (
@@ -115,24 +115,20 @@ export const rule = createRule({
     type: 'problem',
     docs: {
       description:
-        'Enforce using shouldDirty: true in the second argument of setValue in react-hook-form for better state management.',
+        'This custom ESLint rule enforces setting shouldDirty as the third argument of the setValue function when using the react-hook-form library.',
     },
     fixable: 'code',
     messages: {
       requireShouldDirty:
-        'You must set shouldDirty when calling setValue for optimal performance and state consistency.',
+        'You must set the shouldDirty option when calling the setValue function in react-hook-form to ensure that the form state (isDirty) is properly managed.',
+      requireThirdArgument:
+        'You must set third argument when calling setValue function in react-hook-form.',
     },
-    schema: [
-      {
-        type: 'object',
-        properties: {
-          requireShouldDirty: {
-            type: 'boolean',
-            default: true,
-          },
-        },
-      },
-    ],
+    /**
+     * If your rule doesn’t have options, do not set schema: false, but simply omit the schema property or use schema: []
+     * @see https://eslint.org/docs/latest/extend/custom-rules#options-schemas
+     */
+    schema: [],
   },
   create(context) {
     return {

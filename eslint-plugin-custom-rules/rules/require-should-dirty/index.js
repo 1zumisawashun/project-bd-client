@@ -1,10 +1,32 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.rule = exports.isUseFormContext = exports.isUseForm = exports.checkSetValue = exports.createRule = void 0;
+exports.rule = void 0;
 const utils_1 = require("@typescript-eslint/utils");
-exports.createRule = utils_1.ESLintUtils.RuleCreator(() => {
+const createRule = utils_1.ESLintUtils.RuleCreator(() => {
     return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/README.md`;
 });
+const isShouldDirty = (property) => {
+    return (property.type === utils_1.AST_NODE_TYPES.Property &&
+        property.key.type === utils_1.AST_NODE_TYPES.Identifier &&
+        property.key.name === 'shouldDirty');
+};
+const isSetValue = (property) => {
+    return (property.type === utils_1.AST_NODE_TYPES.Property &&
+        property.key.type === utils_1.AST_NODE_TYPES.Identifier &&
+        property.key.name === 'setValue');
+};
+const isUseForm = (node) => {
+    return (node.type === utils_1.AST_NODE_TYPES.VariableDeclarator &&
+        node.init?.type === utils_1.AST_NODE_TYPES.CallExpression &&
+        node.init?.callee.type === utils_1.AST_NODE_TYPES.Identifier &&
+        node.init?.callee.name === 'useForm');
+};
+const isUseFormContext = (node) => {
+    return (node.type === utils_1.AST_NODE_TYPES.VariableDeclarator &&
+        node.init?.type === utils_1.AST_NODE_TYPES.CallExpression &&
+        node.init?.callee.type === utils_1.AST_NODE_TYPES.Identifier &&
+        node.init?.callee.name === 'useFormContext');
+};
 const formatObjectToString = (obj) => {
     return JSON.stringify(obj).replace(/"([^"]+)":/g, '$1:');
 };
@@ -31,19 +53,7 @@ const reportShouldDirty = (context, objectExpression) => {
     });
 };
 const reportThirdArgument = (context, node) => {
-    context.report({
-        node,
-        messageId: 'requireShouldDirty',
-    });
-};
-const hasShouldDirty = (objectExpression) => {
-    return objectExpression.properties.some((p) => {
-        if (p.type === utils_1.AST_NODE_TYPES.Property &&
-            p.key.type === utils_1.AST_NODE_TYPES.Identifier) {
-            return p.key.name === 'shouldDirty';
-        }
-        return false;
-    });
+    context.report({ node, messageId: 'requireShouldDirty' });
 };
 const checkSetValue = (context, callExpression) => {
     const secondArgument = callExpression.arguments.at(1);
@@ -52,28 +62,14 @@ const checkSetValue = (context, callExpression) => {
         reportThirdArgument(context, callExpression);
     }
     if (thirdArgument?.type === utils_1.AST_NODE_TYPES.ObjectExpression) {
-        if (!hasShouldDirty(thirdArgument)) {
-            reportShouldDirty(context, thirdArgument);
-        }
+        const hasShouldDirty = thirdArgument.properties.some(isShouldDirty);
+        if (hasShouldDirty)
+            return;
+        reportShouldDirty(context, thirdArgument);
     }
 };
-exports.checkSetValue = checkSetValue;
-const isUseForm = (node) => {
-    return (node.type === utils_1.AST_NODE_TYPES.VariableDeclarator &&
-        node.init?.type === utils_1.AST_NODE_TYPES.CallExpression &&
-        node.init?.callee.type === utils_1.AST_NODE_TYPES.Identifier &&
-        node.init?.callee.name === 'useForm');
-};
-exports.isUseForm = isUseForm;
-const isUseFormContext = (node) => {
-    return (node.type === utils_1.AST_NODE_TYPES.VariableDeclarator &&
-        node.init?.type === utils_1.AST_NODE_TYPES.CallExpression &&
-        node.init?.callee.type === utils_1.AST_NODE_TYPES.Identifier &&
-        node.init?.callee.name === 'useFormContext');
-};
-exports.isUseFormContext = isUseFormContext;
 /** @see https://github.com/andykao1213/eslint-plugin-react-hook-form */
-exports.rule = (0, exports.createRule)({
+exports.rule = createRule({
     name: 'require-should-dirty',
     defaultOptions: [],
     meta: {
@@ -101,7 +97,7 @@ exports.rule = (0, exports.createRule)({
         return {
             VariableDeclarator(node) {
                 // `useForm`または`useFormContext`で初期化されていた場合、次に進む
-                if ((0, exports.isUseForm)(node) || (0, exports.isUseFormContext)(node)) {
+                if (isUseForm(node) || isUseFormContext(node)) {
                     // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
                     if (node.id.type === utils_1.AST_NODE_TYPES.Identifier) {
                         const methodsScope = context.sourceCode.getScope(node);
@@ -112,22 +108,13 @@ exports.rule = (0, exports.createRule)({
                             if (memberExpression.type === utils_1.AST_NODE_TYPES.MemberExpression &&
                                 memberExpression.parent.type === utils_1.AST_NODE_TYPES.CallExpression) {
                                 const callExpression = memberExpression.parent;
-                                (0, exports.checkSetValue)(context, callExpression);
+                                checkSetValue(context, callExpression);
                             }
                         });
                     }
-                    const property = (() => {
-                        if (node.id.type === utils_1.AST_NODE_TYPES.ObjectPattern) {
-                            return node.id.properties.find((p) => {
-                                if (p.type === utils_1.AST_NODE_TYPES.Property &&
-                                    p.key.type === utils_1.AST_NODE_TYPES.Identifier) {
-                                    return p.key.name === 'setValue';
-                                }
-                                return null;
-                            });
-                        }
-                        return null;
-                    })();
+                    const property = node.id.type === utils_1.AST_NODE_TYPES.ObjectPattern
+                        ? node.id.properties.find(isSetValue)
+                        : null;
                     // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
                     if (property?.value?.type === utils_1.AST_NODE_TYPES.Identifier) {
                         const setValueScope = context.sourceCode.getScope(node);
@@ -136,7 +123,7 @@ exports.rule = (0, exports.createRule)({
                         setValue?.references.forEach((r) => {
                             if (r.identifier.parent.type === utils_1.AST_NODE_TYPES.CallExpression) {
                                 const callExpression = r.identifier.parent;
-                                (0, exports.checkSetValue)(context, callExpression);
+                                checkSetValue(context, callExpression);
                             }
                         });
                     }

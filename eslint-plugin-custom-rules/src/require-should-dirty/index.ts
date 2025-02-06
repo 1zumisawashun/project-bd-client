@@ -6,9 +6,45 @@ type Fix = NonNullable<Parameters<Context['report']>[number]['fix']>
 type RuleFix = ReturnType<Fix>
 type Fixer = Parameters<Fix>[number]
 
-export const createRule = ESLintUtils.RuleCreator(() => {
+const createRule = ESLintUtils.RuleCreator(() => {
   return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/README.md`
 })
+
+const isShouldDirty = (property: TSESTree.ObjectLiteralElement): boolean => {
+  return (
+    property.type === AST_NODE_TYPES.Property &&
+    property.key.type === AST_NODE_TYPES.Identifier &&
+    property.key.name === 'shouldDirty'
+  )
+}
+
+const isSetValue = (
+  property: TSESTree.Property | TSESTree.RestElement,
+): boolean => {
+  return (
+    property.type === AST_NODE_TYPES.Property &&
+    property.key.type === AST_NODE_TYPES.Identifier &&
+    property.key.name === 'setValue'
+  )
+}
+
+const isUseForm = (node: TSESTree.VariableDeclarator): boolean => {
+  return (
+    node.type === AST_NODE_TYPES.VariableDeclarator &&
+    node.init?.type === AST_NODE_TYPES.CallExpression &&
+    node.init?.callee.type === AST_NODE_TYPES.Identifier &&
+    node.init?.callee.name === 'useForm'
+  )
+}
+
+const isUseFormContext = (node: TSESTree.VariableDeclarator): boolean => {
+  return (
+    node.type === AST_NODE_TYPES.VariableDeclarator &&
+    node.init?.type === AST_NODE_TYPES.CallExpression &&
+    node.init?.callee.type === AST_NODE_TYPES.Identifier &&
+    node.init?.callee.name === 'useFormContext'
+  )
+}
 
 const formatObjectToString = (obj: unknown): string => {
   return JSON.stringify(obj).replace(/"([^"]+)":/g, '$1:')
@@ -50,27 +86,10 @@ const reportShouldDirty = (
 }
 
 const reportThirdArgument = (context: Context, node: TSESTree.Node): void => {
-  context.report({
-    node,
-    messageId: 'requireShouldDirty',
-  })
+  context.report({ node, messageId: 'requireShouldDirty' })
 }
 
-const hasShouldDirty = (
-  objectExpression: TSESTree.ObjectExpression,
-): boolean => {
-  return objectExpression.properties.some((p) => {
-    if (
-      p.type === AST_NODE_TYPES.Property &&
-      p.key.type === AST_NODE_TYPES.Identifier
-    ) {
-      return p.key.name === 'shouldDirty'
-    }
-    return false
-  })
-}
-
-export const checkSetValue = (
+const checkSetValue = (
   context: Context,
   callExpression: TSESTree.CallExpression,
 ): void => {
@@ -82,30 +101,10 @@ export const checkSetValue = (
   }
 
   if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
-    if (!hasShouldDirty(thirdArgument)) {
-      reportShouldDirty(context, thirdArgument)
-    }
+    const hasShouldDirty = thirdArgument.properties.some(isShouldDirty)
+    if (hasShouldDirty) return
+    reportShouldDirty(context, thirdArgument)
   }
-}
-
-export const isUseForm = (node: TSESTree.VariableDeclarator): boolean => {
-  return (
-    node.type === AST_NODE_TYPES.VariableDeclarator &&
-    node.init?.type === AST_NODE_TYPES.CallExpression &&
-    node.init?.callee.type === AST_NODE_TYPES.Identifier &&
-    node.init?.callee.name === 'useForm'
-  )
-}
-
-export const isUseFormContext = (
-  node: TSESTree.VariableDeclarator,
-): boolean => {
-  return (
-    node.type === AST_NODE_TYPES.VariableDeclarator &&
-    node.init?.type === AST_NODE_TYPES.CallExpression &&
-    node.init?.callee.type === AST_NODE_TYPES.Identifier &&
-    node.init?.callee.name === 'useFormContext'
-  )
 }
 
 /** @see https://github.com/andykao1213/eslint-plugin-react-hook-form */
@@ -158,20 +157,10 @@ export const rule = createRule({
             })
           }
 
-          const property = (() => {
-            if (node.id.type === AST_NODE_TYPES.ObjectPattern) {
-              return node.id.properties.find((p) => {
-                if (
-                  p.type === AST_NODE_TYPES.Property &&
-                  p.key.type === AST_NODE_TYPES.Identifier
-                ) {
-                  return p.key.name === 'setValue'
-                }
-                return null
-              })
-            }
-            return null
-          })()
+          const property =
+            node.id.type === AST_NODE_TYPES.ObjectPattern
+              ? node.id.properties.find(isSetValue)
+              : null
 
           // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
           if (property?.value?.type === AST_NODE_TYPES.Identifier) {

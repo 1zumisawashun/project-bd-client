@@ -26,6 +26,10 @@ const ignores = [
   '**/*.cjs',
   '**/*.mjs',
   '**/.storybook/**',
+  '**/eslint-plugin-custom-rules/tests/',
+  '**/eslint-plugin-custom-rules/rules/',
+  '**/eslint-plugin-custom-rules/index.js',
+  '**/jest.setup.ts',
 ]
 
 export default [

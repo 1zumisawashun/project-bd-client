@@ -1,68 +1,80 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rule = void 0;
-const utils_1 = require("@typescript-eslint/utils");
-const createRule = utils_1.ESLintUtils.RuleCreator(() => {
-    return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/README.md`;
+var utils_1 = require("@typescript-eslint/utils");
+var createRule = utils_1.ESLintUtils.RuleCreator(function () {
+    return "https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/README.md";
 });
-const isShouldDirty = (property) => {
+var isShouldDirty = function (property) {
     return (property.type === utils_1.AST_NODE_TYPES.Property &&
         property.key.type === utils_1.AST_NODE_TYPES.Identifier &&
         property.key.name === 'shouldDirty');
 };
-const isSetValue = (property) => {
+var isSetValue = function (property) {
     return (property.type === utils_1.AST_NODE_TYPES.Property &&
         property.key.type === utils_1.AST_NODE_TYPES.Identifier &&
         property.key.name === 'setValue');
 };
-const isUseForm = (node) => {
+var isUseForm = function (node) {
+    var _a, _b, _c;
     return (node.type === utils_1.AST_NODE_TYPES.VariableDeclarator &&
-        node.init?.type === utils_1.AST_NODE_TYPES.CallExpression &&
-        node.init?.callee.type === utils_1.AST_NODE_TYPES.Identifier &&
-        node.init?.callee.name === 'useForm');
+        ((_a = node.init) === null || _a === void 0 ? void 0 : _a.type) === utils_1.AST_NODE_TYPES.CallExpression &&
+        ((_b = node.init) === null || _b === void 0 ? void 0 : _b.callee.type) === utils_1.AST_NODE_TYPES.Identifier &&
+        ((_c = node.init) === null || _c === void 0 ? void 0 : _c.callee.name) === 'useForm');
 };
-const isUseFormContext = (node) => {
+var isUseFormContext = function (node) {
+    var _a, _b, _c;
     return (node.type === utils_1.AST_NODE_TYPES.VariableDeclarator &&
-        node.init?.type === utils_1.AST_NODE_TYPES.CallExpression &&
-        node.init?.callee.type === utils_1.AST_NODE_TYPES.Identifier &&
-        node.init?.callee.name === 'useFormContext');
+        ((_a = node.init) === null || _a === void 0 ? void 0 : _a.type) === utils_1.AST_NODE_TYPES.CallExpression &&
+        ((_b = node.init) === null || _b === void 0 ? void 0 : _b.callee.type) === utils_1.AST_NODE_TYPES.Identifier &&
+        ((_c = node.init) === null || _c === void 0 ? void 0 : _c.callee.name) === 'useFormContext');
 };
-const formatObjectToString = (obj) => {
+var formatObjectToString = function (obj) {
     return JSON.stringify(obj).replace(/"([^"]+)":/g, '$1:');
 };
-const fixShouldDirty = (objectExpression) => (fixer) => {
-    const defaultOptions = objectExpression.properties.reduce((acc, cur) => {
-        if (cur.type === utils_1.AST_NODE_TYPES.Property &&
-            cur.key.type === utils_1.AST_NODE_TYPES.Identifier &&
-            cur.value.type === utils_1.AST_NODE_TYPES.Literal) {
-            acc[cur.key.name] = cur.value.value;
-        }
-        return acc;
-    }, {});
-    const optionsWithShouldDirty = formatObjectToString({
-        ...defaultOptions,
-        shouldDirty: true,
-    });
-    return fixer.replaceText(objectExpression, optionsWithShouldDirty);
+var fixShouldDirty = function (objectExpression) {
+    return function (fixer) {
+        var defaultOptions = objectExpression.properties.reduce(function (acc, cur) {
+            if (cur.type === utils_1.AST_NODE_TYPES.Property &&
+                cur.key.type === utils_1.AST_NODE_TYPES.Identifier &&
+                cur.value.type === utils_1.AST_NODE_TYPES.Literal) {
+                acc[cur.key.name] = cur.value.value;
+            }
+            return acc;
+        }, {});
+        var optionsWithShouldDirty = formatObjectToString(__assign(__assign({}, defaultOptions), { shouldDirty: true }));
+        return fixer.replaceText(objectExpression, optionsWithShouldDirty);
+    };
 };
-const reportShouldDirty = (context, objectExpression) => {
+var reportShouldDirty = function (context, objectExpression) {
     context.report({
         node: objectExpression,
         messageId: 'requireShouldDirty',
         fix: fixShouldDirty(objectExpression),
     });
 };
-const reportThirdArgument = (context, node) => {
-    context.report({ node, messageId: 'requireThirdArgument' });
+var reportThirdArgument = function (context, node) {
+    context.report({ node: node, messageId: 'requireThirdArgument' });
 };
-const checkSetValue = (context, callExpression) => {
-    const secondArgument = callExpression.arguments.at(1);
-    const thirdArgument = callExpression.arguments.at(2);
+var checkSetValue = function (context, callExpression) {
+    var secondArgument = callExpression.arguments.at(1);
+    var thirdArgument = callExpression.arguments.at(2);
     if (secondArgument && !thirdArgument) {
         reportThirdArgument(context, callExpression);
     }
-    if (thirdArgument?.type === utils_1.AST_NODE_TYPES.ObjectExpression) {
-        const hasShouldDirty = thirdArgument.properties.some(isShouldDirty);
+    if ((thirdArgument === null || thirdArgument === void 0 ? void 0 : thirdArgument.type) === utils_1.AST_NODE_TYPES.ObjectExpression) {
+        var hasShouldDirty = thirdArgument.properties.some(isShouldDirty);
         if (hasShouldDirty)
             return;
         reportShouldDirty(context, thirdArgument);
@@ -88,36 +100,37 @@ exports.rule = createRule({
          */
         schema: [],
     },
-    create(context) {
+    create: function (context) {
         return {
-            VariableDeclarator(node) {
+            VariableDeclarator: function (node) {
+                var _a;
                 // `useForm`または`useFormContext`で初期化されていた場合、次に進む
                 if (isUseForm(node) || isUseFormContext(node)) {
                     // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
                     if (node.id.type === utils_1.AST_NODE_TYPES.Identifier) {
-                        const methodsScope = context.sourceCode.getScope(node);
-                        const methods = methodsScope.set.get(node.id.name);
+                        var methodsScope = context.sourceCode.getScope(node);
+                        var methods = methodsScope.set.get(node.id.name);
                         // `methods`の参照を見つけた場合、次に進む ex) methods.setValue(), methods.getValues() etc.
-                        methods?.references.forEach((r) => {
-                            const memberExpression = r.identifier.parent;
+                        methods === null || methods === void 0 ? void 0 : methods.references.forEach(function (r) {
+                            var memberExpression = r.identifier.parent;
                             if (memberExpression.type === utils_1.AST_NODE_TYPES.MemberExpression &&
                                 memberExpression.parent.type === utils_1.AST_NODE_TYPES.CallExpression) {
-                                const callExpression = memberExpression.parent;
+                                var callExpression = memberExpression.parent;
                                 checkSetValue(context, callExpression);
                             }
                         });
                     }
-                    const property = node.id.type === utils_1.AST_NODE_TYPES.ObjectPattern
+                    var property = node.id.type === utils_1.AST_NODE_TYPES.ObjectPattern
                         ? node.id.properties.find(isSetValue)
                         : null;
                     // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
-                    if (property?.value?.type === utils_1.AST_NODE_TYPES.Identifier) {
-                        const setValueScope = context.sourceCode.getScope(node);
-                        const setValue = setValueScope.set.get(property.value.name);
+                    if (((_a = property === null || property === void 0 ? void 0 : property.value) === null || _a === void 0 ? void 0 : _a.type) === utils_1.AST_NODE_TYPES.Identifier) {
+                        var setValueScope = context.sourceCode.getScope(node);
+                        var setValue_1 = setValueScope.set.get(property.value.name);
                         // `setValue`の参照を見つけた場合、次に進む
-                        setValue?.references.forEach((r) => {
+                        setValue_1 === null || setValue_1 === void 0 ? void 0 : setValue_1.references.forEach(function (r) {
                             if (r.identifier.parent.type === utils_1.AST_NODE_TYPES.CallExpression) {
-                                const callExpression = r.identifier.parent;
+                                var callExpression = r.identifier.parent;
                                 checkSetValue(context, callExpression);
                             }
                         });

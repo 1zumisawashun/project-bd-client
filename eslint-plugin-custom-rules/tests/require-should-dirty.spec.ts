@@ -1,6 +1,6 @@
 import { RuleTester } from '@typescript-eslint/rule-tester'
 
-import { rule } from './requireShouldDirty'
+import { rule } from '../src/require-should-dirty'
 
 const ruleTester = new RuleTester()
 

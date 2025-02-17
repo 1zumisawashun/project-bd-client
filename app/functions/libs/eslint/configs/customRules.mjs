@@ -7,7 +7,7 @@ export default [
     plugins: { 'custom-rules': pluginCustomRules },
     rules: {
       'custom-rules/require-should-dirty': 'error',
-      'custom-rules/no-loop-over-enum': 'error',
+      'custom-rules/require-satisfies-to-refetch-queries': 'error',
     },
   },
 ]

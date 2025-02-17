@@ -48,3 +48,18 @@ export const getErrorMessage = (error: unknown) => {
   }
   return 'Something went wrong. Please try again later.'
 }
+
+// eslint-disable-next-line
+export enum DayWeek1 {
+  SAN,
+  MON,
+  TUE,
+  WEN = 30,
+  THU,
+  FRI,
+  SAT,
+}
+
+// for (const value of DayWeek1) {
+//   console.log(value)
+// }

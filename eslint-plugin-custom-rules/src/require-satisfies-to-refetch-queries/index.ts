@@ -11,7 +11,7 @@ type Create = ReturnType<typeof createRule>['create']
 type Context = Parameters<Create>[number]
 
 const createRule = ESLintUtils.RuleCreator(() => {
-  return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/README.md`
+  return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-satisfies-to-refetch-queries/README.md`
 })
 
 const isRefetchQueries = (node: TSESTree.Property) => {

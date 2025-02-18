@@ -4,7 +4,7 @@ exports.rule = void 0;
 var utils_1 = require("@typescript-eslint/utils");
 var utilities_1 = require("../utilities/utilities");
 var createRule = utils_1.ESLintUtils.RuleCreator(function () {
-    return "https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/README.md";
+    return "https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-satisfies-to-refetch-queries/README.md";
 });
 var isRefetchQueries = function (node) {
     return (0, utilities_1.isIdentifier)(node.key) && node.key.name === 'refetchQueries';

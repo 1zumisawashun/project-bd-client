@@ -1,45 +1,48 @@
-# require-should-dirty
+# require-satisfies-to-refetch-queries
 
-このカスタムESLintルールは、`react-hook-form` ライブラリを使用する際に、`setValue` 関数の第3引数に `shouldDirty` を設定することを強制します。
+このカスタム ESLint ルールは、`refetchQueries` プロパティに `satisfies` を使用することを強制します。
 
 ## ルールの目的
 
-`react-hook-form` を使用する際、`setValue` 関数を呼び出すときに  `shouldDirty` オプションを設定することで、フォームの状態（ `isDirty` ）が適切に管理されます。このルールは、`shouldDirty` オプションが設定されていない場合に警告を表示し、コードの修正を提案します。
+Apollo Client の `refetchQueries` を使用する際に、型安全性を向上させるために `satisfies` を利用することが推奨されます。このルールは、`refetchQueries` プロパティに `satisfies` が適用されていない場合に警告を表示し、修正を促します。
 
 ## ルールの詳細
 
 このルールは、以下の条件を満たす場合に適用されます：
 
-1. `useForm` または `useFormContext` フックが使用されている。
-2. `setValue` 関数が呼び出されている。
-3. `setValue` 関数の第3引数に `shouldDirty` が設定されていない。
+1. `useMutation` などの Apollo Client のフック内で `refetchQueries` が指定されている。
+2. `refetchQueries` がオブジェクトまたは変数として定義されている。
+3. `refetchQueries` に `satisfies` が適用されていない。
 
 ### 例
 
 #### 正しいコード例
 
 ```typescript
-const { setValue } = useForm()
-setValue('fieldName', value, { shouldDirty: true })
+const mutation = useMutation(SOME_MUTATION, {
+  refetchQueries: [{ query: GET_DATA }] satisfies RefetchQueriesType,
+})
 ```
 
 #### 間違ったコード例
 
 ```typescript
-const { setValue } = useForm()
-setValue('fieldName', value)
+const mutation = useMutation(SOME_MUTATION, {
+  refetchQueries: [{ query: GET_DATA }],
+})
 ```
 
 ## 実装の詳細
 
 このルールは、以下の手順で実装されています：
 
-1. `useForm` または `useFormContext` フックの呼び出しを検出します。
-2. これらのフックから返される `methods` オブジェクトを追跡します。
-3. `methods` オブジェクトの `setValue` 関数の呼び出しを検出します。
-4. `setValue` 関数の第3引数に `shouldDirty` が設定されているかどうかを確認します。
-5. 設定されていない場合、警告メッセージを表示し、修正を提案します。
+1. `useMutation` などのフックの呼び出しを検出。
+2. `refetchQueries` プロパティの存在をチェック。
+3. `refetchQueries` の値がオブジェクトまたは配列であるかを判定。
+4. TypeScript の型情報を取得し、`satisfies` が適用されているかを確認。
+5. `satisfies` が適用されていない場合、警告メッセージを表示し、修正を提案。
 
 ## 参考リンク
 
-- [react-hook-form ドキュメント](https://react-hook-form.com/)
+- [Apollo Client ドキュメント](https://www.apollographql.com/docs/react/data/mutations/#refetching-queries)
+- [TypeScript satisfies 演算子](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html#the-satisfies-operator)

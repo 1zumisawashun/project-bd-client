@@ -1,4 +1,14 @@
-import { AST_NODE_TYPES, ESLintUtils, TSESTree } from '@typescript-eslint/utils'
+import { ESLintUtils, TSESTree } from '@typescript-eslint/utils'
+import {
+  isCallExpression,
+  isIdentifier,
+  isLiteral,
+  isMemberExpression,
+  isObjectExpression,
+  isObjectPattern,
+  isProperty,
+  isVariableDeclarator,
+} from '../utilities/utilities'
 
 type Create = ReturnType<typeof createRule>['create']
 type Context = Parameters<Create>[number]
@@ -12,36 +22,33 @@ const createRule = ESLintUtils.RuleCreator(() => {
 
 const isShouldDirty = (property: TSESTree.ObjectLiteralElement): boolean => {
   return (
-    property.type === AST_NODE_TYPES.Property &&
-    property.key.type === AST_NODE_TYPES.Identifier &&
+    isProperty(property) &&
+    isIdentifier(property.key) &&
     property.key.name === 'shouldDirty'
   )
 }
-
 const isSetValue = (
   property: TSESTree.Property | TSESTree.RestElement,
 ): boolean => {
   return (
-    property.type === AST_NODE_TYPES.Property &&
-    property.key.type === AST_NODE_TYPES.Identifier &&
+    isProperty(property) &&
+    isIdentifier(property.key) &&
     property.key.name === 'setValue'
   )
 }
-
 const isUseForm = (node: TSESTree.VariableDeclarator): boolean => {
   return (
-    node.type === AST_NODE_TYPES.VariableDeclarator &&
-    node.init?.type === AST_NODE_TYPES.CallExpression &&
-    node.init?.callee.type === AST_NODE_TYPES.Identifier &&
+    isVariableDeclarator(node) &&
+    isCallExpression(node.init) &&
+    isIdentifier(node.init?.callee) &&
     node.init?.callee.name === 'useForm'
   )
 }
-
 const isUseFormContext = (node: TSESTree.VariableDeclarator): boolean => {
   return (
-    node.type === AST_NODE_TYPES.VariableDeclarator &&
-    node.init?.type === AST_NODE_TYPES.CallExpression &&
-    node.init?.callee.type === AST_NODE_TYPES.Identifier &&
+    isVariableDeclarator(node) &&
+    isCallExpression(node.init) &&
+    isIdentifier(node.init?.callee) &&
     node.init?.callee.name === 'useFormContext'
   )
 }
@@ -56,11 +63,7 @@ const fixShouldDirty =
     const defaultOptions = objectExpression.properties.reduce<
       Record<string, unknown>
     >((acc, cur) => {
-      if (
-        cur.type === AST_NODE_TYPES.Property &&
-        cur.key.type === AST_NODE_TYPES.Identifier &&
-        cur.value.type === AST_NODE_TYPES.Literal
-      ) {
+      if (isProperty(cur) && isIdentifier(cur.key) && isLiteral(cur.value)) {
         acc[cur.key.name] = cur.value.value
       }
       return acc
@@ -100,7 +103,7 @@ const checkSetValue = (
     reportThirdArgument(context, callExpression)
   }
 
-  if (thirdArgument?.type === AST_NODE_TYPES.ObjectExpression) {
+  if (isObjectExpression(thirdArgument)) {
     const hasShouldDirty = thirdArgument.properties.some(isShouldDirty)
     if (hasShouldDirty) return
     reportShouldDirty(context, thirdArgument)
@@ -136,7 +139,7 @@ export const rule = createRule({
         // `useForm`または`useFormContext`で初期化されていた場合、次に進む
         if (isUseForm(node) || isUseFormContext(node)) {
           // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
-          if (node.id.type === AST_NODE_TYPES.Identifier) {
+          if (isIdentifier(node.id)) {
             const methodsScope = context.sourceCode.getScope(node)
             const methods = methodsScope.set.get(node.id.name)
 
@@ -144,8 +147,8 @@ export const rule = createRule({
             methods?.references.forEach((r) => {
               const memberExpression = r.identifier.parent
               if (
-                memberExpression.type === AST_NODE_TYPES.MemberExpression &&
-                memberExpression.parent.type === AST_NODE_TYPES.CallExpression
+                isMemberExpression(memberExpression) &&
+                isCallExpression(memberExpression.parent)
               ) {
                 const callExpression = memberExpression.parent
                 checkSetValue(context, callExpression)
@@ -153,19 +156,18 @@ export const rule = createRule({
             })
           }
 
-          const property =
-            node.id.type === AST_NODE_TYPES.ObjectPattern
-              ? node.id.properties.find(isSetValue)
-              : null
+          const property = isObjectPattern(node.id)
+            ? node.id.properties.find(isSetValue)
+            : null
 
           // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
-          if (property?.value?.type === AST_NODE_TYPES.Identifier) {
+          if (isIdentifier(property?.value)) {
             const setValueScope = context.sourceCode.getScope(node)
             const setValue = setValueScope.set.get(property.value.name)
 
             // `setValue`の参照を見つけた場合、次に進む
             setValue?.references.forEach((r) => {
-              if (r.identifier.parent.type === AST_NODE_TYPES.CallExpression) {
+              if (isCallExpression(r.identifier.parent)) {
                 const callExpression = r.identifier.parent
                 checkSetValue(context, callExpression)
               }

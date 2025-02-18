@@ -17,6 +17,7 @@ var isVariables = function (node) {
 };
 // 実質的な型チェックはこの関数でのみ実施、他のロジックは通常のASTノードでの検出になる
 var tsCheck = function (context, node) {
+    // https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/
     var parserServices = context.sourceCode.parserServices;
     if (!(parserServices === null || parserServices === void 0 ? void 0 : parserServices.program) || !(parserServices === null || parserServices === void 0 ? void 0 : parserServices.esTreeNodeToTSNodeMap)) {
         throw new Error('This rule requires `parserOptions.project`.');

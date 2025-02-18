@@ -26,6 +26,7 @@ const isVariables = (node: TSESTree.Property) => {
 
 // 実質的な型チェックはこの関数でのみ実施、他のロジックは通常のASTノードでの検出になる
 const tsCheck = (context: Context, node: TSESTree.Property) => {
+  // https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/
   const parserServices = context.sourceCode.parserServices
 
   if (!parserServices?.program || !parserServices?.esTreeNodeToTSNodeMap) {

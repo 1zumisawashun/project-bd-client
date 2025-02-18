@@ -1,11 +1,11 @@
-import customRules from './app/functions/libs/eslint/configs/customRules.mjs'
-import eslint from './app/functions/libs/eslint/configs/eslint.mjs'
-import next from './app/functions/libs/eslint/configs/next.mjs'
-import prettier from './app/functions/libs/eslint/configs/prettier.mjs'
-import react from './app/functions/libs/eslint/configs/react.mjs'
-import storybook from './app/functions/libs/eslint/configs/storybook.mjs'
-import testingLibrary from './app/functions/libs/eslint/configs/testingLibrary.mjs'
-import typescript from './app/functions/libs/eslint/configs/typescript.mjs'
+import customRules from 'eslint-plugin-custom-rules/configs/customRules.mjs'
+import eslint from 'eslint-plugin-custom-rules/configs/eslint.mjs'
+import next from 'eslint-plugin-custom-rules/configs/next.mjs'
+import prettier from 'eslint-plugin-custom-rules/configs/prettier.mjs'
+import react from 'eslint-plugin-custom-rules/configs/react.mjs'
+import storybook from 'eslint-plugin-custom-rules/configs/storybook.mjs'
+import testingLibrary from 'eslint-plugin-custom-rules/configs/testingLibrary.mjs'
+import typescript from 'eslint-plugin-custom-rules/configs/typescript.mjs'
 
 const ignores = [
   '**/node_modules/',

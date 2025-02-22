@@ -1,4 +1,5 @@
 import { ESLintUtils, TSESTree } from '@typescript-eslint/utils'
+import * as ts from 'typescript'
 import {
   isArrayExpression,
   isIdentifier,
@@ -26,19 +27,15 @@ const isVariables = (node: TSESTree.Property) => {
 
 // 実質的な型チェックはこの関数でのみ実施、他のロジックは通常のASTノードでの検出になる
 const tsCheck = (context: Context, node: TSESTree.Node) => {
-  // https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/
   const parserServices = context.sourceCode.parserServices
 
-  if (!parserServices?.program || !parserServices?.esTreeNodeToTSNodeMap) {
+  if (!parserServices?.esTreeNodeToTSNodeMap) {
     throw new Error('This rule requires `parserOptions.project`.')
   }
 
-  const checker = parserServices.program.getTypeChecker()
   const tsNode = parserServices.esTreeNodeToTSNodeMap.get(node) // TypeScriptのASTノードを取得
-  const type = checker.getTypeAtLocation(tsNode)
-  const typeText = checker.typeToString(type)
 
-  if (!typeText.includes('satisfies')) {
+  if (tsNode.kind !== ts.SyntaxKind.SatisfiesExpression) {
     context.report({ node, messageId: 'requireSatisfiesForRefetchVariables' })
   }
 }

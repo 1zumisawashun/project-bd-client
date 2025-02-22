@@ -1,7 +1,31 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rule = void 0;
 var utils_1 = require("@typescript-eslint/utils");
+var ts = __importStar(require("typescript"));
 var utilities_1 = require("../utilities/utilities");
 var createRule = utils_1.ESLintUtils.RuleCreator(function () {
     return "https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-satisfies-for-refetch-variables/README.md";
@@ -17,16 +41,12 @@ var isVariables = function (node) {
 };
 // 実質的な型チェックはこの関数でのみ実施、他のロジックは通常のASTノードでの検出になる
 var tsCheck = function (context, node) {
-    // https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/
     var parserServices = context.sourceCode.parserServices;
-    if (!(parserServices === null || parserServices === void 0 ? void 0 : parserServices.program) || !(parserServices === null || parserServices === void 0 ? void 0 : parserServices.esTreeNodeToTSNodeMap)) {
+    if (!(parserServices === null || parserServices === void 0 ? void 0 : parserServices.esTreeNodeToTSNodeMap)) {
         throw new Error('This rule requires `parserOptions.project`.');
     }
-    var checker = parserServices.program.getTypeChecker();
     var tsNode = parserServices.esTreeNodeToTSNodeMap.get(node); // TypeScriptのASTノードを取得
-    var type = checker.getTypeAtLocation(tsNode);
-    var typeText = checker.typeToString(type);
-    if (!typeText.includes('satisfies')) {
+    if (tsNode.kind !== ts.SyntaxKind.SatisfiesExpression) {
         context.report({ node: node, messageId: 'requireSatisfiesForRefetchVariables' });
     }
 };

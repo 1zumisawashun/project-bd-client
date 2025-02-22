@@ -1,3 +1,4 @@
+import tsESLintParser from '@typescript-eslint/parser'
 import { RuleTester } from '@typescript-eslint/rule-tester'
 import { rule } from '../src/require-satisfies-for-refetch-variables'
 
@@ -10,16 +11,43 @@ const ruleTester = new RuleTester({
       projectService: {
         allowDefaultProject: ['*.ts*'],
       },
-      tsconfigRootDir: __dirname,
+      parser: tsESLintParser,
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
+      },
     },
   },
 })
 
 ruleTester.run('require-satisfies-for-refetch-variables', rule, {
   valid: [
-    /* ... */
+    {
+      code: `
+      export const [mutation] = useMutation({
+        refetchQueries: [
+          {
+            query: null,
+            variables: { id: "id" } satisfies { id: string },
+          },
+        ],
+      })
+      `,
+    },
   ],
   invalid: [
-    /* ... */
+    {
+      code: `
+      export const [mutation] = useMutation({
+        refetchQueries: [
+          {
+            query: null,
+            variables: { id: "id" },
+          },
+        ],
+      })
+      `,
+      errors: [{ messageId: 'requireSatisfiesForRefetchVariables' }],
+    },
   ],
 })

@@ -16,3 +16,18 @@ if (!global.structuredClone) {
     return JSON.parse(JSON.stringify(objectToClone))
   }
 }
+
+if (!global.setImmediate) {
+  global.setImmediate = function setImmediate(
+    callback: (...args: any[]) => void,
+    ...args: any[]
+  ) {
+    return setTimeout(callback, 0, ...args)
+  }
+}
+
+if (!global.clearImmediate) {
+  global.clearImmediate = function clearImmediate(id: any) {
+    clearTimeout(id)
+  }
+}

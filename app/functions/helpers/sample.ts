@@ -5,23 +5,33 @@ const useMutation = ({ refetchQueries }: { refetchQueries: unknown }) => {
   return [null]
 }
 
-const id1 = 'id1'
-const id2 = 'id2'
+// const id1 = 'id1'
+// const id2 = 'id2'
+const id = 'id'
+
+// export const [mutation6] = useMutation({
+//   refetchQueries: [
+//     {
+//       query: null,
+//       variables: { id } satisfies { id: string },
+//     },
+//   ],
+// })
 
 /**
  * ==============================
  * 通常のパターン
  * ==============================
  */
-export const [mutation1] = useMutation({
+export const [mutation] = useMutation({
   refetchQueries: [
     {
       query: null,
-      variables: { id1 }, // satisfiesを強制したい
+      variables: { id } satisfies { id: string }, // satisfiesを強制したい
     },
     {
       query: null,
-      variables: { id2 }, // satisfiesを強制したい
+      variables: { id }, // satisfiesを強制したい
     },
   ],
 })
@@ -31,53 +41,54 @@ export const [mutation1] = useMutation({
  * refetchQueriesの配列を変数に切り出しているパターン
  * ==============================
  */
-const refetchQueries = [
-  {
-    query: null,
-    variables: { id1 }, // satisfiesを強制したい
-  },
-  {
-    query: null,
-    variables: { id2 }, // satisfiesを強制したい
-  },
-]
-export const [mutation2] = useMutation({
-  refetchQueries,
-})
+// const refetchQueries = [
+//   {
+//     query: null,
+//     variables: { id1 }, // satisfiesを強制したい
+//   },
+//   {
+//     query: null,
+//     variables: { id2 }, // satisfiesを強制したい
+//   },
+// ]
+// export const [mutation2] = useMutation({
+//   refetchQueries,
+// })
 
 /**
  * ==============================
  * refetchQueriesのオブジェクトを変数に切り出しているパターン
  * ==============================
  */
-const refetchQuery = {
-  query: null,
-  variables: { id1 }, // satisfiesを強制したい
-}
-const refetchQuery2 = {
-  query: null,
-  variables: { id2 }, // satisfiesを強制したい
-}
-export const [mutation3] = useMutation({
-  refetchQueries: [refetchQuery, refetchQuery2],
-})
+// const refetchQuery = {
+//   query: null,
+//   variables: { id1 }, // satisfiesを強制したい
+// }
+// const refetchQuery2 = {
+//   query: null,
+//   variables: { id2 } satisfies { id2: any }, // satisfiesを強制したい
+// }
+// export const [mutation3] = useMutation({
+//   refetchQueries: [refetchQuery, refetchQuery2],
+// })
 
 /**
  * ==============================
  * refetchQueriesのオブジェクトを変数に切り出しているパターン
  * ==============================
  */
-const variables = { id1 } // satisfiesを強制したい
-const variables2 = { id2 } // satisfiesを強制したい
+// const variables = { id1 } // satisfiesを強制したい
+// const variables2 = { id2 } // satisfiesを強制したい
 
-const refetchQuery3 = {
-  query: null,
-  variables,
-}
-const refetchQuery4 = {
-  query: null,
-  variables: variables2, // satisfiesを強制したい
-}
-export const [mutation4] = useMutation({
-  refetchQueries: [refetchQuery3, refetchQuery4],
-})
+// const refetchQuery3 = {
+//   query: null,
+//   variables,
+// }
+// const refetchQuery4 = {
+//   query: null,
+//   variables: variables2, // satisfiesを強制したい
+// }
+// export const [mutation4] = useMutation({
+//   refetchQueries: [refetchQuery3, refetchQuery4],
+// })
+

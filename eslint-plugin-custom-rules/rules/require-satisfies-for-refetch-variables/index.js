@@ -4,7 +4,7 @@ exports.rule = void 0;
 var utils_1 = require("@typescript-eslint/utils");
 var utilities_1 = require("../utilities/utilities");
 var createRule = utils_1.ESLintUtils.RuleCreator(function () {
-    return "https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-satisfies-to-refetch-queries/README.md";
+    return "https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-satisfies-for-refetch-variables/README.md";
 });
 var isRefetchQueries = function (node) {
     return (0, utilities_1.isIdentifier)(node.key) && node.key.name === 'refetchQueries';
@@ -27,7 +27,7 @@ var tsCheck = function (context, node) {
     var type = checker.getTypeAtLocation(tsNode);
     var typeText = checker.typeToString(type);
     if (!typeText.includes('satisfies')) {
-        context.report({ node: node, messageId: 'requireSatisfiesToRefetchQueries' });
+        context.report({ node: node, messageId: 'requireSatisfiesForRefetchVariables' });
     }
 };
 var checkVariables = function (context, node) {
@@ -46,14 +46,14 @@ var checkVariables = function (context, node) {
  * @see https://www.apollographql.com/docs/react/data/mutations#refetching-queries
  */
 exports.rule = createRule({
-    name: 'require-satisfies-to-refetch-queries',
+    name: 'require-satisfies-for-refetch-variables',
     defaultOptions: [],
     meta: {
         docs: {
-            description: 'require satisfies to refetch queries.',
+            description: 'require satisfies for refetch variables.',
         },
         messages: {
-            requireSatisfiesToRefetchQueries: 'require satisfies to refetch queries.',
+            requireSatisfiesForRefetchVariables: 'require satisfies for refetch variables.',
         },
         type: 'suggestion',
         schema: [],

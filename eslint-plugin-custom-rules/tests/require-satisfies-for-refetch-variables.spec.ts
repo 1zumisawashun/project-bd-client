@@ -1,5 +1,5 @@
 import { RuleTester } from '@typescript-eslint/rule-tester'
-import { rule } from '../src/require-satisfies-to-refetch-queries'
+import { rule } from '../src/require-satisfies-for-refetch-variables'
 
 /**
  * @see https://typescript-eslint.io/developers/custom-rules/#testing-typed-rules
@@ -15,7 +15,7 @@ const ruleTester = new RuleTester({
   },
 })
 
-ruleTester.run('require-satisfies-to-refetch-queries', rule, {
+ruleTester.run('require-satisfies-for-refetch-variables', rule, {
   valid: [
     /* ... */
   ],

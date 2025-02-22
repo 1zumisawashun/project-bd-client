@@ -11,7 +11,7 @@ type Create = ReturnType<typeof createRule>['create']
 type Context = Parameters<Create>[number]
 
 const createRule = ESLintUtils.RuleCreator(() => {
-  return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-satisfies-to-refetch-queries/README.md`
+  return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-satisfies-for-refetch-variables/README.md`
 })
 
 const isRefetchQueries = (node: TSESTree.Property) => {
@@ -39,7 +39,7 @@ const tsCheck = (context: Context, node: TSESTree.Property) => {
   const typeText = checker.typeToString(type)
 
   if (!typeText.includes('satisfies')) {
-    context.report({ node, messageId: 'requireSatisfiesToRefetchQueries' })
+    context.report({ node, messageId: 'requireSatisfiesForRefetchVariables' })
   }
 }
 
@@ -60,14 +60,15 @@ const checkVariables = (context: Context, node: TSESTree.ArrayExpression) => {
  * @see https://www.apollographql.com/docs/react/data/mutations#refetching-queries
  */
 export const rule = createRule({
-  name: 'require-satisfies-to-refetch-queries',
+  name: 'require-satisfies-for-refetch-variables',
   defaultOptions: [],
   meta: {
     docs: {
-      description: 'require satisfies to refetch queries.',
+      description: 'require satisfies for refetch variables.',
     },
     messages: {
-      requireSatisfiesToRefetchQueries: 'require satisfies to refetch queries.',
+      requireSatisfiesForRefetchVariables:
+        'require satisfies for refetch variables.',
     },
     type: 'suggestion',
     schema: [],

@@ -25,7 +25,7 @@ const isVariables = (node: TSESTree.Property) => {
 }
 
 // 実質的な型チェックはこの関数でのみ実施、他のロジックは通常のASTノードでの検出になる
-const tsCheck = (context: Context, node: TSESTree.Property) => {
+const tsCheck = (context: Context, node: TSESTree.Node) => {
   // https://eslint.org/blog/2023/09/preparing-custom-rules-eslint-v9/
   const parserServices = context.sourceCode.parserServices
 
@@ -34,7 +34,7 @@ const tsCheck = (context: Context, node: TSESTree.Property) => {
   }
 
   const checker = parserServices.program.getTypeChecker()
-  const tsNode = parserServices.esTreeNodeToTSNodeMap.get(node.value) // TypeScriptのASTノードを取得
+  const tsNode = parserServices.esTreeNodeToTSNodeMap.get(node) // TypeScriptのASTノードを取得
   const type = checker.getTypeAtLocation(tsNode)
   const typeText = checker.typeToString(type)
 
@@ -43,12 +43,51 @@ const tsCheck = (context: Context, node: TSESTree.Property) => {
   }
 }
 
-const checkVariables = (context: Context, node: TSESTree.ArrayExpression) => {
-  node.elements.forEach((element) => {
-    if (isObjectExpression(element)) {
-      element.properties.forEach((property) => {
-        if (isProperty(property) && isVariables(property)) {
-          tsCheck(context, property)
+const checkRefetchQuery = (
+  context: Context,
+  node: TSESTree.ObjectExpression,
+) => {
+  node.properties.forEach((p) => {
+    if (!isProperty(p)) return
+
+    // 通常のパターン
+    if (!isIdentifier(p.value) && isVariables(p)) {
+      tsCheck(context, p.value)
+    }
+
+    // variablesが変数に切り出されているパターン
+    if (isIdentifier(p.value)) {
+      const variablesScope = context.sourceCode.getScope(p)
+      const variables = variablesScope.set.get(p.value.name)
+
+      variables?.references.forEach((r) => {
+        const parent = r.identifier.parent
+        if (isVariableDeclarator(parent) && isObjectExpression(parent.init)) {
+          tsCheck(context, parent.init)
+        }
+      })
+    }
+  })
+}
+
+const checkRefetchQueries = (
+  context: Context,
+  node: TSESTree.ArrayExpression,
+) => {
+  node.elements.forEach((e) => {
+    // 通常のパターン
+    if (isObjectExpression(e)) {
+      checkRefetchQuery(context, e)
+    }
+    // refetchQueriesのオブジェクトが外に切り出しているパターン
+    if (isIdentifier(e)) {
+      const refetchQueryScope = context.sourceCode.getScope(e)
+      const refetchQuery = refetchQueryScope.set.get(e.name)
+
+      refetchQuery?.references.forEach((r) => {
+        const parent = r.identifier.parent
+        if (isVariableDeclarator(parent) && isObjectExpression(parent.init)) {
+          checkRefetchQuery(context, parent.init)
         }
       })
     }
@@ -63,14 +102,19 @@ export const rule = createRule({
   name: 'require-satisfies-for-refetch-variables',
   defaultOptions: [],
   meta: {
+    type: 'problem',
     docs: {
-      description: 'require satisfies for refetch variables.',
+      description:
+        'The refetchQueries property should use the satisfies operator to ensure type safety and prevent unexpected runtime errors.',
     },
     messages: {
       requireSatisfiesForRefetchVariables:
-        'require satisfies for refetch variables.',
+        'The refetchQueries property should use the satisfies operator to ensure type safety and prevent unexpected runtime errors.',
     },
-    type: 'suggestion',
+    /**
+     * If your rule doesn’t have options, do not set schema: false, but simply omit the schema property or use schema: []
+     * @see https://eslint.org/docs/latest/extend/custom-rules#options-schemas
+     */
     schema: [],
   },
   create(context) {
@@ -85,24 +129,28 @@ export const rule = createRule({
 
           if (!isRefetchQueries(property)) return
 
+          // 通常のパターン
           if (isArrayExpression(property.value)) {
-            checkVariables(context, property.value)
+            checkRefetchQueries(context, property.value)
           }
-          // refetchQueriesを外に切り出しているパターン
-          if (!isIdentifier(property.key)) return
 
-          const refetchQueriesScope = context.sourceCode.getScope(node)
-          const refetchQueries = refetchQueriesScope.set.get(property.key.name)
+          // refetchQueriesの配列が外に切り出しているパターン
+          if (isIdentifier(property.key)) {
+            const refetchQueriesScope = context.sourceCode.getScope(node)
+            const refetchQueries = refetchQueriesScope.set.get(
+              property.key.name,
+            )
 
-          refetchQueries?.references.forEach((r) => {
-            const parent = r.identifier.parent
-            if (
-              isVariableDeclarator(parent) &&
-              isArrayExpression(parent.init)
-            ) {
-              checkVariables(context, parent.init)
-            }
-          })
+            refetchQueries?.references.forEach((r) => {
+              const parent = r.identifier.parent
+              if (
+                isVariableDeclarator(parent) &&
+                isArrayExpression(parent.init)
+              ) {
+                checkRefetchQueries(context, parent.init)
+              }
+            })
+          }
         }
       },
     }

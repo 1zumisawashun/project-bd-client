@@ -4,7 +4,7 @@
 
 ## ルールの目的
 
-`react-hook-form` を使用する際、`setValue` 関数を呼び出すときに  `shouldDirty` オプションを設定することで、フォームの状態（ `isDirty` ）が適切に管理されます。このルールは、`shouldDirty` オプションが設定されていない場合に警告を表示し、コードの修正を提案します。
+`react-hook-form` を使用する際、`setValue` 関数を呼び出すときに `shouldDirty` オプションを設定することで、フォームの状態（ `isDirty` ）が適切に管理されます。このルールは、`shouldDirty` オプションが設定されていない場合に警告を表示し、コードの修正を提案します。
 
 ## ルールの詳細
 
@@ -16,14 +16,14 @@
 
 ### 例
 
-#### 正しいコード例
+#### ✅ 正しいコード例
 
 ```typescript
 const { setValue } = useForm()
 setValue('fieldName', value, { shouldDirty: true })
 ```
 
-#### 間違ったコード例
+#### ❌ 間違ったコード例
 
 ```typescript
 const { setValue } = useForm()

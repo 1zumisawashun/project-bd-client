@@ -23,19 +23,48 @@ var tsCheck = function (context, node) {
         throw new Error('This rule requires `parserOptions.project`.');
     }
     var checker = parserServices.program.getTypeChecker();
-    var tsNode = parserServices.esTreeNodeToTSNodeMap.get(node.value); // TypeScriptのASTノードを取得
+    var tsNode = parserServices.esTreeNodeToTSNodeMap.get(node); // TypeScriptのASTノードを取得
     var type = checker.getTypeAtLocation(tsNode);
     var typeText = checker.typeToString(type);
     if (!typeText.includes('satisfies')) {
         context.report({ node: node, messageId: 'requireSatisfiesForRefetchVariables' });
     }
 };
-var checkVariables = function (context, node) {
-    node.elements.forEach(function (element) {
-        if ((0, utilities_1.isObjectExpression)(element)) {
-            element.properties.forEach(function (property) {
-                if ((0, utilities_1.isProperty)(property) && isVariables(property)) {
-                    tsCheck(context, property);
+var checkRefetchQuery = function (context, node) {
+    node.properties.forEach(function (p) {
+        if (!(0, utilities_1.isProperty)(p))
+            return;
+        // 通常のパターン
+        if (!(0, utilities_1.isIdentifier)(p.value) && isVariables(p)) {
+            tsCheck(context, p.value);
+        }
+        // variablesが変数に切り出されているパターン
+        if ((0, utilities_1.isIdentifier)(p.value)) {
+            var variablesScope = context.sourceCode.getScope(p);
+            var variables = variablesScope.set.get(p.value.name);
+            variables === null || variables === void 0 ? void 0 : variables.references.forEach(function (r) {
+                var parent = r.identifier.parent;
+                if ((0, utilities_1.isVariableDeclarator)(parent) && (0, utilities_1.isObjectExpression)(parent.init)) {
+                    tsCheck(context, parent.init);
+                }
+            });
+        }
+    });
+};
+var checkRefetchQueries = function (context, node) {
+    node.elements.forEach(function (e) {
+        // 通常のパターン
+        if ((0, utilities_1.isObjectExpression)(e)) {
+            checkRefetchQuery(context, e);
+        }
+        // refetchQueriesのオブジェクトが外に切り出しているパターン
+        if ((0, utilities_1.isIdentifier)(e)) {
+            var refetchQueryScope = context.sourceCode.getScope(e);
+            var refetchQuery = refetchQueryScope.set.get(e.name);
+            refetchQuery === null || refetchQuery === void 0 ? void 0 : refetchQuery.references.forEach(function (r) {
+                var parent = r.identifier.parent;
+                if ((0, utilities_1.isVariableDeclarator)(parent) && (0, utilities_1.isObjectExpression)(parent.init)) {
+                    checkRefetchQuery(context, parent.init);
                 }
             });
         }
@@ -49,13 +78,17 @@ exports.rule = createRule({
     name: 'require-satisfies-for-refetch-variables',
     defaultOptions: [],
     meta: {
+        type: 'problem',
         docs: {
-            description: 'require satisfies for refetch variables.',
+            description: 'The refetchQueries property should use the satisfies operator to ensure type safety and prevent unexpected runtime errors.',
         },
         messages: {
-            requireSatisfiesForRefetchVariables: 'require satisfies for refetch variables.',
+            requireSatisfiesForRefetchVariables: 'The refetchQueries property should use the satisfies operator to ensure type safety and prevent unexpected runtime errors.',
         },
-        type: 'suggestion',
+        /**
+         * If your rule doesn’t have options, do not set schema: false, but simply omit the schema property or use schema: []
+         * @see https://eslint.org/docs/latest/extend/custom-rules#options-schemas
+         */
         schema: [],
     },
     create: function (context) {
@@ -70,21 +103,22 @@ exports.rule = createRule({
                         return;
                     if (!isRefetchQueries(property))
                         return;
+                    // 通常のパターン
                     if ((0, utilities_1.isArrayExpression)(property.value)) {
-                        checkVariables(context, property.value);
+                        checkRefetchQueries(context, property.value);
                     }
-                    // refetchQueriesを外に切り出しているパターン
-                    if (!(0, utilities_1.isIdentifier)(property.key))
-                        return;
-                    var refetchQueriesScope = context.sourceCode.getScope(node);
-                    var refetchQueries = refetchQueriesScope.set.get(property.key.name);
-                    refetchQueries === null || refetchQueries === void 0 ? void 0 : refetchQueries.references.forEach(function (r) {
-                        var parent = r.identifier.parent;
-                        if ((0, utilities_1.isVariableDeclarator)(parent) &&
-                            (0, utilities_1.isArrayExpression)(parent.init)) {
-                            checkVariables(context, parent.init);
-                        }
-                    });
+                    // refetchQueriesの配列が外に切り出しているパターン
+                    if ((0, utilities_1.isIdentifier)(property.key)) {
+                        var refetchQueriesScope = context.sourceCode.getScope(node);
+                        var refetchQueries = refetchQueriesScope.set.get(property.key.name);
+                        refetchQueries === null || refetchQueries === void 0 ? void 0 : refetchQueries.references.forEach(function (r) {
+                            var parent = r.identifier.parent;
+                            if ((0, utilities_1.isVariableDeclarator)(parent) &&
+                                (0, utilities_1.isArrayExpression)(parent.init)) {
+                                checkRefetchQueries(context, parent.init);
+                            }
+                        });
+                    }
                 }
             },
         };

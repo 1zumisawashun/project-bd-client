@@ -88,7 +88,6 @@ exports.rule = createRule({
         docs: {
             description: 'This custom ESLint rule enforces setting shouldDirty as the third argument of the setValue function when using the react-hook-form library.',
         },
-        fixable: 'code',
         messages: {
             requireShouldDirty: 'You must set the shouldDirty option when calling the setValue function in react-hook-form to ensure that the form state (isDirty) is properly managed.',
             requireThirdArgument: 'You must set third argument when calling setValue function in react-hook-form.',
@@ -98,6 +97,7 @@ exports.rule = createRule({
          * @see https://eslint.org/docs/latest/extend/custom-rules#options-schemas
          */
         schema: [],
+        fixable: 'code',
     },
     create: function (context) {
         return {

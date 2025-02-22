@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { z } from 'zod'
 
 export const delay = (ms: number) =>
@@ -49,65 +48,3 @@ export const getErrorMessage = (error: unknown) => {
   }
   return 'Something went wrong. Please try again later.'
 }
-
-// eslint-disable-next-line
-export enum DayWeek1 {
-  SAN,
-  MON,
-  TUE,
-  WEN = 30,
-  THU,
-  FRI,
-  SAT,
-}
-
-// for (const value of DayWeek1) {
-//   console.log(value)
-// }
-
-const useSampleMutation = ({ refetchQueries }: { refetchQueries: unknown }) => {
-  console.log(refetchQueries)
-  return [null]
-}
-
-const sampleOneId = 'sampleOneId'
-const sampleTwoId = 'sampleTwoId'
-
-// tsxファイル内で以下のように使われることを想定
-
-export const [mutation] = useSampleMutation({
-  refetchQueries: [
-    {
-      query: null,
-      variables: { sampleOneId }, // satisfiesを強制したい
-    },
-    {
-      query: null,
-      variables: { sampleTwoId }, // satisfiesを強制したい
-    },
-  ],
-})
-
-const useSample2Mutation = ({
-  refetchQueries,
-}: {
-  refetchQueries: unknown
-}) => {
-  console.log(refetchQueries)
-  return [null]
-}
-
-const refetchQueries = [
-  {
-    query: null,
-    variables: { sampleOneId }, // satisfiesを強制したい
-  },
-  {
-    query: null,
-    variables: { sampleTwoId }, // satisfiesを強制したい
-  },
-]
-
-export const [mutation2] = useSample2Mutation({
-  refetchQueries,
-})

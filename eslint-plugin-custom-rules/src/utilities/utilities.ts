@@ -18,7 +18,9 @@ export const isObjectPattern = (node?: TSESTree.Node) => {
 export const isMemberExpression = (node?: TSESTree.Node) => {
   return node?.type === AST_NODE_TYPES.MemberExpression
 }
-export const isIdentifier = (node?: TSESTree.Node) => {
+export const isIdentifier = (
+  node?: TSESTree.Node | TSESTree.SpreadElement | TSESTree.Expression | null,
+) => {
   return node?.type === AST_NODE_TYPES.Identifier
 }
 export const isObjectExpression = (

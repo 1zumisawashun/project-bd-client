@@ -4,6 +4,7 @@ import pluginCustomRules from 'eslint-plugin-custom-rules'
 export default [
   {
     name: 'custom-rules',
+    files: ['**/*.{ts,tsx}'],
     plugins: { 'custom-rules': pluginCustomRules },
     rules: {
       'custom-rules/require-should-dirty': 'error',

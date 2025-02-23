@@ -2,7 +2,7 @@ import pluginStorybook from 'eslint-plugin-storybook'
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [
-  ...pluginStorybook.configs['flat/recommended'], // setup, stories-rules, main-rules
+  ...pluginStorybook.configs['flat/recommended'],
   {
     name: 'storybook recommended override',
     files: ['*.stories.@(ts|tsx)'],

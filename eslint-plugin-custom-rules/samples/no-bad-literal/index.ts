@@ -7,7 +7,6 @@ export default {
       description: "文字列リテラルの'bad'が使われていたら警告を出す",
     },
   },
-
   create(context: Rule.RuleContext) {
     return {
       Literal(node) {

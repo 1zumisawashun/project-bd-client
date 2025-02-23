@@ -7,33 +7,23 @@ import storybook from 'eslint-plugin-custom-rules/configs/storybook.mjs'
 import testingLibrary from 'eslint-plugin-custom-rules/configs/testing-library.mjs'
 import typescript from 'eslint-plugin-custom-rules/configs/typescript.mjs'
 
-const ignores = [
-  '**/node_modules/',
-  '**/.next/',
-  '**/.nuxt/',
-  '**/.astro/',
-  '**/build/',
-  '**/dist/',
-  '**/out/',
-  '**/public/',
-  '**/package-lock.json',
-  '**/yarn.lock',
-  '**/pnpm-lock.yaml',
-  '**/vite.config.ts',
-  '**/next.config.js',
-  '**/tsconfig.json',
-  'src/env.d.ts',
-  '**/*.cjs',
-  '**/*.mjs',
-  '**/.storybook/**',
-  '**/eslint-plugin-custom-rules/tests/',
-  '**/eslint-plugin-custom-rules/rules/',
-  '**/eslint-plugin-custom-rules/index.js',
-  '**/jest.setup.ts',
-]
-
 export default [
-  { ignores },
+  {
+    ignores: [
+      '**/node_modules/',
+      '**/.next/',
+      '**/public/',
+      '**/package-lock.json',
+      '**/tsconfig.json',
+      '**/*.cjs',
+      '**/*.mjs',
+      '**/.storybook/',
+      '**/jest.setup.ts',
+      '**/.lintstagedrc.js',
+      '**/eslint-plugin-custom-rules/',
+      '!**/eslint-plugin-custom-rules/src/',
+    ],
+  },
   ...eslint,
   ...prettier,
   ...typescript,

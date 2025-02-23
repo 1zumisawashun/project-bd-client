@@ -18,6 +18,7 @@ if (!global.structuredClone) {
 }
 
 if (!global.setImmediate) {
+  // @ts-ignore
   global.setImmediate = function setImmediate(
     callback: (...args: any[]) => void,
     ...args: any[]

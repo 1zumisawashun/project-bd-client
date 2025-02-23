@@ -40,7 +40,7 @@ var isVariables = function (node) {
     return (0, utilities_1.isIdentifier)(node.key) && node.key.name === 'variables';
 };
 // 実質的な型チェックはこの関数でのみ実施、他のロジックは通常のASTノードでの検出になる
-var tsCheck = function (context, node) {
+var checkSatisfies = function (context, node) {
     var parserServices = context.sourceCode.parserServices;
     if (!(parserServices === null || parserServices === void 0 ? void 0 : parserServices.esTreeNodeToTSNodeMap)) {
         throw new Error('This rule requires `parserOptions.project`.');
@@ -56,7 +56,7 @@ var checkRefetchQuery = function (context, node) {
             return;
         // 通常のパターン
         if (!(0, utilities_1.isIdentifier)(p.value) && isVariables(p)) {
-            tsCheck(context, p.value);
+            checkSatisfies(context, p.value);
         }
         // variablesが変数に切り出されているパターン
         if ((0, utilities_1.isIdentifier)(p.value)) {
@@ -65,7 +65,7 @@ var checkRefetchQuery = function (context, node) {
             variables === null || variables === void 0 ? void 0 : variables.references.forEach(function (r) {
                 var parent = r.identifier.parent;
                 if ((0, utilities_1.isVariableDeclarator)(parent) && (0, utilities_1.isObjectExpression)(parent.init)) {
-                    tsCheck(context, parent.init);
+                    checkSatisfies(context, parent.init);
                 }
             });
         }
@@ -113,6 +113,7 @@ exports.rule = createRule({
     },
     create: function (context) {
         return {
+            // MEMO: もし解析時間がかかりそうなら〇〇.generated.tsからフィルタリングするのアリかも
             CallExpression: function (node) {
                 if (isHook(node)) {
                     var objectExpression = node.arguments.find(utilities_1.isObjectExpression);

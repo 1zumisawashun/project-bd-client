@@ -26,7 +26,7 @@ const isVariables = (node: TSESTree.Property) => {
 }
 
 // 実質的な型チェックはこの関数でのみ実施、他のロジックは通常のASTノードでの検出になる
-const tsCheck = (context: Context, node: TSESTree.Node) => {
+const checkSatisfies = (context: Context, node: TSESTree.Node) => {
   const parserServices = context.sourceCode.parserServices
 
   if (!parserServices?.esTreeNodeToTSNodeMap) {
@@ -49,7 +49,7 @@ const checkRefetchQuery = (
 
     // 通常のパターン
     if (!isIdentifier(p.value) && isVariables(p)) {
-      tsCheck(context, p.value)
+      checkSatisfies(context, p.value)
     }
 
     // variablesが変数に切り出されているパターン
@@ -60,7 +60,7 @@ const checkRefetchQuery = (
       variables?.references.forEach((r) => {
         const parent = r.identifier.parent
         if (isVariableDeclarator(parent) && isObjectExpression(parent.init)) {
-          tsCheck(context, parent.init)
+          checkSatisfies(context, parent.init)
         }
       })
     }
@@ -116,6 +116,7 @@ export const rule = createRule({
   },
   create(context) {
     return {
+      // MEMO: もし解析時間がかかりそうなら〇〇.generated.tsからフィルタリングするのアリかも
       CallExpression(node) {
         if (isHook(node)) {
           const objectExpression = node.arguments.find(isObjectExpression)

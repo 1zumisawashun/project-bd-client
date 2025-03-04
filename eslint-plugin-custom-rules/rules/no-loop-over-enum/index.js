@@ -26,13 +26,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.rule = void 0;
 var utils_1 = require("@typescript-eslint/utils");
 var ts = __importStar(require("typescript"));
-var createRule = utils_1.ESLintUtils.RuleCreator(function () {
-    return "https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/README.md";
-});
+var createRule_1 = require("../utilities/createRule");
 /**
  * @see https://typescript-eslint.io/developers/custom-rules/#typed-rules
  */
-exports.rule = createRule({
+exports.rule = (0, createRule_1.createRule)({
     name: 'no-loop-over-enum',
     defaultOptions: [],
     meta: {

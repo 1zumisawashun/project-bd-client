@@ -1,5 +1,6 @@
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils'
+import { TSESTree } from '@typescript-eslint/utils'
 import * as ts from 'typescript'
+import { createRule } from '../utilities/createRule'
 import {
   isArrayExpression,
   isIdentifier,
@@ -10,10 +11,6 @@ import {
 
 type Create = ReturnType<typeof createRule>['create']
 type Context = Parameters<Create>[number]
-
-const createRule = ESLintUtils.RuleCreator(() => {
-  return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-satisfies-for-refetch-variables/README.md`
-})
 
 const isRefetchQueries = (node: TSESTree.Property) => {
   return isIdentifier(node.key) && node.key.name === 'refetchQueries'

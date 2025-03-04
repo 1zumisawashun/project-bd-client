@@ -1,9 +1,6 @@
 import { ESLintUtils } from '@typescript-eslint/utils'
 import * as ts from 'typescript'
-
-const createRule = ESLintUtils.RuleCreator(() => {
-  return `https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/README.md`
-})
+import { createRule } from '../utilities/createRule'
 
 /**
  * @see https://typescript-eslint.io/developers/custom-rules/#typed-rules

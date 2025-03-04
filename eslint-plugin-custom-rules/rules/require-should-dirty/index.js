@@ -12,17 +12,17 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rule = void 0;
-var utils_1 = require("@typescript-eslint/utils");
+var createRule_1 = require("../utilities/createRule");
 var typeGuard_1 = require("../utilities/typeGuard");
-var createRule = utils_1.ESLintUtils.RuleCreator(function (name) {
-    var projectPath = process.cwd();
-    return "".concat(projectPath, "/eslint-plugin-custom-rules/src/").concat(name, "/README.md");
-});
 var isShouldDirty = function (property) {
-    return (0, typeGuard_1.isProperty)(property) && (0, typeGuard_1.isIdentifier)(property.key) && property.key.name === 'shouldDirty';
+    return ((0, typeGuard_1.isProperty)(property) &&
+        (0, typeGuard_1.isIdentifier)(property.key) &&
+        property.key.name === 'shouldDirty');
 };
 var isSetValue = function (property) {
-    return (0, typeGuard_1.isProperty)(property) && (0, typeGuard_1.isIdentifier)(property.key) && property.key.name === 'setValue';
+    return ((0, typeGuard_1.isProperty)(property) &&
+        (0, typeGuard_1.isIdentifier)(property.key) &&
+        property.key.name === 'setValue');
 };
 var isUseForm = function (node) {
     var _a, _b;
@@ -77,7 +77,9 @@ var checkSetValue = function (context, callExpression) {
     }
 };
 var checkDestructuredVariableDeclarator = function (context, node) {
-    var property = (0, typeGuard_1.isObjectPattern)(node.id) ? node.id.properties.find(isSetValue) : null;
+    var property = (0, typeGuard_1.isObjectPattern)(node.id)
+        ? node.id.properties.find(isSetValue)
+        : null;
     if ((0, typeGuard_1.isIdentifier)(property === null || property === void 0 ? void 0 : property.value)) {
         var setValueScope = context.sourceCode.getScope(node);
         var setValue_1 = setValueScope.set.get(property.value.name);
@@ -89,7 +91,7 @@ var checkDestructuredVariableDeclarator = function (context, node) {
         });
     }
 };
-exports.rule = createRule({
+exports.rule = (0, createRule_1.createRule)({
     name: 'require-should-dirty',
     defaultOptions: [],
     meta: {

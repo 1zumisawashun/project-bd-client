@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rule = void 0;
-var utils_1 = require("@typescript-eslint/utils");
-var createRule = utils_1.ESLintUtils.RuleCreator(function (name) { return "https://example.com/rule/".concat(name); });
-exports.rule = createRule({
+var createRule_1 = require("../utilities/createRule");
+exports.rule = (0, createRule_1.createRule)({
     create: function (context) {
         return {
             TSTypeReference: function (node) {

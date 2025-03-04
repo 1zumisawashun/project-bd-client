@@ -1,8 +1,4 @@
-import { ESLintUtils } from '@typescript-eslint/utils'
-
-const createRule = ESLintUtils.RuleCreator(
-  (name) => `https://example.com/rule/${name}`, // ルールのドキュメントURL
-)
+import { createRule } from '../utilities/createRule'
 
 export const rule = createRule({
   create(context) {

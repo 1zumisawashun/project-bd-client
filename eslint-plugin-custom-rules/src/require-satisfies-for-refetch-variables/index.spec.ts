@@ -1,5 +1,5 @@
 import { RuleTester } from '@typescript-eslint/rule-tester'
-import { rule } from '../src/require-satisfies-for-refetch-variables'
+import { rule } from './index'
 
 /**
  * @see https://typescript-eslint.io/developers/custom-rules/#testing-typed-rules

@@ -13,32 +13,29 @@ var __assign = (this && this.__assign) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.rule = void 0;
 var utils_1 = require("@typescript-eslint/utils");
-var utilities_1 = require("../utilities/utilities");
-var createRule = utils_1.ESLintUtils.RuleCreator(function () {
-    return "https://github.com/1zumisawashun/project-bd-client/blob/main/eslint-plugin-custom-rules/src/require-should-dirty/README.md";
+var typeGuard_1 = require("../utilities/typeGuard");
+var createRule = utils_1.ESLintUtils.RuleCreator(function (name) {
+    var projectPath = process.cwd();
+    return "".concat(projectPath, "/eslint-plugin-custom-rules/src/").concat(name, "/README.md");
 });
 var isShouldDirty = function (property) {
-    return ((0, utilities_1.isProperty)(property) &&
-        (0, utilities_1.isIdentifier)(property.key) &&
-        property.key.name === 'shouldDirty');
+    return (0, typeGuard_1.isProperty)(property) && (0, typeGuard_1.isIdentifier)(property.key) && property.key.name === 'shouldDirty';
 };
 var isSetValue = function (property) {
-    return ((0, utilities_1.isProperty)(property) &&
-        (0, utilities_1.isIdentifier)(property.key) &&
-        property.key.name === 'setValue');
+    return (0, typeGuard_1.isProperty)(property) && (0, typeGuard_1.isIdentifier)(property.key) && property.key.name === 'setValue';
 };
 var isUseForm = function (node) {
     var _a, _b;
-    return ((0, utilities_1.isVariableDeclarator)(node) &&
-        (0, utilities_1.isCallExpression)(node.init) &&
-        (0, utilities_1.isIdentifier)((_a = node.init) === null || _a === void 0 ? void 0 : _a.callee) &&
+    return ((0, typeGuard_1.isVariableDeclarator)(node) &&
+        (0, typeGuard_1.isCallExpression)(node.init) &&
+        (0, typeGuard_1.isIdentifier)((_a = node.init) === null || _a === void 0 ? void 0 : _a.callee) &&
         ((_b = node.init) === null || _b === void 0 ? void 0 : _b.callee.name) === 'useForm');
 };
 var isUseFormContext = function (node) {
     var _a, _b;
-    return ((0, utilities_1.isVariableDeclarator)(node) &&
-        (0, utilities_1.isCallExpression)(node.init) &&
-        (0, utilities_1.isIdentifier)((_a = node.init) === null || _a === void 0 ? void 0 : _a.callee) &&
+    return ((0, typeGuard_1.isVariableDeclarator)(node) &&
+        (0, typeGuard_1.isCallExpression)(node.init) &&
+        (0, typeGuard_1.isIdentifier)((_a = node.init) === null || _a === void 0 ? void 0 : _a.callee) &&
         ((_b = node.init) === null || _b === void 0 ? void 0 : _b.callee.name) === 'useFormContext');
 };
 var formatObjectToString = function (obj) {
@@ -47,7 +44,7 @@ var formatObjectToString = function (obj) {
 var fixShouldDirty = function (objectExpression) {
     return function (fixer) {
         var defaultOptions = objectExpression.properties.reduce(function (acc, cur) {
-            if ((0, utilities_1.isProperty)(cur) && (0, utilities_1.isIdentifier)(cur.key) && (0, utilities_1.isLiteral)(cur.value)) {
+            if ((0, typeGuard_1.isProperty)(cur) && (0, typeGuard_1.isIdentifier)(cur.key) && (0, typeGuard_1.isLiteral)(cur.value)) {
                 acc[cur.key.name] = cur.value.value;
             }
             return acc;
@@ -72,14 +69,26 @@ var checkSetValue = function (context, callExpression) {
     if (secondArgument && !thirdArgument) {
         reportThirdArgument(context, callExpression);
     }
-    if ((0, utilities_1.isObjectExpression)(thirdArgument)) {
+    if ((0, typeGuard_1.isObjectExpression)(thirdArgument)) {
         var hasShouldDirty = thirdArgument.properties.some(isShouldDirty);
         if (hasShouldDirty)
             return;
         reportShouldDirty(context, thirdArgument);
     }
 };
-/** @see https://github.com/andykao1213/eslint-plugin-react-hook-form */
+var checkDestructuredVariableDeclarator = function (context, node) {
+    var property = (0, typeGuard_1.isObjectPattern)(node.id) ? node.id.properties.find(isSetValue) : null;
+    if ((0, typeGuard_1.isIdentifier)(property === null || property === void 0 ? void 0 : property.value)) {
+        var setValueScope = context.sourceCode.getScope(node);
+        var setValue_1 = setValueScope.set.get(property.value.name);
+        // `setValue`の参照を見つけた場合、次に進む
+        setValue_1 === null || setValue_1 === void 0 ? void 0 : setValue_1.references.forEach(function (r) {
+            if ((0, typeGuard_1.isCallExpression)(r.identifier.parent)) {
+                checkSetValue(context, r.identifier.parent);
+            }
+        });
+    }
+};
 exports.rule = createRule({
     name: 'require-should-dirty',
     defaultOptions: [],
@@ -104,35 +113,25 @@ exports.rule = createRule({
             VariableDeclarator: function (node) {
                 // `useForm`または`useFormContext`で初期化されていた場合、次に進む
                 if (isUseForm(node) || isUseFormContext(node)) {
-                    // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
-                    if ((0, utilities_1.isIdentifier)(node.id)) {
+                    // ex) const methods = useForm() etc.
+                    if ((0, typeGuard_1.isIdentifier)(node.id)) {
                         var methodsScope = context.sourceCode.getScope(node);
                         var methods = methodsScope.set.get(node.id.name);
-                        // `methods`の参照を見つけた場合、次に進む ex) methods.setValue(), methods.getValues() etc.
+                        // `methods`の参照を見つけた場合、次に進む
                         methods === null || methods === void 0 ? void 0 : methods.references.forEach(function (r) {
-                            var memberExpression = r.identifier.parent;
-                            if ((0, utilities_1.isMemberExpression)(memberExpression) &&
-                                (0, utilities_1.isCallExpression)(memberExpression.parent)) {
-                                var callExpression = memberExpression.parent;
-                                checkSetValue(context, callExpression);
+                            var node = r.identifier.parent;
+                            // ex) methods.setValue
+                            if ((0, typeGuard_1.isMemberExpression)(node) && (0, typeGuard_1.isCallExpression)(node.parent)) {
+                                checkSetValue(context, node.parent);
+                            }
+                            // ex) const { setValue } = methods
+                            if ((0, typeGuard_1.isVariableDeclarator)(node)) {
+                                checkDestructuredVariableDeclarator(context, node);
                             }
                         });
                     }
-                    var property = (0, utilities_1.isObjectPattern)(node.id)
-                        ? node.id.properties.find(isSetValue)
-                        : null;
-                    // `methods`が`useForm`または`useFormContext`の呼び出し結果である場合、次に進む
-                    if ((0, utilities_1.isIdentifier)(property === null || property === void 0 ? void 0 : property.value)) {
-                        var setValueScope = context.sourceCode.getScope(node);
-                        var setValue_1 = setValueScope.set.get(property.value.name);
-                        // `setValue`の参照を見つけた場合、次に進む
-                        setValue_1 === null || setValue_1 === void 0 ? void 0 : setValue_1.references.forEach(function (r) {
-                            if ((0, utilities_1.isCallExpression)(r.identifier.parent)) {
-                                var callExpression = r.identifier.parent;
-                                checkSetValue(context, callExpression);
-                            }
-                        });
-                    }
+                    // ex) const { setValue } = useForm() etc.
+                    checkDestructuredVariableDeclarator(context, node);
                 }
             },
         };

@@ -6,7 +6,7 @@ import {
   isObjectExpression,
   isProperty,
   isVariableDeclarator,
-} from '../utilities/utilities'
+} from '../utilities/typeGuard'
 
 type Create = ReturnType<typeof createRule>['create']
 type Context = Parameters<Create>[number]

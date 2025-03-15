@@ -1,5 +1,10 @@
 pre-commit:
+  parallel: true
   commands:
-    lint:js:fix:
-      run: npm run lint:js:fix
-      stage_fixed: true
+    lint:
+      glob: '**/*.{ts,tsx}'
+      run: docker compose run --rm app sh -c "yarn lint {staged_files} && yarn format {staged_files}"
+    build:
+      glob: 'src/**/*'
+      exclude: '\.test\..+$'
+      run: docker compose run --rm app yarn build

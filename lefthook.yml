@@ -1,0 +1,18 @@
+pre-commit:
+  parallel: true # 並行でlintを実行できるのか
+  jobs:
+    - run: npx tsc --noEmit
+      glob:
+        - '*.ts'
+        - '*.js'
+        - '*.tsx'
+        - '*.jsx'
+      stage_fixed: true
+
+    - run: npm run eslint --fix "{staged_files}"
+      glob:
+        - '*.ts'
+        - '*.js'
+        - '*.tsx'
+        - '*.jsx'
+      stage_fixed: true

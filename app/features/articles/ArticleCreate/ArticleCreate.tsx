@@ -13,6 +13,7 @@ type Props = {
   defaultValues: Schema
   categoryOptions: string[]
 }
+// MARK: - ArticleCreate
 export const ArticleCreate: React.FC<Props> = ({
   defaultValues,
   categoryOptions,
@@ -26,7 +27,7 @@ export const ArticleCreate: React.FC<Props> = ({
         <main className={styles[`${BLOCK_NAME}-inner`]}>
           <ArticleCreateForm categoryOptions={categoryOptions} />
         </main>
-        <Footer />
+        <Footer></Footer>
       </div>
     </ArticleCreateProvider>
   )

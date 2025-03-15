@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# コミットのたびに実行されるのはやっぱり辛いので、コメントアウトしておく
-# npm run lint-staged

@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# 一旦 compile は外す
-# npm run lint:js && npm run format && npm run compile
-npm run lint:js && npm run format

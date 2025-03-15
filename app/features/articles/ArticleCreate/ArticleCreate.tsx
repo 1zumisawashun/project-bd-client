@@ -26,7 +26,7 @@ export const ArticleCreate: React.FC<Props> = ({
         <main className={styles[`${BLOCK_NAME}-inner`]}>
           <ArticleCreateForm categoryOptions={categoryOptions} />
         </main>
-        <Footer ></Footer>
+        <Footer />
       </div>
     </ArticleCreateProvider>
   )

@@ -1,5 +1,5 @@
 pre-commit:
   commands:
-    lint:
+    lint:js:fix:
       run: npm run lint:js:fix
       stage_fixed: true

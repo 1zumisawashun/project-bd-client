@@ -15,8 +15,6 @@
     "format": "prettier \"app/**/*.+(js|json|yml|ts|tsx)\"",
     "format:fix": "prettier --write \"app/**/*.+(js|json|yml|ts|tsx)\"",
     "compile": "npx tsc --noEmit",
-    "prepare": "husky install",
-    "lint-staged": "lint-staged",
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "storybook dev -p 6006",

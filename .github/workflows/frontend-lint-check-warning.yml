@@ -1,4 +1,4 @@
-name: check-eslint-warning
+name: frontend lint check warning
 
 on:
   pull_request:

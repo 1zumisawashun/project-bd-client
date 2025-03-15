@@ -44,7 +44,7 @@ export const ArticleCreateHeader: React.FC = () => {
         description: response.message ?? '成功しました',
       })
 
-      router.push(`/articles/${response.data.id ?? ''}`)
+      // router.push(`/articles/${response.data.id ?? ''}`)
       router.refresh()
     })
   }

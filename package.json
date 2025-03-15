@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint:js": "eslint 'app/**/*.{tsx,ts}'",
     "lint:js:fix": "npm run lint:js -- --fix",
@@ -28,8 +28,7 @@
     "prisma:studio": "npx prisma studio",
     "prisma:push": "npx prisma db push",
     "prisma:reset": "npx prisma db push --force-reset && npm run prisma:seed",
-    "vercel-build": "prisma generate && next build && prisma migrate deploy",
-    "postinstall": "prisma generate"
+    "vercel-build": "prisma generate && next build && prisma migrate deploy"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.2",

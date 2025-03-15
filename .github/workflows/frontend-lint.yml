@@ -1,0 +1,56 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: setup node.js
+        uses: actions/setup-node@v3
+      - name: npm ci
+        run: npm ci
+
+  lint:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: setup node.js
+        uses: actions/setup-node@v3
+      - name: npm ci
+        run: npm ci
+      - name: lint:js
+        run: npm run lint:js
+
+  format:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: setup node.js
+        uses: actions/setup-node@v3
+      - name: npm ci
+        run: npm ci
+      - name: format
+        run: npm run format
+
+  compile:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: setup node.js
+        uses: actions/setup-node@v3
+      - name: npm ci
+        run: npm ci
+      - name: compile
+        run: npm run compile

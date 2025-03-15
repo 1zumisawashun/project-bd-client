@@ -2,13 +2,9 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
-
-// datasource db {
-//   provider = "sqlite"
-//   url      = env("DATABASE_URL")
-// }
 
 datasource db {
   provider  = "postgresql"
@@ -45,7 +41,7 @@ model Article {
   content String
   status  String // draft, published, archived
 
-  author     User?       @relation(fields: [authorId], references: [id])
+  author     User?      @relation(fields: [authorId], references: [id])
   authorId   String
   likedUsers User[]     @relation(name: "LikedUserToLikedArticle")
   categories Category[]

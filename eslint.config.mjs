@@ -1,4 +1,3 @@
-import customRules from 'eslint-plugin-custom-rules/configs/custom-rules.mjs'
 import eslint from 'eslint-plugin-custom-rules/configs/eslint.mjs'
 import next from 'eslint-plugin-custom-rules/configs/next.mjs'
 import prettier from 'eslint-plugin-custom-rules/configs/prettier.mjs'
@@ -7,6 +6,29 @@ import storybook from 'eslint-plugin-custom-rules/configs/storybook.mjs'
 import testingLibrary from 'eslint-plugin-custom-rules/configs/testing-library.mjs'
 import typescript from 'eslint-plugin-custom-rules/configs/typescript.mjs'
 
+import pluginCustomRules from 'eslint-plugin-custom-rules'
+
+const typescriptReactConfig = [...eslint, ...typescript, ...react, ...next]
+
+const storybookConfig = [...storybook]
+
+const testingLibraryConfig = [...testingLibrary]
+
+const customRulesConfig = [
+  {
+    name: 'custom-rules',
+    files: ['**/*.{ts,tsx}'],
+    plugins: { 'custom-rules': pluginCustomRules },
+    rules: {
+      'custom-rules/require-should-dirty': 'error',
+      'custom-rules/require-satisfies-for-refetch-variables': 'error',
+    },
+  },
+]
+
+const prettierConfig = [...prettier]
+
+/** @type {import("eslint").Linter.Config[]} */
 export default [
   {
     ignores: [
@@ -24,12 +46,9 @@ export default [
       '!**/eslint-plugin-custom-rules/src/',
     ],
   },
-  ...eslint,
-  ...prettier,
-  ...typescript,
-  ...react,
-  ...next,
-  ...storybook,
-  ...testingLibrary,
-  ...customRules,
+  ...typescriptReactConfig,
+  ...storybookConfig,
+  ...testingLibraryConfig,
+  ...customRulesConfig,
+  ...prettierConfig,
 ]

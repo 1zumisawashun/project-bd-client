@@ -4,7 +4,7 @@ import pluginImport from 'eslint-plugin-import'
 /** @type {import("eslint").Linter.Config[]} */
 export default [
   {
-    name: 'js recommended',
+    name: 'eslint',
     files: ['**/*.{ts,tsx}'],
     rules: {
       ...eslint.configs.recommended.rules,
@@ -24,7 +24,7 @@ export default [
   },
   {
     ...pluginImport.flatConfigs.recommended,
-    name: 'import recommended',
+    name: 'eslint-plugin-import',
     files: ['**/*.{ts,tsx}'],
     rules: {
       ...pluginImport.flatConfigs.recommended.rules,

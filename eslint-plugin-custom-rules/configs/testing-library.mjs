@@ -4,7 +4,7 @@ import pluginTestingLibrary from 'eslint-plugin-testing-library'
 export default [
   {
     ...pluginTestingLibrary.configs['flat/react'],
-    name: 'testing-library recommended',
+    name: 'eslint-plugin-testing-library',
     files: ['**/?(*.)+(spec|test).[jt]s?(x)'],
   },
 ]

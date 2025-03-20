@@ -6,7 +6,7 @@ import pluginReactHooks from 'eslint-plugin-react-hooks'
 export default [
   {
     ...pluginReact.configs.flat.recommended,
-    name: 'react recommended + jsx-runtime',
+    name: 'eslint-plugin-react',
     files: ['**/*.{ts,tsx}'],
     rules: {
       ...pluginReact.configs.flat.recommended.rules,
@@ -25,7 +25,7 @@ export default [
     },
   },
   {
-    name: 'react-hooks recommended',
+    name: 'eslint-plugin-react-hooks',
     files: ['**/*.{ts,tsx}'],
     plugins: { 'react-hooks': pluginReactHooks },
     rules: {
@@ -34,7 +34,7 @@ export default [
   },
   {
     ...pluginJsxA11y.flatConfigs.recommended,
-    name: 'jsx-a11y recommended',
+    name: 'eslint-plugin-jsx-a11y',
     files: ['**/*.{ts,tsx}'],
     rules: {
       ...pluginJsxA11y.flatConfigs.recommended.rules,

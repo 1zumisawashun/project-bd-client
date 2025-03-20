@@ -1,9 +1,7 @@
-name: Continuous Integration
+name: frontend lint
 
 on:
-  push:
-    branches-ignore:
-      - main
+  pull_request:
 
 jobs:
   setup:

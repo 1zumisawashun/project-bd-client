@@ -16,10 +16,10 @@
   "json.schemaDownload.enable": true,
   "github.copilot.chat.codeGeneration.instructions": [
     {
-      "file": "docs/code-style-react.md"
+      "file": "docs/guideline/code-style-react.md"
     },
     {
-      "file": "docs/code-style-typescript.md"
+      "file": "docs/ai/code-style-typescript.md"
     }
   ]
 }

@@ -57,7 +57,7 @@ export const MyPageLogout: React.FC = () => {
         <VStack gap={2}>
           <Title>ログアウトする</Title>
           <Description>
-            ログアウトするログアウトするログアウトするログアウトするログアウトするログアウトする
+            アカウントからログアウトします。再度利用するにはログインが必要です。
           </Description>
         </VStack>
         <HStack>

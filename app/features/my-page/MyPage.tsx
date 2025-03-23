@@ -25,7 +25,7 @@ export const MyPage: React.FC<Props> = ({ user }) => {
         <TabsTrigger value="setting">設定</TabsTrigger>
         <TabsTrigger value="published">公開中</TabsTrigger>
         <TabsTrigger value="draft">下書き</TabsTrigger>
-        <TabsTrigger value="like">お気に入り</TabsTrigger>
+        <TabsTrigger value="like">いいね</TabsTrigger>
       </TabsList>
       <TabsContent value="setting">
         <MyPageSetting user={user} />

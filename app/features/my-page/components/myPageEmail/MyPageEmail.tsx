@@ -115,7 +115,7 @@ export const MyPageEmail: React.FC<{ user: User }> = ({ user }) => {
         <VStack gap={2}>
           <Title>メールアドレスを変更する</Title>
           <Description>
-            メールアドレスを変更するメールアドレスを変更するメールアドレスを変更するメールアドレスを変更するメールアドレスを変更する
+            登録されているメールアドレスを変更できます。新しいメールアドレスを入力してください。
           </Description>
         </VStack>
         {isOpen ? (

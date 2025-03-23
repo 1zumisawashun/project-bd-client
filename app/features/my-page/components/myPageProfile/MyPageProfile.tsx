@@ -116,7 +116,7 @@ export const MyPageProfile: React.FC<{ user: User }> = ({ user }) => {
         <VStack gap={2}>
           <Title>プロフィールを変更する</Title>
           <Description>
-            プロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更するプロフィールを変更する
+            現在の名前を編集して、新しい名前に変更できます。
           </Description>
         </VStack>
         {isOpen ? (

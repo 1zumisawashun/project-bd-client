@@ -1,0 +1,23 @@
+@import '@radix-ui/colors/black-alpha.css';
+@import '@radix-ui/colors/mauve.css';
+@import '@radix-ui/colors/violet.css';
+
+.toggle-group {
+  display: inline-flex;
+  gap: 1rem;
+}
+
+.toggle-group-item:hover {
+  cursor: pointer;
+  // filter: brightness(90%);
+  filter: brightness(0.75) contrast(120%); // 0.75 * 120% = 90%
+  transition: filter 0.3s ease;
+}
+.toggle-group-item[data-state='on'] {
+  filter: brightness(80%);
+  transition: filter 0.3s ease;
+}
+.toggle-group-item:focus-visible {
+  outline: 2px solid;
+  outline-offset: 2px;
+}

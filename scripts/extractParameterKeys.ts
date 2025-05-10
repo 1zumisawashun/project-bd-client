@@ -1,60 +1,72 @@
-import { parse } from '@babel/parser'
-import traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import fs from 'fs'
 import path from 'path'
+import { parse } from './utilities/parse'
+import { traverse } from './utilities/traverse'
 
-const rootDir = './src' // あなたの対象ディレクトリ
-const keys = new Set<string>()
+const rootDir = './app'
+const keys: string[] = []
 
-function extractKeysFromParameterObject(node: t.ObjectExpression) {
-  for (const prop of node.properties) {
-    if (t.isObjectProperty(prop) && t.isIdentifier(prop.key)) {
-      keys.add(prop.key.name)
+const extractKeysFromParameterObject = (node: t.ObjectExpression) => {
+  for (const p of node.properties) {
+    if (t.isObjectProperty(p) && t.isIdentifier(p.key)) {
+      keys.push(p.key.name)
     }
   }
 }
 
-function parseCode(code: string) {
-  const ast = parse(code, {
-    sourceType: 'module',
-    plugins: ['typescript', 'jsx'],
-  })
+const parseCode = (code: string) => {
+  const ast = parse(code)
 
   traverse(ast, {
     VariableDeclarator(path) {
       const { id, init } = path.node
 
+      // const parameters = { ... }
       if (
         t.isIdentifier(id) &&
-        id.name === 'parameter' &&
+        id.name === 'parameters' &&
         t.isObjectExpression(init)
       ) {
         extractKeysFromParameterObject(init)
       }
-    },
-    AssignmentExpression(path) {
-      const { left, right } = path.node
 
-      if (
-        t.isIdentifier(left) &&
-        left.name === 'parameter' &&
-        t.isObjectExpression(right)
-      ) {
-        extractKeysFromParameterObject(right)
+      // const Story = { parameters: { ... } }
+      if (t.isObjectExpression(init)) {
+        for (const p of init.properties) {
+          if (
+            t.isObjectProperty(p) &&
+            t.isIdentifier(p.key) &&
+            p.key.name === 'parameters'
+          ) {
+            // parameters: { layout: 'fullscreen' }
+            if (t.isObjectExpression(p.value)) {
+              extractKeysFromParameterObject(p.value)
+            }
+            // parameters: getLayout()
+            if (t.isCallExpression(p.value) && t.isIdentifier(p.value.callee)) {
+              keys.push(p.value.callee.name)
+            }
+            // parameters: layouts,
+            if (t.isIdentifier(p.value)) {
+              keys.push(p.value.name)
+            }
+          }
+        }
       }
     },
   })
 }
 
-function walkDir(dir: string) {
+// MEMO: workDirは再利用できそう、parseCodeは解析するコードによって変わるので都度カスタマイズが必要
+const walkDir = (dir: string) => {
   for (const entry of fs.readdirSync(dir)) {
     const fullPath = path.join(dir, entry)
     const stat = fs.statSync(fullPath)
 
     if (stat.isDirectory()) {
       walkDir(fullPath)
-    } else if (entry.endsWith('.ts') || entry.endsWith('.tsx')) {
+    } else if (entry.endsWith('.stories.tsx')) {
       const code = fs.readFileSync(fullPath, 'utf-8')
       parseCode(code)
     }
@@ -62,4 +74,6 @@ function walkDir(dir: string) {
 }
 
 walkDir(rootDir)
-console.log('parameter keys:', Array.from(keys))
+
+console.log('parameter keys:', Array.from(new Set(keys)))
+console.log('parameter keys length:', keys.length)

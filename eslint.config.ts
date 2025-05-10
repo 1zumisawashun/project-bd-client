@@ -1,12 +1,12 @@
-import eslint from 'eslint-plugin-custom-rules/configs/eslint.mjs'
-import next from 'eslint-plugin-custom-rules/configs/next.mjs'
-import prettier from 'eslint-plugin-custom-rules/configs/prettier.mjs'
-import react from 'eslint-plugin-custom-rules/configs/react.mjs'
-import storybook from 'eslint-plugin-custom-rules/configs/storybook.mjs'
-import testingLibrary from 'eslint-plugin-custom-rules/configs/testing-library.mjs'
-import typescript from 'eslint-plugin-custom-rules/configs/typescript.mjs'
+import eslint from './app/functions/libs/eslint/configs/eslint'
+import next from './app/functions/libs/eslint/configs/next'
+import prettier from './app/functions/libs/eslint/configs/prettier'
+import react from './app/functions/libs/eslint/configs/react'
+import storybook from './app/functions/libs/eslint/configs/storybook'
+import testingLibrary from './app/functions/libs/eslint/configs/testing-library'
+import typescript from './app/functions/libs/eslint/configs/typescript'
 
-import pluginCustomRules from 'eslint-plugin-custom-rules'
+import pluginCustomRules from './app/functions/libs/eslint'
 
 const typescriptReactConfig = [...eslint, ...typescript, ...react, ...next]
 
@@ -37,13 +37,11 @@ export default [
       '**/public/',
       '**/package-lock.json',
       '**/tsconfig.json',
-      '**/*.cjs',
-      '**/*.mjs',
       '**/.storybook/',
       '**/jest.setup.ts',
-      '**/.lintstagedrc.js',
       '**/eslint-plugin-custom-rules/',
       '!**/eslint-plugin-custom-rules/src/',
+      'app/functions/libs/eslint/configs/**/*.ts',
     ],
   },
   ...typescriptReactConfig,

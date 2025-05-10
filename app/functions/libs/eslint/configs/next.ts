@@ -1,3 +1,4 @@
+// @ts-expect-error
 import pluginNext from '@next/eslint-plugin-next'
 
 /** @type {import("eslint").Linter.Config[]} */

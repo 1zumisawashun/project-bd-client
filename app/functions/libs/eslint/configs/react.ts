@@ -1,16 +1,20 @@
+// @ts-expect-error
 import pluginJsxA11y from 'eslint-plugin-jsx-a11y'
 import pluginReact from 'eslint-plugin-react'
+// @ts-expect-error
 import pluginReactHooks from 'eslint-plugin-react-hooks'
+
+import type { Linter } from 'eslint'
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [
   {
-    ...pluginReact.configs.flat.recommended,
+    ...pluginReact.configs.flat['recommended'],
     name: 'eslint-plugin-react',
     files: ['**/*.{ts,tsx}'],
     rules: {
-      ...pluginReact.configs.flat.recommended.rules,
-      ...pluginReact.configs.flat['jsx-runtime'].rules,
+      ...pluginReact.configs.flat['recommended']?.rules,
+      ...pluginReact.configs.flat['jsx-runtime']?.rules,
       'react/require-default-props': 'off',
       'react/function-component-definition': 'off',
       'react/prop-types': 'off',
@@ -41,4 +45,4 @@ export default [
       'jsx-a11y/anchor-is-valid': 'off',
     },
   },
-]
+] as Linter.Config[]

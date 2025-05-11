@@ -42,6 +42,7 @@ export default [
       '**/eslint-plugin-custom-rules/',
       '!**/eslint-plugin-custom-rules/src/',
       'app/functions/libs/eslint/configs/**/*.ts',
+      'app/functions/libs/open-api/*.d.ts',
     ],
   },
   ...typescriptReactConfig,

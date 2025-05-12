@@ -28,7 +28,11 @@
     "prisma:push": "npx prisma db push",
     "prisma:reset": "npx prisma db push --force-reset && npm run prisma:seed",
     "vercel-build": "prisma generate && next build && prisma migrate deploy",
-    "script:extract-parameter-keys": "npx tsx ./scripts/extractParameterKeys.ts"
+    "script:extract-parameter-keys": "npx tsx ./scripts/extractParameterKeys.ts",
+    "openapi:json": "npx next-swagger-doc-cli next-swagger-doc.json --output ./app/functions/libs/open-api/swagger.json",
+    "openapi:typescript": "npx openapi-typescript ./app/functions/libs/open-api/swagger.json -o ./app/functions/libs/open-api/swagger.d.ts",
+    "openapi:generate": "npm run openapi:json && npm run openapi:typescript",
+    "openapi:test": "dredd ./app/functions/libs/open-api/swagger.json http://localhost:3000"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.2",
@@ -64,9 +68,11 @@
     "dompurify": "^3.2.2",
     "next": "14.2.5",
     "next-auth": "^5.0.0-beta.20",
+    "next-swagger-doc": "^0.4.1",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.2",
+    "swagger-ui-react": "^5.21.0",
     "validator": "^13.12.0",
     "zod": "^3.23.8"
   },
@@ -92,6 +98,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/swagger-ui-react": "^5.18.0",
     "@types/validator": "^13.12.2",
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",
@@ -112,6 +119,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "lefthook": "^1.11.3",
     "next-router-mock": "^0.9.13",
+    "openapi-typescript": "^7.8.0",
     "prettier": "^3.3.3",
     "prisma": "^5.18.0",
     "prisma-erd-generator": "^1.11.2",

@@ -1,8 +1,4 @@
-import {
-  authRouteOptions,
-  privateRouteOptions,
-  publicRouteOptions,
-} from '@/functions/constants/routes'
+import { getFlatMenu } from '@/functions/helpers/getFlatMenu'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { AnchorButton } from '../../buttons/AnchorButton'
 import { HamburgerMenu } from '../HamburgerMenu'
@@ -13,11 +9,7 @@ const BLOCK_NAME = 'header'
 // NOTE: RSCに依存しているためカタログに追加できない
 export const Header: React.FC = async () => {
   const session = await auth()
-  const isAuthenticated = !!session
-
-  const routes = isAuthenticated
-    ? [...privateRouteOptions, ...publicRouteOptions]
-    : [...authRouteOptions, ...publicRouteOptions]
+  const routes = getFlatMenu({ isPrivate: true, isAuth: !!session })
 
   return (
     <header className={styles[`${BLOCK_NAME}`]}>

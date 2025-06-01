@@ -27,8 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/functions/libs/eslint/configs/**/*.ts",
-    "app/functions/libs/open-api/*.d.ts"
+    "app/functions/libs/eslint/configs/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

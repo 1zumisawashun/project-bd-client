@@ -1,7 +1,7 @@
-import clsx from 'clsx'
-import { forwardRef, ElementRef, ComponentProps } from 'react'
 import { AnchorButton } from '@/components/buttons/AnchorButton'
-import styles from '../index.module.scss'
+import clsx from 'clsx'
+import { ComponentProps, ElementRef, forwardRef } from 'react'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'breadcrumb'
 type Props = { isCurrent?: boolean } & ComponentProps<typeof AnchorButton>

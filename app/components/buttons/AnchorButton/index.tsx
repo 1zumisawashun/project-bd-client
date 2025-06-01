@@ -1,13 +1,13 @@
+import { Shape, Theme, Variant } from '@/functions/types'
 import clsx from 'clsx'
+import NextLink, { LinkProps } from 'next/link'
 import {
+  ComponentPropsWithoutRef,
   ElementRef,
   forwardRef,
-  ComponentPropsWithoutRef,
   ReactNode,
 } from 'react'
-import NextLink, { LinkProps } from 'next/link'
-import { Theme, Variant, Shape } from '@/functions/types'
-import styles from './index.module.scss'
+import styles from './index.module.css'
 
 const BLOCK_NAME = 'button'
 type Props = Omit<ComponentPropsWithoutRef<'a'>, 'prefix'> & {

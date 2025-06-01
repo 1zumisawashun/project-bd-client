@@ -14,7 +14,7 @@ import {
 } from 'react-hook-form'
 import { Schema } from '../../articleEdit.schema'
 import { editArticle } from './articleEditHeader.action'
-import styles from './articleEditHeader.module.scss'
+import styles from './articleEditHeader.module.css'
 
 const BLOCK_NAME = 'articleEditHeader'
 type Props = {

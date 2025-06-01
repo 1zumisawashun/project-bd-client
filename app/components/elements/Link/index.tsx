@@ -1,12 +1,12 @@
 import clsx from 'clsx'
+import NextLink, { LinkProps } from 'next/link'
 import {
+  ComponentPropsWithoutRef,
   ElementRef,
   forwardRef,
-  ComponentPropsWithoutRef,
   ReactNode,
 } from 'react'
-import NextLink, { LinkProps } from 'next/link'
-import styles from './index.module.scss'
+import styles from './index.module.css'
 
 const BLOCK_NAME = 'link'
 type Props = Omit<ComponentPropsWithoutRef<'a'>, 'prefix'> & {

@@ -1,5 +1,5 @@
 import * as RowDropdownMenu from '@radix-ui/react-dropdown-menu'
-import { forwardRef, ElementRef } from 'react'
+import { ElementRef, forwardRef } from 'react'
 
 type Props = {} & RowDropdownMenu.DropdownMenuTriggerProps
 type Ref = ElementRef<'button'>

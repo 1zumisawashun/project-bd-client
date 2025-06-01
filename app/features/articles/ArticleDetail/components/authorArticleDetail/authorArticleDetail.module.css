@@ -1,4 +1,4 @@
-// override the base-button styles
+/* override the base-button styles */
 .authorArticleDetail-button.authorArticleDetail-button {
   justify-content: flex-start;
 }

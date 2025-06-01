@@ -1,12 +1,12 @@
 .radio-group {
-  composes: toggle-group from '@/assets/base-toggle.module.scss';
+  composes: toggle-group from '@/assets/base-toggle.module.css';
 }
 .radio-group-item-label {
-  composes: toggle-label from '@/assets/base-toggle.module.scss';
+  composes: toggle-label from '@/assets/base-toggle.module.css';
 }
 
 .radio-group-item {
-  composes: toggle from '@/assets/base-toggle.module.scss';
+  composes: toggle from '@/assets/base-toggle.module.css';
   background-color: var(--indigo-1);
   display: inline-flex;
   align-items: center;
@@ -18,5 +18,5 @@
 }
 
 .radio-group-item-text {
-  composes: toggle-text from '@/assets/base-toggle.module.scss';
+  composes: toggle-text from '@/assets/base-toggle.module.css';
 }

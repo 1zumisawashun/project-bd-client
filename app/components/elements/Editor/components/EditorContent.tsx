@@ -1,10 +1,10 @@
-import clsx from 'clsx'
-import { forwardRef, ElementRef } from 'react'
 import {
-  EditorContent as RowEditorContent,
   EditorContentProps,
+  EditorContent as RowEditorContent,
 } from '@tiptap/react'
-import styles from '../index.module.scss'
+import clsx from 'clsx'
+import { ElementRef, forwardRef } from 'react'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'editor'
 type Props = {} & EditorContentProps

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { PlusIcon } from '@radix-ui/react-icons'
-import { Tooltip } from './index'
 import { IconButton } from '../../buttons/IconButton'
+import { Tooltip } from './index'
 
 const meta: Meta<typeof Tooltip> = {
   title: 'element/Tooltip',

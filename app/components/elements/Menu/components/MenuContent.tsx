@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { ElementRef, forwardRef, ComponentPropsWithoutRef } from 'react'
-import styles from '../index.module.scss'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { useMenu } from '../hooks/useMenu'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menu'
 type Ref = ElementRef<'div'>

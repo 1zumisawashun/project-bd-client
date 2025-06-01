@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { NotFound } from './index'
 import { VStack } from '../../layouts/VStack'
+import { NotFound } from './index'
 
 const meta: Meta<typeof NotFound> = {
   title: 'element/NotFound',

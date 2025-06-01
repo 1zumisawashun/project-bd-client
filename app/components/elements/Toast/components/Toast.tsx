@@ -1,8 +1,8 @@
-import * as RowToast from '@radix-ui/react-toast'
 import { IconButton } from '@/components/buttons/IconButton'
-import { Cross1Icon } from '@radix-ui/react-icons'
 import { Toast as ToastType } from '@/functions/types'
-import styles from '../index.module.scss'
+import { Cross1Icon } from '@radix-ui/react-icons'
+import * as RowToast from '@radix-ui/react-toast'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'toast'
 type Props = {

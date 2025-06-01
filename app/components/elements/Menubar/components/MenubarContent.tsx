@@ -1,7 +1,7 @@
-import clsx from 'clsx'
-import { forwardRef, ElementRef } from 'react'
 import * as RowMenubar from '@radix-ui/react-menubar'
-import styles from '../index.module.scss'
+import clsx from 'clsx'
+import { ElementRef, forwardRef } from 'react'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menubar'
 type Props = {} & RowMenubar.MenubarContentProps

@@ -2,7 +2,7 @@ import { getFlatMenu } from '@/functions/helpers/getFlatMenu'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { AnchorButton } from '../../buttons/AnchorButton'
 import { HamburgerMenu } from '../HamburgerMenu'
-import styles from './index.module.scss'
+import styles from './index.module.css'
 
 const BLOCK_NAME = 'header'
 

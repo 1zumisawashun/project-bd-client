@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useCallback } from 'react'
 import { genRandomId } from '@/functions/helpers/utils'
 import { Toast } from '@/functions/types'
+import { useCallback, useState } from 'react'
 import { ToastDispatchContextParams } from '../components/ToastDispatchProvider'
 
 export const useToast = () => {

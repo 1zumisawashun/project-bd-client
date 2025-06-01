@@ -10,7 +10,7 @@ import { BaseArticleDetail } from '../baseArticleDetail/BaseArticleDetail'
 import { DeleteDialog } from '../deleteDialog/DeleteDialog'
 import { DraftDialog } from '../draftDialog/DraftDialog'
 import { PublishDialog } from '../publishDialog/PublishDialog'
-import styles from './authorArticleDetail.module.scss'
+import styles from './authorArticleDetail.module.css'
 
 const BLOCK_NAME = 'authorArticleDetail'
 

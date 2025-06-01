@@ -1,7 +1,7 @@
 .card {
   border-radius: 0.5rem;
 
-  // shape
+  /* shape */
   &[data-shape='square'] {
     border-radius: 0.25rem;
   }
@@ -9,12 +9,12 @@
     border-radius: 1rem;
   }
 
-  // scroll
+  /* scroll */
   &[data-scroll='true'] {
     overflow-y: scroll;
   }
 
-  // panel theme and border
+  /* panel theme and border */
   &[data-theme='transparent'] {
     background-color: transparent;
     color: inherit;
@@ -23,7 +23,7 @@
     }
   }
 
-  // variant and color
+  /* variant and color */
   &[data-theme='danger'] {
     background-color: var(--red-1);
     color: var(--red-10);

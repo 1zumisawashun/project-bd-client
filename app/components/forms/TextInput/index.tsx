@@ -1,6 +1,6 @@
 import * as Form from '@radix-ui/react-form'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import styles from './index.module.scss'
+import styles from './index.module.css'
 
 /** @see https://tech.smarthr.jp/entry/2024/03/12/170000 */
 type Props = Omit<ComponentPropsWithoutRef<'input'>, 'placeholder'>

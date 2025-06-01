@@ -1,8 +1,8 @@
-import clsx from 'clsx'
-import { forwardRef, ElementRef, useId } from 'react'
 import * as RowCheckbox from '@radix-ui/react-checkbox'
 import { CheckIcon } from '@radix-ui/react-icons'
-import styles from '../index.module.scss'
+import clsx from 'clsx'
+import { ElementRef, forwardRef, useId } from 'react'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'checkbox'
 type Props = { error?: boolean } & RowCheckbox.CheckboxProps

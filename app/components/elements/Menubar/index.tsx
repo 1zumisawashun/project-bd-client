@@ -1,6 +1,6 @@
 export * from './components/Menubar'
+export * from './components/MenubarContent'
 export * from './components/MenubarItem'
 export * from './components/MenubarMenu'
-export * from './components/MenubarContent'
 export * from './components/MenubarSeparator'
 export * from './components/MenubarTrigger'

@@ -21,7 +21,7 @@
   }
 }
 
-// 詳細度をあげてスタイルを上書きする
+/* 詳細度をあげてスタイルを上書きする */
 .label-action-button.label-action-button {
   padding: 0.2rem;
 }

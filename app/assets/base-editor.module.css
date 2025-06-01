@@ -1,5 +1,5 @@
 .editor-reset {
-  // revert reset css
+  /* revert reset css */
   *:where(
       :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
     ) {
@@ -20,9 +20,9 @@
       margin-top: 0.25em;
       margin-bottom: 0.25em;
     }
-    // li::first-line {
-    //   margin-left: -1rem;
-    // }
+    /* li::first-line {
+      margin-left: -1rem;
+    } */
   }
 
   /* Heading styles */

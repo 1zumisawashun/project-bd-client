@@ -1,8 +1,8 @@
-import clsx from 'clsx'
-import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react'
-import { ChevronLeftIcon } from '@radix-ui/react-icons'
 import { AnchorButton } from '@/components/buttons/AnchorButton'
-import styles from '../index.module.scss'
+import { ChevronLeftIcon } from '@radix-ui/react-icons'
+import clsx from 'clsx'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'breadcrumb'
 type Props = { href?: string } & ComponentPropsWithoutRef<'nav'>

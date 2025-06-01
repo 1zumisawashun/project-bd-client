@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from '@/components/buttons/Button'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import { VStack } from './index'
 

@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import type { Meta, StoryObj } from '@storybook/react'
+import { Controller, useForm } from 'react-hook-form'
 import * as z from 'zod'
+import { Form, FormErrorMessage, FormField } from '../Form'
 import { PriceInput } from './index'
-import { FormErrorMessage, FormField, Form } from '../Form'
 
 const meta: Meta<typeof PriceInput> = {
   title: 'form/PriceInput',

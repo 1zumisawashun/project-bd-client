@@ -1,13 +1,13 @@
 'use client'
 
-import {
-  createContext,
-  forwardRef,
-  ElementRef,
-  ComponentPropsWithoutRef,
-} from 'react'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import styles from '../index.module.scss'
+import {
+  ComponentPropsWithoutRef,
+  createContext,
+  ElementRef,
+  forwardRef,
+} from 'react'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menu'
 type MenuContextParams = Omit<

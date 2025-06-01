@@ -1,5 +1,5 @@
 import { Button } from '../../../buttons/Button'
-import styles from '../index.module.scss'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menu'
 type Props = {

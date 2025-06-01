@@ -1,9 +1,9 @@
-import clsx from 'clsx'
-import { ElementRef, forwardRef, ComponentPropsWithoutRef, useRef } from 'react'
-import { useOuterClick } from '@/functions/hooks/useOuterClick'
 import { useMergeRef } from '@/functions/hooks/useMergeRef'
-import styles from '../index.module.scss'
+import { useOuterClick } from '@/functions/hooks/useOuterClick'
+import clsx from 'clsx'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, useRef } from 'react'
 import { useMenu } from '../hooks/useMenu'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menu'
 type Ref = ElementRef<'button'>

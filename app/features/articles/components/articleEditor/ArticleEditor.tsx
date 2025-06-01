@@ -5,7 +5,7 @@ import { useEditor } from '@/components/elements/Editor/hooks/useEditor'
 import { VStack } from '@/components/layouts/VStack'
 import { ArticleMenuBubble } from '../articleMenuBubble/ArticleMenuBubble'
 import { ArticleMenubar } from '../articleMenubar/ArticleMenubar'
-import styles from './articleEditor.module.scss'
+import styles from './articleEditor.module.css'
 
 const BLOCK_NAME = 'articleEditor'
 

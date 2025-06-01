@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { userEvent, within } from '@storybook/test'
-import { SimpleDialog } from './index'
 import { Button } from '../../buttons/Button'
+import { SimpleDialog } from './index'
 
 const meta: Meta<typeof SimpleDialog> = {
   title: 'element/SimpleDialog',

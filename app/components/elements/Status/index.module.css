@@ -5,7 +5,7 @@
   gap: 0.5rem;
   padding: 1rem;
 
-  // variant and color
+  /* variant and color */
   &[data-status='empty'] {
     background-color: var(--indigo-4);
     color: var(--indigo-12);
@@ -19,5 +19,5 @@
 }
 
 .status-icon {
-  composes: svg from '@/assets/base-icon.module.scss';
+  composes: svg from '@/assets/base-icon.module.css';
 }

@@ -1,7 +1,7 @@
 import * as RowToggleGroup from '@radix-ui/react-toggle-group'
 import clsx from 'clsx'
 import { ElementRef, forwardRef } from 'react'
-import styles from '../index.module.scss'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'toggle-group'
 // NOTE: 単一選択のみ許容する

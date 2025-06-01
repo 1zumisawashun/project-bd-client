@@ -1,7 +1,7 @@
 'use client'
 
 import { Footer } from '@/components/elements/Footer'
-import styles from '@/components/layouts/SiteWrapper/index.module.scss'
+import styles from '@/components/layouts/SiteWrapper/index.module.css'
 import { StickyWrapper } from '@/components/layouts/StickyWrapper'
 import { Schema } from './articleEdit.schema'
 import { ArticleEditForm } from './components/articleEditForm/ArticleEditForm'

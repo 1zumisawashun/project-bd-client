@@ -8,7 +8,7 @@ import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import { Article } from '@/functions/types'
 import DOMPurify from 'dompurify'
 import NextLink from 'next/link'
-import styles from './baseArticleDetail.module.scss'
+import styles from './baseArticleDetail.module.css'
 
 const BLOCK_NAME = 'baseArticleDetail'
 type Props = {

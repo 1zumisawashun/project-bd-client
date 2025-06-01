@@ -1,8 +1,8 @@
-import clsx from 'clsx'
-import { forwardRef, ElementRef, useId } from 'react'
-import * as RowRadioGroup from '@radix-ui/react-radio-group'
 import { CheckIcon } from '@radix-ui/react-icons'
-import styles from '../index.module.scss'
+import * as RowRadioGroup from '@radix-ui/react-radio-group'
+import clsx from 'clsx'
+import { ElementRef, forwardRef, useId } from 'react'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'radio-group'
 type Props = { error?: boolean } & RowRadioGroup.RadioGroupItemProps

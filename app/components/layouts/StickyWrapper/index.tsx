@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 import {
-  useState,
-  forwardRef,
-  ElementRef,
   ComponentPropsWithoutRef,
+  ElementRef,
+  forwardRef,
+  useState,
 } from 'react'
-import styles from './index.module.scss'
+import styles from './index.module.css'
 
 const BLOCK_NAME = 'sticky-wrapper'
 type Props = {} & ComponentPropsWithoutRef<'div'>

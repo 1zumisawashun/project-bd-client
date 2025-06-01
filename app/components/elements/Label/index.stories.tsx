@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
+import type { Meta, StoryObj } from '@storybook/react'
 import { Label, LabelAction } from './index'
 
 const meta: Meta<typeof Label> = {

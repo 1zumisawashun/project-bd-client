@@ -1,10 +1,10 @@
-import { DotsVerticalIcon } from '@radix-ui/react-icons'
+import { IconButton } from '@/components/buttons/IconButton'
 import {
-  DropdownMenuContent,
   DropdownMenu,
+  DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/elements/DropdownMenu'
-import { IconButton } from '@/components/buttons/IconButton'
+import { DotsVerticalIcon } from '@radix-ui/react-icons'
 
 type Props = {
   render: React.FC

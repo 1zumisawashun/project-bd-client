@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { content } from '@/functions/constants/content'
-import { EditorContent } from './index'
 import { useEditor } from './hooks/useEditor'
+import { EditorContent } from './index'
 
 const meta: Meta<typeof EditorContent> = {
   title: 'element/Editor',

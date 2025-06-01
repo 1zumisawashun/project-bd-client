@@ -1,16 +1,16 @@
 $viewport-padding: 1rem;
 
 .toast-viewport {
-  // popupする位置
+  /* popupする位置 */
   position: fixed;
   bottom: 0;
   right: 0;
   z-index: 1000;
-  // 複数表示する場合の間隔
+  /* 複数表示する場合の間隔 */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  // 複数表示した場合の枠
+  /* 複数表示した場合の枠 */
   --viewport-padding: 1rem;
   padding: $viewport-padding;
 }

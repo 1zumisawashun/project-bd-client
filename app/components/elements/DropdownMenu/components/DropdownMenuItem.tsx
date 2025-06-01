@@ -1,7 +1,7 @@
-import clsx from 'clsx'
 import * as RowDropdownMenu from '@radix-ui/react-dropdown-menu'
-import { forwardRef, ElementRef } from 'react'
-import styles from '../index.module.scss'
+import clsx from 'clsx'
+import { ElementRef, forwardRef } from 'react'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'dropdown-menu'
 type Props = {} & RowDropdownMenu.DropdownMenuItemProps

@@ -1,7 +1,7 @@
 'use client'
 
-import { createContext } from 'react'
 import { Toast } from '@/functions/types'
+import { createContext } from 'react'
 
 export type ToastDispatchContextParams = Omit<Toast, 'id' | 'isOpen'>
 export const ToastDispatchContext = createContext<

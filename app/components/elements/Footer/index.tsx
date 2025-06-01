@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './index.module.scss'
+import styles from './index.module.css'
 
 const BLOCK_NAME = 'footer'
 export const Footer: React.FC = () => {

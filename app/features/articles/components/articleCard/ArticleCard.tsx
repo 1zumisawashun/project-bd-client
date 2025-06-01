@@ -1,6 +1,6 @@
 import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import { Articles } from '@/functions/types'
-import styles from './articleCard.module.scss'
+import styles from './articleCard.module.css'
 
 const BLOCK_NAME = 'articleCard'
 type Props = {

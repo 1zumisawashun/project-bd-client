@@ -1,6 +1,6 @@
 import { Footer } from '../../elements/Footer'
 import { Header } from '../../elements/Header'
-import styles from './index.module.scss'
+import styles from './index.module.css'
 
 const BLOCK_NAME = 'site-wrapper'
 

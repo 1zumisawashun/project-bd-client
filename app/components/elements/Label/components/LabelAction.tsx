@@ -1,9 +1,9 @@
 import { IconButton } from '@/components/buttons/IconButton'
+import { Action } from '@/functions/types'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import clsx from 'clsx'
 import { ComponentProps } from 'react'
-import { Action } from '@/functions/types'
-import styles from '../index.module.scss'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'label-action'
 type Props = { action?: Action } & ComponentProps<typeof IconButton>

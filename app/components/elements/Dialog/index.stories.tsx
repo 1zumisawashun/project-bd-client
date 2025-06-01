@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { VStack } from '@/components/layouts/VStack'
 import { HStack } from '@/components/layouts/HStack'
+import { VStack } from '@/components/layouts/VStack'
+import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { userEvent, within } from '@storybook/test'
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from './index'
 import { Button } from '../../buttons/Button'
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from './index'
 
 const meta: Meta<typeof Dialog> = {
   title: 'element/Dialog',

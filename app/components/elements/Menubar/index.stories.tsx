@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import {
   Menubar,
-  MenubarMenu,
-  MenubarItem,
   MenubarContent,
+  MenubarItem,
+  MenubarMenu,
   MenubarSeparator,
   MenubarTrigger,
 } from './index'

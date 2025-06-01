@@ -3,9 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { userEvent, within } from '@storybook/test'
 import {
+  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenu,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './index'

@@ -1,4 +1,4 @@
-import styles from './articleCardGroup.module.scss'
+import styles from './articleCardGroup.module.css'
 
 const BLOCK_NAME = 'articleCardGroup'
 export const ArticleCardGroup: React.FC<React.PropsWithChildren> = (props) => {

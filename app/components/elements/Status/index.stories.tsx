@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Status } from './index'
 import { VStack } from '../../layouts/VStack'
+import { Status } from './index'
 
 const meta: Meta<typeof Status> = {
   title: 'element/Status',

@@ -1,7 +1,7 @@
-import { forwardRef, ElementRef, ComponentPropsWithoutRef } from 'react'
-import clsx from 'clsx'
 import { Shape, Theme } from '@/functions/types'
-import styles from '../index.module.scss'
+import clsx from 'clsx'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'card'
 type Props = ComponentPropsWithoutRef<'div'> & {

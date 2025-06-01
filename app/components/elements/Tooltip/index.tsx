@@ -1,8 +1,8 @@
-import clsx from 'clsx'
-import { forwardRef, ElementRef } from 'react'
-import * as RowTooltip from '@radix-ui/react-tooltip'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import styles from './index.module.scss'
+import * as RowTooltip from '@radix-ui/react-tooltip'
+import clsx from 'clsx'
+import { ElementRef, forwardRef } from 'react'
+import styles from './index.module.css'
 
 const BLOCK_NAME = 'tooltip'
 type Props = {} & RowTooltip.TooltipContentProps

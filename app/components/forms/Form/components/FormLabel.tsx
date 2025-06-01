@@ -1,7 +1,7 @@
-import clsx from 'clsx'
-import { forwardRef, ElementRef } from 'react'
 import * as Form from '@radix-ui/react-form'
-import styles from '../index.module.scss'
+import clsx from 'clsx'
+import { ElementRef, forwardRef } from 'react'
+import styles from '../index.module.css'
 
 const BLOCK_NAME = 'form'
 type Props = {} & Form.FormLabelProps

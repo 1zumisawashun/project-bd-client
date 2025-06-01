@@ -2,7 +2,7 @@
 
 import * as RowToast from '@radix-ui/react-toast'
 import { useToast } from '../hooks/useToast'
-import styles from '../index.module.scss'
+import styles from '../index.module.css'
 import { Toast } from './Toast'
 import { ToastDispatchProvider } from './ToastDispatchProvider'
 

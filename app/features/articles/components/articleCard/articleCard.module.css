@@ -3,7 +3,7 @@
   border: 1px solid var(--mauve-6);
   border-radius: 0.5rem;
   padding: 1rem;
-  // NOTE: subgridでランダムな高さを揃える
+  /* NOTE: subgridでランダムな高さを揃える */
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 2;
@@ -12,7 +12,7 @@
   font-weight: 600;
   color: var(--mauve-11);
 
-  composes: _line-clamp-3 from '@/assets/line-clump.module.scss';
+  composes: _line-clamp-3 from '@/assets/line-clump.module.css';
 }
 .articleCard-content {
   display: flex;
@@ -20,9 +20,9 @@
   gap: 0.5rem;
   text-align: left;
 
-  composes: _line-clamp-1 from '@/assets/line-clump.module.scss';
+  composes: _line-clamp-1 from '@/assets/line-clump.module.css';
 
-  > :is(p) {
+  & :is(p) {
     font-size: 0.875rem;
     color: var(--mauve-10);
   }

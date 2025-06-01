@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { userEvent, within } from '@storybook/test'
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { MenuContent, MenuItem, Menu, MenuTrigger } from './index'
+import { Menu, MenuContent, MenuItem, MenuTrigger } from './index'
 
 const meta: Meta<typeof Menu> = {
   title: 'element/Menu',

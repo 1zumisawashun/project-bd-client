@@ -33,7 +33,7 @@
   }
 }
 
-// 詳細度をあげてスタイルを上書きする
+/* 詳細度をあげてスタイルを上書きする */
 .menu-item-button.menu-item-button {
   width: 100%;
   justify-content: flex-start;

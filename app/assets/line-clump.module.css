@@ -1,0 +1,91 @@
+/* @see https://twitter.com/tak_dcxi/status/1766517419466793102?s=12&t=0Bs_ltBYiO3nhiiL9YZAEw */
+
+/* @for $i from 1 through 10 {
+  ._line-clamp-#{$i} {
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: block-axis;
+    -webkit-line-clamp: #{$i};
+    contain: content;
+  }
+} */
+
+._line-clamp-1 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 1;
+  contain: content;
+}
+
+._line-clamp-2 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 2;
+  contain: content;
+}
+
+._line-clamp-3 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 3;
+  contain: content;
+}
+
+._line-clamp-4 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 4;
+  contain: content;
+}
+
+._line-clamp-5 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 5;
+  contain: content;
+}
+
+._line-clamp-6 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 6;
+  contain: content;
+}
+
+._line-clamp-7 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 7;
+  contain: content;
+}
+
+._line-clamp-8 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 8;
+  contain: content;
+}
+
+._line-clamp-9 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 9;
+  contain: content;
+}
+
+._line-clamp-10 {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-box-orient: block-axis;
+  -webkit-line-clamp: 10;
+  contain: content;
+}

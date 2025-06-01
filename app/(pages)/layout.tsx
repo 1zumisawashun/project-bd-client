@@ -1,4 +1,4 @@
-import '@/assets/global.scss'
+import '@/assets/global.css'
 import '@/assets/the-new-css-reset.css'
 import AppProviders from '@/providers'
 import { Analytics } from '@vercel/analytics/react'

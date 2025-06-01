@@ -1,0 +1,7 @@
+.editor-content {
+  :focus-visible {
+    outline: none;
+  }
+
+  composes: editor-reset from '@/assets/base-editor.module.css';
+}

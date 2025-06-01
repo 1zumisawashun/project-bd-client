@@ -14,7 +14,7 @@ import {
 } from 'react-hook-form'
 import { Schema } from '../../articleCreate.schema'
 import { createArticle } from './articleCreateHeader.action'
-import styles from './articleCreateHeader.module.scss'
+import styles from './articleCreateHeader.module.css'
 
 const BLOCK_NAME = 'articleCreateHeader'
 export const ArticleCreateHeader: React.FC = () => {

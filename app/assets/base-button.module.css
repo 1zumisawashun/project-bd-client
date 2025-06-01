@@ -1,0 +1,100 @@
+.base-button {
+  &:hover {
+    cursor: pointer;
+    /* filter: brightness(90%); */
+    filter: brightness(0.75) contrast(120%);
+    transition: filter 0.3s ease;
+  }
+  &:active {
+    filter: brightness(80%);
+    transition: filter 0.3s ease;
+  }
+  &:is([disabled], [aria-disabled]) {
+    cursor: not-allowed;
+    filter: brightness(60%);
+    transition: filter 0.3s ease;
+  }
+  &:focus-visible {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
+
+  &[data-variant='contained'] {
+    &[data-theme='primary'] {
+      color: var(--indigo-1);
+      background-color: var(--indigo-12);
+      border: 1px solid var(--indigo-12);
+      &:focus-visible {
+        outline-color: var(--indigo-6);
+      }
+    }
+    &[data-theme='danger'] {
+      color: var(--red-1);
+      background-color: var(--red-10);
+      border: 1px solid var(--red-10);
+      &:focus-visible {
+        outline-color: var(--red-6);
+      }
+    }
+    &[data-theme='success'] {
+      color: var(--green-1);
+      background-color: var(--green-9);
+      border: 1px solid var(--green-9);
+      &:focus-visible {
+        outline-color: var(--green-6);
+      }
+    }
+  }
+  &[data-variant='outlined'] {
+    &[data-theme='primary'] {
+      color: var(--indigo-12);
+      background-color: var(--indigo-1);
+      border: 1px solid var(--indigo-12);
+      &:focus-visible {
+        outline-color: var(--indigo-6);
+      }
+    }
+    &[data-theme='danger'] {
+      color: var(--red-10);
+      background-color: var(--red-1);
+      border: 1px solid var(--red-10);
+      &:focus-visible {
+        outline-color: var(--red-6);
+      }
+    }
+    &[data-theme='success'] {
+      color: var(--green-10);
+      background-color: var(--green-1);
+      border: 1px solid var(--green-9);
+      &:focus-visible {
+        outline-color: var(--green-6);
+      }
+    }
+  }
+  &[data-variant='ghost'] {
+    &[data-theme='primary'] {
+      color: var(--indigo-12);
+      background-color: var(--indigo-1);
+      border: 1px solid var(--indigo-1);
+      &:focus-visible {
+        outline-color: var(--indigo-6);
+      }
+    }
+    &[data-theme='danger'] {
+      color: var(--red-10);
+      background-color: var(--red-1);
+      border: 1px solid var(--red-1);
+      &:focus-visible {
+        outline-color: var(--red-6);
+      }
+    }
+    &[data-theme='success'] {
+      color: var(--green-9);
+      background-color: var(--green-1);
+      border: 1px solid var(--green-1);
+      &:focus-visible {
+        outline-color: var(--green-6);
+      }
+    }
+  }
+}

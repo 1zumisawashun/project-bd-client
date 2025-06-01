@@ -1,5 +1,5 @@
 .button {
-  composes: base-button from '@/assets/base-button.module.scss';
+  composes: base-button from '@/assets/base-button.module.css';
   // override the base-button styles
   box-sizing: border-box;
   font-size: 1rem;

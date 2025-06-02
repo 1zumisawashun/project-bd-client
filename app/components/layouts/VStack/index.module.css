@@ -1,4 +1,4 @@
-$data-gap-multiplier: 0.25rem;
+/* $data-gap-multiplier: 0.25rem;
 
 $alignments: (
   'start': flex-start,
@@ -26,4 +26,74 @@ $alignments: (
       align-items: $d;
     }
   }
+} */
+
+.vstack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vstack[data-gap='1'] {
+  gap: 0.25rem;
+}
+
+.vstack[data-gap='2'] {
+  gap: 0.5rem;
+}
+
+.vstack[data-gap='3'] {
+  gap: 0.75rem;
+}
+
+.vstack[data-gap='4'] {
+  gap: 1rem;
+}
+
+.vstack[data-gap='5'] {
+  gap: 1.25rem;
+}
+
+.vstack[data-gap='6'] {
+  gap: 1.5rem;
+}
+
+.vstack[data-gap='7'] {
+  gap: 1.75rem;
+}
+
+.vstack[data-gap='8'] {
+  gap: 2rem;
+}
+
+.vstack[data-gap='9'] {
+  gap: 2.25rem;
+}
+
+.vstack[data-gap='10'] {
+  gap: 2.5rem;
+}
+
+.vstack[data-justify='start'] {
+  justify-content: flex-start;
+}
+
+.vstack[data-justify='center'] {
+  justify-content: center;
+}
+
+.vstack[data-justify='end'] {
+  justify-content: flex-end;
+}
+
+.vstack[data-align='start'] {
+  align-items: flex-start;
+}
+
+.vstack[data-align='center'] {
+  align-items: center;
+}
+
+.vstack[data-align='end'] {
+  align-items: flex-end;
 }

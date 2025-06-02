@@ -1,5 +1,3 @@
-$viewport-padding: 1rem;
-
 .toast-viewport {
   /* popupする位置 */
   position: fixed;
@@ -12,7 +10,7 @@ $viewport-padding: 1rem;
   gap: 0.5rem;
   /* 複数表示した場合の枠 */
   --viewport-padding: 1rem;
-  padding: $viewport-padding;
+  padding: var(--viewport-padding);
 }
 
 .toast {
@@ -64,8 +62,9 @@ $viewport-padding: 1rem;
 }
 
 @keyframes slideIn {
+  --viewport-padding: 1rem;
   from {
-    transform: translateX(calc(100% + $viewport-padding));
+    transform: translateX(calc(100% + var(--viewport-padding)));
   }
   to {
     transform: translateX(0);
@@ -73,11 +72,12 @@ $viewport-padding: 1rem;
 }
 
 @keyframes swipeOut {
+  --viewport-padding: 1rem;
   from {
     transform: translateX(var(--radix-toast-swipe-end-x));
   }
   to {
-    transform: translateX(calc(100% + $viewport-padding));
+    transform: translateX(calc(100% + var(--viewport-padding)));
   }
 }
 

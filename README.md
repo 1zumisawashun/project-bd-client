@@ -60,6 +60,7 @@ See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client
 ## TODO
 
 - Jest -> Vitest
+  - テスト薄いので随時追加して行く
 - スマホから記事編集できるようにする
 - npm -> pnpm
 - renovate の更新

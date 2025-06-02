@@ -1,22 +1,23 @@
+/* @see https://github.com/vercel/next.js/discussions/31705 */
 .editor-reset {
   /* revert reset css */
-  *:where(
+  &:where(
       :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
     ) {
     all: revert;
   }
 
-  :first-child {
+  &:first-child {
     margin-top: 0;
   }
 
   /* List styles */
-  ul,
-  ol {
+  &:global(ul),
+  &:global(ol) {
     padding: 0 1rem;
     margin: 1.25rem 1rem 1.25rem 0.4rem;
 
-    li p {
+    &:global(li p) {
       margin-top: 0.25em;
       margin-bottom: 0.25em;
     }
@@ -26,43 +27,43 @@
   }
 
   /* Heading styles */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  &:global(h1),
+  &:global(h2),
+  &:global(h3),
+  &:global(h4),
+  &:global(h5),
+  &:global(h6) {
     line-height: 1.1;
     margin-top: 2.5rem;
     text-wrap: pretty;
   }
 
-  h1,
-  h2 {
+  &:global(h1),
+  &:global(h2) {
     margin-top: 3.5rem;
     margin-bottom: 1.5rem;
   }
 
-  h1 {
+  &:global(h1) {
     font-size: 1.4rem;
   }
 
-  h2 {
+  &:global(h2) {
     font-size: 1.2rem;
   }
 
-  h3 {
+  &:global(h3) {
     font-size: 1.1rem;
   }
 
-  h4,
-  h5,
-  h6 {
+  &:global(h4),
+  &:global(h5),
+  &:global(h6) {
     font-size: 1rem;
   }
 
   /* Code and preformatted text styles */
-  code {
+  &:global(code) {
     background-color: var(--mauve-12);
     border-radius: 0.4rem;
     color: var(--mauve-12);
@@ -70,7 +71,7 @@
     padding: 0.25em 0.3em;
   }
 
-  pre {
+  &:global(pre) {
     background: var(--mauve-12);
     border-radius: 0.5rem;
     color: var(--mauve-1);
@@ -78,7 +79,7 @@
     margin: 1.5rem 0;
     padding: 0.75rem 1rem;
 
-    code {
+    &:global(code) {
       background: none;
       color: inherit;
       font-size: 0.8rem;
@@ -86,24 +87,24 @@
     }
   }
 
-  blockquote {
+  &:global(blockquote) {
     border-left: 3px solid var(--mauve-8);
     margin: 1.5rem 0;
     padding-left: 1rem;
   }
 
-  hr {
+  &:global(hr) {
     border: none;
     border-top: 1px solid var(--mauve-10);
     margin: 2rem 0;
   }
 
-  a {
+  &:global(a) {
     color: var(--blue-8);
     text-decoration: inherit;
     cursor: pointer;
   }
-  a:hover {
+  &:global(a:hover) {
     color: var(--blue-10);
   }
 }

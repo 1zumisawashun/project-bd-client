@@ -39,8 +39,6 @@ export default [
       '**/tsconfig.json',
       '**/.storybook/',
       '**/jest.setup.ts',
-      '**/eslint-plugin-custom-rules/',
-      '!**/eslint-plugin-custom-rules/src/',
       'app/functions/libs/eslint/configs/**/*.ts',
     ],
   },

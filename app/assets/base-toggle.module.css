@@ -42,7 +42,7 @@
     border: 1px solid var(--indigo-12);
     background-color: var(--indigo-1);
     color: var(--indigo-12);
-    :focus {
+    &:focus {
       outline-color: var(--indigo-6);
     }
   }

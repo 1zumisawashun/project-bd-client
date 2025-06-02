@@ -1,0 +1,62 @@
+/* @see https://github.com/css-modules/css-modules/issues/412 */
+.sample1 {
+  border: 2px solid black;
+  margin: 1rem;
+
+  & :nth-child(1) {
+    border: 2px solid red;
+    color: red;
+  }
+
+  & > :nth-child(2) {
+    border: 2px solid blue;
+    color: blue;
+  }
+
+  /* 詳細度を上げるために、&.sample1 を使用している */
+  &.sample1 :nth-child(3) {
+    border: 2px solid yellow;
+    color: yellow;
+  }
+
+  /* 詳細度を上げるために、&.sample1 を使用している */
+  &.sample1 > :nth-child(4) {
+    border: 2px solid green;
+    color: green;
+  }
+}
+
+.sample2 {
+  border: 2px solid black;
+  margin: 1rem;
+
+  & .paragraph1 {
+    border: 2px solid crimson;
+    color: red;
+  }
+  > .paragraph2 {
+    border: 2px solid blue;
+    color: blue;
+  }
+  .paragraph3 {
+    border: 2px solid yellow;
+    color: yellow;
+  }
+}
+
+/** @see https://github.com/css-modules/css-modules/issues/348 */
+.roleFormContainer :global .ui.form .field > label {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.roleFormContainer {
+  & .ui.form {
+    & .field {
+      & label {
+        font-size: 15px;
+        font-weight: bold;
+      }
+    }
+  }
+}

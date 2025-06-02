@@ -7,15 +7,15 @@ project-bdのリポジトリです
 - クローンして VSCodeを開く
 
 ```bash
-$ git clone git@github.com:1zumisawashun/project-bd-client.git
+$ gh repo clone 1zumisawashun/project-bd-client
 $ cd project-bd-client
 $ code .
 ```
 
-- envファイルを生成する（必要な秘匿情報は[こちら]()から参照してください）
+- envファイルを生成する（必要な秘匿情報は[こちら](https://github.com/1zumisawashun)から参照してください）
 
 ```bash
-$ cp .env.example .env
+$ cp .env.local.example .env.local
 ```
 
 - パッケージをインストールする
@@ -34,9 +34,13 @@ $ npm run dev
 
 ## ディレクトリ構成
 
+以下を参照してください
+
 See [Configuration Reference](https://github.com/1zumisawashun/folder-structure-template).
 
 ## ERD
+
+以下を参照してください
 
 See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client/blob/main/prisma/schema.md).
 
@@ -51,21 +55,26 @@ See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client
 - auth : NextAuth
 - test : Jest + react-testing-library
 - hosting : Vercel
-- other : react-hook-form, zod, tiptap, Storybook, Chromatic
 ```
+
+## TODO
+
+- Jest -> Vitest
+- スマホから記事編集できるようにする
+- npm -> pnpm
+- renovate の更新
+- GHA が壊れているので修正する
 
 ## Troubleshoot
 
 ### デプロイが失敗する
 
-Supabaseをhobbyプランで使用しているため定期的に稼働させないとロックされます。  
-Supabaseのダッシュボードでリストアさせてください。
+Supabaseをhobbyプランで使用しているため定期的に稼働させないとロックされます。Supabaseのダッシュボードでリストアさせてください。
 
 ### nodeエラーが発生する
 
-nodeのバージョンを本案件のバージョンに合わせてください。  
-nodeのバージョン管理ツールをVoltaに設定している場合は不要です。
+nodeのバージョンを本案件のバージョンに合わせてください。nodeのバージョン管理ツールをVoltaに設定している場合は不要です。
 
 ## その他ドキュメント
 
-See [Configuration Reference]().
+See [Configuration Reference](https://github.com/1zumisawashun).

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { userEvent, within } from '@storybook/test'
 import { mockUsers } from '@/functions/constants/users'
+import { userEvent, within } from '@storybook/test'
 import { MyPage } from './MyPage'
 
 const meta: Meta<typeof MyPage> = {
@@ -43,7 +43,7 @@ export const MyPageLike: Story = {
   render: () => <RenderDefault />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByRole('tab', { name: /お気に入り/ }))
+    await userEvent.click(canvas.getByRole('tab', { name: /いいね/ }))
   },
 }
 export const MyPagePublishEmpty: Story = {
@@ -64,6 +64,6 @@ export const MyPageLikeEmpty: Story = {
   render: () => <RenderEmpty />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByRole('tab', { name: /お気に入り/ }))
+    await userEvent.click(canvas.getByRole('tab', { name: /いいね/ }))
   },
 }

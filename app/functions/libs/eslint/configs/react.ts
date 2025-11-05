@@ -43,6 +43,7 @@ export default [
     rules: {
       ...pluginJsxA11y.flatConfigs.recommended.rules,
       'jsx-a11y/anchor-is-valid': 'off',
+      'jsx-a11y/label-has-associated-control': 'off',
     },
   },
 ] as Linter.Config[]

@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import AppProviders from '@/providers'
+import { FC } from 'react'
 
-export const FullWidthDecorator = (Story: any) => (
+export const FullWidthDecorator = (Story: FC) => (
   <AppProviders>
     <div style={{ width: '100vw' }}>
       <Story />
@@ -9,7 +9,7 @@ export const FullWidthDecorator = (Story: any) => (
   </AppProviders>
 )
 
-export const SpWidthDecorator = (Story: any) => (
+export const SpWidthDecorator = (Story: FC) => (
   <AppProviders>
     <div style={{ width: '576px' }}>
       <Story />

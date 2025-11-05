@@ -1,13 +1,13 @@
-import { useEditor as useRowEditor, UseEditorOptions } from '@tiptap/react'
-// eslint-disable-next-line import/no-named-as-default
+import { UseEditorOptions, useEditor as useRowEditor } from '@tiptap/react'
+
 import StarterKit from '@tiptap/starter-kit'
 import {
-  Image,
-  TextAlign,
-  Link,
-  Focus,
-  Placeholder,
   CharacterCount,
+  Focus,
+  Image,
+  Link,
+  Placeholder,
+  TextAlign,
 } from '../helpers/tiptapExtendClient'
 
 export const useEditor = ({ extensions = [], ...rest }: UseEditorOptions) =>

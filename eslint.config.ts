@@ -1,3 +1,6 @@
+// @ts-expect-error
+import oxlint from 'eslint-plugin-oxlint'
+import pluginCustomRules from './app/functions/libs/eslint'
 import eslint from './app/functions/libs/eslint/configs/eslint'
 import next from './app/functions/libs/eslint/configs/next'
 import prettier from './app/functions/libs/eslint/configs/prettier'
@@ -5,8 +8,6 @@ import react from './app/functions/libs/eslint/configs/react'
 import storybook from './app/functions/libs/eslint/configs/storybook'
 import testingLibrary from './app/functions/libs/eslint/configs/testing-library'
 import typescript from './app/functions/libs/eslint/configs/typescript'
-
-import pluginCustomRules from './app/functions/libs/eslint'
 
 const typescriptReactConfig = [...eslint, ...typescript, ...react, ...next]
 
@@ -40,6 +41,8 @@ export default [
       '**/.storybook/',
       '**/jest.setup.ts',
       'app/functions/libs/eslint/configs/**/*.ts',
+      'next.config.mjs',
+      'eslint.config.ts',
     ],
   },
   ...typescriptReactConfig,
@@ -47,4 +50,5 @@ export default [
   ...testingLibraryConfig,
   ...customRulesConfig,
   ...prettierConfig,
+  ...oxlint.buildFromOxlintConfigFile('./.oxlintrc.json'),
 ]

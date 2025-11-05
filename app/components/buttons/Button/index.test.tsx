@@ -1,4 +1,5 @@
 import { render, screen } from '@/functions/libs/react-testing-library/test-utils'
+import { createRef } from 'react'
 import { Button } from './index'
 
 describe('Button', () => {
@@ -217,7 +218,7 @@ describe('Button', () => {
 
   describe('ForwardRef', () => {
     it('forwards ref to button element', () => {
-      const ref = { current: null }
+      const ref = createRef<HTMLButtonElement>()
       render(<Button ref={ref}>Click me</Button>)
       
       expect(ref.current).toBeInstanceOf(HTMLButtonElement)

@@ -1,4 +1,7 @@
-import { render, screen } from '@/functions/libs/react-testing-library/test-utils'
+import {
+  render,
+  screen,
+} from '@/functions/libs/react-testing-library/test-utils'
 import { createRef } from 'react'
 import { Button } from './index'
 
@@ -6,17 +9,17 @@ describe('Button', () => {
   describe('Basic rendering', () => {
     it('renders button with children text', () => {
       render(<Button>Click me</Button>)
-      
+
       const button = screen.getByRole('button', { name: 'Click me' })
-      
+
       expect(button).toBeInTheDocument()
     })
 
     it('renders with default type as button', () => {
       render(<Button>Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveAttribute('type', 'button')
     })
   })
@@ -24,17 +27,17 @@ describe('Button', () => {
   describe('Type prop', () => {
     it('renders with type submit', () => {
       render(<Button type="submit">Submit</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveAttribute('type', 'submit')
     })
 
     it('renders with type reset', () => {
       render(<Button type="reset">Reset</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveAttribute('type', 'reset')
     })
   })
@@ -42,17 +45,17 @@ describe('Button', () => {
   describe('Theme prop', () => {
     it('renders with primary theme by default', () => {
       render(<Button>Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveAttribute('data-theme', 'primary')
     })
 
     it('renders with danger theme', () => {
       render(<Button theme="danger">Delete</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveAttribute('data-theme', 'danger')
     })
   })
@@ -60,25 +63,25 @@ describe('Button', () => {
   describe('Variant prop', () => {
     it('renders with contained variant by default', () => {
       render(<Button>Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveAttribute('data-variant', 'contained')
     })
 
     it('renders with outlined variant', () => {
       render(<Button variant="outlined">Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveAttribute('data-variant', 'outlined')
     })
 
     it('renders with ghost variant', () => {
       render(<Button variant="ghost">Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveAttribute('data-variant', 'ghost')
     })
   })
@@ -86,25 +89,25 @@ describe('Button', () => {
   describe('Shape prop', () => {
     it('renders without shape attribute when not provided', () => {
       render(<Button>Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).not.toHaveAttribute('data-shape')
     })
 
     it('renders with rounded shape', () => {
       render(<Button shape="rounded">Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveAttribute('data-shape', 'rounded')
     })
 
     it('renders with circle shape', () => {
       render(<Button shape="circle">Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveAttribute('data-shape', 'circle')
     })
   })
@@ -112,17 +115,17 @@ describe('Button', () => {
   describe('Disabled state', () => {
     it('renders enabled button by default', () => {
       render(<Button>Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).not.toBeDisabled()
     })
 
     it('renders disabled button when disabled prop is true', () => {
       render(<Button disabled>Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toBeDisabled()
     })
   })
@@ -130,9 +133,9 @@ describe('Button', () => {
   describe('Prefix and suffix', () => {
     it('renders without prefix and suffix by default', () => {
       render(<Button>Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button.textContent).toBe('Click me')
     })
 
@@ -140,11 +143,11 @@ describe('Button', () => {
       render(
         <Button prefix={<span data-testid="prefix-icon">→</span>}>
           Click me
-        </Button>
+        </Button>,
       )
-      
+
       const prefix = screen.getByTestId('prefix-icon')
-      
+
       expect(prefix).toBeInTheDocument()
       expect(prefix.textContent).toBe('→')
     })
@@ -153,11 +156,11 @@ describe('Button', () => {
       render(
         <Button suffix={<span data-testid="suffix-icon">←</span>}>
           Click me
-        </Button>
+        </Button>,
       )
-      
+
       const suffix = screen.getByTestId('suffix-icon')
-      
+
       expect(suffix).toBeInTheDocument()
       expect(suffix.textContent).toBe('←')
     })
@@ -169,12 +172,12 @@ describe('Button', () => {
           suffix={<span data-testid="suffix-icon">←</span>}
         >
           Click me
-        </Button>
+        </Button>,
       )
-      
+
       const prefix = screen.getByTestId('prefix-icon')
       const suffix = screen.getByTestId('suffix-icon')
-      
+
       expect(prefix).toBeInTheDocument()
       expect(suffix).toBeInTheDocument()
     })
@@ -183,9 +186,9 @@ describe('Button', () => {
   describe('Custom className', () => {
     it('applies custom className', () => {
       render(<Button className="custom-class">Click me</Button>)
-      
+
       const button = screen.getByRole('button')
-      
+
       expect(button).toHaveClass('custom-class')
     })
   })
@@ -194,10 +197,10 @@ describe('Button', () => {
     it('calls onClick handler when clicked', async () => {
       const handleClick = jest.fn()
       const { user } = render(<Button onClick={handleClick}>Click me</Button>)
-      
+
       const button = screen.getByRole('button')
       await user.click(button)
-      
+
       expect(handleClick).toHaveBeenCalledTimes(1)
     })
 
@@ -206,12 +209,12 @@ describe('Button', () => {
       const { user } = render(
         <Button onClick={handleClick} disabled>
           Click me
-        </Button>
+        </Button>,
       )
-      
+
       const button = screen.getByRole('button')
       await user.click(button)
-      
+
       expect(handleClick).not.toHaveBeenCalled()
     })
   })
@@ -220,7 +223,7 @@ describe('Button', () => {
     it('forwards ref to button element', () => {
       const ref = createRef<HTMLButtonElement>()
       render(<Button ref={ref}>Click me</Button>)
-      
+
       expect(ref.current).toBeInstanceOf(HTMLButtonElement)
     })
   })
@@ -230,11 +233,11 @@ describe('Button', () => {
       render(
         <Button data-testid="test-button" aria-label="Test button">
           Click me
-        </Button>
+        </Button>,
       )
-      
+
       const button = screen.getByTestId('test-button')
-      
+
       expect(button).toHaveAttribute('aria-label', 'Test button')
     })
   })

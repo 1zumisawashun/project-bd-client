@@ -57,15 +57,6 @@ See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client
 - hosting : Vercel
 ```
 
-## TODO
-
-- Jest -> Vitest
-  - テスト薄いので随時追加して行く
-- スマホから記事編集できるようにする
-- npm -> pnpm
-- renovate の更新
-- GHA が壊れているので修正する
-
 ## Troubleshoot
 
 ### デプロイが失敗する

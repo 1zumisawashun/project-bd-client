@@ -1,5 +1,5 @@
 ---
-applyTo: '**/*.test.tsx'
+applyTo: '*.test.*'
 ---
 
 # Project coding standards for TypeScript and React

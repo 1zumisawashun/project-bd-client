@@ -16,8 +16,9 @@ const BLOCK_NAME = 'authorArticleDetail'
 
 const buttonProps = {
   variant: 'ghost',
-  className: styles[`${BLOCK_NAME}-button`],
-} as const
+  // NOTE: stylesがundefinedになる可能性があるため、!を付与
+  className: styles[`${BLOCK_NAME}-button`]!,
+}
 type Props = {
   article: Article
   likeButton: React.ReactNode

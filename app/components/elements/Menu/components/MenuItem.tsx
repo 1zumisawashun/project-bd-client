@@ -14,7 +14,7 @@ export const MenuItem: React.FC<React.PropsWithChildren<Props>> = ({
       <Button
         onClick={onClick}
         variant="ghost"
-        className={styles[`${BLOCK_NAME}-item-button`]}
+        className={styles[`${BLOCK_NAME}-item-button`]!}
       >
         {children}
       </Button>

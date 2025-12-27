@@ -46,6 +46,8 @@ See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client
 
 ## 使用技術
 
+**Before**
+
 ```
 - frontend : Next.js App Router
 - backend : Next.js Route Handler
@@ -54,6 +56,20 @@ See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client
 - ui : Radix UI + CSS Modules
 - auth : NextAuth
 - test : Jest + react-testing-library
+- hosting : Vercel
+```
+
+**After**
+
+```
+- frontend : Next.js App Router
+- backend : Next.js Route Handler
+- orm : Drizzle
+- database : PGlite
+- ui : Base UI + CSS Modules
+- auth : NextAuth
+- test : Vitest + react-testing-library, Playwright
+- Lefthook, Eslint, Oxlint, Oxfmt
 - hosting : Vercel
 ```
 

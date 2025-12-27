@@ -9,8 +9,14 @@ import {
   HeartIcon,
   PlusIcon,
 } from '@radix-ui/react-icons'
-import { items } from '../buttons.constant'
+import { FC } from 'react'
 import { IconAnchorButton } from './index'
+
+const items = [
+  { id: 1, variant: 'contained', theme: 'primary' },
+  { id: 2, variant: 'outlined', theme: 'primary' },
+  { id: 3, variant: 'ghost', theme: 'primary' },
+] as const
 
 const meta: Meta<typeof IconAnchorButton> = {
   title: 'button/IconAnchorButton',
@@ -21,7 +27,7 @@ export default meta
 
 type Story = StoryObj<typeof IconAnchorButton>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <VStack>
       {items.map((item) => (
@@ -68,6 +74,5 @@ const Render: React.FC = () => {
 }
 
 export const Default: Story = {
-  args: {},
   render: () => <Render />,
 }

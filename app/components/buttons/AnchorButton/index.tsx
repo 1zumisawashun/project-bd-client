@@ -9,7 +9,7 @@ import {
 } from 'react'
 import styles from './index.module.css'
 
-const BLOCK_NAME = 'button'
+const BLOCK_NAME = 'anchor-button'
 type Props = Omit<ComponentPropsWithoutRef<'a'>, 'prefix'> & {
   theme?: Theme
   variant?: Variant

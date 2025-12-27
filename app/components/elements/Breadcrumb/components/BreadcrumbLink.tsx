@@ -5,7 +5,7 @@ import styles from '../index.module.css'
 
 const BLOCK_NAME = 'breadcrumb'
 type Props = { isCurrent?: boolean } & ComponentProps<typeof AnchorButton>
-type Ref = ElementRef<'a'>
+type Ref = ElementRef<'button'>
 /** @see https://developer.mozilla.org/ja/docs/Web/CSS/Layout_cookbook/Breadcrumb_Navigation */
 export const BreadcrumbLink = forwardRef<Ref, Props>(
   ({ isCurrent, className, ...props }, ref) => {

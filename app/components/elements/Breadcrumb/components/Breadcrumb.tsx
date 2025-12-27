@@ -22,7 +22,7 @@ export const Breadcrumb = forwardRef<Ref, Props>(
           <AnchorButton
             href={href}
             variant="ghost"
-            className={styles[`${BLOCK_NAME}-back-button`]}
+            className={styles[`${BLOCK_NAME}-back-button`]!}
           >
             <ChevronLeftIcon />
           </AnchorButton>

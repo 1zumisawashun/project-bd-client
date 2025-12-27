@@ -24,7 +24,7 @@ export const Header: React.FC = async () => {
                 key={d.href}
                 variant="ghost"
                 href={d.href}
-                className={styles[`${BLOCK_NAME}-anchor-button`]}
+                className={styles[`${BLOCK_NAME}-anchor-button`]!}
               >
                 {d.label}
               </AnchorButton>

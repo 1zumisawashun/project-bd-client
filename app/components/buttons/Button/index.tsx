@@ -27,7 +27,7 @@ export const Button = forwardRef<Ref, Props>(
       // custom props
       theme = 'primary',
       variant = 'contained',
-      shape = 'circle',
+      shape = 'rounded',
       prefix,
       suffix,
       // native props
@@ -42,6 +42,7 @@ export const Button = forwardRef<Ref, Props>(
   ) => {
     return (
       <RowButton
+        {...props}
         // base-ui props
         nativeButton={true}
         // native props
@@ -53,8 +54,6 @@ export const Button = forwardRef<Ref, Props>(
         data-variant={variant}
         data-theme={theme}
         data-shape={shape}
-        // other props
-        {...props}
       >
         {prefix ?? null}
         {children}

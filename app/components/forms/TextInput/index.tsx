@@ -1,23 +1,28 @@
-import * as Form from '@radix-ui/react-form'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { Input } from '@base-ui/react/input'
+import clsx from 'clsx'
+import { ComponentProps, ElementRef, forwardRef } from 'react'
 import styles from './index.module.css'
 
-/** @see https://tech.smarthr.jp/entry/2024/03/12/170000 */
-type Props = Omit<ComponentPropsWithoutRef<'input'>, 'placeholder'>
+const BLOCK_NAME = 'text-input'
+
+type InputProps = ComponentProps<typeof Input>
+
+type CustomProps = {}
+
+type Props = InputProps & CustomProps
+
 type Ref = ElementRef<'input'>
 
-const BLOCK_NAME = 'text-input'
+/** @see https://tech.smarthr.jp/entry/2024/03/12/170000 */
 export const TextInput = forwardRef<Ref, Props>(
-  ({ className: _className, disabled, width: _width, ...props }, ref) => {
+  ({ className, ...props }, ref) => {
     return (
-      <Form.Control asChild>
-        <input
-          {...props}
-          className={styles[`${BLOCK_NAME}`]}
-          ref={ref}
-          disabled={disabled}
-        />
-      </Form.Control>
+      <Input
+        {...props}
+        // native props
+        className={clsx(styles[`${BLOCK_NAME}`], className)}
+        ref={ref}
+      />
     )
   },
 )

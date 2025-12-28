@@ -1,5 +1,6 @@
+import { VStack } from '@/components/layouts/VStack'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Form, FormField } from '../Form'
+import { Field, FieldLabel } from '../Field'
 import { TextInput } from './index'
 
 const meta: Meta<typeof TextInput> = {
@@ -11,20 +12,24 @@ type Story = StoryObj<typeof TextInput>
 
 const Render: React.FC = () => {
   return (
-    <Form>
-      <FormField name="default">
+    <VStack>
+      <Field>
+        <FieldLabel>Normal</FieldLabel>
         <TextInput />
-      </FormField>
-      <FormField name="default focus">
-        <TextInput id="focus" value="value" />
-      </FormField>
-      <FormField name="invalid" serverInvalid>
+      </Field>
+      <Field>
+        <FieldLabel>Normal Focus</FieldLabel>
+        <TextInput id="focus" />
+      </Field>
+      <Field invalid>
+        <FieldLabel>Error</FieldLabel>
         <TextInput />
-      </FormField>
-      <FormField name="invalid focus" serverInvalid>
-        <TextInput id="focus" value="value" />
-      </FormField>
-    </Form>
+      </Field>
+      <Field invalid>
+        <FieldLabel>Error Focus</FieldLabel>
+        <TextInput id="focus" />
+      </Field>
+    </VStack>
   )
 }
 

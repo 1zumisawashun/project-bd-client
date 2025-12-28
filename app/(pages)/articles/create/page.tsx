@@ -1,6 +1,6 @@
-import { ArticleCreate } from '@/features/articles/ArticleCreate/ArticleCreate'
-import { getCategories } from '@/functions/db/category'
 import { content } from '@/functions/constants/content'
+import { getCategories } from '@/functions/db/category'
+import { ArticleCreate } from '@/pages/articles/ArticleCreate/ArticleCreate'
 
 export default async function Page() {
   const categories = await getCategories()

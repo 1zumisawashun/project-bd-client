@@ -1,6 +1,6 @@
-import { MyPage } from '@/features/my-page/MyPage'
-import { auth } from '@/functions/libs/next-auth/auth'
 import { getUserById } from '@/functions/db/user'
+import { auth } from '@/functions/libs/next-auth/auth'
+import { MyPage } from '@/pages/my-page/MyPage'
 
 export default async function Page() {
   const session = await auth()

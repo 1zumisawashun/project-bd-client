@@ -1,7 +1,7 @@
-import { ArticleEdit } from '@/features/articles/ArticleEdit/ArticleEdit'
 import { getArticleById } from '@/functions/db/article'
 import { getCategories } from '@/functions/db/category'
 import { ArticleStatus } from '@/functions/types'
+import { ArticleEdit } from '@/pages/articles/ArticleEdit/ArticleEdit'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const categories = await getCategories()

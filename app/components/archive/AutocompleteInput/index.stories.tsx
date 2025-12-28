@@ -16,7 +16,7 @@ import {
   AutocompleteInputGroup,
   AutocompleteInputUnControl,
 } from '.'
-import { options } from '../forms.constant'
+import { options } from '../../forms/forms.constant'
 
 const meta = {
   title: 'form/AutocompleteInput',

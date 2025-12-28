@@ -1,5 +1,5 @@
-import { ElementRef, ComponentProps, forwardRef } from 'react'
-import { TextInput } from '../../TextInput'
+import { ComponentProps, ElementRef, forwardRef } from 'react'
+import { TextInput } from '../../../forms/TextInput'
 
 type Ref = ElementRef<'input'>
 type Props = { options: string[] } & ComponentProps<typeof TextInput>

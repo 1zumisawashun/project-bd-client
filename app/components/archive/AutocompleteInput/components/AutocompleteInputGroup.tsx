@@ -2,7 +2,7 @@ import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
 import { useMergeRef } from '@/functions/hooks/useMergeRef'
 import { useOuterClick } from '@/functions/hooks/useOuterClick'
 import { ComponentProps, ElementRef, forwardRef, useRef } from 'react'
-import { TextInput } from '../../TextInput'
+import { TextInput } from '../../../forms/TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
 type InputRef = ElementRef<'input'>

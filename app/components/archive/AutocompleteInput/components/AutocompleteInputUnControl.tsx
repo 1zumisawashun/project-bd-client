@@ -7,7 +7,7 @@ import {
   forwardRef,
   useRef,
 } from 'react'
-import { TextInput } from '../../TextInput'
+import { TextInput } from '../../../forms/TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
 type Ref = ElementRef<'input'>

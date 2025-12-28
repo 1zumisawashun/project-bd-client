@@ -1,6 +1,6 @@
 import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
-import { TextInput } from '../../TextInput'
+import { TextInput } from '../../../forms/TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
 type Ref = ElementRef<'input'>

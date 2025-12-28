@@ -8,7 +8,7 @@ import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { FC } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
-import { ArticleEditor } from '../articleEditor/ArticleEditor'
+import { ArticleEditor } from './components/articleEditor/ArticleEditor'
 import { Schema } from './articleForm.schema'
 
 type Props = {

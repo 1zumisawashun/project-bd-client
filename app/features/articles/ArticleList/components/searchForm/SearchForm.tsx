@@ -1,6 +1,6 @@
 import { AutocompleteInputGroup } from '@/components/archive/AutocompleteInput'
 import { Label, LabelAction } from '@/components/elements/Label'
-import { Form, FormField } from '@/components/forms/Form'
+import { Field } from '@/components/forms/Field'
 import { HStack } from '@/components/layouts/HStack'
 import { useRouter } from 'next/navigation'
 import { useOptimistic } from 'react'
@@ -40,24 +40,23 @@ export const SearchForm: React.FC<Props> = ({
   }
 
   return (
-    <Form>
-      <FormField name="" style={{ gap: '0.5rem' }}>
-        <AutocompleteInputGroup
-          options={options}
-          value={categories}
-          onChange={add}
-        />
-        {categories?.length > 0 && (
-          <HStack gap={2} style={{ flexWrap: 'wrap' }}>
-            {categories.map((d) => (
-              <Label key={d}>
-                {d}
-                <LabelAction onClick={() => remove(d)} />
-              </Label>
-            ))}
-          </HStack>
-        )}
-      </FormField>
-    </Form>
+    <Field>
+      {/* TODO: 挙動までは確認していないので後ほど修正する */}
+      <AutocompleteInputGroup
+        options={options}
+        value={categories}
+        onChange={add}
+      />
+      {categories?.length > 0 && (
+        <HStack gap={2} style={{ flexWrap: 'wrap' }}>
+          {categories.map((d) => (
+            <Label key={d}>
+              {d}
+              <LabelAction onClick={() => remove(d)} />
+            </Label>
+          ))}
+        </HStack>
+      )}
+    </Field>
   )
 }

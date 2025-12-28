@@ -1,11 +1,7 @@
 import { Label, LabelAction } from '@/components/elements/Label'
-import {
-  Form,
-  FormErrorMessage,
-  FormField,
-  FormLabel,
-} from '@/components/forms/Form'
+import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
 import { HStack } from '@/components/layouts/HStack'
+import { VStack } from '@/components/layouts/VStack'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Controller, useFieldArray, useForm, useWatch } from 'react-hook-form'
@@ -14,7 +10,6 @@ import {
   AutocompleteInput,
   AutocompleteInputControl,
   AutocompleteInputGroup,
-  AutocompleteInputUnControl,
 } from '.'
 import { options } from '../../forms/forms.constant'
 
@@ -38,11 +33,7 @@ const DefaultRender: React.FC = () => {
 
   type Schema = z.infer<typeof schema>
 
-  const {
-    control,
-    register,
-    formState: { errors },
-  } = useForm<Schema>({
+  const { control } = useForm<Schema>({
     mode: 'onTouched',
     resolver: zodResolver(schema),
     defaultValues: {
@@ -53,14 +44,20 @@ const DefaultRender: React.FC = () => {
   const preview = useWatch({ control, name: 'category' }) ?? '-----'
 
   return (
-    <Form>
+    <VStack>
       <p>Preview: {preview}</p>
-      <FormField name="category" serverInvalid={!!errors.category}>
-        <FormLabel>Content</FormLabel>
-        <AutocompleteInput options={options} {...register('category')} />
-        <FormErrorMessage>{errors.category?.message}</FormErrorMessage>
-      </FormField>
-    </Form>
+      <Controller
+        name="category"
+        control={control}
+        render={({ field, fieldState: { invalid, error } }) => (
+          <Field invalid={invalid}>
+            <FieldLabel>Content</FieldLabel>
+            <AutocompleteInput options={options} {...field} />
+            <FieldError match={!!error}>{error?.message}</FieldError>
+          </Field>
+        )}
+      />
+    </VStack>
   )
 }
 
@@ -70,110 +67,6 @@ export const Default: Story = {
     options: [],
   },
   render: () => <DefaultRender />,
-}
-
-/**
- * ================================================
- * AutocompleteInputUnControl
- * ================================================
- */
-const UnControlRender: React.FC = () => {
-  const schema = z.object({
-    category: z.string(),
-  })
-
-  type Schema = z.infer<typeof schema>
-
-  const {
-    control,
-    register,
-    formState: { errors },
-  } = useForm<Schema>({
-    mode: 'onTouched',
-    resolver: zodResolver(schema),
-    defaultValues: {
-      category: '',
-    },
-  })
-
-  const preview = useWatch({ control, name: 'category' }) ?? '-----'
-
-  return (
-    <Form>
-      <p>Preview: {preview}</p>
-      <FormField name="category" serverInvalid={!!errors.category}>
-        <FormLabel>Content</FormLabel>
-        <AutocompleteInputUnControl
-          options={options}
-          {...register('category')}
-        />
-        <FormErrorMessage>{errors.category?.message}</FormErrorMessage>
-      </FormField>
-    </Form>
-  )
-}
-
-export const UnControl: Story = {
-  args: {
-    onChange: () => null,
-    options: [],
-  },
-  render: () => <UnControlRender />,
-}
-
-/**
- * ================================================
- * AutocompleteInputControl
- * ================================================
- */
-const ControlRender: React.FC = () => {
-  const schema = z.object({
-    category: z.string(),
-  })
-
-  type Schema = z.infer<typeof schema>
-
-  const {
-    control,
-    formState: { errors },
-  } = useForm<Schema>({
-    mode: 'onTouched',
-    resolver: zodResolver(schema),
-    defaultValues: {
-      category: '',
-    },
-  })
-
-  const preview = useWatch({ control, name: 'category' }) ?? '-----'
-
-  return (
-    <Form>
-      <p>Preview: {preview}</p>
-      <FormField name="category" serverInvalid={!!errors.category}>
-        <FormLabel>Content</FormLabel>
-        <Controller
-          control={control}
-          name="category"
-          render={({ field: { onChange, ...rest } }) => (
-            <AutocompleteInputControl
-              onChange={onChange}
-              options={options}
-              {...rest}
-            />
-          )}
-        />
-        <FormErrorMessage>{errors.category?.message}</FormErrorMessage>
-      </FormField>
-    </Form>
-  )
-}
-
-export const Control: Story = {
-  args: {
-    onChange: () => null,
-    options: [],
-  },
-  render: () => <ControlRender />,
 }
 
 /**
@@ -191,10 +84,7 @@ const MultipleRender: React.FC = () => {
 
   type Schema = z.infer<typeof schema>
 
-  const {
-    control,
-    formState: { errors },
-  } = useForm<Schema>({
+  const { control } = useForm<Schema>({
     mode: 'onTouched',
     resolver: zodResolver(schema),
     defaultValues: {
@@ -210,24 +100,30 @@ const MultipleRender: React.FC = () => {
   const names = fields.map((d) => d.name)
 
   return (
-    <Form>
-      <FormField name="text" serverInvalid={!!errors.categories}>
-        <FormLabel>カテゴリー</FormLabel>
-        <AutocompleteInputGroup
-          onChange={(value) => append({ name: value })}
-          options={options.filter((d) => !names.includes(d))}
-        />
-        <HStack gap={2} style={{ margin: '0.5rem', flexWrap: 'wrap' }}>
-          {fields?.map((d, index) => (
-            <Label key={d.id}>
-              {d.name}
-              <LabelAction onClick={() => remove(index)} />
-            </Label>
-          ))}
-        </HStack>
-        <FormErrorMessage>{errors.categories?.message}</FormErrorMessage>
-      </FormField>
-    </Form>
+    <VStack>
+      <Controller
+        name="categories"
+        control={control}
+        render={({ fieldState: { invalid, error } }) => (
+          <Field invalid={invalid}>
+            <FieldLabel>Content</FieldLabel>
+            <AutocompleteInputGroup
+              onChange={(value) => append({ name: value })}
+              options={options.filter((d) => !names.includes(d))}
+            />
+            <HStack gap={2} style={{ margin: '0.5rem', flexWrap: 'wrap' }}>
+              {fields?.map((d, index) => (
+                <Label key={d.id}>
+                  {d.name}
+                  <LabelAction onClick={() => remove(index)} />
+                </Label>
+              ))}
+            </HStack>
+            <FieldError match={!!error}>{error?.message}</FieldError>
+          </Field>
+        )}
+      />
+    </VStack>
   )
 }
 

@@ -2,14 +2,10 @@
 
 import { AutocompleteInputGroup } from '@/components/archive/AutocompleteInput'
 import { Label, LabelAction } from '@/components/elements/Label'
-import {
-  Form,
-  FormErrorMessage,
-  FormField,
-  FormLabel,
-} from '@/components/forms/Form'
+import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
 import { TextInput } from '@/components/forms/TextInput'
 import { HStack } from '@/components/layouts/HStack'
+import { VStack } from '@/components/layouts/VStack'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { ArticleEditor } from '../../../components/articleEditor/ArticleEditor'
 import { Schema } from '../../articleEdit.schema'
@@ -18,11 +14,7 @@ type Props = {
   categoryOptions: string[]
 }
 export const ArticleEditForm: React.FC<Props> = ({ categoryOptions }) => {
-  const {
-    control,
-    register,
-    formState: { errors },
-  } = useFormContext<Schema>()
+  const { control } = useFormContext<Schema>()
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -33,43 +25,53 @@ export const ArticleEditForm: React.FC<Props> = ({ categoryOptions }) => {
   const options = categoryOptions.filter((d) => !names.includes(d))
 
   return (
-    <Form>
-      <FormField name="title" serverInvalid={!!errors.title}>
-        <FormLabel>タイトル</FormLabel>
-        <TextInput {...register('title')} />
-        <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
-      </FormField>
-
-      <FormField name="categories" serverInvalid={!!errors.categories}>
-        <FormLabel>カテゴリー</FormLabel>
-        <AutocompleteInputGroup
-          onChange={(value) => append({ name: value })}
-          options={options}
-        />
-        {fields?.length > 0 && (
-          <HStack gap={2} style={{ flexWrap: 'wrap' }}>
-            {fields?.map((d, index) => (
-              <Label key={d.id}>
-                {d.name}
-                <LabelAction onClick={() => remove(index)} />
-              </Label>
-            ))}
-          </HStack>
+    <VStack>
+      <Controller
+        name="title"
+        control={control}
+        render={({ field, fieldState: { invalid, error } }) => (
+          <Field invalid={invalid}>
+            <FieldLabel>タイトル</FieldLabel>
+            <TextInput {...field} />
+            <FieldError match={!!error}>{error?.message}</FieldError>
+          </Field>
         )}
-        <FormErrorMessage>{errors.categories?.message}</FormErrorMessage>
-      </FormField>
-
-      <FormField name="content" serverInvalid={!!errors.content}>
-        <FormLabel>本文</FormLabel>
-        <Controller
-          name="content"
-          control={control}
-          render={({ field }) => (
+      />
+      <Controller
+        name="categories"
+        control={control}
+        render={({ fieldState: { invalid, error } }) => (
+          <Field invalid={invalid}>
+            <FieldLabel>カテゴリー</FieldLabel>
+            <AutocompleteInputGroup
+              onChange={(value) => append({ name: value })}
+              options={options}
+            />
+            {fields?.length > 0 && (
+              <HStack gap={2} style={{ flexWrap: 'wrap' }}>
+                {fields?.map((d, index) => (
+                  <Label key={d.id}>
+                    {d.name}
+                    <LabelAction onClick={() => remove(index)} />
+                  </Label>
+                ))}
+              </HStack>
+            )}
+            <FieldError match={!!error}>{error?.message}</FieldError>
+          </Field>
+        )}
+      />
+      <Controller
+        name="content"
+        control={control}
+        render={({ field, fieldState: { invalid, error } }) => (
+          <Field invalid={invalid}>
+            <FieldLabel>本文</FieldLabel>
             <ArticleEditor onChange={field.onChange} value={field.value} />
-          )}
-        />
-        <FormErrorMessage>{errors.content?.message}</FormErrorMessage>
-      </FormField>
-    </Form>
+            <FieldError match={!!error}>{error?.message}</FieldError>
+          </Field>
+        )}
+      />
+    </VStack>
   )
 }

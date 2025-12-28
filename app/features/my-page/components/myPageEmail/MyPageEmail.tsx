@@ -4,12 +4,7 @@ import { Button } from '@/components/buttons/Button'
 import { Card, CardBody } from '@/components/elements/Card'
 import { useToastDispatch } from '@/components/elements/Toast'
 import { Description, Title } from '@/components/elements/Typography'
-import {
-  Form,
-  FormErrorMessage,
-  FormField,
-  FormLabel,
-} from '@/components/forms/Form'
+import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
 import { TextInput } from '@/components/forms/TextInput'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
@@ -18,7 +13,12 @@ import { User } from '@/functions/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { startTransition } from 'react'
-import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
+import {
+  Controller,
+  SubmitErrorHandler,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form'
 import { updateEmail } from './myPageEmail.action'
 import { EmailSchema, emailSchema } from './myPageEmail.schema'
 
@@ -43,11 +43,7 @@ const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
   const router = useRouter()
   const openToast = useToastDispatch()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<EmailSchema>({
+  const { control, handleSubmit } = useForm<EmailSchema>({
     mode: 'onTouched',
     resolver: zodResolver(emailSchema),
     defaultValues: {
@@ -88,13 +84,17 @@ const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
 
   return (
     <VStack>
-      <Form>
-        <FormField name="email" serverInvalid={!!errors.email}>
-          <FormLabel>メールアドレス</FormLabel>
-          <TextInput {...register('email')} />
-          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-        </FormField>
-      </Form>
+      <Controller
+        name="email"
+        control={control}
+        render={({ field, fieldState: { invalid, error } }) => (
+          <Field invalid={invalid}>
+            <FieldLabel>メールアドレス</FieldLabel>
+            <TextInput type="email" {...field} />
+            <FieldError match={!!error}>{error?.message}</FieldError>
+          </Field>
+        )}
+      />
       <HStack>
         <Button onClick={close}>キャンセル</Button>
         <Button onClick={(e) => void handleSubmit(onSubmit, onError)(e)}>

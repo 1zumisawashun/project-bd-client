@@ -4,12 +4,7 @@ import { Button } from '@/components/buttons/Button'
 import { Card, CardBody } from '@/components/elements/Card'
 import { useToastDispatch } from '@/components/elements/Toast'
 import { Description, Title } from '@/components/elements/Typography'
-import {
-  Form,
-  FormErrorMessage,
-  FormField,
-  FormLabel,
-} from '@/components/forms/Form'
+import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
 import { TextInput } from '@/components/forms/TextInput'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
@@ -18,7 +13,12 @@ import { User } from '@/functions/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { startTransition } from 'react'
-import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
+import {
+  Controller,
+  SubmitErrorHandler,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form'
 import { updateProfile } from './myPageProfile.action'
 import { ProfileSchema, profileSchema } from './myPageProfile.schema'
 
@@ -43,11 +43,7 @@ const ProfileEditForm: React.FC<{
   const router = useRouter()
   const openToast = useToastDispatch()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ProfileSchema>({
+  const { control, handleSubmit } = useForm<ProfileSchema>({
     mode: 'onTouched',
     resolver: zodResolver(profileSchema),
     defaultValues: {
@@ -88,13 +84,17 @@ const ProfileEditForm: React.FC<{
 
   return (
     <VStack>
-      <Form>
-        <FormField name="name" serverInvalid={!!errors.name}>
-          <FormLabel>名前</FormLabel>
-          <TextInput {...register('name')} />
-          <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
-        </FormField>
-      </Form>
+      <Controller
+        name="name"
+        control={control}
+        render={({ field, fieldState: { invalid, error } }) => (
+          <Field invalid={invalid}>
+            <FieldLabel>名前</FieldLabel>
+            <TextInput {...field} />
+            <FieldError match={!!error}>{error?.message}</FieldError>
+          </Field>
+        )}
+      />
 
       <HStack>
         <Button onClick={close}>キャンセル</Button>

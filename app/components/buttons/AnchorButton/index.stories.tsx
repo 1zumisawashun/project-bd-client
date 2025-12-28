@@ -10,7 +10,7 @@ const items = [
   { id: 1, variant: 'contained', theme: 'primary' },
   { id: 2, variant: 'outlined', theme: 'primary' },
   { id: 3, variant: 'ghost', theme: 'primary' },
-] as const
+]
 
 const meta: Meta<typeof AnchorButton> = {
   title: 'button/AnchorButton',

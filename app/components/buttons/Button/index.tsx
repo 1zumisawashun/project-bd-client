@@ -1,13 +1,16 @@
 import { Shape, Theme, Variant } from '@/functions/types'
-import { Button as RowButton, type ButtonProps } from '@base-ui/react/button'
+import { Button as RowButton } from '@base-ui/react/button'
 import clsx from 'clsx'
-import { ElementRef, forwardRef, ReactNode } from 'react'
+import { ComponentProps, ElementRef, forwardRef, ReactNode } from 'react'
 import styles from './index.module.css'
 
 const BLOCK_NAME = 'button'
 
 // NOTE: ButtonPropsからButtonNativePropsの部分だけを抽出する
-type ButtonNativeProps = Extract<ButtonProps, { nativeButton?: true }>
+type ButtonNativeProps = Extract<
+  ComponentProps<typeof RowButton>,
+  { nativeButton?: true }
+>
 
 type CustomProps = {
   theme?: Theme

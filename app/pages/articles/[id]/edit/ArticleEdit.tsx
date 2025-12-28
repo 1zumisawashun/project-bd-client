@@ -4,8 +4,8 @@ import { Footer } from '@/components/elements/Footer'
 import styles from '@/components/layouts/SiteWrapper/index.module.css'
 import { StickyWrapper } from '@/components/layouts/StickyWrapper'
 import { FC } from 'react'
-import { Schema } from './articleEdit.schema'
-import { ArticleEditForm } from './components/articleEditForm/ArticleEditForm'
+import { ArticleForm } from '../../shared/articleForm/ArticleForm'
+import { Schema } from '../../shared/articleForm/articleForm.schema'
 import { ArticleEditHeader } from './components/articleEditHeader/ArticleEditHeader'
 import { ArticleEditProvider } from './components/articleEditProvider/ArticleEditProvider'
 
@@ -27,7 +27,7 @@ export const ArticleEdit: FC<Props> = ({
           <ArticleEditHeader articleId={articleId} />
         </StickyWrapper>
         <main className={styles[`${BLOCK_NAME}-inner`]}>
-          <ArticleEditForm categoryOptions={categoryOptions} />
+          <ArticleForm categoryOptions={categoryOptions} />
         </main>
         <Footer />
       </div>

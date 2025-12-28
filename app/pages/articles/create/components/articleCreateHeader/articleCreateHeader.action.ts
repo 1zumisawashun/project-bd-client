@@ -5,10 +5,12 @@ import { createCategory, getCategoryByName } from '@/functions/db/category'
 import { actionResult } from '@/functions/helpers/utils'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { ActionsResult, Article } from '@/functions/types'
-import { Schema, schema } from '../../articleCreate.schema'
+import { Schema, schema } from '../../../shared/articleForm/articleForm.schema'
 
 type Return = ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
+
 type Props = { data: Schema }
+
 export const createArticle = async ({ data }: Props): Promise<Return> => {
   try {
     const session = await auth()

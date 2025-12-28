@@ -8,13 +8,14 @@ import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { FC } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
-import { ArticleEditor } from '../../../../shared/articleEditor/ArticleEditor'
-import { Schema } from '../../articleEdit.schema'
+import { ArticleEditor } from '../articleEditor/ArticleEditor'
+import { Schema } from './articleForm.schema'
 
 type Props = {
   categoryOptions: string[]
 }
-export const ArticleEditForm: FC<Props> = ({ categoryOptions }) => {
+
+export const ArticleForm: FC<Props> = ({ categoryOptions }) => {
   const { control } = useFormContext<Schema>()
 
   const { fields, append, remove } = useFieldArray({

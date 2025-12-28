@@ -12,11 +12,13 @@ import {
   SubmitHandler,
   useFormContext,
 } from 'react-hook-form'
-import { Schema } from '../../articleCreate.schema'
+import { Schema } from '../../../shared/articleForm/articleForm.schema'
+
 import { createArticle } from './articleCreateHeader.action'
 import styles from './articleCreateHeader.module.css'
 
 const BLOCK_NAME = 'articleCreateHeader'
+
 export const ArticleCreateHeader: FC = () => {
   const router = useRouter()
   const openToast = useToastDispatch()

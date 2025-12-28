@@ -12,7 +12,7 @@ import {
   SubmitHandler,
   useFormContext,
 } from 'react-hook-form'
-import { Schema } from '../../articleEdit.schema'
+import { Schema } from '../../../../shared/articleForm/articleForm.schema'
 import { editArticle } from './articleEditHeader.action'
 import styles from './articleEditHeader.module.css'
 

@@ -3,7 +3,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, PropsWithChildren } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { schema, Schema } from '../../articleEdit.schema'
+import {
+  Schema,
+  schema,
+} from '../../../../shared/articleForm/articleForm.schema'
 
 type Props = {
   defaultValues: Schema

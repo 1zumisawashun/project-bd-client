@@ -1,11 +1,14 @@
 'use server'
 
-import { auth } from '@/functions/libs/next-auth/auth'
-import { actionResult } from '@/functions/helpers/utils'
-import { ActionsResult, Article } from '@/functions/types'
 import { updateArticle } from '@/functions/db/article'
 import { createCategory, getCategoryByName } from '@/functions/db/category'
-import { Schema, schema } from '../../articleEdit.schema'
+import { actionResult } from '@/functions/helpers/utils'
+import { auth } from '@/functions/libs/next-auth/auth'
+import { ActionsResult, Article } from '@/functions/types'
+import {
+  Schema,
+  schema,
+} from '../../../../shared/articleForm/articleForm.schema'
 
 type Return = ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
 type Props = { data: Schema; id: string }

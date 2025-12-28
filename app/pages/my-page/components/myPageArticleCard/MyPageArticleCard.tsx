@@ -1,7 +1,7 @@
 import { NotFound } from '@/components/elements/NotFound'
+import { ArticleCard } from '@/features/articles/articleCard/ArticleCard'
+import { ArticleCardGroup } from '@/features/articles/articleCardGroup/ArticleCardGroup'
 import { User } from '@/functions/types'
-import { ArticleCard } from '@/pages/articles/components/articleCard/ArticleCard'
-import { ArticleCardGroup } from '@/pages/articles/components/articleCardGroup/ArticleCardGroup'
 import NextLink from 'next/link'
 import { FC } from 'react'
 

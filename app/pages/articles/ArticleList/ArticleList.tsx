@@ -4,8 +4,8 @@ import { VStack } from '@/components/layouts/VStack'
 import { Articles } from '@/functions/types'
 import NextLink from 'next/link'
 import { FC } from 'react'
-import { ArticleCard } from '../components/articleCard/ArticleCard'
-import { ArticleCardGroup } from '../components/articleCardGroup/ArticleCardGroup'
+import { ArticleCard } from '../../../features/articles/articleCard/ArticleCard'
+import { ArticleCardGroup } from '../../../features/articles/articleCardGroup/ArticleCardGroup'
 import { SearchForm } from './components/searchForm/SearchForm'
 
 type Props = {

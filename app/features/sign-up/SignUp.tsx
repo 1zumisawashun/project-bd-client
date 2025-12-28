@@ -5,7 +5,7 @@ import { Card, CardBody } from '@/components/elements/Card'
 import { Link } from '@/components/elements/Link'
 import { Nl2br } from '@/components/elements/Nl2br'
 import { SimpleDialog } from '@/components/elements/SimpleDialog'
-import { Checkbox, CheckedState } from '@/components/forms/Checkbox'
+import { Checkbox } from '@/components/forms/Checkbox'
 import {
   Form,
   FormErrorMessage,
@@ -28,7 +28,7 @@ export const SignUp: React.FC = () => {
   const router = useRouter()
 
   const [errorMessage, setErrorMessage] = useState('')
-  const [checkedState, setCheckedState] = useState<CheckedState>(false)
+  const [checked, setChecked] = useState(false)
 
   const {
     register,
@@ -82,7 +82,7 @@ export const SignUp: React.FC = () => {
               <Nl2br>{tos}</Nl2br>
             </CardBody>
           </Card>
-          <Checkbox checked={checkedState} onCheckedChange={setCheckedState}>
+          <Checkbox checked={checked} onClick={() => setChecked(!checked)}>
             利用規約に同意する
           </Checkbox>
           <HStack style={{ justifyContent: 'space-between' }}>
@@ -91,7 +91,7 @@ export const SignUp: React.FC = () => {
             </HStack>
             <Button
               onClick={(e) => void handleSubmit(onSubmit, onError)(e)}
-              disabled={!checkedState}
+              disabled={!checked}
             >
               新規登録
             </Button>

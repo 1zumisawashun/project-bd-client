@@ -8,8 +8,15 @@ import {
 import styles from './index.module.css'
 
 const BLOCK_NAME = 'sticky-wrapper'
-type Props = {} & ComponentPropsWithoutRef<'div'>
+
+type StickyWrapperProps = ComponentPropsWithoutRef<'div'>
+
+type CustomProps = {}
+
+type Props = StickyWrapperProps & CustomProps
+
 type Ref = ElementRef<'div'>
+
 export const StickyWrapper = forwardRef<Ref, Props>(
   ({ className, ...props }, ref) => {
     const [pageHeaderTop, setPageHeaderTop] = useState<number>(0)

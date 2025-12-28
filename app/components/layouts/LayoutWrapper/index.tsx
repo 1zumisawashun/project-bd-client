@@ -1,14 +1,28 @@
 'use client'
 
-import { useState } from 'react'
+import {
+  ComponentPropsWithoutRef,
+  ElementRef,
+  forwardRef,
+  useState,
+} from 'react'
 import styles from './index.module.css'
 
 const BLOCK_NAME = 'layout-wrapper'
 
-// NOTE: SiteWrapper と同じように、ページの高さを調整するコンポーネント
-export const LayoutWrapper: React.FC<React.PropsWithChildren> = ({
-  children,
-}) => {
+type StickyWrapperProps = ComponentPropsWithoutRef<'main'>
+
+type CustomProps = {}
+
+type Props = StickyWrapperProps & CustomProps
+
+type Ref = ElementRef<'main'>
+
+/**
+ * NOTE:
+ * SiteWrapper と同じように、ページの高さを調整するコンポーネント
+ */
+export const LayoutWrapper = forwardRef<Ref, Props>(({ children }, ref) => {
   const [top, setTop] = useState(0)
 
   return (
@@ -16,6 +30,13 @@ export const LayoutWrapper: React.FC<React.PropsWithChildren> = ({
       ref={(node) => {
         if (!node) return
         setTop(node.getBoundingClientRect().top ?? 0)
+
+        // NOTE: 親コンポーネントからのrefがある場合は、それも適用する
+        if (typeof ref === 'function') {
+          ref(node)
+        } else if (ref) {
+          ref.current = node
+        }
       }}
       style={{ minHeight: `calc(100vh - ${top}px)` }}
       className={styles[BLOCK_NAME]}
@@ -23,4 +44,6 @@ export const LayoutWrapper: React.FC<React.PropsWithChildren> = ({
       {children}
     </main>
   )
-}
+})
+
+LayoutWrapper.displayName = 'LayoutWrapper'

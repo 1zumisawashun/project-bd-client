@@ -3,7 +3,6 @@
 import { Button } from '@/components/buttons/Button'
 import {
   Dialog,
-  DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
@@ -49,20 +48,18 @@ export const DraftDialog: FC<Props> = ({ isOpen, onClose, articleId }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
-        <VStack align="center">
-          <DialogTitle>記事を下書きに戻します</DialogTitle>
-          <DialogDescription>
-            記事が一覧から取り除かれます。マイページの下書きから閲覧可能です。
-          </DialogDescription>
-          <HStack>
-            <Button variant="outlined" onClick={onClose}>
-              キャンセル
-            </Button>
-            <Button onClick={handleDraft}>下書きに戻す</Button>
-          </HStack>
-        </VStack>
-      </DialogContent>
+      <VStack align="center">
+        <DialogTitle>記事を下書きに戻します</DialogTitle>
+        <DialogDescription>
+          記事が一覧から取り除かれます。マイページの下書きから閲覧可能です。
+        </DialogDescription>
+        <HStack>
+          <Button variant="outlined" onClick={onClose}>
+            キャンセル
+          </Button>
+          <Button onClick={handleDraft}>下書きに戻す</Button>
+        </HStack>
+      </VStack>
     </Dialog>
   )
 }

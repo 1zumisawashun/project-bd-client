@@ -7,6 +7,7 @@ const meta: Meta<typeof Card> = {
   title: 'element/Card',
   component: Card,
 }
+
 export default meta
 
 type Story = StoryObj<typeof Card>

@@ -3,7 +3,6 @@
 import { Button } from '@/components/buttons/Button'
 import {
   Dialog,
-  DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
@@ -26,15 +25,13 @@ export const SimpleDialog: FC<Props> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent>
-        <VStack align="center">
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
-          <HStack>
-            <Button onClick={close}>閉じる</Button>
-          </HStack>
-        </VStack>
-      </DialogContent>
+      <VStack align="center">
+        <DialogTitle>{title}</DialogTitle>
+        <DialogDescription>{description}</DialogDescription>
+        <HStack>
+          <Button onClick={close}>閉じる</Button>
+        </HStack>
+      </VStack>
     </Dialog>
   )
 }

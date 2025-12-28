@@ -4,7 +4,6 @@ import { Button } from '@/components/buttons/Button'
 import { Card, CardBody } from '@/components/elements/Card'
 import {
   Dialog,
-  DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
@@ -31,20 +30,18 @@ export const LogoutDialog: FC<Props> = ({ isOpen, close }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
-      <DialogContent>
-        <VStack align="center">
-          <DialogTitle>ログアウトしますか？</DialogTitle>
-          <DialogDescription>本当にログアウトしますか？</DialogDescription>
-          <HStack>
-            <Button theme="danger" variant="outlined" onClick={close}>
-              キャンセル
-            </Button>
-            <Button theme="danger" onClick={() => void logout()}>
-              ログアウトする
-            </Button>
-          </HStack>
-        </VStack>
-      </DialogContent>
+      <VStack align="center">
+        <DialogTitle>ログアウトしますか？</DialogTitle>
+        <DialogDescription>本当にログアウトしますか？</DialogDescription>
+        <HStack>
+          <Button theme="danger" variant="outlined" onClick={close}>
+            キャンセル
+          </Button>
+          <Button theme="danger" onClick={() => void logout()}>
+            ログアウトする
+          </Button>
+        </HStack>
+      </VStack>
     </Dialog>
   )
 }

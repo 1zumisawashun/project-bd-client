@@ -3,7 +3,6 @@
 import { Button } from '@/components/buttons/Button'
 import {
   Dialog,
-  DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
@@ -49,20 +48,18 @@ export const PublishDialog: FC<Props> = ({ isOpen, onClose, articleId }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
-        <VStack align="center">
-          <DialogTitle>記事を公開します</DialogTitle>
-          <DialogDescription>
-            記事を公開します。執筆お疲れ様でした！
-          </DialogDescription>
-          <HStack>
-            <Button variant="outlined" onClick={onClose}>
-              キャンセル
-            </Button>
-            <Button onClick={handlePublish}>公開する</Button>
-          </HStack>
-        </VStack>
-      </DialogContent>
+      <VStack align="center">
+        <DialogTitle>記事を公開します</DialogTitle>
+        <DialogDescription>
+          記事を公開します。執筆お疲れ様でした！
+        </DialogDescription>
+        <HStack>
+          <Button variant="outlined" onClick={onClose}>
+            キャンセル
+          </Button>
+          <Button onClick={handlePublish}>公開する</Button>
+        </HStack>
+      </VStack>
     </Dialog>
   )
 }

@@ -3,7 +3,6 @@
 import { Button } from '@/components/buttons/Button'
 import {
   Dialog,
-  DialogContent,
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
@@ -49,20 +48,18 @@ export const DeleteDialog: FC<Props> = ({ isOpen, onClose, articleId }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
-        <VStack align="center">
-          <DialogTitle>記事を削除します</DialogTitle>
-          <DialogDescription>一度削除すると復元ができません</DialogDescription>
-          <HStack>
-            <Button theme="danger" variant="outlined" onClick={onClose}>
-              キャンセル
-            </Button>
-            <Button theme="danger" onClick={handleDelete}>
-              削除する
-            </Button>
-          </HStack>
-        </VStack>
-      </DialogContent>
+      <VStack align="center">
+        <DialogTitle>記事を削除します</DialogTitle>
+        <DialogDescription>一度削除すると復元ができません</DialogDescription>
+        <HStack>
+          <Button theme="danger" variant="outlined" onClick={onClose}>
+            キャンセル
+          </Button>
+          <Button theme="danger" onClick={handleDelete}>
+            削除する
+          </Button>
+        </HStack>
+      </VStack>
     </Dialog>
   )
 }

@@ -1,20 +1,26 @@
-import * as RowToggleGroup from '@radix-ui/react-toggle-group'
+import { ToggleGroup as RowToggleGroup } from '@base-ui/react/toggle-group'
 import clsx from 'clsx'
-import { ElementRef, forwardRef } from 'react'
+import { ComponentProps, ElementRef, forwardRef } from 'react'
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'toggle-group'
-// NOTE: 単一選択のみ許容する
-type Props = {} & Omit<RowToggleGroup.ToggleGroupSingleProps, 'type'>
+
+type ToggleGroupProps = ComponentProps<typeof RowToggleGroup>
+
+type CustomProps = {}
+
+type Props = ToggleGroupProps & CustomProps
+
 type Ref = ElementRef<'div'>
+
 export const ToggleGroup = forwardRef<Ref, Props>(
   ({ className, ...props }, ref) => {
     return (
-      <RowToggleGroup.Root
-        type="single"
+      <RowToggleGroup
         {...props}
-        ref={ref}
+        // native props
         className={clsx(styles[`${BLOCK_NAME}`], className)}
+        ref={ref}
       />
     )
   },

@@ -11,7 +11,16 @@ import {
   AutocompleteInputControl,
   AutocompleteInputGroup,
 } from '.'
-import { options } from '../../forms/forms.constant'
+
+const options = [
+  'React',
+  'Ruby on Rails',
+  'JavaScript',
+  'TypeScript',
+  'Go',
+  'HTML',
+  'CSS',
+]
 
 const meta = {
   title: 'form/AutocompleteInput',

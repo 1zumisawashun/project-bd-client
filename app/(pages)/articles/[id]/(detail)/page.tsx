@@ -1,7 +1,7 @@
 import { NotFound } from '@/components/elements/NotFound'
 import { getArticleById } from '@/functions/db/article'
 import { auth } from '@/functions/libs/next-auth/auth'
-import { ArticleDetail } from '@/pages/articles/ArticleDetail/ArticleDetail'
+import { ArticleDetail } from '@/pages/articles/[id]/ArticleDetail'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const article = await getArticleById({ id: params.id })

@@ -1,11 +1,11 @@
 'use client'
 
 import { VStack } from '@/components/layouts/VStack'
+import { ArticleCard } from '@/features/articles/articleCard/ArticleCard'
+import { ArticleCardGroup } from '@/features/articles/articleCardGroup/ArticleCardGroup'
 import { Articles } from '@/functions/types'
 import NextLink from 'next/link'
 import { FC } from 'react'
-import { ArticleCard } from '../../../features/articles/articleCard/ArticleCard'
-import { ArticleCardGroup } from '../../../features/articles/articleCardGroup/ArticleCardGroup'
 import { SearchForm } from './components/searchForm/SearchForm'
 
 type Props = {

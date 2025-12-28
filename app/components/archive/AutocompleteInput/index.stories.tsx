@@ -1,4 +1,4 @@
-import { Label, LabelAction } from '@/components/elements/Label'
+import { Label } from '@/components/elements/Label'
 import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
@@ -122,9 +122,8 @@ const MultipleRender: React.FC = () => {
             />
             <HStack gap={2} style={{ margin: '0.5rem', flexWrap: 'wrap' }}>
               {fields?.map((d, index) => (
-                <Label key={d.id}>
+                <Label key={d.id} onClick={() => remove(index)}>
                   {d.name}
-                  <LabelAction onClick={() => remove(index)} />
                 </Label>
               ))}
             </HStack>

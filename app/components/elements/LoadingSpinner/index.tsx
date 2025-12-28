@@ -3,9 +3,16 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import styles from './index.module.css'
 
 const BLOCK_NAME = 'loading-spinner'
-type Props = {} & ComponentPropsWithoutRef<'div'>
+
+type LoadingSpinnerProps = ComponentPropsWithoutRef<'div'>
+
+type CustomProps = {}
+
+type Props = LoadingSpinnerProps & CustomProps
+
 type Ref = ElementRef<'div'>
-export const LoadingSpinner: React.FC = forwardRef<Ref, Props>(
+
+export const LoadingSpinner = forwardRef<Ref, Props>(
   ({ className, ...props }, ref) => {
     return (
       <div className={styles[`${BLOCK_NAME}-overlay`]}>

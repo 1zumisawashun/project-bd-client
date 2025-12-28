@@ -1,7 +1,7 @@
 'use client'
 
 import { AutocompleteInputGroup } from '@/components/archive/AutocompleteInput'
-import { Label, LabelAction } from '@/components/elements/Label'
+import { Label } from '@/components/elements/Label'
 import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
 import { TextInput } from '@/components/forms/TextInput'
 import { HStack } from '@/components/layouts/HStack'
@@ -50,9 +50,8 @@ export const ArticleEditForm: React.FC<Props> = ({ categoryOptions }) => {
             {fields?.length > 0 && (
               <HStack gap={2} style={{ flexWrap: 'wrap' }}>
                 {fields?.map((d, index) => (
-                  <Label key={d.id}>
+                  <Label key={d.id} onClick={() => remove(index)}>
                     {d.name}
-                    <LabelAction onClick={() => remove(index)} />
                   </Label>
                 ))}
               </HStack>

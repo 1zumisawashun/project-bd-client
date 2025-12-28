@@ -3,13 +3,21 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import styles from './index.module.css'
 
 const BLOCK_NAME = 'loading-dot'
-type Props = {} & ComponentPropsWithoutRef<'div'>
+
+type LoadingDotProps = ComponentPropsWithoutRef<'div'>
+
+type CustomProps = {}
+
+type Props = LoadingDotProps & CustomProps
+
 type Ref = ElementRef<'div'>
-export const LoadingDot: React.FC = forwardRef<Ref, Props>(
+
+export const LoadingDot = forwardRef<Ref, Props>(
   ({ className, ...props }, ref) => {
     return (
       <div
         {...props}
+        // native props
         ref={ref}
         className={clsx(styles[`${BLOCK_NAME}`], className)}
       >

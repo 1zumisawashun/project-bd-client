@@ -1,5 +1,5 @@
 import { AutocompleteInputGroup } from '@/components/archive/AutocompleteInput'
-import { Label, LabelAction } from '@/components/elements/Label'
+import { Label } from '@/components/elements/Label'
 import { Field } from '@/components/forms/Field'
 import { HStack } from '@/components/layouts/HStack'
 import { useRouter } from 'next/navigation'
@@ -50,9 +50,8 @@ export const SearchForm: React.FC<Props> = ({
       {categories?.length > 0 && (
         <HStack gap={2} style={{ flexWrap: 'wrap' }}>
           {categories.map((d) => (
-            <Label key={d}>
+            <Label key={d} onClick={() => remove(d)}>
               {d}
-              <LabelAction onClick={() => remove(d)} />
             </Label>
           ))}
         </HStack>

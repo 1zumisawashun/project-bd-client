@@ -1,16 +1,19 @@
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Label, LabelAction } from './index'
+import { FC } from 'react'
+import { Label } from './index'
 
 const meta: Meta<typeof Label> = {
   title: 'element/Label',
   component: Label,
 }
+
 export default meta
+
 type Story = StoryObj<typeof Label>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <VStack>
       <HStack>
@@ -20,17 +23,14 @@ const Render: React.FC = () => {
       </HStack>
 
       <HStack>
-        <Label theme="primary">
+        <Label theme="primary" onClick={() => null}>
           primary
-          <LabelAction onClick={() => null} />
         </Label>
-        <Label theme="danger">
+        <Label theme="danger" onClick={() => null}>
           danger
-          <LabelAction onClick={() => null} theme="danger" />
         </Label>
-        <Label theme="success">
+        <Label theme="success" onClick={() => null}>
           success
-          <LabelAction onClick={() => null} theme="success" />
         </Label>
       </HStack>
     </VStack>

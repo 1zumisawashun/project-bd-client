@@ -1,7 +1,7 @@
 'use client'
 
+import { AutocompleteInputGroup } from '@/components/archive/AutocompleteInput'
 import { Label, LabelAction } from '@/components/elements/Label'
-import { AutocompleteInputGroup } from '@/components/forms/AutocompleteInput'
 import {
   Form,
   FormErrorMessage,

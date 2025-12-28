@@ -1,5 +1,5 @@
+import { AutocompleteInputGroup } from '@/components/archive/AutocompleteInput'
 import { Label, LabelAction } from '@/components/elements/Label'
-import { AutocompleteInputGroup } from '@/components/forms/AutocompleteInput'
 import { Form, FormField } from '@/components/forms/Form'
 import { HStack } from '@/components/layouts/HStack'
 import { useRouter } from 'next/navigation'

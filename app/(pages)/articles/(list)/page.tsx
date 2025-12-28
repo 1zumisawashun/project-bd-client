@@ -1,7 +1,8 @@
 import { getArticles } from '@/functions/db/article'
 import { getCategories } from '@/functions/db/category'
 import { SearchParams } from '@/functions/types'
-import { ArticleList } from '@/pages/articles/ArticleList'
+import { ArticleList } from '@/pages/articles/(list)/ArticleList'
+
 export default async function Page({
   searchParams,
 }: {

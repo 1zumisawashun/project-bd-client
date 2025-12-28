@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import NextLink, { LinkProps } from 'next/link'
+import NextLink, { LinkProps as RowLinkProps } from 'next/link'
 import {
   ComponentPropsWithoutRef,
   ElementRef,
@@ -9,22 +9,32 @@ import {
 import styles from './index.module.css'
 
 const BLOCK_NAME = 'link'
-type Props = Omit<ComponentPropsWithoutRef<'a'>, 'prefix'> & {
+
+type LinkProps = Omit<ComponentPropsWithoutRef<'a'>, 'prefix'> & RowLinkProps
+
+type CustomProps = {
   disabled?: boolean
   isExternal?: boolean
   prefix?: ReactNode
   suffix?: ReactNode
-} & LinkProps
+}
+
+type Props = LinkProps & CustomProps
+
 type Ref = ElementRef<'a'>
+
 export const Link = forwardRef<Ref, Props>(
   (
     {
-      children,
+      // custom props
       disabled = false,
-      className,
+      isExternal = false,
       prefix,
       suffix,
-      isExternal = false,
+      // native props
+      children,
+      className,
+      // other props
       ...props
     },
     ref,
@@ -38,9 +48,11 @@ export const Link = forwardRef<Ref, Props>(
     return (
       <NextLink
         {...props}
+        // native props
         className={clsx(styles[`${BLOCK_NAME}`], className)}
-        aria-disabled={disabled}
         ref={ref}
+        // custom props
+        aria-disabled={disabled}
         {...externalProps}
       >
         {prefix ?? null}

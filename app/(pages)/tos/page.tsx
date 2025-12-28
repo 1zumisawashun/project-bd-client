@@ -1,4 +1,4 @@
-import { Tos } from '@/features/tos/Tos'
+import { Tos } from '@/pages/tos/Tos'
 
 export default function Page() {
   return <Tos />

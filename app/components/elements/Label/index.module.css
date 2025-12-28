@@ -22,11 +22,11 @@
 }
 
 /* 詳細度をあげてスタイルを上書きする */
-.label-action-button.label-action-button {
+.label-button.label-button {
   padding: 0.2rem;
 }
 
-.label-action-icon {
+.label-icon {
   width: 0.4rem;
   height: 0.4rem;
 }

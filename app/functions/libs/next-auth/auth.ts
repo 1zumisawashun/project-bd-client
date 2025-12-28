@@ -1,7 +1,7 @@
-import { schema } from '@/features/sign-up/signUp.schema'
 import { getUserByEmail } from '@/functions/db/user'
 import { isPasswordValid } from '@/functions/helpers/hash'
 import prisma from '@/functions/libs/prisma-client/prisma'
+import { schema } from '@/pages/sign-up/signUp.schema'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import NextAuth, { NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'

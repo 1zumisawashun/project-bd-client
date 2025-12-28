@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { FC } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './index'
 
 const meta: Meta<typeof Tabs> = {
@@ -9,7 +10,7 @@ const meta: Meta<typeof Tabs> = {
 export default meta
 type Story = StoryObj<typeof Tabs>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <Tabs defaultValue="tab1" orientation="vertical">
       <TabsList>

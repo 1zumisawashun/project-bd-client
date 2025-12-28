@@ -1,13 +1,18 @@
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import clsx from 'clsx'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import {
+  ComponentPropsWithoutRef,
+  ElementRef,
+  forwardRef,
+  PropsWithChildren,
+} from 'react'
 import { HStack } from '../../layouts/HStack'
 import { Description, Title } from '../Typography'
 import styles from './index.module.css'
 
 const BLOCK_NAME = 'status'
 type Props = ComponentPropsWithoutRef<'div'> &
-  React.PropsWithChildren<{
+  PropsWithChildren<{
     status?: _Status
     title: string
   }>

@@ -9,17 +9,25 @@ import {
   HeartIcon,
   PlusIcon,
 } from '@radix-ui/react-icons'
-import { items } from '../buttons.constant'
+import { FC } from 'react'
 import { IconButton } from './index'
+
+const items = [
+  { id: 1, variant: 'contained', theme: 'primary' },
+  { id: 2, variant: 'outlined', theme: 'primary' },
+  { id: 3, variant: 'ghost', theme: 'primary' },
+]
 
 const meta: Meta<typeof IconButton> = {
   title: 'button/IconButton',
   component: IconButton,
 }
+
 export default meta
+
 type Story = StoryObj<typeof IconButton>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <VStack>
       {items.map((item) => (
@@ -50,6 +58,5 @@ const Render: React.FC = () => {
 }
 
 export const Default: Story = {
-  args: {},
   render: () => <Render />,
 }

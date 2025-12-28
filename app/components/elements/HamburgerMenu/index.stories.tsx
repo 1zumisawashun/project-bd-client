@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from '@/components/buttons/Button'
+import { FC } from 'react'
 import { HamburgerMenu } from './index'
 
 const meta: Meta<typeof HamburgerMenu> = {
@@ -10,7 +11,7 @@ const meta: Meta<typeof HamburgerMenu> = {
 export default meta
 type Story = StoryObj<typeof HamburgerMenu>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <HamburgerMenu
       render={() => (

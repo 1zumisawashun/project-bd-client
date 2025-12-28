@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { VStack } from '@/components/layouts/VStack'
+import { FC } from 'react'
 import { Card, CardBody } from '../Card'
 import { Breadcrumb, BreadcrumbLink } from './index'
 
@@ -8,10 +9,12 @@ const meta: Meta<typeof Breadcrumb> = {
   title: 'element/Breadcrumb',
   component: Breadcrumb,
 }
+
 export default meta
+
 type Story = StoryObj<typeof Breadcrumb>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <VStack>
       <Card>

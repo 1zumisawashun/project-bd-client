@@ -1,7 +1,6 @@
 :is(.breadcrumb-link, .breadcrumb-back-button) {
   padding: 0.25rem;
   font-size: 0.875rem;
-
   &[aria-current='true'] {
     font-weight: bold;
     cursor: not-allowed;
@@ -15,7 +14,7 @@
   font-size: 0.875rem;
 }
 
-.breadcrumb-item {
+.breadcrumb-link-item {
   color: var(--mauve-8);
 
   &:not(:last-child)::after {

@@ -3,18 +3,26 @@ import { VStack } from '@/components/layouts/VStack'
 import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
 import { PlusIcon } from '@radix-ui/react-icons'
 import type { Meta, StoryObj } from '@storybook/react'
-import { items } from '../buttons.constant'
+import { FC } from 'react'
 import { Button } from './index'
+
+const items = [
+  { id: 1, variant: 'contained', theme: 'primary' },
+  { id: 2, variant: 'outlined', theme: 'primary' },
+  { id: 3, variant: 'ghost', theme: 'primary' },
+]
 
 const meta: Meta<typeof Button> = {
   title: 'button/Button',
   component: Button,
   decorators: [FullWidthDecorator],
 }
+
 export default meta
+
 type Story = StoryObj<typeof Button>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <VStack>
       {items.map((item) => (
@@ -55,6 +63,5 @@ const Render: React.FC = () => {
 }
 
 export const Default: Story = {
-  args: {},
   render: () => <Render />,
 }

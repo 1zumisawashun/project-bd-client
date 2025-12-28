@@ -2,6 +2,7 @@ import { IconButton } from '@/components/buttons/IconButton'
 import { Toast as ToastType } from '@/functions/types'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import * as RowToast from '@radix-ui/react-toast'
+import { FC } from 'react'
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'toast'
@@ -9,7 +10,7 @@ type Props = {
   value: ToastType
   onClose: (id: string) => void
 }
-export const Toast: React.FC<Props> = ({ value, onClose }) => {
+export const Toast: FC<Props> = ({ value, onClose }) => {
   return (
     <RowToast.Root
       className={styles[`${BLOCK_NAME}`]}

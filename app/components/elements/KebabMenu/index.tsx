@@ -5,11 +5,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/elements/DropdownMenu'
 import { DotsVerticalIcon } from '@radix-ui/react-icons'
+import { FC } from 'react'
 
 type Props = {
-  render: React.FC
+  render: FC
 }
-export const KebabMenu: React.FC<Props> = (props) => {
+export const KebabMenu: FC<Props> = (props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

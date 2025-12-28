@@ -1,11 +1,11 @@
-.dialog-overlay {
+.dialog-backdrop {
   background-color: var(--black-a9);
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dialog-content {
+.dialog-popup {
   background-color: white;
   border-radius: 6px;
   box-shadow:
@@ -20,9 +20,9 @@
   max-height: 85vh;
   padding: 25px;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.dialog-content:focus {
-  outline: none;
+  &:focus {
+    outline: none;
+  }
 }
 
 @keyframes overlayShow {

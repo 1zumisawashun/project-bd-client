@@ -2,9 +2,10 @@
 import { render, RenderOptions } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider'
+import { PropsWithChildren, ReactElement } from 'react'
 
 /** @description renderに必要なProviderはここでまとめて提供する */
-function AllTheProviders({ children }: React.PropsWithChildren) {
+function AllTheProviders({ children }: PropsWithChildren) {
   /**
    * @description next/linkのモックを提供する
    * @see https://www.npmjs.com/package/next-router-mock
@@ -13,7 +14,7 @@ function AllTheProviders({ children }: React.PropsWithChildren) {
 }
 
 const customRender = (
-  ui: React.ReactElement,
+  ui: ReactElement,
   options?: Omit<RenderOptions, 'wrapper'>,
 ) => {
   return {

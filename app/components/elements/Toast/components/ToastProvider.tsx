@@ -1,15 +1,14 @@
 'use client'
 
 import * as RowToast from '@radix-ui/react-toast'
+import { FC, PropsWithChildren } from 'react'
 import { useToast } from '../hooks/useToast'
 import styles from '../index.module.css'
 import { Toast } from './Toast'
 import { ToastDispatchProvider } from './ToastDispatchProvider'
 
 const BLOCK_NAME = 'toast'
-export const ToastProvider: React.FC<React.PropsWithChildren> = ({
-  children,
-}) => {
+export const ToastProvider: FC<PropsWithChildren> = ({ children }) => {
   const { toasts, openToast, closeToast } = useToast()
 
   return (

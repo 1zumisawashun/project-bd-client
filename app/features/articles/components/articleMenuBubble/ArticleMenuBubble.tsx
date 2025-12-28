@@ -2,13 +2,14 @@ import { Button } from '@/components/buttons/Button'
 import { MenuBubble } from '@/components/elements/Editor'
 import { tiptapClient } from '@/components/elements/Editor/helpers/tiptapClient'
 import { Editor } from '@tiptap/react'
+import { FC } from 'react'
 import styles from './articleMenuBubble.module.css'
 
 const BLOCK_NAME = 'articleMenuBubble'
 type Props = {
   editor: Editor
 }
-export const ArticleMenuBubble: React.FC<Props> = ({ editor }) => {
+export const ArticleMenuBubble: FC<Props> = ({ editor }) => {
   const { bold, italic, strike, trash, link } = tiptapClient(editor)
 
   const items = [bold, italic, strike, link, trash]

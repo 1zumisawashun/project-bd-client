@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from '@/components/buttons/Button'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { userEvent, within } from '@storybook/test'
+import { FC } from 'react'
 import { DeleteDialog } from './DeleteDialog'
 
 const meta: Meta<typeof DeleteDialog> = {
@@ -12,7 +13,7 @@ const meta: Meta<typeof DeleteDialog> = {
 export default meta
 type Story = StoryObj<typeof DeleteDialog>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   const { isOpen, close, open } = useDisclosure()
   return (
     <>

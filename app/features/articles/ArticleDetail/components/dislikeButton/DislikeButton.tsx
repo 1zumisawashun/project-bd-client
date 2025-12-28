@@ -4,7 +4,7 @@ import { IconButton } from '@/components/buttons/IconButton'
 import { useToastDispatch } from '@/components/elements/Toast'
 import { HeartIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
-import { startTransition } from 'react'
+import { FC, startTransition } from 'react'
 import { likeArticle } from './dislikeButton.action'
 import styles from './dislikeButton.module.css'
 
@@ -13,7 +13,7 @@ type Props = {
   articleId: string
   userId: string
 }
-export const DislikeButton: React.FC<Props> = ({ articleId, userId }) => {
+export const DislikeButton: FC<Props> = ({ articleId, userId }) => {
   const router = useRouter()
   const openToast = useToastDispatch()
 

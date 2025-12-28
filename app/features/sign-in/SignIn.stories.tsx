@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { FC } from 'react'
 import { SignIn } from './SignIn'
 
 const meta: Meta<typeof SignIn> = {
@@ -9,7 +10,7 @@ const meta: Meta<typeof SignIn> = {
 export default meta
 type Story = StoryObj<typeof SignIn>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return <SignIn />
 }
 export const Default: Story = {

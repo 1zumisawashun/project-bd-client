@@ -3,17 +3,14 @@ import { Label } from '@/components/elements/Label'
 import { Field } from '@/components/forms/Field'
 import { HStack } from '@/components/layouts/HStack'
 import { useRouter } from 'next/navigation'
-import { useOptimistic } from 'react'
+import { FC, useOptimistic } from 'react'
 
 type Props = {
   categoryOptions: string[]
   defaultValues: string[]
 }
 
-export const SearchForm: React.FC<Props> = ({
-  categoryOptions,
-  defaultValues,
-}) => {
+export const SearchForm: FC<Props> = ({ categoryOptions, defaultValues }) => {
   const router = useRouter()
 
   const [categories, setCategories] = useOptimistic<string[]>(defaultValues)

@@ -5,11 +5,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/elements/DropdownMenu'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
+import { FC } from 'react'
 
 type Props = {
-  render: React.FC
+  render: FC
 }
-export const HamburgerMenu: React.FC<Props> = (props) => {
+export const HamburgerMenu: FC<Props> = (props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

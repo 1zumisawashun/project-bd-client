@@ -3,6 +3,7 @@
 import { Footer } from '@/components/elements/Footer'
 import styles from '@/components/layouts/SiteWrapper/index.module.css'
 import { StickyWrapper } from '@/components/layouts/StickyWrapper'
+import { FC } from 'react'
 import { Schema } from './articleEdit.schema'
 import { ArticleEditForm } from './components/articleEditForm/ArticleEditForm'
 import { ArticleEditHeader } from './components/articleEditHeader/ArticleEditHeader'
@@ -14,7 +15,7 @@ type Props = {
   defaultValues: Schema
   categoryOptions: string[]
 }
-export const ArticleEdit: React.FC<Props> = ({
+export const ArticleEdit: FC<Props> = ({
   articleId,
   defaultValues,
   categoryOptions,

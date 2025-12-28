@@ -6,6 +6,7 @@ import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
 import { TextInput } from '@/components/forms/TextInput'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
+import { FC } from 'react'
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { ArticleEditor } from '../../../components/articleEditor/ArticleEditor'
 import { Schema } from '../../articleCreate.schema'
@@ -13,7 +14,7 @@ import { Schema } from '../../articleCreate.schema'
 type Props = {
   categoryOptions: string[]
 }
-export const ArticleCreateForm: React.FC<Props> = ({ categoryOptions }) => {
+export const ArticleCreateForm: FC<Props> = ({ categoryOptions }) => {
   const { control } = useFormContext<Schema>()
 
   const { fields, append, remove } = useFieldArray({

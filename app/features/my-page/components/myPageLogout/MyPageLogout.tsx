@@ -14,13 +14,14 @@ import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { FC } from 'react'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']
   close: ReturnType<typeof useDisclosure>['close']
 }
 
-export const LogoutDialog: React.FC<Props> = ({ isOpen, close }) => {
+export const LogoutDialog: FC<Props> = ({ isOpen, close }) => {
   const router = useRouter()
 
   const logout = async () => {
@@ -48,7 +49,7 @@ export const LogoutDialog: React.FC<Props> = ({ isOpen, close }) => {
   )
 }
 
-export const MyPageLogout: React.FC = () => {
+export const MyPageLogout: FC = () => {
   const { isOpen, open, close } = useDisclosure()
 
   return (

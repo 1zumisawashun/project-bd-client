@@ -8,16 +8,17 @@ import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import { Article } from '@/functions/types'
 import DOMPurify from 'dompurify'
 import NextLink from 'next/link'
+import { FC, ReactNode } from 'react'
 import styles from './baseArticleDetail.module.css'
 
 const BLOCK_NAME = 'baseArticleDetail'
 type Props = {
   article: Article
-  status: React.ReactNode
-  likeButton: React.ReactNode
-  kebabMenu: React.ReactNode
+  status: ReactNode
+  likeButton: ReactNode
+  kebabMenu: ReactNode
 }
-export const BaseArticleDetail: React.FC<Props> = ({
+export const BaseArticleDetail: FC<Props> = ({
   article,
   status,
   likeButton,

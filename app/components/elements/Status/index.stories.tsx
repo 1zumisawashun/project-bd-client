@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { FC } from 'react'
 import { VStack } from '../../layouts/VStack'
 import { Status } from './index'
 
@@ -11,7 +12,7 @@ export default meta
 
 type Story = StoryObj<typeof Status>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <VStack>
       <Status title="タイトルタイトルタイトル" status="empty">

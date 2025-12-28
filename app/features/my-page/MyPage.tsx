@@ -5,13 +5,14 @@ import {
   TabsTrigger,
 } from '@/components/elements/Tabs'
 import { User } from '@/functions/types'
+import { FC } from 'react'
 import { MyPageArticleCard } from './components/myPageArticleCard/MyPageArticleCard'
 import { MyPageSetting } from './components/myPageSetting/MyPageSetting'
 
 type Props = {
   user: User
 }
-export const MyPage: React.FC<Props> = ({ user }) => {
+export const MyPage: FC<Props> = ({ user }) => {
   const published =
     user?.posts?.filter((post) => post.status === 'PUBLISHED') ?? []
 

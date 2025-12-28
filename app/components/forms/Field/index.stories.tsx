@@ -1,6 +1,7 @@
 import { VStack } from '@/components/layouts/VStack'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Meta, StoryObj } from '@storybook/react'
+import { FC } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { TextInput } from '../TextInput'
@@ -22,7 +23,7 @@ const schema = z.object({
  * NOTE:
  * @see https://base-ui.com/react/handbook/forms#react-hook-form
  */
-const Render: React.FC = () => {
+const Render: FC = () => {
   const { control } = useForm({
     mode: 'onTouched',
     resolver: zodResolver(schema),

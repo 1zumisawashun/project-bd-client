@@ -1,4 +1,6 @@
-export function HeartFilledIcon(props: React.ComponentProps<'svg'>) {
+import { ComponentProps } from 'react'
+
+export function HeartFilledIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="16"
@@ -12,7 +14,7 @@ export function HeartFilledIcon(props: React.ComponentProps<'svg'>) {
   )
 }
 
-export function HeartOutlineIcon(props: React.ComponentProps<'svg'>) {
+export function HeartOutlineIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
       width="16"

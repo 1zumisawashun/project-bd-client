@@ -12,7 +12,7 @@ import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { User } from '@/functions/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { startTransition } from 'react'
+import { FC, startTransition } from 'react'
 import {
   Controller,
   SubmitErrorHandler,
@@ -22,7 +22,7 @@ import {
 import { updateEmail } from './myPageEmail.action'
 import { EmailSchema, emailSchema } from './myPageEmail.schema'
 
-const EmailPreview: React.FC<{ email: string; open: () => void }> = ({
+const EmailPreview: FC<{ email: string; open: () => void }> = ({
   email,
   open,
 }) => {
@@ -36,7 +36,7 @@ const EmailPreview: React.FC<{ email: string; open: () => void }> = ({
   )
 }
 
-const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
+const EmailEditForm: FC<{ email: string; close: () => void }> = ({
   email,
   close,
 }) => {
@@ -105,7 +105,7 @@ const EmailEditForm: React.FC<{ email: string; close: () => void }> = ({
   )
 }
 
-export const MyPageEmail: React.FC<{ user: User }> = ({ user }) => {
+export const MyPageEmail: FC<{ user: User }> = ({ user }) => {
   const { isOpen, open, close } = useDisclosure()
   const email = user.email ?? ''
 

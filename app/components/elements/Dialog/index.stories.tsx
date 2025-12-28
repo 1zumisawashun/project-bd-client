@@ -4,6 +4,7 @@ import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { userEvent, within } from '@storybook/test'
+import { FC } from 'react'
 import { Button } from '../../buttons/Button'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from './index'
 
@@ -14,7 +15,7 @@ const meta: Meta<typeof Dialog> = {
 export default meta
 type Story = StoryObj<typeof Dialog>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   const { isOpen, close, open } = useDisclosure()
   return (
     <>

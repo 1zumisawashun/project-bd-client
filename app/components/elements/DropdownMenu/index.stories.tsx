@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { userEvent, within } from '@storybook/test'
+import { FC } from 'react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,7 +20,7 @@ export default meta
 
 type Story = StoryObj<typeof DropdownMenu>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

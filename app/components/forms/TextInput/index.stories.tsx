@@ -1,5 +1,6 @@
 import { VStack } from '@/components/layouts/VStack'
 import type { Meta, StoryObj } from '@storybook/react'
+import { FC } from 'react'
 import { Field, FieldLabel } from '../Field'
 import { TextInput } from './index'
 
@@ -10,7 +11,7 @@ const meta: Meta<typeof TextInput> = {
 export default meta
 type Story = StoryObj<typeof TextInput>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <VStack>
       <Field>

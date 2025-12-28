@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { userEvent, within } from '@storybook/test'
+import { FC } from 'react'
 import { Menu, MenuContent, MenuItem, MenuTrigger } from './index'
 
 const meta: Meta<typeof Menu> = {
@@ -14,7 +15,7 @@ export default meta
 
 type Story = StoryObj<typeof Menu>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   const { isOpen, open, close } = useDisclosure()
   return (
     <Menu isOpen={isOpen} open={open} close={close}>

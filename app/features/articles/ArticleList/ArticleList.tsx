@@ -3,6 +3,7 @@
 import { VStack } from '@/components/layouts/VStack'
 import { Articles } from '@/functions/types'
 import NextLink from 'next/link'
+import { FC } from 'react'
 import { ArticleCard } from '../components/articleCard/ArticleCard'
 import { ArticleCardGroup } from '../components/articleCardGroup/ArticleCardGroup'
 import { SearchForm } from './components/searchForm/SearchForm'
@@ -13,7 +14,7 @@ type Props = {
   defaultValues: string[]
 }
 
-export const ArticleList: React.FC<Props> = ({
+export const ArticleList: FC<Props> = ({
   articles,
   categoryOptions,
   defaultValues,

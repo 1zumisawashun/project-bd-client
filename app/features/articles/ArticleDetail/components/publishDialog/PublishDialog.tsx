@@ -12,7 +12,7 @@ import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { useRouter } from 'next/navigation'
-import { startTransition } from 'react'
+import { FC, startTransition } from 'react'
 import { publishArticle } from './publishDialog.action'
 
 type Props = {
@@ -20,11 +20,7 @@ type Props = {
   onClose: ReturnType<typeof useDisclosure>['close']
   articleId: string
 }
-export const PublishDialog: React.FC<Props> = ({
-  isOpen,
-  onClose,
-  articleId,
-}) => {
+export const PublishDialog: FC<Props> = ({ isOpen, onClose, articleId }) => {
   const openToast = useToastDispatch()
   const router = useRouter()
 

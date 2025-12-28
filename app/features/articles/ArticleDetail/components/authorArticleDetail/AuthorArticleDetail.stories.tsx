@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { mockArticle } from '@/functions/constants/articles'
+import { FC } from 'react'
 import { LikeButton } from '../likeButton/LikeButton'
 import { AuthorArticleDetail } from './AuthorArticleDetail'
 
@@ -11,7 +12,7 @@ const meta: Meta<typeof AuthorArticleDetail> = {
 export default meta
 type Story = StoryObj<typeof AuthorArticleDetail>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <AuthorArticleDetail
       article={mockArticle}

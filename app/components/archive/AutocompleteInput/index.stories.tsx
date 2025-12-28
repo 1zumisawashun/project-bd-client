@@ -4,6 +4,7 @@ import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Meta, StoryObj } from '@storybook/react'
+import { FC } from 'react'
 import { Controller, useFieldArray, useForm, useWatch } from 'react-hook-form'
 import * as z from 'zod'
 import {
@@ -35,7 +36,7 @@ type Story = StoryObj<typeof meta>
  * AutocompleteInputDefault
  * ================================================
  */
-const DefaultRender: React.FC = () => {
+const DefaultRender: FC = () => {
   const schema = z.object({
     category: z.string(),
   })
@@ -83,7 +84,7 @@ export const Default: Story = {
  * AutocompleteInputMultiple
  * ================================================
  */
-const MultipleRender: React.FC = () => {
+const MultipleRender: FC = () => {
   const schema = z.object({
     categories: z
       .object({ name: z.string() })

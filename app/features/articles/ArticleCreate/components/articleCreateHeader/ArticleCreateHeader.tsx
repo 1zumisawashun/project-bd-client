@@ -6,7 +6,7 @@ import { useToastDispatch } from '@/components/elements/Toast'
 import { HStack } from '@/components/layouts/HStack'
 import { ChevronLeftIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
-import { startTransition } from 'react'
+import { FC, startTransition } from 'react'
 import {
   SubmitErrorHandler,
   SubmitHandler,
@@ -17,7 +17,7 @@ import { createArticle } from './articleCreateHeader.action'
 import styles from './articleCreateHeader.module.css'
 
 const BLOCK_NAME = 'articleCreateHeader'
-export const ArticleCreateHeader: React.FC = () => {
+export const ArticleCreateHeader: FC = () => {
   const router = useRouter()
   const openToast = useToastDispatch()
   const {

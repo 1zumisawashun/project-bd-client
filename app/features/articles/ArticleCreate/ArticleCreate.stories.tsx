@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
 import { content } from '@/functions/constants/content'
+import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
+import type { Meta, StoryObj } from '@storybook/react'
 
+import { FC } from 'react'
 import { ArticleCreate } from './ArticleCreate'
 
 const meta: Meta<typeof ArticleCreate> = {
@@ -13,7 +14,7 @@ const meta: Meta<typeof ArticleCreate> = {
 export default meta
 type Story = StoryObj<typeof ArticleCreate>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <ArticleCreate
       defaultValues={{

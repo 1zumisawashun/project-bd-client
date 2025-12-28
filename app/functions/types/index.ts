@@ -1,6 +1,7 @@
 import { getArticleById, getArticles } from '@/functions/db/article'
 import { getCategories } from '@/functions/db/category'
 import { getUserById } from '@/functions/db/user'
+import { ReactNode } from 'react'
 
 const _THEME_OPTIONS = ['primary', 'danger'] as const
 export type Theme = (typeof _THEME_OPTIONS)[number] | (string & {})
@@ -26,8 +27,8 @@ export type Action = (typeof _ACTION_OPTIONS)[number]
 export type Toast = {
   id: string
   theme: Theme
-  title: React.ReactNode
-  description?: React.ReactNode
+  title: ReactNode
+  description?: ReactNode
   isOpen: boolean
 }
 export type SearchParams = Record<string, string | string[] | undefined>

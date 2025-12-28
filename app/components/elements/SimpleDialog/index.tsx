@@ -10,6 +10,7 @@ import {
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { FC } from 'react'
 
 type Props = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']
@@ -17,7 +18,7 @@ type Props = {
   title: string
   description?: string
 }
-export const SimpleDialog: React.FC<Props> = ({
+export const SimpleDialog: FC<Props> = ({
   isOpen,
   close,
   title,

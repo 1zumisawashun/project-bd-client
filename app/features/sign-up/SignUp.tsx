@@ -13,7 +13,7 @@ import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { startTransition, useState } from 'react'
+import { FC, startTransition, useState } from 'react'
 import {
   Controller,
   SubmitErrorHandler,
@@ -24,7 +24,7 @@ import { tos } from '../tos/tos.constant'
 import { signUp } from './signUp.action'
 import { schema, Schema } from './signUp.schema'
 
-export const SignUp: React.FC = () => {
+export const SignUp: FC = () => {
   const dialog = useDisclosure()
   const router = useRouter()
 

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { userEvent, within } from '@storybook/test'
+import { FC } from 'react'
 import { Button } from '../../buttons/Button'
 import { SimpleDialog } from './index'
 
@@ -12,7 +13,7 @@ const meta: Meta<typeof SimpleDialog> = {
 export default meta
 type Story = StoryObj<typeof SimpleDialog>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   const { isOpen, close, open } = useDisclosure()
   return (
     <>

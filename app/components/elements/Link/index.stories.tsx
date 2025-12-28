@@ -2,6 +2,7 @@ import { HStack } from '@/components/layouts/HStack'
 import { ExternalLinkIcon } from '@radix-ui/react-icons'
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { FC } from 'react'
 import { Link } from './index'
 
 const meta: Meta<typeof Link> = {
@@ -11,7 +12,7 @@ const meta: Meta<typeof Link> = {
 export default meta
 type Story = StoryObj<typeof Link>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <HStack>
       <Link href="/">default</Link>

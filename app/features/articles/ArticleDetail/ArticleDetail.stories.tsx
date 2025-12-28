@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { mockArticle, mockArticleDraft } from '@/functions/constants/articles'
+import { FC } from 'react'
 import { ArticleDetail } from './ArticleDetail'
 
 const meta: Meta<typeof ArticleDetail> = {
@@ -10,15 +11,15 @@ const meta: Meta<typeof ArticleDetail> = {
 export default meta
 type Story = StoryObj<typeof ArticleDetail>
 
-const LikeRender: React.FC = () => {
+const LikeRender: FC = () => {
   return <ArticleDetail article={mockArticle} isAuthor userId="" isLike />
 }
-const DislikeRender: React.FC = () => {
+const DislikeRender: FC = () => {
   return (
     <ArticleDetail article={mockArticle} isAuthor userId="" isLike={false} />
   )
 }
-const DraftRender: React.FC = () => {
+const DraftRender: FC = () => {
   return <ArticleDetail article={mockArticleDraft} isAuthor userId="" isLike />
 }
 

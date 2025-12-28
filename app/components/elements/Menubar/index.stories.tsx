@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { FC } from 'react'
 import {
   Menubar,
   MenubarContent,
@@ -18,7 +19,7 @@ export default meta
 
 type Story = StoryObj<typeof Menubar>
 
-const Render: React.FC = () => {
+const Render: FC = () => {
   return (
     <Menubar>
       <MenubarMenu>

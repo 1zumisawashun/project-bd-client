@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from '@/components/buttons/Button'
 import { VStack } from '@/components/layouts/VStack'
+import { FC } from 'react'
 import { Toast } from './components/Toast'
 import { ToastProvider, useToastDispatch } from './index'
 
@@ -21,7 +22,7 @@ export default meta
 
 type Story = StoryObj<typeof Toast>
 
-const ToastStatusListRender: React.FC = () => {
+const ToastStatusListRender: FC = () => {
   return (
     <VStack>
       <Toast
@@ -58,7 +59,7 @@ const ToastStatusListRender: React.FC = () => {
   )
 }
 
-const ToastDispatchRender: React.FC = () => {
+const ToastDispatchRender: FC = () => {
   const openToast = useToastDispatch()
   return (
     <Button

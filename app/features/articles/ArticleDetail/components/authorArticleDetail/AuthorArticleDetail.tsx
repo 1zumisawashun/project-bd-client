@@ -6,6 +6,7 @@ import { KebabMenu } from '@/components/elements/KebabMenu'
 import { Status } from '@/components/elements/Status'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { Article } from '@/functions/types'
+import { FC, ReactNode } from 'react'
 import { BaseArticleDetail } from '../baseArticleDetail/BaseArticleDetail'
 import { DeleteDialog } from '../deleteDialog/DeleteDialog'
 import { DraftDialog } from '../draftDialog/DraftDialog'
@@ -21,9 +22,9 @@ const buttonProps = {
 }
 type Props = {
   article: Article
-  likeButton: React.ReactNode
+  likeButton: ReactNode
 }
-export const AuthorArticleDetail: React.FC<Props> = (props) => {
+export const AuthorArticleDetail: FC<Props> = (props) => {
   const deleteDialog = useDisclosure()
   const draftDialog = useDisclosure()
   const publishDialog = useDisclosure()

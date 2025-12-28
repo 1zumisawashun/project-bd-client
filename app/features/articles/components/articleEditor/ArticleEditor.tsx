@@ -3,6 +3,7 @@
 import { EditorContent } from '@/components/elements/Editor'
 import { useEditor } from '@/components/elements/Editor/hooks/useEditor'
 import { VStack } from '@/components/layouts/VStack'
+import { FC } from 'react'
 import { ArticleMenuBubble } from '../articleMenuBubble/ArticleMenuBubble'
 import { ArticleMenubar } from '../articleMenubar/ArticleMenubar'
 import styles from './articleEditor.module.css'
@@ -13,7 +14,7 @@ type Props = {
   onChange: (content: string) => void
   value: string
 }
-export const ArticleEditor: React.FC<Props> = ({ onChange, value }) => {
+export const ArticleEditor: FC<Props> = ({ onChange, value }) => {
   const editor = useEditor({
     content: value,
     onUpdate: ({ editor }) => {

@@ -12,7 +12,7 @@ import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { User } from '@/functions/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { startTransition } from 'react'
+import { FC, startTransition } from 'react'
 import {
   Controller,
   SubmitErrorHandler,
@@ -22,7 +22,7 @@ import {
 import { updateProfile } from './myPageProfile.action'
 import { ProfileSchema, profileSchema } from './myPageProfile.schema'
 
-const ProfilePreview: React.FC<{ name: string; open: () => void }> = ({
+const ProfilePreview: FC<{ name: string; open: () => void }> = ({
   name,
   open,
 }) => {
@@ -36,7 +36,7 @@ const ProfilePreview: React.FC<{ name: string; open: () => void }> = ({
   )
 }
 
-const ProfileEditForm: React.FC<{
+const ProfileEditForm: FC<{
   name: string
   close: () => void
 }> = ({ name, close }) => {
@@ -106,7 +106,7 @@ const ProfileEditForm: React.FC<{
   )
 }
 
-export const MyPageProfile: React.FC<{ user: User }> = ({ user }) => {
+export const MyPageProfile: FC<{ user: User }> = ({ user }) => {
   const { isOpen, open, close } = useDisclosure()
   const name = user.name ?? '名無し'
 

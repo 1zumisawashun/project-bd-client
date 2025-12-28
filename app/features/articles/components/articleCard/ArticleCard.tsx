@@ -1,12 +1,13 @@
 import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import { Articles } from '@/functions/types'
+import { FC } from 'react'
 import styles from './articleCard.module.css'
 
 const BLOCK_NAME = 'articleCard'
 type Props = {
   article: Articles[number]
 }
-export const ArticleCard: React.FC<Props> = ({ article }) => {
+export const ArticleCard: FC<Props> = ({ article }) => {
   const { title, createdAt } = article
 
   return (

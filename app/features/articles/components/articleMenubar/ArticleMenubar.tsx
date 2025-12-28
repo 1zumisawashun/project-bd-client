@@ -8,13 +8,14 @@ import {
 } from '@/components/elements/Menubar'
 import { TextIcon } from '@radix-ui/react-icons'
 import { Editor } from '@tiptap/react'
+import { FC } from 'react'
 import styles from './articleMenubar.module.css'
 
 const BLOCK_NAME = 'articleMenubar'
 type Props = {
   editor: Editor
 }
-export const ArticleMenubar: React.FC<Props> = ({ editor }) => {
+export const ArticleMenubar: FC<Props> = ({ editor }) => {
   const {
     // typography
     bold,

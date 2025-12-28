@@ -1,107 +1,87 @@
 import { VStack } from '@/components/layouts/VStack'
-import { zodResolver } from '@hookform/resolvers/zod'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Controller, useForm } from 'react-hook-form'
-import * as z from 'zod'
 import { Card, CardBody } from '../../elements/Card'
-import { Form, FormErrorMessage, FormField } from '../Form'
-import { groupItems, statusItems } from '../forms.constant'
-import { RadioGroup, RadioGroupItem } from './index'
 
-const meta: Meta<typeof RadioGroup> = {
-  title: 'form/RadioGroup',
-  component: RadioGroup,
+import { Field } from '../Field'
+import { Fieldset, FieldsetLegend } from '../Fieldset'
+
+import { FC, useState } from 'react'
+import { Radio, RadioGroup } from './index'
+
+const options = [
+  { value: 'http', label: 'HTTP' },
+  { value: 'https', label: 'HTTPS' },
+  { value: 'ssh', label: 'SSH' },
+]
+
+const meta: Meta<typeof Radio> = {
+  title: 'form/Radio',
+  component: Radio,
 }
-export default meta
-type Story = StoryObj<typeof RadioGroup>
 
-const RadioGroupStatusListRender: React.FC = () => {
+export default meta
+
+type Story = StoryObj<typeof Radio>
+
+const State: FC = () => {
+  return (
+    <Field>
+      <Fieldset render={<RadioGroup defaultValue="checked" />}>
+        <FieldsetLegend>Radio State</FieldsetLegend>
+        <Radio value="checked">checked</Radio>
+        <Radio value="unchecked">unchecked</Radio>
+        <Radio value="error" error>
+          error
+        </Radio>
+        <Radio value="disabled" disabled>
+          disabled
+        </Radio>
+      </Fieldset>
+    </Field>
+  )
+}
+
+const Multiple: FC = () => {
+  const [value, setValue] = useState('http')
+
+  return (
+    <Field>
+      <Fieldset
+        render={
+          <RadioGroup
+            value={value}
+            onValueChange={(value) => setValue(value as string)}
+          />
+        }
+      >
+        <FieldsetLegend>Radio Multiple</FieldsetLegend>
+        {options.map(({ value, label }) => (
+          <Radio value={value} key={value}>
+            {label}
+          </Radio>
+        ))}
+      </Fieldset>
+    </Field>
+  )
+}
+
+const Render: FC = () => {
   return (
     <VStack>
-      {statusItems.map((d) => (
-        <Card key={d.value}>
-          <CardBody>
-            <RadioGroup>
-              <RadioGroupItem {...d}>default</RadioGroupItem>
-              <RadioGroupItem {...d} id="hover">
-                hover
-              </RadioGroupItem>
-              <RadioGroupItem {...d} id="focus">
-                focus
-              </RadioGroupItem>
-              <RadioGroupItem {...d} disabled>
-                disabled
-              </RadioGroupItem>
-            </RadioGroup>
-          </CardBody>
-        </Card>
-      ))}
+      <Card>
+        <CardBody>
+          <State></State>
+        </CardBody>
+      </Card>
+      <Card>
+        <CardBody>
+          <Multiple></Multiple>
+        </CardBody>
+      </Card>
     </VStack>
   )
 }
 
-const RadioGroupControlledRender: React.FC = () => {
-  const schema = z.object({
-    radio: z.string().optional(),
-  })
-
-  const {
-    control,
-    formState: { errors },
-  } = useForm({
-    mode: 'onTouched',
-    resolver: zodResolver(schema),
-    defaultValues: {
-      radio: '',
-    },
-  })
-
-  return (
-    <Form>
-      <FormField name="radio" serverInvalid={!!errors.radio}>
-        <Controller
-          control={control}
-          name="radio"
-          render={({ field: { onChange, ...props } }) => (
-            /** @see https://github.com/orgs/react-hook-form/discussions/10246 */
-            <RadioGroup {...props} onValueChange={onChange}>
-              {groupItems.map((d) => (
-                <RadioGroupItem key={d.value} {...d}>
-                  {d.label}
-                </RadioGroupItem>
-              ))}
-            </RadioGroup>
-          )}
-        />
-        <FormErrorMessage>{errors.radio?.message}</FormErrorMessage>
-      </FormField>
-    </Form>
-  )
-}
-
-const RadioGroupUncontrolledRender: React.FC = () => {
-  return (
-    <RadioGroup>
-      {groupItems.map((d) => (
-        <RadioGroupItem key={d.value} {...d}>
-          {d.label}
-        </RadioGroupItem>
-      ))}
-    </RadioGroup>
-  )
-}
-
-export const RadioGroupStatusList: Story = {
-  args: {},
-  render: () => <RadioGroupStatusListRender />,
-}
-
-export const RadioGroupControlled: Story = {
-  args: {},
-  render: () => <RadioGroupControlledRender />,
-}
-
-export const RadioGroupUncontrolled = {
-  args: {},
-  render: () => <RadioGroupUncontrolledRender />,
+export const Default: Story = {
+  render: () => <Render />,
 }

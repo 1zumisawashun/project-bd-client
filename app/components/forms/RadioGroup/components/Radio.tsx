@@ -1,24 +1,24 @@
-import { Checkbox as RowCheckbox } from '@base-ui/react/checkbox'
+import { Radio as RowRadio } from '@base-ui/react/radio'
 import { CheckIcon } from '@radix-ui/react-icons'
 import clsx from 'clsx'
 import { ComponentProps, forwardRef } from 'react'
 import styles from '../index.module.css'
 
-const BLOCK_NAME = 'checkbox'
+const BLOCK_NAME = 'radio'
 
-type CheckboxRootProps = ComponentProps<typeof RowCheckbox.Root>
+type RadioProps = ComponentProps<typeof RowRadio.Root>
 
 type CustomProps = { error?: boolean }
 
-type Props = CheckboxRootProps & CustomProps
+type Props = RadioProps & CustomProps
 
 type Ref = HTMLElement
 
-export const Checkbox = forwardRef<Ref, Props>(
+export const Radio = forwardRef<Ref, Props>(
   ({ className, children, error, ...props }, ref) => {
     return (
       <label className={styles[`${BLOCK_NAME}-label`]}>
-        <RowCheckbox.Root
+        <RowRadio.Root
           {...props}
           // native props
           className={clsx(styles[`${BLOCK_NAME}`], className)}
@@ -26,14 +26,14 @@ export const Checkbox = forwardRef<Ref, Props>(
           // custom props
           data-error={error}
         >
-          <RowCheckbox.Indicator>
+          <RowRadio.Indicator>
             <CheckIcon />
-          </RowCheckbox.Indicator>
-        </RowCheckbox.Root>
+          </RowRadio.Indicator>
+        </RowRadio.Root>
         <span className={styles[`${BLOCK_NAME}-text`]}>{children}</span>
       </label>
     )
   },
 )
 
-Checkbox.displayName = 'Checkbox'
+Radio.displayName = 'Radio'

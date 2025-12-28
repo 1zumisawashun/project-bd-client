@@ -1,11 +1,11 @@
 .radio-group {
   composes: toggle-group from '@/assets/base-toggle.module.css';
 }
-.radio-group-item-label {
+.radio-label {
   composes: toggle-label from '@/assets/base-toggle.module.css';
 }
 
-.radio-group-item {
+.radio {
   composes: toggle from '@/assets/base-toggle.module.css';
   background-color: var(--indigo-1);
   display: inline-flex;
@@ -17,6 +17,6 @@
   border-radius: 100%;
 }
 
-.radio-group-item-text {
+.radio-text {
   composes: toggle-text from '@/assets/base-toggle.module.css';
 }

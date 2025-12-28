@@ -18,7 +18,9 @@ const meta: Meta<typeof Checkbox> = {
   title: 'form/Checkbox',
   component: Checkbox,
 }
+
 export default meta
+
 type Story = StoryObj<typeof Checkbox>
 
 const State: FC = () => {

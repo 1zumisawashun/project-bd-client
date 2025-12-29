@@ -1,5 +1,0 @@
-export * from './components/DropdownMenu'
-export * from './components/DropdownMenuItem'
-export * from './components/DropdownMenuTrigger'
-export * from './components/DropdownMenuContent'
-export * from './components/DropdownMenuSeparator'

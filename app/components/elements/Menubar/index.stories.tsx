@@ -1,14 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Button } from '@/components/buttons/Button'
 import { FC } from 'react'
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarTrigger,
-} from './index'
+import { Menu, MenuItem, MenuList, MenuSeparator, MenuTrigger } from '../Menu'
+import { Menubar } from './index'
 
 const meta: Meta<typeof Menubar> = {
   title: 'element/Menubar',
@@ -22,29 +17,31 @@ type Story = StoryObj<typeof Menubar>
 const Render: FC = () => {
   return (
     <Menubar>
-      <MenubarMenu>
-        <MenubarTrigger>File</MenubarTrigger>
-
-        <MenubarContent align="start" sideOffset={5} alignOffset={-3}>
-          <MenubarItem>New Tab</MenubarItem>
-          <MenubarItem>New Window</MenubarItem>
-          <MenubarItem disabled>New Incognito Window</MenubarItem>
-          <MenubarSeparator />
-          <MenubarItem>Print…</MenubarItem>
-        </MenubarContent>
-      </MenubarMenu>
-
-      <MenubarMenu>
-        <MenubarTrigger>Edit</MenubarTrigger>
-        <MenubarContent align="start" sideOffset={5} alignOffset={-3}>
-          <MenubarItem>Undo</MenubarItem>
-          <MenubarItem>Redo</MenubarItem>
-          <MenubarSeparator />
-          <MenubarItem>Cut</MenubarItem>
-          <MenubarItem>Copy</MenubarItem>
-          <MenubarItem>Paste</MenubarItem>
-        </MenubarContent>
-      </MenubarMenu>
+      <Menu>
+        <MenuTrigger>
+          <Button>File</Button>
+        </MenuTrigger>
+        <MenuList>
+          <MenuItem onClick={() => null}>New Tab</MenuItem>
+          <MenuItem onClick={() => null}>New Window</MenuItem>
+          <MenuItem onClick={() => null}>New Incognito Window</MenuItem>
+          <MenuSeparator />
+          <MenuItem onClick={() => null}>Print…</MenuItem>
+        </MenuList>
+      </Menu>
+      <Menu>
+        <MenuTrigger>
+          <Button>Edit</Button>
+        </MenuTrigger>
+        <MenuList>
+          <MenuItem onClick={() => null}>Undo</MenuItem>
+          <MenuItem onClick={() => null}>Redo</MenuItem>
+          <MenuSeparator />
+          <MenuItem onClick={() => null}>Cut</MenuItem>
+          <MenuItem onClick={() => null}>Copy</MenuItem>
+          <MenuItem onClick={() => null}>Paste</MenuItem>
+        </MenuList>
+      </Menu>
     </Menubar>
   )
 }

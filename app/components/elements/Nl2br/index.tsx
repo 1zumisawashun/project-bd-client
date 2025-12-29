@@ -1,9 +1,10 @@
 import { FC } from 'react'
 
-type Props = {
+type Nl2brProps = {
   children: string
 }
-export const Nl2br: FC<Props> = ({ children }) => {
+
+export const Nl2br: FC<Nl2brProps> = ({ children }) => {
   return (
     <>
       {children.split(/(\n)/g).map((t, index) => {

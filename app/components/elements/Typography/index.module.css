@@ -23,93 +23,93 @@
   }
 } */
 
-.typography-title {
+.title {
   font-weight: 600;
   font-size: 1rem;
   color: var(--mauve-12);
 }
 
-.typography-title[data-font-size='1'] {
+.title[data-font-size='1'] {
   font-size: 0.25rem;
 }
 
-.typography-title[data-font-size='2'] {
+.title[data-font-size='2'] {
   font-size: 0.5rem;
 }
 
-.typography-title[data-font-size='3'] {
+.title[data-font-size='3'] {
   font-size: 0.75rem;
 }
 
-.typography-title[data-font-size='4'] {
+.title[data-font-size='4'] {
   font-size: 1rem;
 }
 
-.typography-title[data-font-size='5'] {
+.title[data-font-size='5'] {
   font-size: 1.25rem;
 }
 
-.typography-title[data-font-size='6'] {
+.title[data-font-size='6'] {
   font-size: 1.5rem;
 }
 
-.typography-title[data-font-size='7'] {
+.title[data-font-size='7'] {
   font-size: 1.75rem;
 }
 
-.typography-title[data-font-size='8'] {
+.title[data-font-size='8'] {
   font-size: 2rem;
 }
 
-.typography-title[data-font-size='9'] {
+.title[data-font-size='9'] {
   font-size: 2.25rem;
 }
 
-.typography-title[data-font-size='10'] {
+.title[data-font-size='10'] {
   font-size: 2.5rem;
 }
 
-.typography-description {
+.description {
   font-size: 0.875rem;
   color: var(--mauve-10);
 }
 
-.typography-description[data-font-size='1'] {
+.description[data-font-size='1'] {
   font-size: 0.25rem;
 }
 
-.typography-description[data-font-size='2'] {
+.description[data-font-size='2'] {
   font-size: 0.5rem;
 }
 
-.typography-description[data-font-size='3'] {
+.description[data-font-size='3'] {
   font-size: 0.75rem;
 }
 
-.typography-description[data-font-size='4'] {
+.description[data-font-size='4'] {
   font-size: 1rem;
 }
 
-.typography-description[data-font-size='5'] {
+.description[data-font-size='5'] {
   font-size: 1.25rem;
 }
 
-.typography-description[data-font-size='6'] {
+.description[data-font-size='6'] {
   font-size: 1.5rem;
 }
 
-.typography-description[data-font-size='7'] {
+.description[data-font-size='7'] {
   font-size: 1.75rem;
 }
 
-.typography-description[data-font-size='8'] {
+.description[data-font-size='8'] {
   font-size: 2rem;
 }
 
-.typography-description[data-font-size='9'] {
+.description[data-font-size='9'] {
   font-size: 2.25rem;
 }
 
-.typography-description[data-font-size='10'] {
+.description[data-font-size='10'] {
   font-size: 2.5rem;
 }

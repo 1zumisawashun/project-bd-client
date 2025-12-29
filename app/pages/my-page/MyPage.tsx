@@ -1,9 +1,4 @@
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/elements/Tabs'
+import { Tabs, TabsList, TabsPanel, TabsTab } from '@/components/elements/Tabs'
 import { User } from '@/functions/types'
 import { FC } from 'react'
 import { MyPageArticleCard } from './components/myPageArticleCard/MyPageArticleCard'
@@ -23,23 +18,23 @@ export const MyPage: FC<Props> = ({ user }) => {
   return (
     <Tabs defaultValue="setting">
       <TabsList>
-        <TabsTrigger value="setting">設定</TabsTrigger>
-        <TabsTrigger value="published">公開中</TabsTrigger>
-        <TabsTrigger value="draft">下書き</TabsTrigger>
-        <TabsTrigger value="like">いいね</TabsTrigger>
+        <TabsTab value="setting">設定</TabsTab>
+        <TabsTab value="published">公開中</TabsTab>
+        <TabsTab value="draft">下書き</TabsTab>
+        <TabsTab value="like">いいね</TabsTab>
       </TabsList>
-      <TabsContent value="setting">
+      <TabsPanel value="setting">
         <MyPageSetting user={user} />
-      </TabsContent>
-      <TabsContent value="published">
+      </TabsPanel>
+      <TabsPanel value="published">
         <MyPageArticleCard articles={published} />
-      </TabsContent>
-      <TabsContent value="draft">
+      </TabsPanel>
+      <TabsPanel value="draft">
         <MyPageArticleCard articles={draft} />
-      </TabsContent>
-      <TabsContent value="like">
+      </TabsPanel>
+      <TabsPanel value="like">
         <MyPageArticleCard articles={liked} />
-      </TabsContent>
+      </TabsPanel>
     </Tabs>
   )
 }

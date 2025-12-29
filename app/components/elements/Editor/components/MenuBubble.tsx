@@ -1,23 +1,34 @@
-import { BubbleMenuProps, BubbleMenu as RowBubbleMenu } from '@tiptap/react'
+import { BubbleMenu as RowBubbleMenu } from '@tiptap/react'
 import clsx from 'clsx'
-import { FC } from 'react'
+import { ComponentProps, FC } from 'react'
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menu-bubble'
-type Props = {} & BubbleMenuProps
 
-// NOTE: refが生えていないのでbubble-menuには渡せない
+type BubbleMenuProps = ComponentProps<typeof RowBubbleMenu>
+
+type CustomProps = {}
+
+type Props = BubbleMenuProps & CustomProps
 
 /**
+ * NOTE:
  * @see https://tiptap.dev/api/extensions/bubble-menu
  * 内部的にtippy.jsを使っているっぽい
  * @see https://atomiks.github.io/tippyjs/
  */
-export const MenuBubble: FC<Props> = ({ className, editor, ...props }) => (
+export const MenuBubble: FC<Props> = ({
+  // native props
+  className,
+  // tiptap props
+  editor,
+  // other props
+  ...props
+}) => (
   <RowBubbleMenu
+    {...props}
     editor={editor}
     tippyOptions={{ duration: 100, maxWidth: 600 }}
     className={clsx(styles[`${BLOCK_NAME}`], className)}
-    {...props}
   />
 )

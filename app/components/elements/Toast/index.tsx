@@ -1,2 +1,2 @@
 export { ToastProvider } from './components/ToastProvider'
-export { useToastDispatch } from './hooks/useToastDispatch'
+export { useToast } from './hooks/useToast'

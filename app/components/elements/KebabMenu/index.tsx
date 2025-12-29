@@ -1,27 +1,25 @@
 import { IconButton } from '@/components/buttons/IconButton'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from '@/components/elements/DropdownMenu'
 import { DotsVerticalIcon } from '@radix-ui/react-icons'
 import { FC } from 'react'
+import { Menu, MenuList, MenuTrigger } from '../Menu'
 
-type Props = {
+type KebabMenuProps = {
   render: FC
 }
-export const KebabMenu: FC<Props> = (props) => {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <IconButton variant="outlined">
-          <DotsVerticalIcon />
-        </IconButton>
-      </DropdownMenuTrigger>
 
-      <DropdownMenuContent>
+export const KebabMenu: FC<KebabMenuProps> = (props) => {
+  return (
+    <Menu>
+      <MenuTrigger
+        render={
+          <IconButton variant="outlined">
+            <DotsVerticalIcon />
+          </IconButton>
+        }
+      />
+      <MenuList>
         <props.render />
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </MenuList>
+    </Menu>
   )
 }

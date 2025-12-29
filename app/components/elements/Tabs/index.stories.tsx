@@ -1,26 +1,28 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { FC } from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './index'
+import { Tabs, TabsTab, TabsList, TabsPanel } from './index'
 
 const meta: Meta<typeof Tabs> = {
   title: 'element/Tabs',
   component: Tabs,
 }
+
 export default meta
+
 type Story = StoryObj<typeof Tabs>
 
 const Render: FC = () => {
   return (
     <Tabs defaultValue="tab1" orientation="vertical">
       <TabsList>
-        <TabsTrigger value="tab1">Tab1</TabsTrigger>
-        <TabsTrigger value="tab2">Tab2</TabsTrigger>
-        <TabsTrigger value="tab3">Tab3</TabsTrigger>
+        <TabsTab value="tab1">Tab1</TabsTab>
+        <TabsTab value="tab2">Tab2</TabsTab>
+        <TabsTab value="tab3">Tab3</TabsTab>
       </TabsList>
-      <TabsContent value="tab1">Content1</TabsContent>
-      <TabsContent value="tab2">Content2</TabsContent>
-      <TabsContent value="tab3">Content3</TabsContent>
+      <TabsPanel value="tab1">Content1</TabsPanel>
+      <TabsPanel value="tab2">Content2</TabsPanel>
+      <TabsPanel value="tab3">Content3</TabsPanel>
     </Tabs>
   )
 }

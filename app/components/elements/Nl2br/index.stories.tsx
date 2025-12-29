@@ -16,6 +16,7 @@ type Story = StoryObj<typeof Nl2br>
 const Render: FC = () => {
   return <Nl2br>{faq}</Nl2br>
 }
+
 export const Default: Story = {
   render: () => <Render />,
 }

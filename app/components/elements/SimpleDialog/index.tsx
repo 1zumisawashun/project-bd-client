@@ -11,13 +11,14 @@ import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { FC } from 'react'
 
-type Props = {
+type SimpleDialogProps = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']
   close: ReturnType<typeof useDisclosure>['close']
   title: string
   description?: string
 }
-export const SimpleDialog: FC<Props> = ({
+
+export const SimpleDialog: FC<SimpleDialogProps> = ({
   isOpen,
   close,
   title,

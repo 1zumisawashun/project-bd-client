@@ -1,26 +1,25 @@
 import { IconButton } from '@/components/buttons/IconButton'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from '@/components/elements/DropdownMenu'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { FC } from 'react'
+import { Menu, MenuList, MenuTrigger } from '../Menu'
 
-type Props = {
+type HamburgerMenuProps = {
   render: FC
 }
-export const HamburgerMenu: FC<Props> = (props) => {
+
+export const HamburgerMenu: FC<HamburgerMenuProps> = (props) => {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <IconButton variant="outlined">
-          <HamburgerMenuIcon />
-        </IconButton>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
+    <Menu>
+      <MenuTrigger
+        render={
+          <IconButton variant="outlined">
+            <HamburgerMenuIcon />
+          </IconButton>
+        }
+      />
+      <MenuList>
         <props.render />
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </MenuList>
+    </Menu>
   )
 }

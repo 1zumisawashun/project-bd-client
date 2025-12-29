@@ -1,4 +1,4 @@
-import { Menu, MenuContent, MenuItem } from '@/components/elements/Menu'
+import { Menu, MenuContent, MenuItem } from '@/components/archive/Menu'
 import { useMergeRef } from '@/functions/hooks/useMergeRef'
 import {
   ChangeEvent,

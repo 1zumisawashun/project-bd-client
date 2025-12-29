@@ -8,6 +8,7 @@ const meta: Meta<typeof Status> = {
   title: 'element/Status',
   component: Status,
 }
+
 export default meta
 
 type Story = StoryObj<typeof Status>

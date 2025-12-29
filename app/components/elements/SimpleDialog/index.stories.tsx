@@ -10,7 +10,9 @@ const meta: Meta<typeof SimpleDialog> = {
   title: 'element/SimpleDialog',
   component: SimpleDialog,
 }
+
 export default meta
+
 type Story = StoryObj<typeof SimpleDialog>
 
 const Render: FC = () => {
@@ -29,7 +31,6 @@ const Render: FC = () => {
 }
 
 export const Default: Story = {
-  args: {},
   render: () => <Render />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)

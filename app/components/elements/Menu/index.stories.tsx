@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { userEvent, within } from '@storybook/test'
 import { FC } from 'react'
-import { Menu, MenuContent, MenuItem, MenuTrigger } from './index'
+import { Button } from '../../buttons/Button'
+import { Menu, MenuItem, MenuList, MenuTrigger } from './index'
 
 const meta: Meta<typeof Menu> = {
   title: 'element/Menu',
@@ -16,18 +15,15 @@ export default meta
 type Story = StoryObj<typeof Menu>
 
 const Render: FC = () => {
-  const { isOpen, open, close } = useDisclosure()
   return (
-    <Menu isOpen={isOpen} open={open} close={close}>
-      <MenuTrigger>
-        <HamburgerMenuIcon aria-label="hamburger-menu" />
-      </MenuTrigger>
-
-      <MenuContent>
+    <Menu>
+      {/* compositionではなく、as-childみたいな挙動になる */}
+      <MenuTrigger render={<Button>Open Menu</Button>} />
+      <MenuList>
         <MenuItem onClick={() => null}>New Tab</MenuItem>
         <MenuItem onClick={() => null}>New Window</MenuItem>
         <MenuItem onClick={() => null}>New Private Window</MenuItem>
-      </MenuContent>
+      </MenuList>
     </Menu>
   )
 }
@@ -37,6 +33,6 @@ export const Default: Story = {
   render: () => <Render />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByLabelText('hamburger-menu'))
+    await userEvent.click(canvas.getByRole('button', { name: 'Open Menu' }))
   },
 }

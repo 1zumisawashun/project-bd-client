@@ -1,35 +1,12 @@
-'use client'
+import { Menu as RowMenu } from '@base-ui/react/menu'
+import { ComponentProps, FC } from 'react'
 
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import {
-  ComponentPropsWithoutRef,
-  createContext,
-  ElementRef,
-  forwardRef,
-} from 'react'
-import styles from '../index.module.css'
+type MenuProps = ComponentProps<typeof RowMenu.Root>
 
-const BLOCK_NAME = 'menu'
-type MenuContextParams = Omit<
-  ReturnType<typeof useDisclosure>,
-  'setIsOpen' | 'toggle'
->
-export const MenuContext = createContext<MenuContextParams | undefined>(
-  undefined,
-)
+type CustomProps = {}
 
-const MenuProvider = MenuContext.Provider
-type Props = MenuContextParams & ComponentPropsWithoutRef<'div'>
-type Ref = ElementRef<'div'>
+type Props = MenuProps & CustomProps
 
-export const Menu = forwardRef<Ref, Props>(
-  ({ isOpen, open, close, ...rest }, ref) => {
-    return (
-      <MenuProvider value={{ isOpen, open, close }}>
-        <div className={styles[`${BLOCK_NAME}`]} {...rest} ref={ref} />
-      </MenuProvider>
-    )
-  },
-)
-
-Menu.displayName = 'Menu'
+export const Menu: FC<Props> = (props) => {
+  return <RowMenu.Root {...props} />
+}

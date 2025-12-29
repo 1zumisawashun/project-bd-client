@@ -24,7 +24,7 @@ const options = [
 ]
 
 const meta = {
-  title: 'form/AutocompleteInput',
+  title: 'archive/AutocompleteInput',
   component: AutocompleteInputControl,
 } satisfies Meta<typeof AutocompleteInputControl>
 

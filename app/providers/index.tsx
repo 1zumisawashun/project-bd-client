@@ -1,4 +1,4 @@
-import { ToastProvider } from '@/components/elements/Toast'
+import { ToastProvider } from '@/components/archive/Toast'
 import { SessionProvider } from 'next-auth/react'
 import { PropsWithChildren } from 'react'
 

@@ -1,7 +1,7 @@
 'use client'
 
+import { useToastDispatch } from '@/components/archive/Toast'
 import { IconButton } from '@/components/buttons/IconButton'
-import { useToastDispatch } from '@/components/elements/Toast'
 import { HeartFilledIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
 import { FC, startTransition } from 'react'

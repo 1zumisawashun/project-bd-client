@@ -21,7 +21,7 @@ type Ref = ElementRef<'div'>
 export const Card = forwardRef<Ref, Props>(
   (
     {
-      //native props
+      // native props
       className,
       // custom props
       theme = 'transparent',

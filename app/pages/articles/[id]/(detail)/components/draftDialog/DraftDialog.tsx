@@ -1,12 +1,12 @@
 'use client'
 
+import { useToastDispatch } from '@/components/archive/Toast'
 import { Button } from '@/components/buttons/Button'
 import {
   Dialog,
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
-import { useToastDispatch } from '@/components/elements/Toast'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'

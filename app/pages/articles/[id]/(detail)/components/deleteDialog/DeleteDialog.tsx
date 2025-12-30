@@ -1,12 +1,12 @@
 'use client'
 
-import { useToastDispatch } from '@/components/archive/Toast'
 import { Button } from '@/components/buttons/Button'
 import {
   Dialog,
   DialogDescription,
   DialogTitle,
 } from '@/components/elements/Dialog'
+import { useToast } from '@/components/elements/Toast'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
@@ -20,7 +20,7 @@ type Props = {
   articleId: string
 }
 export const DeleteDialog: FC<Props> = ({ isOpen, onClose, articleId }) => {
-  const openToast = useToastDispatch()
+  const toast = useToast()
   const router = useRouter()
 
   const handleDelete = () => {
@@ -28,15 +28,13 @@ export const DeleteDialog: FC<Props> = ({ isOpen, onClose, articleId }) => {
       const response = await deleteArticle({ id: articleId })
 
       if (!response?.isSuccess) {
-        openToast({
-          theme: 'danger',
+        toast.add({
           title: 'エラーが発生しました',
           description: response.error.message ?? 'エラーが発生しました',
         })
         return
       }
-      openToast({
-        theme: 'success',
+      toast.add({
         title: '成功しました',
         description: response.message ?? '成功しました',
       })

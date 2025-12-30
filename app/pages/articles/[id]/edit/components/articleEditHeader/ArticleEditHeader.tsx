@@ -1,8 +1,8 @@
 'use client'
 
-import { useToastDispatch } from '@/components/archive/Toast'
 import { Button } from '@/components/buttons/Button'
 import { IconAnchorButton } from '@/components/buttons/IconAnchorButton'
+import { useToast } from '@/components/elements/Toast'
 import { HStack } from '@/components/layouts/HStack'
 import { ChevronLeftIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
@@ -22,7 +22,7 @@ type Props = {
 }
 export const ArticleEditHeader: FC<Props> = ({ articleId }) => {
   const router = useRouter()
-  const openToast = useToastDispatch()
+  const toast = useToast()
   const {
     handleSubmit,
     setValue,
@@ -34,15 +34,13 @@ export const ArticleEditHeader: FC<Props> = ({ articleId }) => {
       const response = await editArticle({ data, id: articleId })
 
       if (!response?.isSuccess) {
-        openToast({
-          theme: 'danger',
+        toast.add({
           title: 'エラーが発生しました',
           description: response?.error?.message ?? 'エラーが発生しました',
         })
         return
       }
-      openToast({
-        theme: 'success',
+      toast.add({
         title: '成功しました',
         description: response.message ?? '成功しました',
       })
@@ -53,8 +51,7 @@ export const ArticleEditHeader: FC<Props> = ({ articleId }) => {
   }
 
   const onError: SubmitErrorHandler<Schema> = (error) => {
-    openToast({
-      theme: 'danger',
+    toast.add({
       title: 'エラーが発生しました',
       description: JSON.stringify(error, null, 2),
     })

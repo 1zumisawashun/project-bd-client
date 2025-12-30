@@ -1,8 +1,8 @@
 'use client'
 
-import { useToastDispatch } from '@/components/archive/Toast'
 import { Button } from '@/components/buttons/Button'
 import { Card, CardBody } from '@/components/elements/Card'
+import { useToast } from '@/components/elements/Toast'
 import { Description, Title } from '@/components/elements/Typography'
 import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
 import { TextInput } from '@/components/forms/TextInput'
@@ -41,7 +41,7 @@ const EmailEditForm: FC<{ email: string; close: () => void }> = ({
   close,
 }) => {
   const router = useRouter()
-  const openToast = useToastDispatch()
+  const toast = useToast()
 
   const { control, handleSubmit } = useForm<EmailSchema>({
     mode: 'onTouched',
@@ -56,15 +56,13 @@ const EmailEditForm: FC<{ email: string; close: () => void }> = ({
       const response = await updateEmail({ data })
 
       if (!response?.isSuccess) {
-        openToast({
-          theme: 'danger',
+        toast.add({
           title: 'エラーが発生しました',
           description: response.error.message ?? 'エラーが発生しました',
         })
         return
       }
-      openToast({
-        theme: 'success',
+      toast.add({
         title: '成功しました',
         description: response.message ?? '成功しました',
       })
@@ -75,8 +73,7 @@ const EmailEditForm: FC<{ email: string; close: () => void }> = ({
   }
 
   const onError: SubmitErrorHandler<EmailSchema> = (error) => {
-    openToast({
-      theme: 'danger',
+    toast.add({
       title: 'エラーが発生しました',
       description: JSON.stringify(error, null, 2),
     })

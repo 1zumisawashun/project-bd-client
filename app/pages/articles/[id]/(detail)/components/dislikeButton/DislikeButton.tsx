@@ -1,7 +1,7 @@
 'use client'
 
-import { useToastDispatch } from '@/components/archive/Toast'
 import { IconButton } from '@/components/buttons/IconButton'
+import { useToast } from '@/components/elements/Toast'
 import { HeartIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
 import { FC, startTransition } from 'react'
@@ -15,15 +15,14 @@ type Props = {
 }
 export const DislikeButton: FC<Props> = ({ articleId, userId }) => {
   const router = useRouter()
-  const openToast = useToastDispatch()
+  const toast = useToast()
 
   const handleLike = () => {
     startTransition(async () => {
       const response = await likeArticle({ articleId, userId })
 
       if (!response?.isSuccess) {
-        openToast({
-          theme: 'danger',
+        toast.add({
           title: 'エラーが発生しました',
           description: response.error.message ?? 'エラーが発生しました',
         })

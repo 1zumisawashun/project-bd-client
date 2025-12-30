@@ -1,6 +1,5 @@
 'use client'
 
-import { useToastDispatch } from '@/components/archive/Toast'
 import { Button } from '@/components/buttons/Button'
 import { IconAnchorButton } from '@/components/buttons/IconAnchorButton'
 import { HStack } from '@/components/layouts/HStack'
@@ -14,6 +13,7 @@ import {
 } from 'react-hook-form'
 import { Schema } from '../../../shared/articleForm/articleForm.schema'
 
+import { useToast } from '@/components/elements/Toast'
 import { createArticle } from './articleCreateHeader.action'
 import styles from './articleCreateHeader.module.css'
 
@@ -21,7 +21,7 @@ const BLOCK_NAME = 'articleCreateHeader'
 
 export const ArticleCreateHeader: FC = () => {
   const router = useRouter()
-  const openToast = useToastDispatch()
+  const toast = useToast()
   const {
     handleSubmit,
     setValue,
@@ -33,15 +33,13 @@ export const ArticleCreateHeader: FC = () => {
       const response = await createArticle({ data })
 
       if (!response?.isSuccess) {
-        openToast({
-          theme: 'danger',
+        toast.add({
           title: 'エラーが発生しました',
           description: response?.error?.message ?? 'エラーが発生しました',
         })
         return
       }
-      openToast({
-        theme: 'success',
+      toast.add({
         title: '成功しました',
         description: response.message ?? '成功しました',
       })
@@ -52,8 +50,7 @@ export const ArticleCreateHeader: FC = () => {
   }
 
   const onError: SubmitErrorHandler<Schema> = (error) => {
-    openToast({
-      theme: 'danger',
+    toast.add({
       title: 'エラーが発生しました',
       description: JSON.stringify(error, null, 2),
     })

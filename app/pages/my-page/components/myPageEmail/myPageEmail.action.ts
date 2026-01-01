@@ -30,15 +30,22 @@ export const updateEmail = async ({
     })
 
     if (existingUser) {
-      actionResult.end('このメールアドレスは既に登録されています')
+      return actionResult.end('このメールアドレスは既に登録されています')
     }
 
     const response = await updateUser({
       id: session.user.id,
       data: validatedFields.data,
     })
+
+    if (!response) {
+      throw new Error('Failed to update user')
+    }
+
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
   }
 }
+
+// Contains AI-generated edits.

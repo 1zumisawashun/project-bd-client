@@ -1,13 +1,13 @@
 'use server'
 
-import { updateArticle } from '@/functions/db/article'
+import { dislikeArticle as _dislikeArticle } from '@/functions/db/article'
 import { actionResult } from '@/functions/helpers/utils'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { ActionsResult, Article } from '@/functions/types'
 
 type Return = ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
 
-export const likeArticle = async ({
+export const dislikeArticle = async ({
   articleId,
   userId,
 }: {
@@ -21,10 +21,14 @@ export const likeArticle = async ({
       return actionResult.end('ログインしてください')
     }
 
-    const params = { likedUsers: { connect: { id: userId } } }
-    const response = await updateArticle({ id: articleId, data: params })
+    const response = await _dislikeArticle({ articleId, userId })
+    if (!response) {
+      throw new Error('Failed to dislike article')
+    }
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
   }
 }
+
+// Contains AI-generated edits.

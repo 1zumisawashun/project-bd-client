@@ -31,8 +31,14 @@ export const updateProfile = async ({
       data: validatedFields.data,
     })
 
+    if (!response) {
+      throw new Error('Failed to update user')
+    }
+
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
   }
 }
+
+// Contains AI-generated edits.

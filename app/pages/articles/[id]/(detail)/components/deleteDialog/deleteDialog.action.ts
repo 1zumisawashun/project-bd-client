@@ -16,12 +16,17 @@ export const deleteArticle = async ({
     const session = await auth()
 
     if (!session?.user.id) {
-      actionResult.end('ログインしてください')
+      return actionResult.end('ログインしてください')
     }
 
     const response = await _deleteArticle({ id })
+    if (!response) {
+      throw new Error('Failed to delete article')
+    }
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
   }
 }
+
+// Contains AI-generated edits.

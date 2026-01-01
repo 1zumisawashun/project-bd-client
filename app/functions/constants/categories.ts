@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { NewCategory } from '@/functions/libs/drizzle-client/schema'
 import { Categories } from '@/functions/types'
 
 export const mockCategories = [
@@ -64,5 +64,9 @@ export const mockCategories = [
   },
 ] satisfies Categories
 
-export const prismaCategories: Prisma.CategoryCreateInput[] =
-  mockCategories.map((d) => ({ id: d.id, name: d.name }))
+export const drizzleCategories: NewCategory[] = mockCategories.map((d) => ({
+  id: d.id,
+  name: d.name,
+}))
+
+// Contains AI-generated edits.

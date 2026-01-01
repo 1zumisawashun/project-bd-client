@@ -1,5 +1,5 @@
 import { User } from '@/functions/types'
-import { NewUser } from '@/functions/libs/drizzle-client/schema'
+import { NewUser } from '@/../drizzle/schema'
 import { mockArticles } from './articles'
 
 const id = 'cm07vrx4y00002vwkx0koma0j'

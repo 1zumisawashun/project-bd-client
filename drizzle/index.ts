@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { drizzle } from 'drizzle-orm/pglite'
 import { PGlite } from '@electric-sql/pglite'
 import * as schema from './schema'

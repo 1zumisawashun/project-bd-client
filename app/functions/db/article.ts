@@ -1,11 +1,11 @@
-import db from '@/functions/libs/drizzle-client/db'
+import db from '@/../drizzle'
 import {
   articles,
   users,
   categories,
   articlesToCategories,
   usersToLikedArticles,
-} from '@/functions/libs/drizzle-client/schema'
+} from '@/../drizzle/schema'
 import { eq, inArray, and } from 'drizzle-orm'
 
 export const getArticles = async ({ categories: categoryNames }: { categories: string[] }) => {

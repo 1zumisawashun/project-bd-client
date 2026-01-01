@@ -2,8 +2,8 @@
 
 import { actionResult } from '@/functions/helpers/utils'
 import { getUserByEmail } from '@/functions/db/user'
-import db from '@/functions/libs/drizzle-client/db'
-import { users, User } from '@/functions/libs/drizzle-client/schema'
+import db from '@/../drizzle'
+import { users, User } from '@/../drizzle/schema'
 import { hashPassword } from '@/functions/helpers/hash'
 import { ActionsResult } from '@/functions/types'
 import { Schema, schema } from './signUp.schema'

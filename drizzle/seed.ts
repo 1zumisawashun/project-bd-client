@@ -1,5 +1,5 @@
-import db from '@/functions/libs/drizzle-client/db'
-import { users, categories, articles } from '@/functions/libs/drizzle-client/schema'
+import db from './index'
+import { users, categories, articles } from './schema'
 import { drizzleCategories } from '@/functions/constants/categories'
 import { drizzleUsers } from '@/functions/constants/users'
 import { drizzleArticles } from '@/functions/constants/articles'

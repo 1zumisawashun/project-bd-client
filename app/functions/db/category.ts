@@ -1,5 +1,5 @@
-import db from '@/functions/libs/drizzle-client/db'
-import { categories } from '@/functions/libs/drizzle-client/schema'
+import db from '@/../drizzle'
+import { categories } from '@/../drizzle/schema'
 import { eq } from 'drizzle-orm'
 import { createId } from '@paralleldrive/cuid2'
 

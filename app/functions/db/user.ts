@@ -1,5 +1,5 @@
-import db from '@/functions/libs/drizzle-client/db'
-import { users, articles, usersToLikedArticles } from '@/functions/libs/drizzle-client/schema'
+import db from '@/../drizzle'
+import { users, articles, usersToLikedArticles } from '@/../drizzle/schema'
 import { eq } from 'drizzle-orm'
 
 export const getUserByEmail = async ({ email }: { email: string }) => {

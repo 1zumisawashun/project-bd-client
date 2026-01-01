@@ -1,4 +1,4 @@
-import { NewCategory } from '@/functions/libs/drizzle-client/schema'
+import { NewCategory } from '@/../drizzle/schema'
 import { Categories } from '@/functions/types'
 
 export const mockCategories = [

@@ -1,4 +1,4 @@
-import { NewArticle } from '@/functions/libs/drizzle-client/schema'
+import { NewArticle } from '@/../drizzle/schema'
 import { Articles, Article } from '@/functions/types'
 import { content } from './content'
 import { mockCategories } from './categories'

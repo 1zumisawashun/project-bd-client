@@ -1,14 +1,14 @@
 import 'dotenv/config'
-import { defineConfig } from 'drizzle-kit'
+import { defineConfig, type Config } from 'drizzle-kit'
 
 export default defineConfig({
-  schema: './drizzle/schema.ts',
   out: './drizzle/migrations',
+  schema: './drizzle/schema.ts',
   dialect: 'postgresql',
   driver: 'pglite',
   dbCredentials: {
     url: process.env['DATABASE_URL'] ?? './data/pglite',
   },
-})
+}) satisfies Config
 
 // Contains AI-generated edits.

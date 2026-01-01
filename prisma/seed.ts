@@ -7,7 +7,6 @@ import {
 import { prismaCategories } from '@/functions/constants/categories'
 import { prismaUsers } from '@/functions/constants/users'
 import { prismaArticles } from '@/functions/constants/articles'
-import { sql } from 'drizzle-orm'
 
 async function main() {
   // delete all

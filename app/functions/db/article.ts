@@ -90,7 +90,15 @@ export const getArticleById = async ({ id }: { id: string }) => {
         },
       },
     })
-    return article ?? null
+
+    if (!article) return null
+
+    // Transform the data to match the expected structure
+    return {
+      ...article,
+      categories: article.categories?.map((cat) => cat.category) || [],
+      likedUsers: article.likedUsers?.map((liked) => liked.user) || [],
+    }
   } catch {
     return null
   }
@@ -175,5 +183,52 @@ export const updateArticle = async ({
     throw new Error('Failed to update article')
   }
 }
+
+export const likeArticle = async ({
+  articleId,
+  userId,
+}: {
+  articleId: string
+  userId: string
+}) => {
+  try {
+    await db.insert(likedUsersToArticles).values({ articleId, userId })
+    const [article] = await db
+      .select()
+      .from(articles)
+      .where(eq(articles.id, articleId))
+    return article
+  } catch {
+    throw new Error('Failed to like article')
+  }
+}
+
+export const dislikeArticle = async ({
+  articleId,
+  userId,
+}: {
+  articleId: string
+  userId: string
+}) => {
+  try {
+    await db
+      .delete(likedUsersToArticles)
+      .where(
+        and(
+          eq(likedUsersToArticles.articleId, articleId),
+          eq(likedUsersToArticles.userId, userId),
+        ),
+      )
+    const [article] = await db
+      .select()
+      .from(articles)
+      .where(eq(articles.id, articleId))
+    return article
+  } catch {
+    throw new Error('Failed to dislike article')
+  }
+}
+
+// Contains AI-generated edits.
 
 // Contains AI-generated edits.

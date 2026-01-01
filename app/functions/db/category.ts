@@ -26,6 +26,7 @@ export const createCategory = async ({ name }: { name: string }) => {
       .insert(categories)
       .values({ name })
       .returning()
+    if (!category) throw new Error('Failed to create category')
     return category
   } catch {
     throw new Error('Failed to create category')

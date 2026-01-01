@@ -16,6 +16,7 @@ export const getUserByEmail = async ({ email }: { email: string }) => {
     return null
   }
 }
+
 export const getUserById = async ({ id }: { id: string }) => {
   try {
     const user = await db.query.users.findFirst({
@@ -45,11 +46,23 @@ export const getUserById = async ({ id }: { id: string }) => {
         },
       },
     })
-    return user ?? null
+
+    if (!user) return null
+
+    // Transform the data to match the expected structure
+    return {
+      ...user,
+      posts: user.posts || [],
+      likedArticles:
+        user.likedArticles?.map((liked) => ({
+          ...liked.article,
+        })) || [],
+    }
   } catch {
     return null
   }
 }
+
 export const updateUser = async ({
   id,
   data,
@@ -68,5 +81,7 @@ export const updateUser = async ({
     throw new Error('Failed to update user')
   }
 }
+
+// Contains AI-generated edits.
 
 // Contains AI-generated edits.

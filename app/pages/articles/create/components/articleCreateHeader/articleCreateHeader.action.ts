@@ -6,6 +6,7 @@ import { actionResult } from '@/functions/helpers/utils'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { ActionsResult, Article } from '@/functions/types'
 import { Schema, schema } from '../../../shared/articleForm/articleForm.schema'
+import { createId } from '@paralleldrive/cuid2'
 
 type Return = ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
 
@@ -37,14 +38,22 @@ export const createArticle = async ({ data }: Props): Promise<Return> => {
     const categoryIds = await Promise.all(promises)
 
     const params = {
-      ...data,
-      author: { connect: { id: session.user.id } },
+      id: createId(),
+      title: data.title,
+      content: data.content,
+      status: data.status,
+      authorId: session.user.id,
       categories: { connect: categoryIds },
     }
 
     const response = await _createArticle({ data: params })
+    if (!response) {
+      throw new Error('Failed to create article')
+    }
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
   }
 }
+
+// Contains AI-generated edits.

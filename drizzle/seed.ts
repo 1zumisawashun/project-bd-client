@@ -3,6 +3,7 @@ import { users, categories, articles } from '@/functions/libs/drizzle-client/sch
 import { drizzleCategories } from '@/functions/constants/categories'
 import { drizzleUsers } from '@/functions/constants/users'
 import { drizzleArticles } from '@/functions/constants/articles'
+import { createId } from '@paralleldrive/cuid2'
 
 async function main() {
   console.log('Starting seed...')
@@ -22,11 +23,15 @@ async function main() {
   // Seed users
   for (const user of drizzleUsers) {
     const [createdUser] = await db.insert(users).values(user).returning()
+    if (!createdUser) {
+      throw new Error('Failed to create user')
+    }
     console.log(`Created user: ${createdUser.email}`)
 
     // Seed articles for this user
     for (const article of drizzleArticles) {
       await db.insert(articles).values({
+        id: createId(),
         ...article,
         authorId: createdUser.id,
       })

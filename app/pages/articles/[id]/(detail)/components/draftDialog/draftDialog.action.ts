@@ -17,8 +17,13 @@ export const draftArticle = async ({ id }: { id: string }): Promise<Return> => {
 
     const params = { status: 'DRAFT' }
     const response = await updateArticle({ id, data: params })
+    if (!response) {
+      throw new Error('Failed to draft article')
+    }
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
   }
 }
+
+// Contains AI-generated edits.

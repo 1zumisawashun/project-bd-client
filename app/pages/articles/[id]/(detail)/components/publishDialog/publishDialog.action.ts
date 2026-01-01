@@ -21,8 +21,13 @@ export const publishArticle = async ({
 
     const params = { status: 'PUBLISHED' }
     const response = await updateArticle({ id, data: params })
+    if (!response) {
+      throw new Error('Failed to publish article')
+    }
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)
   }
 }
+
+// Contains AI-generated edits.

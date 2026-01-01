@@ -6,7 +6,7 @@ import {
   articlesToCategories,
   usersToLikedArticles,
 } from '@/functions/libs/drizzle-client/schema'
-import { eq, inArray, and } from 'drizzle-orm'
+import { eq, inArray } from 'drizzle-orm'
 
 export const getArticles = async ({ categories: categoryNames }: { categories: string[] }) => {
   try {
@@ -148,6 +148,10 @@ export const updateArticle = async ({
       .where(eq(articles.id, id))
       .returning()
 
+    if (!article) {
+      throw new Error('Article not found')
+    }
+
     // Update categories if provided
     if (categoryData?.connect) {
       // Delete existing categories
@@ -167,6 +171,56 @@ export const updateArticle = async ({
     return article
   } catch {
     throw new Error('Failed to update article')
+  }
+}
+
+export const likeArticle = async ({
+  articleId,
+  userId,
+}: {
+  articleId: string
+  userId: string
+}) => {
+  try {
+    await db
+      .insert(usersToLikedArticles)
+      .values({ articleId, userId })
+      .onConflictDoNothing()
+
+    const [article] = await db
+      .select()
+      .from(articles)
+      .where(eq(articles.id, articleId))
+
+    return article
+  } catch {
+    throw new Error('Failed to like article')
+  }
+}
+
+export const dislikeArticle = async ({
+  articleId,
+  userId,
+}: {
+  articleId: string
+  userId: string
+}) => {
+  try {
+    await db
+      .delete(usersToLikedArticles)
+      .where(
+        eq(usersToLikedArticles.articleId, articleId) &&
+          eq(usersToLikedArticles.userId, userId),
+      )
+
+    const [article] = await db
+      .select()
+      .from(articles)
+      .where(eq(articles.id, articleId))
+
+    return article
+  } catch {
+    throw new Error('Failed to dislike article')
   }
 }
 

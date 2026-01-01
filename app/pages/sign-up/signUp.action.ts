@@ -38,6 +38,10 @@ export const signUp = async ({ data }: Props): Promise<Return> => {
       })
       .returning()
 
+    if (!response) {
+      throw new Error('Failed to create user')
+    }
+
     return actionResult.success(response)
   } catch (error) {
     return actionResult.error(error)

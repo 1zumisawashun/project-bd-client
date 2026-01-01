@@ -6,7 +6,7 @@ import {
   articlesToCategories,
   usersToLikedArticles,
 } from '@/functions/libs/drizzle-client/schema'
-import { eq, inArray } from 'drizzle-orm'
+import { eq, inArray, and } from 'drizzle-orm'
 
 export const getArticles = async ({ categories: categoryNames }: { categories: string[] }) => {
   try {
@@ -213,8 +213,10 @@ export const dislikeArticle = async ({
     await db
       .delete(usersToLikedArticles)
       .where(
-        eq(usersToLikedArticles.articleId, articleId) &&
+        and(
+          eq(usersToLikedArticles.articleId, articleId),
           eq(usersToLikedArticles.userId, userId),
+        ),
       )
 
     const [article] = await db

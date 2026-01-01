@@ -1,43 +1,45 @@
-import { PrismaClient } from '@prisma/client'
+import db from '@/functions/libs/drizzle-client/drizzle'
+import {
+  users,
+  categories,
+  articles,
+} from '@/../../drizzle/schema'
 import { prismaCategories } from '@/functions/constants/categories'
 import { prismaUsers } from '@/functions/constants/users'
 import { prismaArticles } from '@/functions/constants/articles'
-
-const prisma = new PrismaClient()
+import { sql } from 'drizzle-orm'
 
 async function main() {
   // delete all
-  await prisma.user.deleteMany()
-  await prisma.category.deleteMany()
-  await prisma.article.deleteMany()
+  await db.delete(users)
+  await db.delete(categories)
+  await db.delete(articles)
 
   // seeding
   for (const category of prismaCategories) {
-    await prisma.category.create({
-      data: category,
-    })
+    await db.insert(categories).values(category)
   }
 
   for (const user of prismaUsers) {
-    const response = await prisma.user.create({
-      data: user,
-    })
+    const [response] = await db.insert(users).values(user).returning()
 
-    await prisma.article.createMany({
-      data: prismaArticles.map((d) => ({
-        ...d,
+    for (const article of prismaArticles) {
+      await db.insert(articles).values({
+        ...article,
         authorId: response.id,
-      })),
-    })
+      })
+    }
   }
 }
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    console.log('Seeding completed successfully!')
+    process.exit(0)
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
+    console.error('Seeding failed:', e)
     process.exit(1)
   })
+
+// Contains AI-generated edits.

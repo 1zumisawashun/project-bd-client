@@ -5,7 +5,7 @@ import { useToast } from '@/components/elements/Toast'
 import { HeartIcon } from '@radix-ui/react-icons'
 import { useRouter } from 'next/navigation'
 import { FC, startTransition } from 'react'
-import { likeArticle } from './dislikeButton.action'
+import { dislikeArticle } from './dislikeButton.action'
 import styles from './dislikeButton.module.css'
 
 const BLOCK_NAME = 'dislikeButton'
@@ -19,7 +19,7 @@ export const DislikeButton: FC<Props> = ({ articleId, userId }) => {
 
   const handleLike = () => {
     startTransition(async () => {
-      const response = await likeArticle({ articleId, userId })
+      const response = await dislikeArticle({ articleId, userId })
 
       if (!response?.isSuccess) {
         toast.add({

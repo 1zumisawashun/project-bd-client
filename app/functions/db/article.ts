@@ -103,6 +103,10 @@ export const createArticle = async ({
     const { categories: categoryData, ...articleData } = data
     const [article] = await db.insert(articles).values(articleData).returning()
 
+    if (!article) {
+      throw new Error('Failed to create article')
+    }
+
     // Connect categories if provided
     if (categoryData?.connect && categoryData.connect.length > 0) {
       await db.insert(articlesToCategories).values(

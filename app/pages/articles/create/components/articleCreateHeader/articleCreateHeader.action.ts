@@ -37,8 +37,10 @@ export const createArticle = async ({ data }: Props): Promise<Return> => {
     const categoryIds = await Promise.all(promises)
 
     const params = {
-      ...data,
-      author: { connect: { id: session.user.id } },
+      title: data.title,
+      content: data.content,
+      status: data.status,
+      authorId: session.user.id,
       categories: { connect: categoryIds },
     }
 
@@ -48,3 +50,5 @@ export const createArticle = async ({ data }: Props): Promise<Return> => {
     return actionResult.error(error)
   }
 }
+
+// Contains AI-generated edits.

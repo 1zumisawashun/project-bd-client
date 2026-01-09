@@ -39,38 +39,8 @@ applyTo: '*.test.*'
   - テストの可読性と保守性を向上させ、仕様書としての価値を最大化
   - BDD（振る舞い駆動開発）の一部として、テストを構造的に表現する手法
   - Arrange（準備）→Act（操作）→Assert（検証）を明確に分離
-
-```typescript
-// AAAパターンの具体例
-describe('ContactModal', () => {
-  it('変更なしでキャンセルボタンを押下した場合、モーダルが閉じること', async () => {
-    // Arrange（準備）：テストに必要なモックやコンポーネントをセットアップ
-    const onClose = jest.fn();
-    const { user } = setup(<ContactModal isOpen={true} onClose={onClose} />);
-
-    // Act（操作）：テスト対象の動作を実行
-    await user.click(screen.getByRole('button', { name: 'キャンセル' }));
-
-    // Assert（検証）：期待する結果を確認
-    expect(onClose).toHaveBeenCalled();
-  });
-
-  it('保存に成功した場合、成功メッセージが表示されモーダルが閉じること', async () => {
-    // Arrange（準備）：サーバーモックの設定とコンポーネントのセットアップ
-    server.use(...ContactModalMocks.Success);
-    const onClose = jest.fn();
-    const { user } = setup(<ContactModal isOpen={true} onClose={onClose} />);
-
-    // Act（操作）：フォーム入力と保存ボタンのクリック
-    await user.type(screen.getByRole('textbox', { name: /名前/ }), '田中太郎');
-    await user.click(screen.getByRole('button', { name: '保存' }));
-
-    // Assert（検証）：成功メッセージとモーダルの閉じることを確認
-    expect(await screen.findByRole('status')).toHaveTextContent('保存しました');
-    expect(onClose).toHaveBeenCalled();
-  });
-});
-```
+  - **重要**: `コンポーネントのセットアップはArrange（準備）に分類する` - コンポーネントのセットアップは準備段階であり、ユーザー操作ではない
+  - ユーザー操作（`user.click()`、`user.type()`など）がない静的な表示テストの場合、**ActセクションはスキップしてArrangeとAssertのみ**を使用する
 
 ### 実装・ファイル構成方針
 
@@ -79,6 +49,19 @@ describe('ContactModal', () => {
   - 実装ファイル（例：`Foo.tsx`）と同じディレクトリに、同名＋`.test.tsx`でテストを配置
 
 ### コーディングルール
+
+- **カスタムrenderの使用を推奨する** - コンポーネントのセットアップには、プロジェクトのカスタムrender関数を使用すること
+  - カスタムrenderは必要なProvider（ルーター、テーマ等）を自動的にラップし、`userEvent.setup()`も返す
+  - 例: `const { user } = render(<Component />)` でユーザーイベントも同時に取得できる
+  - シンプルなコンポーネントでユーザー操作がない場合は、`render(<Component />)` のみでOK
+  - カスタムrenderの実装は `@/functions/libs/react-testing-library/test-utils` を参照
+
+- **roleベースのクエリを優先する** - 要素取得はReact Testing Libraryの推奨に沿って、roleベースのクエリを使用すること
+  - `getByRole`, `findByRole`, `queryByRole` などのroleクエリを最優先で使用
+  - roleクエリはアクセシビリティを意識したテストになり、ユーザーの実際の操作に近い
+  - 例: `screen.getByRole('button', { name: '送信' })`, `screen.getByRole('textbox', { name: /名前/ })`
+  - roleで取得できない場合のみ、`getByTestId`や他のクエリを使用する
+  - 参考: [Testing Library - About Queries](https://testing-library.com/docs/queries/about)
 
 - **コンポーネントのPropsはテストする** - Propsによる表示・振る舞いの変化を確実に検証し、コンポーネントの仕様を明確化
 
@@ -113,9 +96,58 @@ describe('ContactModal', () => {
 - **テストコード上のロジックを避ける**
   - テストコード上では、ifやforのような制御構文や複雑な関数制御といった、独自のロジック制御はできるだけ控える
   - テストは「1テスト=1論理的概念・1シナリオ」にし、仕様書としての明快さ・可読性を最重視
-  - 参考: [Google Testing Blog](https://testing.googleblog.com/2015/04/testing-on-toilet-change-detector-tests.html), [Vitest: no-conditional-in-test](https://vitest.dev/guide/eslint.html#no-conditional-in-test), [seto3記事](https://zenn.dev/seto3/articles/jest-writing-antipatterns#%E6%96%B9%E9%87%9D2%EF%BC%9A%E6%B3%A8%E6%84%8F%E3%81%99%E3%81%B9%E3%81%8D%E3%81%A6%E3%81%AA%E3%81%84if%E3%81%AE%E4%BD%BF%E7%94%A8)
+  - 参考: [Google Testing Blog](https://testing.googleblog.com/2015/04/testing-on-toilet-change-detector-tests.html)
 
 - **beforeEachはできるだけ使用を避ける**
   - テスト単体での移植性を重視し（テスト単体をコピペしてもなるべくそのまま動かせる）、保守性を向上
   - beforeEachでやってしまうとあるテストに関係のないmock化やmockのresetが入り込んでしまう可能性がある
   - Vitestのコンテキストでは、beforeEachで定義していた処理をtest.extendを使ってcontext経由で渡すとそのコンテキストにアクセスしない限り実行されない無駄のない作りになる
+
+### 具体例
+
+```typescript
+// AAAパターンの具体例（ユーザー操作あり）
+describe('ContactModal', () => {
+  it('変更なしでキャンセルボタンを押下した場合、モーダルが閉じること', async () => {
+    // Arrange（準備）：テストに必要なモックやコンポーネントをセットアップ
+    const onClose = jest.fn();
+    const { user } = setup(<ContactModal isOpen={true} onClose={onClose} />);
+
+    // Act（操作）：テスト対象の動作を実行
+    await user.click(screen.getByRole('button', { name: 'キャンセル' }));
+
+    // Assert（検証）：期待する結果を確認
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('保存に成功した場合、成功メッセージが表示されモーダルが閉じること', async () => {
+    // Arrange（準備）：サーバーモックの設定とコンポーネントのセットアップ
+    server.use(...ContactModalMocks.Success);
+    const onClose = jest.fn();
+    const { user } = setup(<ContactModal isOpen={true} onClose={onClose} />);
+
+    // Act（操作）：フォーム入力と保存ボタンのクリック
+    await user.type(screen.getByRole('textbox', { name: /名前/ }), '田中太郎');
+    await user.click(screen.getByRole('button', { name: '保存' }));
+
+    // Assert（検証）：成功メッセージとモーダルの閉じることを確認
+    expect(await screen.findByRole('status')).toHaveTextContent('保存しました');
+    expect(onClose).toHaveBeenCalled();
+  });
+});
+
+// AAAパターンの具体例（ユーザー操作なし - 静的な表示テスト）
+describe('AnchorButton', () => {
+  it('disabled=trueの場合、リンクが無効化されること', () => {
+    // Arrange（準備）：データ準備とコンポーネントのレンダリング
+    render(
+      <AnchorButton href="/test" disabled={true}>
+        無効なボタン
+      </AnchorButton>,
+    );
+
+    // Assert（検証）：期待する結果を確認
+    expect(screen.getByRole('button', { name: '無効なボタン' })).toHaveAttribute('aria-disabled', 'true');
+  });
+});
+```

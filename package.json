@@ -21,17 +21,15 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "chromatic --project-token=$CHROMATIC_PROJECT_TOKEN",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "prisma db seed",
-    "prisma:dev": "run-s -l prisma:generate prisma:migrate prisma:seed",
-    "prisma:format": "npx prisma format",
-    "prisma:studio": "npx prisma studio",
-    "prisma:push": "npx prisma db push",
-    "prisma:reset": "npx prisma db push --force-reset && npm run prisma:seed",
-    "vercel-build": "prisma generate && next build && prisma migrate deploy"
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx prisma/seed.ts",
+    "vercel-build": "npm run db:generate && next build && npm run db:push"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^1.11.1",
     "@auth/prisma-adapter": "^2.4.2",
     "@base-ui/react": "^1.0.0",
     "@electric-sql/pglite": "^0.3.14",
@@ -124,8 +122,5 @@
   "volta": {
     "node": "22.13.1",
     "npm": "11.2.0"
-  },
-  "prisma": {
-    "seed": "ts-node -r tsconfig-paths/register --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }

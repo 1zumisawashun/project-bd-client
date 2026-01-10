@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { articles } from '@/../../drizzle/schema'
 import { Articles, Article } from '@/functions/types'
 import { content } from './content'
 import { mockCategories } from './categories'
@@ -104,12 +104,14 @@ export const mockArticles = [
   },
 ] satisfies Articles
 
-export const prismaArticles: Prisma.ArticleCreateInput[] = mockArticles.map(
-  (d) => {
+export const prismaArticles: (typeof articles.$inferInsert)[] =
+  mockArticles.map((d) => {
     return {
       title: d.title,
       content: d.content,
       status: d.status,
+      authorId: d.authorId,
     }
-  },
-)
+  })
+
+// Contains AI-generated edits.

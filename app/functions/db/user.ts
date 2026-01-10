@@ -1,39 +1,87 @@
-import prisma from '@/functions/libs/prisma-client/prisma'
-import { Prisma } from '@prisma/client'
+import db from '@/functions/libs/drizzle-client/drizzle'
+import {
+  users,
+  articles,
+  likedUsersToArticles,
+} from '@/../../drizzle/schema'
+import { eq } from 'drizzle-orm'
 
 export const getUserByEmail = async ({ email }: { email: string }) => {
   try {
-    const user = await prisma.user.findUnique({ where: { email } })
-    return user
+    const user = await db.query.users.findFirst({
+      where: eq(users.email, email),
+    })
+    return user ?? null
   } catch {
     return null
   }
 }
+
 export const getUserById = async ({ id }: { id: string }) => {
   try {
-    const user = await prisma.user.findUnique({
-      where: { id },
-      include: {
-        posts: { include: { author: { select: { name: true } } } },
-        likedArticles: { include: { author: { select: { name: true } } } },
+    const user = await db.query.users.findFirst({
+      where: eq(users.id, id),
+      with: {
+        posts: {
+          with: {
+            author: {
+              columns: {
+                name: true,
+              },
+            },
+          },
+        },
+        likedArticles: {
+          with: {
+            article: {
+              with: {
+                author: {
+                  columns: {
+                    name: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     })
-    return user
+
+    if (!user) return null
+
+    // Transform the data to match the expected structure
+    return {
+      ...user,
+      posts: user.posts || [],
+      likedArticles:
+        user.likedArticles?.map((liked) => ({
+          ...liked.article,
+        })) || [],
+    }
   } catch {
     return null
   }
 }
+
 export const updateUser = async ({
   id,
   data,
 }: {
   id: string
-  data: Prisma.UserUpdateInput
+  data: Partial<typeof users.$inferInsert>
 }) => {
   try {
-    const user = await prisma.user.update({ where: { id }, data })
+    const [user] = await db
+      .update(users)
+      .set(data)
+      .where(eq(users.id, id))
+      .returning()
     return user
   } catch {
     throw new Error('Failed to update user')
   }
 }
+
+// Contains AI-generated edits.
+
+// Contains AI-generated edits.

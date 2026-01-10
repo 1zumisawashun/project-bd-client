@@ -1,42 +1,16 @@
 // index.ts
 import 'dotenv/config'
-import { eq } from 'drizzle-orm'
-import { drizzle } from 'drizzle-orm/pglite'
-import { usersTable } from './schema'
+import Database from 'better-sqlite3'
+import { drizzle } from 'drizzle-orm/better-sqlite3'
+import * as schema from './schema'
 
-const db = drizzle(process.env['DATABASE_URL']!)
+const sqlite = new Database(process.env['DATABASE_URL'] || './sqlite.db')
+export const db = drizzle(sqlite, { schema })
 
 async function main() {
-  const user: typeof usersTable.$inferInsert = {
-    name: 'John',
-    age: 30,
-    email: 'john@example.com',
-  }
-
-  await db.insert(usersTable).values(user)
-  console.log('New user created!')
-
-  const users = await db.select().from(usersTable)
-  console.log('Getting all users from the database: ', users)
-  /*
-  const users: {
-    id: number;
-    name: string;
-    age: number;
-    email: string;
-  }[]
-  */
-
-  await db
-    .update(usersTable)
-    .set({
-      age: 31,
-    })
-    .where(eq(usersTable.email, user.email))
-  console.log('User info updated!')
-
-  await db.delete(usersTable).where(eq(usersTable.email, user.email))
-  console.log('User deleted!')
+  console.log('Database connection established!')
+  console.log('Using database:', process.env['DATABASE_URL'] || './sqlite.db')
 }
 
 void main()
+// Contains AI-generated edits.

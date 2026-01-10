@@ -2,10 +2,11 @@
 
 import { actionResult } from '@/functions/helpers/utils'
 import { getUserByEmail } from '@/functions/db/user'
-import prisma from '@/functions/libs/prisma-client/prisma'
+import db from '@/functions/libs/drizzle-client/drizzle'
+import { users } from '@/../drizzle/schema'
 import { hashPassword } from '@/functions/helpers/hash'
 import { ActionsResult } from '@/functions/types'
-import { User } from '@prisma/client'
+import type { User } from '@/../drizzle/schema'
 import { Schema, schema } from './signUp.schema'
 
 type Return = ActionsResult<User>
@@ -28,11 +29,15 @@ export const signUp = async ({ data }: Props): Promise<Return> => {
 
     const hashedPassword = await hashPassword(validatedFields.data.password)
 
-    const response = await prisma.user.create({
-      data: { email: validatedFields.data.email, hashedPassword },
-    })
-    return actionResult.success(response)
+    const response = await db.insert(users).values({
+      id: crypto.randomUUID(),
+      email: validatedFields.data.email,
+      hashedPassword,
+    }).returning()
+    
+    return actionResult.success(response[0])
   } catch (error) {
     return actionResult.error(error)
   }
 }
+// Contains AI-generated edits.

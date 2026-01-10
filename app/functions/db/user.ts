@@ -1,39 +1,62 @@
-import prisma from '@/functions/libs/prisma-client/prisma'
-import { Prisma } from '@prisma/client'
+import db from '@/functions/libs/drizzle-client/drizzle'
+import { users } from '@/../drizzle/schema'
+import { eq } from 'drizzle-orm'
+import type { InsertUser } from '@/../drizzle/schema'
 
 export const getUserByEmail = async ({ email }: { email: string }) => {
   try {
-    const user = await prisma.user.findUnique({ where: { email } })
-    return user
+    const user = await db.query.users.findFirst({
+      where: eq(users.email, email),
+    })
+    return user || null
   } catch {
     return null
   }
 }
+
 export const getUserById = async ({ id }: { id: string }) => {
   try {
-    const user = await prisma.user.findUnique({
-      where: { id },
-      include: {
-        posts: { include: { author: { select: { name: true } } } },
-        likedArticles: { include: { author: { select: { name: true } } } },
+    const user = await db.query.users.findFirst({
+      where: eq(users.id, id),
+      with: {
+        posts: {
+          with: {
+            author: true,
+          },
+        },
+        likedArticles: {
+          with: {
+            article: {
+              with: {
+                author: true,
+              },
+            },
+          },
+        },
       },
     })
-    return user
+    return user || null
   } catch {
     return null
   }
 }
+
 export const updateUser = async ({
   id,
   data,
 }: {
   id: string
-  data: Prisma.UserUpdateInput
+  data: Partial<InsertUser>
 }) => {
   try {
-    const user = await prisma.user.update({ where: { id }, data })
-    return user
+    const user = await db
+      .update(users)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(users.id, id))
+      .returning()
+    return user[0]
   } catch {
     throw new Error('Failed to update user')
   }
 }
+// Contains AI-generated edits.

@@ -37,8 +37,7 @@ export default {
             return
           }
           if (
-            !node.declaration ||
-            node.declaration.type !== 'VariableDeclaration'
+            node.declaration?.type !== 'VariableDeclaration'
           ) {
             return
           }
@@ -61,8 +60,7 @@ export default {
             const isPromiseReturned = declaration.init.body.body.some(
               (statement) =>
                 statement.type === 'ReturnStatement' &&
-                statement.argument &&
-                statement.argument.type === 'CallExpression' &&
+                statement.argument?.type === 'CallExpression' &&
                 statement.argument.callee.type === 'Identifier' &&
                 statement.argument.callee.name === 'Promise',
             )

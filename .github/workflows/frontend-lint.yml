@@ -40,7 +40,7 @@ jobs:
       - name: format
         run: npm run format
 
-  compile:
+  typecheck:
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -50,5 +50,5 @@ jobs:
         uses: actions/setup-node@v3
       - name: npm ci
         run: npm ci
-      - name: compile
-        run: npm run compile
+      - name: typecheck
+        run: npm run typecheck

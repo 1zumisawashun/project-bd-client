@@ -15,7 +15,7 @@
     "custom-rules:watch": "npx tsc -p ./eslint-plugin-custom-rules/tsconfig.json --watch",
     "format": "prettier \"app/**/*.+(js|json|yml|ts|tsx)\" --cache --cache-location=.prettiercache",
     "format:fix": "npm run format -- --write",
-    "compile": "npx tsc --noEmit",
+    "typecheck": "npx tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "storybook dev -p 6006",

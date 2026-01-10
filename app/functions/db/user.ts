@@ -35,7 +35,15 @@ export const getUserById = async ({ id }: { id: string }) => {
         },
       },
     })
-    return user || null
+    
+    if (!user) return null
+    
+    // Transform data to match expected format
+    return {
+      ...user,
+      posts: user.posts,
+      likedArticles: user.likedArticles.map((la) => la.article),
+    }
   } catch {
     return null
   }

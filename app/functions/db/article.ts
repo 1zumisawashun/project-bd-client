@@ -48,7 +48,6 @@ export const getArticleById = async ({ id }: { id: string }) => {
           },
         },
         likedUsers: {
-          columns: {},
           with: {
             user: {
               columns: {
@@ -59,7 +58,15 @@ export const getArticleById = async ({ id }: { id: string }) => {
         },
       },
     })
-    return article || null
+    
+    if (!article) return null
+    
+    // Transform data to match expected format
+    return {
+      ...article,
+      likedUsers: article.likedUsers.map((lu) => ({ id: lu.user.id })),
+      categories: article.categories.map((ac) => ac.category),
+    }
   } catch {
     return null
   }

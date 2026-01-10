@@ -1,6 +1,9 @@
 'use server'
 
-import { updateArticle } from '@/functions/db/article'
+import { getArticleById } from '@/functions/db/article'
+import db from '@/functions/libs/drizzle-client/drizzle'
+import { likedArticles } from '@/../drizzle/schema'
+import { and, eq } from 'drizzle-orm'
 import { actionResult } from '@/functions/helpers/utils'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { ActionsResult, Article } from '@/functions/types'
@@ -21,10 +24,25 @@ export const dislikeArticle = async ({
       return actionResult.end('ログインしてください')
     }
 
-    const params = { likedUsers: { disconnect: { id: userId } } }
-    const response = await updateArticle({ id: articleId, data: params })
-    return actionResult.success(response)
+    // Remove the like by deleting from junction table
+    await db
+      .delete(likedArticles)
+      .where(
+        and(
+          eq(likedArticles.articleId, articleId),
+          eq(likedArticles.userId, userId)
+        )
+      )
+
+    const article = await getArticleById({ id: articleId })
+    if (!article) {
+      return actionResult.end('記事が見つかりません')
+    }
+
+    const { likedUsers, categories, ...articleData } = article
+    return actionResult.success(articleData)
   } catch (error) {
     return actionResult.error(error)
   }
 }
+// Contains AI-generated edits.

@@ -1,8 +1,8 @@
 import { getUserByEmail } from '@/functions/db/user'
 import { isPasswordValid } from '@/functions/helpers/hash'
-import prisma from '@/functions/libs/prisma-client/prisma'
+import db from '@/functions/libs/drizzle-client/drizzle'
 import { schema } from '@/pages/sign-up/signUp.schema'
-import { PrismaAdapter } from '@auth/prisma-adapter'
+import { DrizzleAdapter } from '@auth/drizzle-adapter'
 import NextAuth, { NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import GitHub from 'next-auth/providers/github'
@@ -73,8 +73,9 @@ const callbacks = {
 } satisfies NextAuthConfig['callbacks']
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: DrizzleAdapter(db),
   session: { strategy: 'jwt' },
   providers,
   callbacks,
 })
+// Contains AI-generated edits.

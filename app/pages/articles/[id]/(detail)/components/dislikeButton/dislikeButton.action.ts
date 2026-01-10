@@ -1,6 +1,8 @@
 'use server'
 
-import { updateArticle } from '@/functions/db/article'
+import { getArticleById } from '@/functions/db/article'
+import db from '@/functions/libs/drizzle-client/drizzle'
+import { likedArticles } from '@/../drizzle/schema'
 import { actionResult } from '@/functions/helpers/utils'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { ActionsResult, Article } from '@/functions/types'
@@ -21,10 +23,21 @@ export const likeArticle = async ({
       return actionResult.end('ログインしてください')
     }
 
-    const params = { likedUsers: { connect: { id: userId } } }
-    const response = await updateArticle({ id: articleId, data: params })
-    return actionResult.success(response)
+    // Add a like by inserting into junction table
+    await db.insert(likedArticles).values({
+      articleId,
+      userId,
+    })
+
+    const article = await getArticleById({ id: articleId })
+    if (!article) {
+      return actionResult.end('記事が見つかりません')
+    }
+
+    const { likedUsers, categories, ...articleData } = article
+    return actionResult.success(articleData)
   } catch (error) {
     return actionResult.error(error)
   }
 }
+// Contains AI-generated edits.

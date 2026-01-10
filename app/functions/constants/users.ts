@@ -1,5 +1,5 @@
 import { User } from '@/functions/types'
-import { Prisma } from '@prisma/client'
+import type { InsertUser } from '@/../drizzle/schema'
 import { mockArticles } from './articles'
 
 const id = 'cm07vrx4y00002vwkx0koma0j'
@@ -36,6 +36,7 @@ export const mockUsers = [
   },
 ] satisfies User[]
 
-export const prismaUsers: Prisma.UserCreateInput[] = mockUsers.map(
+export const drizzleUsers: InsertUser[] = mockUsers.map(
   ({ posts: _post, likedArticles: _likedArticles, ...rest }) => rest,
 )
+// Contains AI-generated edits.

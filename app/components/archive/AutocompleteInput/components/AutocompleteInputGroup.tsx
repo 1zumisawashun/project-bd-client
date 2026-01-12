@@ -6,11 +6,14 @@ import { TextInput } from '../../../forms/TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
 type InputRef = ElementRef<'input'>
+
 type ReferenceRef = ElementRef<'div'>
+
 type Props = {
   onChange: (value: string) => void // react-hook-form's onChange
   options: string[]
 } & Omit<ComponentProps<typeof TextInput>, 'onChange'>
+
 export const AutocompleteInputGroup = forwardRef<InputRef, Props>(
   (props, ref) => {
     const {

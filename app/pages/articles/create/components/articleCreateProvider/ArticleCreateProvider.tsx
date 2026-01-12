@@ -1,17 +1,19 @@
 'use client'
 
+import { CONTENT } from '@/functions/constants/content'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, PropsWithChildren } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Schema, schema } from '../../../shared/articleForm/articleForm.schema'
 
-type ArticleCreateProviderProps = {
-  defaultValues: Schema
+const defaultValues = {
+  title: '',
+  content: CONTENT,
+  categories: [],
+  status: 'PUBLISHED' as const,
 }
 
-export const ArticleCreateProvider: FC<
-  PropsWithChildren<ArticleCreateProviderProps>
-> = ({ children, defaultValues }) => {
+export const ArticleCreateProvider: FC<PropsWithChildren> = ({ children }) => {
   const methods = useForm<Schema>({
     mode: 'onTouched',
     resolver: zodResolver(schema),

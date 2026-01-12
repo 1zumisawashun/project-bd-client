@@ -1,3 +1,4 @@
+import { NotFound } from '@/components/elements/NotFound'
 import { getArticles } from '@/functions/db/article'
 import { getCategories } from '@/functions/db/category'
 import { SearchParams } from '@/functions/types'
@@ -9,8 +10,8 @@ export default async function Page({
   searchParams: SearchParams
 }) {
   const categories = await getCategories()
-  const categoryOptions = categories?.map((category) => category.name) ?? []
 
+  // NOTE: 計算結果を CC でも利用するため I/F に定義する
   const defaultValues = (() => {
     const params = searchParams['category']
     if (Array.isArray(params)) return params
@@ -20,13 +21,13 @@ export default async function Page({
 
   const articles = await getArticles({ categories: defaultValues })
 
-  if (!articles) return <div>Failed to fetch articles</div>
+  if (!articles) return <NotFound />
 
   return (
     <ArticleList
       articles={articles}
       defaultValues={defaultValues}
-      categoryOptions={categoryOptions}
+      categories={categories}
     />
   )
 }

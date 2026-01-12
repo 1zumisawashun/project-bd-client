@@ -4,9 +4,16 @@ import {
 } from '@/drizzle/constants/articles'
 import { MOCK_CATEGORIES } from '@/drizzle/constants/categories'
 import { MOCK_USERS } from '@/drizzle/constants/users'
-import { ArticleDetailArticle } from './articleDetail.types'
+import { Article, ArticleCategory } from './article.types'
 
-export const MOCK_ARTICLE_DETAIL_PUBLIC_ARTICLE = {
+export const MOCK_ARTICLE_CATEGORIES = MOCK_CATEGORIES.map((category) => {
+  return {
+    id: category.id,
+    name: category.name,
+  }
+}) satisfies ArticleCategory[]
+
+export const _MOCK_ARTICLE_PUBLIC = {
   ...MOCK_ARTICLE_PUBLISH,
   categories: MOCK_CATEGORIES.map((category) => ({
     categoryId: 'categoryId',
@@ -20,9 +27,9 @@ export const MOCK_ARTICLE_DETAIL_PUBLIC_ARTICLE = {
       id: user.id,
     },
   })),
-} satisfies ArticleDetailArticle
+} satisfies Article
 
-export const MOCK_ARTICLE_DETAIL_DRAFT_ARTICLE = {
+export const _MOCK_ARTICLE_DRAFT = {
   ...MOCK_ARTICLE_DRAFT,
   categories: MOCK_CATEGORIES.map((category) => ({
     categoryId: 'categoryId',
@@ -36,4 +43,4 @@ export const MOCK_ARTICLE_DETAIL_DRAFT_ARTICLE = {
       id: user.id,
     },
   })),
-} satisfies ArticleDetailArticle
+} satisfies Article

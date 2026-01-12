@@ -5,21 +5,11 @@ import { ArticleDetail } from '@/pages/articles/[id]/(detail)/ArticleDetail'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const article = await getArticleById({ id: params.id })
+
+  // NOTE: session は必要な情報のみ I/F に定義する
   const session = await auth()
 
-  const userId = session?.user?.id ?? ''
-  const isAuthor = article?.authorId === userId
-  const isLike =
-    article?.likedUsers.some(({ user }) => user.id === userId) ?? false
+  if (!article || !session?.user.id) return <NotFound />
 
-  if (!article) return <NotFound />
-
-  return (
-    <ArticleDetail
-      article={article}
-      isAuthor={isAuthor}
-      userId={userId}
-      isLike={isLike}
-    />
-  )
+  return <ArticleDetail article={article} userId={session.user.id} />
 }

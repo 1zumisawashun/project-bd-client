@@ -12,7 +12,10 @@ import {
   schema,
 } from '../../../../shared/articleForm/articleForm.schema'
 
-type EditArticleArgs = { data: Schema; id: string }
+type EditArticleArgs = {
+  data: Schema
+  id: string
+}
 
 export const editArticle = async (args: EditArticleArgs) => {
   try {

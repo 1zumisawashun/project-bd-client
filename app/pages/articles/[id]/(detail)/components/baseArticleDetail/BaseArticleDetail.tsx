@@ -8,13 +8,13 @@ import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import DOMPurify from 'dompurify'
 import NextLink from 'next/link'
 import { FC, ReactNode } from 'react'
-import { ArticleDetailArticle } from '../../articleDetail.types'
+import { Article } from '../../../../shared/article.types'
 import styles from './baseArticleDetail.module.css'
 
 const BLOCK_NAME = 'baseArticleDetail'
 
 type BaseArticleDetailProps = {
-  article: ArticleDetailArticle
+  article: Article
   status: ReactNode
   likeButton: ReactNode
   kebabMenu: ReactNode

@@ -26,7 +26,9 @@ export const getArticles = async ({ categories }: { categories: string[] }) => {
     })
 
     const filtered = articlesList.filter((article) =>
-      article.categories.some((ac) => categories.includes(ac.category.name)),
+      article.categories.some(({ category }) =>
+        categories.includes(category.name),
+      ),
     )
 
     return filtered

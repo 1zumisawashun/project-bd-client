@@ -1,28 +1,14 @@
+import { NotFound } from '@/components/elements/NotFound'
 import { getArticleById } from '@/functions/db/article'
 import { getCategories } from '@/functions/db/category'
-import { ArticleStatus } from '@/functions/types'
 import { ArticleEdit } from '@/pages/articles/[id]/edit/ArticleEdit'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const categories = await getCategories()
-  const categoryOptions = categories?.map((category) => category.name) ?? []
 
   const article = await getArticleById({ id: params.id })
 
-  const defaultValues = {
-    title: article?.title ?? '',
-    content: article?.content ?? '',
-    categories:
-      article?.categories?.map(({ category }) => ({ name: category.name })) ??
-      [],
-    status: (article?.status ?? 'PUBLISHED') as ArticleStatus,
-  }
+  if (!article) return <NotFound />
 
-  return (
-    <ArticleEdit
-      articleId={params.id}
-      defaultValues={defaultValues}
-      categoryOptions={categoryOptions}
-    />
-  )
+  return <ArticleEdit article={article} categories={categories} />
 }

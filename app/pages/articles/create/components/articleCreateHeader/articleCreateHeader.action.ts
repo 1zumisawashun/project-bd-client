@@ -11,7 +11,9 @@ import db from '@/functions/libs/drizzle-client/drizzle'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { Schema, schema } from '../../../shared/articleForm/articleForm.schema'
 
-type CreateArticleArgs = { data: Schema }
+type CreateArticleArgs = {
+  data: Schema
+}
 
 export const createArticle = async (args: CreateArticleArgs) => {
   try {

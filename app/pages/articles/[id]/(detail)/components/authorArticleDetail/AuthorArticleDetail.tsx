@@ -6,7 +6,7 @@ import { KebabMenu } from '@/components/elements/KebabMenu'
 import { Status } from '@/components/elements/Status'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { FC, ReactNode } from 'react'
-import { ArticleDetailArticle } from '../../articleDetail.types'
+import { Article } from '../../../../shared/article.types'
 import { BaseArticleDetail } from '../baseArticleDetail/BaseArticleDetail'
 import { DeleteDialog } from '../deleteDialog/DeleteDialog'
 import { DraftDialog } from '../draftDialog/DraftDialog'
@@ -22,7 +22,7 @@ const buttonProps = {
 }
 
 type AuthorArticleDetailProps = {
-  article: ArticleDetailArticle
+  article: Article
   likeButton: ReactNode
 }
 
@@ -70,6 +70,7 @@ export const AuthorArticleDetail: FC<AuthorArticleDetailProps> = (props) => {
           />
         }
       />
+      {/* NOTE: プリミティブであればdatasourceに依存させなくても良さそう？ */}
       <DeleteDialog
         isOpen={deleteDialog.isOpen}
         onClose={deleteDialog.close}

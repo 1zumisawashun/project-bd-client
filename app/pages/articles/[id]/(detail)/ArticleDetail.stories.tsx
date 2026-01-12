@@ -1,11 +1,11 @@
 import { type Meta, type StoryObj } from '@storybook/react'
 
 import { FC } from 'react'
-import { ArticleDetail } from './ArticleDetail'
 import {
-  MOCK_ARTICLE_DETAIL_DRAFT_ARTICLE,
-  MOCK_ARTICLE_DETAIL_PUBLIC_ARTICLE,
-} from './articleDetail.mocks'
+  _MOCK_ARTICLE_DRAFT,
+  _MOCK_ARTICLE_PUBLIC,
+} from '../../shared/article.mocks'
+import { ArticleDetail } from './ArticleDetail'
 
 const meta: Meta<typeof ArticleDetail> = {
   title: 'feature/articles/ArticleDetail',
@@ -17,34 +17,13 @@ export default meta
 type Story = StoryObj<typeof ArticleDetail>
 
 const LikeRender: FC = () => {
-  return (
-    <ArticleDetail
-      article={MOCK_ARTICLE_DETAIL_PUBLIC_ARTICLE}
-      isAuthor
-      userId="userId"
-      isLike
-    />
-  )
+  return <ArticleDetail article={_MOCK_ARTICLE_PUBLIC} userId="userId" />
 }
 const DislikeRender: FC = () => {
-  return (
-    <ArticleDetail
-      article={MOCK_ARTICLE_DETAIL_PUBLIC_ARTICLE}
-      isAuthor
-      userId="userId"
-      isLike={false}
-    />
-  )
+  return <ArticleDetail article={_MOCK_ARTICLE_PUBLIC} userId="userId" />
 }
 const DraftRender: FC = () => {
-  return (
-    <ArticleDetail
-      article={MOCK_ARTICLE_DETAIL_DRAFT_ARTICLE}
-      isAuthor
-      userId="userId"
-      isLike
-    />
-  )
+  return <ArticleDetail article={_MOCK_ARTICLE_DRAFT} userId="userId" />
 }
 
 export const Like: Story = {

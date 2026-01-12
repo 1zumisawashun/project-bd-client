@@ -6,20 +6,23 @@ import { ArticleCardGroup } from '@/features/articles/articleCardGroup/ArticleCa
 
 import NextLink from 'next/link'
 import { FC } from 'react'
+import { ArticleCategory } from '../shared/article.types'
 import { ArticleListArticle } from './articleList.types'
 import { SearchForm } from './components/searchForm/SearchForm'
 
 type Props = {
   articles: ArticleListArticle[]
-  categoryOptions: string[]
+  categories: ArticleCategory[]
   defaultValues: string[]
 }
 
 export const ArticleList: FC<Props> = ({
   articles,
-  categoryOptions,
+  categories,
   defaultValues,
 }) => {
+  const categoryOptions = categories?.map(({ name }) => name) ?? []
+
   return (
     <VStack>
       <SearchForm

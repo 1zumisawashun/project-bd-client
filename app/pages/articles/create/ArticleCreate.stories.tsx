@@ -1,8 +1,8 @@
 import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
 import { type Meta, type StoryObj } from '@storybook/react'
 
-import { CONTENT } from '@/drizzle/constants/articles'
 import { FC } from 'react'
+import { MOCK_ARTICLE_CATEGORIES } from '../shared/article.mocks'
 import { ArticleCreate } from './ArticleCreate'
 
 const meta: Meta<typeof ArticleCreate> = {
@@ -17,18 +17,9 @@ export default meta
 type Story = StoryObj<typeof ArticleCreate>
 
 const Render: FC = () => {
-  return (
-    <ArticleCreate
-      defaultValues={{
-        title: '',
-        content: CONTENT,
-        categories: [],
-        status: 'PUBLISHED',
-      }}
-      categoryOptions={['JavaScript', 'TypeScript', 'React']}
-    />
-  )
+  return <ArticleCreate categories={MOCK_ARTICLE_CATEGORIES} />
 }
+
 export const Default: Story = {
   render: () => <Render />,
 }

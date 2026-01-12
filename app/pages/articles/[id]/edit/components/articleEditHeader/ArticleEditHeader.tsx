@@ -12,6 +12,7 @@ import {
   SubmitHandler,
   useFormContext,
 } from 'react-hook-form'
+import { Article } from '../../../../shared/article.types'
 import { Schema } from '../../../../shared/articleForm/articleForm.schema'
 import { editArticle } from './articleEditHeader.action'
 import styles from './articleEditHeader.module.css'
@@ -19,12 +20,10 @@ import styles from './articleEditHeader.module.css'
 const BLOCK_NAME = 'articleEditHeader'
 
 type ArticleEditHeaderProps = {
-  articleId: string
+  article: Article
 }
 
-export const ArticleEditHeader: FC<ArticleEditHeaderProps> = ({
-  articleId,
-}) => {
+export const ArticleEditHeader: FC<ArticleEditHeaderProps> = ({ article }) => {
   const router = useRouter()
   const toast = useToast()
   const {
@@ -35,7 +34,7 @@ export const ArticleEditHeader: FC<ArticleEditHeaderProps> = ({
 
   const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
-      const response = await editArticle({ data, id: articleId })
+      const response = await editArticle({ data, id: article.id })
 
       if (!response?.isSuccess) {
         toast.add({
@@ -63,7 +62,7 @@ export const ArticleEditHeader: FC<ArticleEditHeaderProps> = ({
 
   return (
     <header className={styles[`${BLOCK_NAME}`]}>
-      <IconAnchorButton href={`/articles/${articleId}`} variant="ghost">
+      <IconAnchorButton href={`/articles/${article.id}`} variant="ghost">
         <ChevronLeftIcon />
       </IconAnchorButton>
       <HStack>

@@ -1,11 +1,11 @@
 'use client'
 
 import { FC, ReactNode } from 'react'
-import { ArticleDetailArticle } from '../../articleDetail.types'
+import { Article } from '../../../../shared/article.types'
 import { BaseArticleDetail } from '../baseArticleDetail/BaseArticleDetail'
 
 type UserArticleDetailProps = {
-  article: ArticleDetailArticle
+  article: Article
   likeButton: ReactNode
 }
 

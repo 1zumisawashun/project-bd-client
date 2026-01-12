@@ -72,6 +72,10 @@ See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client
 - hosting : Cloudflare Workers
 ```
 
+## TODO
+
+- import db from '@/functions/libs/drizzle/client' を db dir に集約させる
+
 ## Troubleshoot
 
 null

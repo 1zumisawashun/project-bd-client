@@ -1,13 +1,21 @@
-import db from '@/functions/libs/drizzle-client/drizzle'
+import db from './client'
 import { MOCK_ARTICLES } from './constants/articles'
 import { MOCK_CATEGORIES } from './constants/categories'
 import { MOCK_USERS } from './constants/users'
-import { articles, articlesCategories, categories, users } from './schema'
+import {
+  articles,
+  articlesCategories,
+  categories,
+  likedArticles,
+  users,
+} from './schema'
 
 async function main() {
-  // delete all
   // delete relations first due to foreign key constraints
   await db.delete(articlesCategories)
+  await db.delete(likedArticles)
+
+  // delete all
   await db.delete(articles)
   await db.delete(users)
   await db.delete(categories)

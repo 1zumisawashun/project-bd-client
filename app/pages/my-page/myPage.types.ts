@@ -1,4 +1,4 @@
-import { InferQueryModel } from '@/drizzle/types'
+import { InferQueryModel } from '@/functions/libs/drizzle/types'
 
 export type MypageUser = InferQueryModel<
   'users',

@@ -1,9 +1,9 @@
 import {
   MOCK_ARTICLE_DRAFT,
   MOCK_ARTICLE_PUBLISH,
-} from '@/drizzle/constants/articles'
-import { MOCK_CATEGORIES } from '@/drizzle/constants/categories'
-import { MOCK_USERS } from '@/drizzle/constants/users'
+} from '@/functions/libs/drizzle/constants/articles'
+import { MOCK_CATEGORIES } from '@/functions/libs/drizzle/constants/categories'
+import { MOCK_USERS } from '@/functions/libs/drizzle/constants/users'
 import { Article, ArticleCategory } from './article.types'
 
 export const MOCK_ARTICLE_CATEGORIES = MOCK_CATEGORIES.map((category) => {

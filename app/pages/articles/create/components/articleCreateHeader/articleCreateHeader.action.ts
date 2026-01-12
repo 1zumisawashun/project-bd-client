@@ -1,13 +1,13 @@
 'use server'
 
-import { articlesCategories } from '@/../drizzle/schema'
 import {
   createArticle as _createArticle,
   getArticleById,
 } from '@/functions/db/article'
 import { createCategory, getCategoryByName } from '@/functions/db/category'
 import { actionResult } from '@/functions/helpers/utils'
-import db from '@/functions/libs/drizzle-client/drizzle'
+import db from '@/functions/libs/drizzle/client'
+import { articlesCategories } from '@/functions/libs/drizzle/schema'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { Schema, schema } from '../../../shared/articleForm/articleForm.schema'
 

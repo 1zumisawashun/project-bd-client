@@ -1,5 +1,5 @@
-import { articles, type InsertArticle } from '@/../drizzle/schema'
-import db from '@/functions/libs/drizzle-client/drizzle'
+import db from '@/functions/libs/drizzle/client'
+import { articles, type InsertArticle } from '@/functions/libs/drizzle/schema'
 import { eq } from 'drizzle-orm'
 
 // FIXME: QueryAPI to SQL-like API

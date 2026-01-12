@@ -1,4 +1,4 @@
-import { type Article } from '@/drizzle/schema'
+import { type Article } from '@/functions/libs/drizzle/schema'
 
 const ID = 'cm07vrx4y00002vwkx0koma0j'
 

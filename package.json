@@ -25,7 +25,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:seed": "tsx drizzle/seed.ts",
+    "db:seed": "tsx ./app/functions/libs/drizzle/seed.ts",
     "vercel-build": "next build"
   },
   "dependencies": {

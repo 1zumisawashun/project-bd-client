@@ -1,10 +1,10 @@
 'use server'
 
-import { users } from '@/drizzle/schema'
 import { getUserByEmail } from '@/functions/db/user'
 import { hashPassword } from '@/functions/helpers/hash'
 import { actionResult } from '@/functions/helpers/utils'
-import db from '@/functions/libs/drizzle-client/drizzle'
+import db from '@/functions/libs/drizzle/client'
+import { users } from '@/functions/libs/drizzle/schema'
 import { Schema, schema } from './signUp.schema'
 
 type SignUpProps = { data: Schema }

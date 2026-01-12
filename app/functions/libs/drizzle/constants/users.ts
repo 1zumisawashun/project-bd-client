@@ -1,4 +1,4 @@
-import { type User } from '@/drizzle/schema'
+import { type User } from '@/functions/libs/drizzle/schema'
 
 const ID = 'cm07vrx4y00002vwkx0koma0j'
 

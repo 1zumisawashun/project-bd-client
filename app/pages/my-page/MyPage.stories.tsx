@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 
-import { mockUsers } from '@/functions/constants/users'
 import { userEvent, within } from '@storybook/test'
 import { FC } from 'react'
 import { MyPage } from './MyPage'
+import { MOCK_MYPAGE_USER } from './myPage.mocks'
 
 const meta: Meta<typeof MyPage> = {
   title: 'feature/my-page/MyPage',
@@ -13,10 +13,10 @@ export default meta
 type Story = StoryObj<typeof MyPage>
 
 const RenderDefault: FC = () => {
-  return <MyPage user={mockUsers[0]!} />
+  return <MyPage user={MOCK_MYPAGE_USER} />
 }
 const RenderEmpty: FC = () => {
-  return <MyPage user={mockUsers[1]!} />
+  return <MyPage user={MOCK_MYPAGE_USER} />
 }
 
 export const MyPageSetting: Story = {

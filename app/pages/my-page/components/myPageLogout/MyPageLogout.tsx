@@ -15,12 +15,12 @@ import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { FC } from 'react'
 
-type Props = {
-  isOpen: ReturnType<typeof useDisclosure>['isOpen']
-  close: ReturnType<typeof useDisclosure>['close']
+type LogoutDialogProps = {
+  isOpen: boolean
+  close: () => void
 }
 
-export const LogoutDialog: FC<Props> = ({ isOpen, close }) => {
+export const LogoutDialog: FC<LogoutDialogProps> = ({ isOpen, close }) => {
   const router = useRouter()
 
   const logout = async () => {

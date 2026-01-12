@@ -1,3 +1,5 @@
+'use client'
+
 import { Toast as RowToast } from '@base-ui/react/toast'
 import { FC } from 'react'
 import { XIcon } from '../../Icon'

@@ -1,14 +1,40 @@
+import { users, type InsertUser } from '@/drizzle/schema'
 import db from '@/functions/libs/drizzle-client/drizzle'
-import { users } from '@/../drizzle/schema'
 import { eq } from 'drizzle-orm'
-import type { InsertUser } from '@/../drizzle/schema'
 
 export const getUserByEmail = async ({ email }: { email: string }) => {
   try {
     const user = await db.query.users.findFirst({
       where: eq(users.email, email),
     })
-    return user || null
+    return user ?? null
+  } catch {
+    return null
+  }
+}
+
+export const getUserByEmailForMypage = async ({ email }: { email: string }) => {
+  try {
+    const user = await db.query.users.findFirst({
+      where: eq(users.email, email),
+      with: {
+        posts: {
+          with: {
+            author: true,
+          },
+        },
+        likedArticles: {
+          with: {
+            article: {
+              with: {
+                author: true,
+              },
+            },
+          },
+        },
+      },
+    })
+    return user ?? null
   } catch {
     return null
   }
@@ -35,36 +61,27 @@ export const getUserById = async ({ id }: { id: string }) => {
         },
       },
     })
-    
-    if (!user) return null
-    
-    // Transform data to match expected format
-    return {
-      ...user,
-      posts: user.posts,
-      likedArticles: user.likedArticles.map((la) => la.article),
-    }
+    return user ?? null
   } catch {
     return null
   }
 }
 
-export const updateUser = async ({
-  id,
+export const updateUserByEmail = async ({
+  email,
   data,
 }: {
-  id: string
+  email: string
   data: Partial<InsertUser>
 }) => {
   try {
-    const user = await db
+    const [user] = await db
       .update(users)
       .set({ ...data, updatedAt: new Date() })
-      .where(eq(users.id, id))
+      .where(eq(users.email, email))
       .returning()
-    return user[0]
+    return user ?? null
   } catch {
-    throw new Error('Failed to update user')
+    return null
   }
 }
-// Contains AI-generated edits.

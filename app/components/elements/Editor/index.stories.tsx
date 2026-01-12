@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 
-import { content } from '@/functions/constants/content'
+import { CONTENT } from '@/functions/constants/content'
 import { FC } from 'react'
 import { useEditor } from './hooks/useEditor'
 import { EditorContent } from './index'
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof EditorContent>
 
 const Render: FC = () => {
   const editor = useEditor({
-    content,
+    content: CONTENT,
   })
   console.log(editor)
 

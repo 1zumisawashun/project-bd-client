@@ -9,7 +9,6 @@ import { TextInput } from '@/components/forms/TextInput'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { User } from '@/functions/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { FC, startTransition } from 'react'
@@ -20,15 +19,17 @@ import {
   useForm,
 } from 'react-hook-form'
 import { updateProfile } from './myPageProfile.action'
-import { ProfileSchema, profileSchema } from './myPageProfile.schema'
+import { Schema, schema } from './myPageProfile.schema'
 
-const ProfilePreview: FC<{ name: string; open: () => void }> = ({
-  name,
-  open,
-}) => {
+type ProfilePreviewProps = {
+  name: string | null
+  open: () => void
+}
+
+const ProfilePreview: FC<ProfilePreviewProps> = ({ name, open }) => {
   return (
     <VStack>
-      <p>現在の名前: {name}</p>
+      <p>現在の名前: {name ?? '未設定'}</p>
       <HStack>
         <Button onClick={open}>変更する</Button>
       </HStack>
@@ -36,22 +37,24 @@ const ProfilePreview: FC<{ name: string; open: () => void }> = ({
   )
 }
 
-const ProfileEditForm: FC<{
-  name: string
+type ProfileEditFormProps = {
+  name: string | null
   close: () => void
-}> = ({ name, close }) => {
+}
+
+const ProfileEditForm: FC<ProfileEditFormProps> = ({ name, close }) => {
   const router = useRouter()
   const toast = useToast()
 
-  const { control, handleSubmit } = useForm<ProfileSchema>({
+  const { control, handleSubmit } = useForm<Schema>({
     mode: 'onTouched',
-    resolver: zodResolver(profileSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
-      name,
+      name: name ?? '',
     },
   })
 
-  const onSubmit: SubmitHandler<ProfileSchema> = (data) => {
+  const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
       const response = await updateProfile({ data })
 
@@ -72,7 +75,7 @@ const ProfileEditForm: FC<{
     })
   }
 
-  const onError: SubmitErrorHandler<ProfileSchema> = (error) => {
+  const onError: SubmitErrorHandler<Schema> = (error) => {
     toast.add({
       title: 'エラーが発生しました',
       description: JSON.stringify(error, null, 2),
@@ -103,9 +106,12 @@ const ProfileEditForm: FC<{
   )
 }
 
-export const MyPageProfile: FC<{ user: User }> = ({ user }) => {
+type MyPageProfileProps = {
+  name: string | null
+}
+
+export const MyPageProfile: FC<MyPageProfileProps> = ({ name }) => {
   const { isOpen, open, close } = useDisclosure()
-  const name = user.name ?? '名無し'
 
   return (
     <Card>

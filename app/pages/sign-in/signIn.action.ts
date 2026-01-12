@@ -2,14 +2,13 @@
 
 import { signIn as NextAuthSignIn } from '@/functions/libs/next-auth/auth'
 import { AuthError } from 'next-auth'
-import { ActionsResult } from '@/functions/types'
 import { Schema } from './signIn.schema'
 
-type Return = ActionsResult<null>
-type Props = { data: Schema }
-export const signIn = async ({ data }: Props): Promise<Return> => {
+type SignInProps = { data: Schema }
+
+export const signIn = async (props: SignInProps) => {
   try {
-    await NextAuthSignIn('credentials', { ...data, redirect: false })
+    await NextAuthSignIn('credentials', props.data)
 
     return {
       isSuccess: true,

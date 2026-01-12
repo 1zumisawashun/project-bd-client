@@ -5,20 +5,22 @@ import { Title } from '@/components/elements/Typography'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
-import { Article } from '@/functions/types'
 import DOMPurify from 'dompurify'
 import NextLink from 'next/link'
 import { FC, ReactNode } from 'react'
+import { ArticleDetailArticle } from '../../articleDetail.types'
 import styles from './baseArticleDetail.module.css'
 
 const BLOCK_NAME = 'baseArticleDetail'
-type Props = {
-  article: Article
+
+type BaseArticleDetailProps = {
+  article: ArticleDetailArticle
   status: ReactNode
   likeButton: ReactNode
   kebabMenu: ReactNode
 }
-export const BaseArticleDetail: FC<Props> = ({
+
+export const BaseArticleDetail: FC<BaseArticleDetailProps> = ({
   article,
   status,
   likeButton,
@@ -43,7 +45,7 @@ export const BaseArticleDetail: FC<Props> = ({
       </HStack>
 
       <HStack style={{ flexWrap: 'wrap' }} gap={2}>
-        {article.categories.map((category) => (
+        {article.categories.map(({ category }) => (
           <NextLink
             key={category.id}
             href={`/articles?category=${category.name}`}

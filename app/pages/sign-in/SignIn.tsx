@@ -41,7 +41,7 @@ export const SignIn: FC = () => {
       const response = await signIn({ data })
 
       if (!response?.isSuccess) {
-        setErrorMessage(response.error.message)
+        setErrorMessage(response?.error?.message ?? 'ログインに失敗しました')
         dialog.open()
         return
       }

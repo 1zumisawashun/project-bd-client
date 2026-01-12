@@ -11,12 +11,12 @@ import { ArticleCreateProvider } from './components/articleCreateProvider/Articl
 
 const BLOCK_NAME = 'site-wrapper'
 
-type Props = {
+type ArticleCreateProps = {
   defaultValues: Schema
   categoryOptions: string[]
 }
 
-export const ArticleCreate: FC<Props> = ({
+export const ArticleCreate: FC<ArticleCreateProps> = ({
   defaultValues,
   categoryOptions,
 }) => {

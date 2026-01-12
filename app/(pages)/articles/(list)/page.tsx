@@ -10,6 +10,7 @@ export default async function Page({
 }) {
   const categories = await getCategories()
   const categoryOptions = categories?.map((category) => category.name) ?? []
+  console.log('categoryOptions', categoryOptions)
 
   const defaultValues = (() => {
     const params = searchParams['category']

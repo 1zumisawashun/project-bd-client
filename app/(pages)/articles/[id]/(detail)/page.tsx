@@ -9,7 +9,8 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   const userId = session?.user?.id ?? ''
   const isAuthor = article?.authorId === userId
-  const isLike = article?.likedUsers.some((d) => d.id === userId) ?? false
+  const isLike =
+    article?.likedUsers.some(({ user }) => user.id === userId) ?? false
 
   if (!article) return <NotFound />
 

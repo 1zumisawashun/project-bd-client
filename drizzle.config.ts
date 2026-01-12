@@ -6,7 +6,7 @@ export default defineConfig({
   schema: './drizzle/schema.ts',
   dialect: 'sqlite',
   dbCredentials: {
-    url: process.env['DATABASE_URL'] || './sqlite.db',
+    // FIXME: ENV読み込めていないので修正する
+    url: process.env['DATABASE_URL']! ?? './sqlite.db',
   },
 }) satisfies Config
-// Contains AI-generated edits.

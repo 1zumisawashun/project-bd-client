@@ -3,15 +3,12 @@
 import { deleteArticle as _deleteArticle } from '@/functions/db/article'
 import { actionResult } from '@/functions/helpers/utils'
 import { auth } from '@/functions/libs/next-auth/auth'
-import { ActionsResult, Article } from '@/functions/types'
 
-type Return = ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
-
-export const deleteArticle = async ({
-  id,
-}: {
+type DeleteArticleArgs = {
   id: string
-}): Promise<Return> => {
+}
+
+export const deleteArticle = async ({ id }: DeleteArticleArgs) => {
   try {
     const session = await auth()
 

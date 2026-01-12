@@ -1,8 +1,8 @@
+import { articles, type InsertArticle } from '@/../drizzle/schema'
 import db from '@/functions/libs/drizzle-client/drizzle'
-import { articles, articlesCategories, likedArticles } from '@/../drizzle/schema'
-import { eq, inArray } from 'drizzle-orm'
-import type { InsertArticle } from '@/../drizzle/schema'
+import { eq } from 'drizzle-orm'
 
+// FIXME: QueryAPI to SQL-like API
 export const getArticles = async ({ categories }: { categories: string[] }) => {
   try {
     if (categories.length === 0) {
@@ -11,10 +11,9 @@ export const getArticles = async ({ categories }: { categories: string[] }) => {
           author: true,
         },
       })
-      return allArticles
+      return allArticles ?? null
     }
 
-    // Query articles with category filtering
     const articlesList = await db.query.articles.findMany({
       with: {
         author: true,
@@ -26,7 +25,6 @@ export const getArticles = async ({ categories }: { categories: string[] }) => {
       },
     })
 
-    // Filter articles that have at least one matching category
     const filtered = articlesList.filter((article) =>
       article.categories.some((ac) => categories.includes(ac.category.name)),
     )
@@ -58,28 +56,17 @@ export const getArticleById = async ({ id }: { id: string }) => {
         },
       },
     })
-    
-    if (!article) return null
-    
-    // Transform data to match expected format
-    return {
-      ...article,
-      likedUsers: article.likedUsers.map((lu) => ({ id: lu.user.id })),
-      categories: article.categories.map((ac) => ac.category),
-    }
+
+    return article ?? null
   } catch {
     return null
   }
 }
 
-export const createArticle = async ({
-  data,
-}: {
-  data: InsertArticle
-}) => {
+export const createArticle = async ({ data }: { data: InsertArticle }) => {
   try {
     const article = await db.insert(articles).values(data).returning()
-    return article[0]
+    return article[0] ?? null
   } catch {
     throw new Error('Failed to create article')
   }
@@ -87,8 +74,11 @@ export const createArticle = async ({
 
 export const deleteArticle = async ({ id }: { id: string }) => {
   try {
-    const article = await db.delete(articles).where(eq(articles.id, id)).returning()
-    return article[0]
+    const article = await db
+      .delete(articles)
+      .where(eq(articles.id, id))
+      .returning()
+    return article[0] ?? null
   } catch {
     throw new Error('Failed to delete article')
   }
@@ -107,9 +97,8 @@ export const updateArticle = async ({
       .set({ ...data, updatedAt: new Date() })
       .where(eq(articles.id, id))
       .returning()
-    return article[0]
+    return article[0] ?? null
   } catch {
     throw new Error('Failed to update article')
   }
 }
-// Contains AI-generated edits.

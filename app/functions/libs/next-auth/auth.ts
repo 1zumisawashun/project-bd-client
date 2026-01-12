@@ -1,81 +1,78 @@
+import { accounts, sessions, users } from '@/drizzle/schema'
 import { getUserByEmail } from '@/functions/db/user'
 import { isPasswordValid } from '@/functions/helpers/hash'
 import db from '@/functions/libs/drizzle-client/drizzle'
-import { schema } from '@/pages/sign-up/signUp.schema'
 import { DrizzleAdapter } from '@auth/drizzle-adapter'
 import NextAuth, { NextAuthConfig } from 'next-auth'
-import Credentials from 'next-auth/providers/credentials'
-import GitHub from 'next-auth/providers/github'
-import Google from 'next-auth/providers/google'
+import authConfig from './auth.config'
 
-const providers = [
-  GitHub,
-  Google,
-  Credentials({
-    // add type to credentials argument
-    credentials: {
-      email: { type: 'text' },
-      password: { type: 'password' },
-    },
-    async authorize(credentials) {
-      const validatedFields = schema.safeParse(credentials)
+type Credentials = {
+  email: string
+  password: string
+}
 
-      if (validatedFields.success) {
-        const { email, password } = validatedFields.data
-
-        const user = await getUserByEmail({ email })
-        if (!user?.hashedPassword) return null
-
-        const passwordsMatch = await isPasswordValid(
-          password,
-          user.hashedPassword,
-        )
-
-        if (passwordsMatch) return user
-      }
-
-      return null
-    },
-  }),
-] satisfies NextAuthConfig['providers']
-
-/** @see https://next-auth.js.org/configuration/callbacks */
+/**
+ * NOTE:
+ * 標準出力で検査してauthorize>signIn>jwt>sessionの順で呼ばれていることを確認済み
+ * 呼び出しのタイミングではなくドキュメントの配置を参考にしてコールバックを定義している
+ * @see https://next-auth.js.org/configuration/callbacks
+ */
 const callbacks = {
-  signIn() {
+  async signIn({ credentials }) {
+    console.log('signIn callback', { credentials })
+    // FIXME: 型定義が不十分なのでtype assertionで対応。next-auth.dに型定義を追加するべき
+    const { email, password } = credentials as Credentials
+    if (!email) throw new Error('No email found on user')
+    if (!password) throw new Error('No password found on user')
+
+    const response = await getUserByEmail({ email })
+    if (!response?.hashedPassword) throw new Error('User has no password')
+
+    const passwordValid = await isPasswordValid(
+      password,
+      response.hashedPassword,
+    )
+    if (!passwordValid) throw new Error('Incorrect password')
     return true
   },
   redirect({ baseUrl }) {
+    // console.log('redirect callback', { baseUrl })
     return baseUrl
   },
   /**
-   * @description This callback is called whenever a session is checked. (i.e. when invoking the /api/session endpoint, using useSession or getSession)
+   * This callback is called whenever a session is checked. (i.e. when invoking the /api/session endpoint, using useSession or getSession)
    * jwtコールバックが呼ばれた後に実行される
    * session.expiresはgetServerSessionで取得できないぽい
    * @see https://github.com/nextauthjs/next-auth/discussions/8907
    * 公式ドキュメントでも触れられているぽい（This means that the expires value is stripped away from session in Server Components.）
    * @see https://next-auth.js.org/configuration/nextjs#in-app-directory
    */
-  session({ session, token }) {
+  session({ token, session, user }) {
+    console.log('session callback', { token, session, user })
     session.user.id = token.id
     session.user.role = token.role
     session.user.expires = session.expires
     return session
   },
   /**
-   * @description When trigger is "signIn" or "signUp", it will be a subset of JWT, name, email and image will be included.
-   * @param {any} user authorizeの返り値を受け取る。新しいsessionでこのコールバックが「最初に呼び出されたときのみ」渡される
-   * @param {any} token 「最初に呼び出されたときのみ」以降の呼び出しではtokenが使用可能。そのためuserをsessionでも使用したい場合はtokenにuserを追加する必要がある
+   * NOTE:
+   * user は authorize の返り値を受け取る。新しい session でこのコールバックが「最初に呼び出されたときのみ」渡される。
+   * token は 「最初に呼び出されたときのみ」以降の呼び出しではtokenが使用可能。そのためuserをsessionでも使用したい場合はtokenにuserを追加する必要がある
    * あーだからここでtokenを作るのか、トークン=永続化するための情報を組んでくれってことね
    */
   jwt({ token, user }) {
+    console.log('jwt callback', { token, user })
     return { ...token, ...user }
   },
 } satisfies NextAuthConfig['callbacks']
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  adapter: DrizzleAdapter(db),
+  adapter: DrizzleAdapter(db, {
+    usersTable: users,
+    accountsTable: accounts,
+    sessionsTable: sessions,
+  }),
   session: { strategy: 'jwt' },
-  providers,
   callbacks,
+  ...authConfig,
 })
-// Contains AI-generated edits.

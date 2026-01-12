@@ -9,17 +9,21 @@ import {
 import { useToast } from '@/components/elements/Toast'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { useRouter } from 'next/navigation'
 import { FC, startTransition } from 'react'
 import { deleteArticle } from './deleteDialog.action'
 
-type Props = {
-  isOpen: ReturnType<typeof useDisclosure>['isOpen']
-  onClose: ReturnType<typeof useDisclosure>['close']
+type DeleteDialogProps = {
+  isOpen: boolean
+  onClose: () => void
   articleId: string
 }
-export const DeleteDialog: FC<Props> = ({ isOpen, onClose, articleId }) => {
+
+export const DeleteDialog: FC<DeleteDialogProps> = ({
+  isOpen,
+  onClose,
+  articleId,
+}) => {
   const toast = useToast()
   const router = useRouter()
 

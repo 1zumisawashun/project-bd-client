@@ -10,12 +10,14 @@ import { ArticleEditHeader } from './components/articleEditHeader/ArticleEditHea
 import { ArticleEditProvider } from './components/articleEditProvider/ArticleEditProvider'
 
 const BLOCK_NAME = 'site-wrapper'
-type Props = {
+
+type ArticleEditProps = {
   articleId: string
   defaultValues: Schema
   categoryOptions: string[]
 }
-export const ArticleEdit: FC<Props> = ({
+
+export const ArticleEdit: FC<ArticleEditProps> = ({
   articleId,
   defaultValues,
   categoryOptions,

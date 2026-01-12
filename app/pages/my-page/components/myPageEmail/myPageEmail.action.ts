@@ -1,41 +1,38 @@
 'use server'
 
-import { getUserByEmail, updateUser } from '@/functions/db/user'
+import { getUserByEmail, updateUserByEmail } from '@/functions/db/user'
 import { actionResult } from '@/functions/helpers/utils'
 import { auth } from '@/functions/libs/next-auth/auth'
-import { ActionsResult, User } from '@/functions/types'
-import { EmailSchema, emailSchema } from './myPageEmail.schema'
+import { Schema, schema } from './myPageEmail.schema'
 
-type Return = ActionsResult<Omit<User, 'posts' | 'likedArticles'>>
-export const updateEmail = async ({
-  data,
-}: {
-  data: EmailSchema
-}): Promise<Return> => {
+type UpdateEmailArgs = {
+  data: Schema
+}
+
+export const updateEmail = async (args: UpdateEmailArgs) => {
   try {
     const session = await auth()
 
-    if (!session?.user.id) {
+    if (!session?.user.email) {
       return actionResult.end('ログインしてください')
     }
 
-    const validatedFields = emailSchema.safeParse(data)
+    const validatedFields = schema.safeParse(args.data)
+    const { success, error, data } = validatedFields
 
-    if (!validatedFields.success) {
-      return actionResult.end(validatedFields.error.message)
+    if (!success) {
+      return actionResult.end(error.message)
     }
 
-    const existingUser = await getUserByEmail({
-      email: validatedFields.data.email,
-    })
+    const existingUser = await getUserByEmail({ email: data.email })
 
     if (existingUser) {
       actionResult.end('このメールアドレスは既に登録されています')
     }
 
-    const response = await updateUser({
-      id: session.user.id,
-      data: validatedFields.data,
+    const response = await updateUserByEmail({
+      email: session.user.email,
+      data,
     })
     return actionResult.success(response)
   } catch (error) {

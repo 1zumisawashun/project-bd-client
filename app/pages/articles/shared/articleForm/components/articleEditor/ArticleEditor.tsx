@@ -10,11 +10,12 @@ import { ArticleMenubar } from './components/articleMenubar/ArticleMenubar'
 
 const BLOCK_NAME = 'articleEditor'
 
-type Props = {
+type ArticleEditorProps = {
   onChange: (content: string) => void
   value: string
 }
-export const ArticleEditor: FC<Props> = ({ onChange, value }) => {
+
+export const ArticleEditor: FC<ArticleEditorProps> = ({ onChange, value }) => {
   const editor = useEditor({
     content: value,
     onUpdate: ({ editor }) => {

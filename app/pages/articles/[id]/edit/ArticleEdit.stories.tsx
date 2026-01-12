@@ -1,7 +1,7 @@
-import { content } from '@/functions/constants/content'
 import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 
+import { CONTENT } from '@/drizzle/constants/articles'
 import { FC } from 'react'
 import { ArticleEdit } from './ArticleEdit'
 
@@ -11,7 +11,9 @@ const meta: Meta<typeof ArticleEdit> = {
   parameters: { layout: 'fullscreen' },
   decorators: [FullWidthDecorator],
 }
+
 export default meta
+
 type Story = StoryObj<typeof ArticleEdit>
 
 const Render: FC = () => {
@@ -20,7 +22,7 @@ const Render: FC = () => {
       articleId="1"
       defaultValues={{
         title: 'テスト',
-        content,
+        content: CONTENT,
         categories: [{ name: 'JavaScript' }],
         status: 'PUBLISHED',
       }}

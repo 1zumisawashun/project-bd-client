@@ -5,7 +5,6 @@ import { ArticleEdit } from '@/pages/articles/[id]/edit/ArticleEdit'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const categories = await getCategories()
-
   const categoryOptions = categories?.map((category) => category.name) ?? []
 
   const article = await getArticleById({ id: params.id })
@@ -14,7 +13,8 @@ export default async function Page({ params }: { params: { id: string } }) {
     title: article?.title ?? '',
     content: article?.content ?? '',
     categories:
-      article?.categories?.map((category) => ({ name: category.name })) ?? [],
+      article?.categories?.map(({ category }) => ({ name: category.name })) ??
+      [],
     status: (article?.status ?? 'PUBLISHED') as ArticleStatus,
   }
 

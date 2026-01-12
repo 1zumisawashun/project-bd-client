@@ -9,17 +9,21 @@ import {
 import { useToast } from '@/components/elements/Toast'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { useRouter } from 'next/navigation'
 import { FC, startTransition } from 'react'
 import { publishArticle } from './publishDialog.action'
 
-type Props = {
-  isOpen: ReturnType<typeof useDisclosure>['isOpen']
-  onClose: ReturnType<typeof useDisclosure>['close']
+type PublishDialogProps = {
+  isOpen: boolean
+  onClose: () => void
   articleId: string
 }
-export const PublishDialog: FC<Props> = ({ isOpen, onClose, articleId }) => {
+
+export const PublishDialog: FC<PublishDialogProps> = ({
+  isOpen,
+  onClose,
+  articleId,
+}) => {
   const toast = useToast()
   const router = useRouter()
 

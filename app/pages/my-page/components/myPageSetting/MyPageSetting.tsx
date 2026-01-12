@@ -1,20 +1,21 @@
 'use client'
 
 import { VStack } from '@/components/layouts/VStack'
-import { User } from '@/functions/types'
 import { FC } from 'react'
+import { MypageUser } from '../../myPage.types'
 import { MyPageEmail } from '../myPageEmail/MyPageEmail'
 import { MyPageLogout } from '../myPageLogout/MyPageLogout'
 import { MyPageProfile } from '../myPageProfile/MyPageProfile'
 
-type Props = {
-  user: User
+type MyPageSettingProps = {
+  user: MypageUser
 }
-export const MyPageSetting: FC<Props> = ({ user }) => {
+
+export const MyPageSetting: FC<MyPageSettingProps> = ({ user }) => {
   return (
     <VStack gap={6}>
-      <MyPageProfile user={user} />
-      <MyPageEmail user={user} />
+      <MyPageProfile name={user.name} />
+      <MyPageEmail email={user.email} />
       <MyPageLogout />
     </VStack>
   )

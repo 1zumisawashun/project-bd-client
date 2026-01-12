@@ -1,5 +1,4 @@
 import eslint from '@eslint/js'
-// @ts-expect-error
 import pluginImport from 'eslint-plugin-import'
 
 import type { Linter } from 'eslint'

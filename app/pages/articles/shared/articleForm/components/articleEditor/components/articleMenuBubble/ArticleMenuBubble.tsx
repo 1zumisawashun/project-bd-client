@@ -6,10 +6,12 @@ import { FC } from 'react'
 import styles from './articleMenuBubble.module.css'
 
 const BLOCK_NAME = 'articleMenuBubble'
-type Props = {
+
+type ArticleMenuBubbleProps = {
   editor: Editor
 }
-export const ArticleMenuBubble: FC<Props> = ({ editor }) => {
+
+export const ArticleMenuBubble: FC<ArticleMenuBubbleProps> = ({ editor }) => {
   const { bold, italic, strike, trash, link } = tiptapClient(editor)
 
   const items = [bold, italic, strike, link, trash]

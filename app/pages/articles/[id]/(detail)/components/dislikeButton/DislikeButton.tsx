@@ -9,11 +9,16 @@ import { likeArticle } from './dislikeButton.action'
 import styles from './dislikeButton.module.css'
 
 const BLOCK_NAME = 'dislikeButton'
-type Props = {
+
+type DislikeButtonProps = {
   articleId: string
   userId: string
 }
-export const DislikeButton: FC<Props> = ({ articleId, userId }) => {
+
+export const DislikeButton: FC<DislikeButtonProps> = ({
+  articleId,
+  userId,
+}) => {
   const router = useRouter()
   const toast = useToast()
 

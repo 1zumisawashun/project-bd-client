@@ -1,13 +1,14 @@
 'use client'
 
-import { Article } from '@/functions/types'
 import { FC, ReactNode } from 'react'
+import { ArticleDetailArticle } from '../../articleDetail.types'
 import { BaseArticleDetail } from '../baseArticleDetail/BaseArticleDetail'
 
-type Props = {
-  article: Article
+type UserArticleDetailProps = {
+  article: ArticleDetailArticle
   likeButton: ReactNode
 }
-export const UserArticleDetail: FC<Props> = (props) => {
+
+export const UserArticleDetail: FC<UserArticleDetailProps> = (props) => {
   return <BaseArticleDetail {...props} status={null} kebabMenu={null} />
 }

@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 import { FC } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as z from 'zod'

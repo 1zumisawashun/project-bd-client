@@ -1,10 +1,12 @@
-import 'dotenv/config'
+import * as schema from '@/drizzle/schema'
 import Database from 'better-sqlite3'
+import 'dotenv/config'
 import { drizzle } from 'drizzle-orm/better-sqlite3'
-import * as schema from '@/../drizzle/schema'
 
 const drizzleClientSingleton = () => {
-  const sqlite = new Database(process.env['DATABASE_URL'] || './sqlite.db')
+  // FIXME: ENV読み込めていないので修正する
+  const sqlite = new Database(process.env['DATABASE_URL']! ?? './sqlite.db')
+  // NOTE: schemaを渡すことで型安全になる
   return drizzle(sqlite, { schema })
 }
 
@@ -17,4 +19,3 @@ const db = globalThis.drizzleGlobal ?? drizzleClientSingleton()
 export default db
 
 if (process.env.NODE_ENV !== 'production') globalThis.drizzleGlobal = db
-// Contains AI-generated edits.

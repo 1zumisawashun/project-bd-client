@@ -40,9 +40,7 @@ See [Configuration Reference](https://github.com/1zumisawashun/folder-structure-
 
 ## ERD
 
-以下を参照してください
-
-See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client/blob/main/prisma/schema.md).
+null
 
 ## 使用技術
 

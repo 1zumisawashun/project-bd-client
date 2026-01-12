@@ -21,7 +21,6 @@ const Render: FC = () => {
   const editor = useEditor({
     content: CONTENT,
   })
-  console.log(editor)
 
   if (!editor) return null
 

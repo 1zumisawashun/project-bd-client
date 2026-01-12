@@ -53,9 +53,9 @@ See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client
 - backend : Next.js Route Handler
 - orm : Prisma
 - database : Supabase
-- ui : Radix UI + CSS Modules
+- ui : Radix UI, CSS Modules
 - auth : NextAuth
-- test : Jest + react-testing-library
+- test : Jest, react-testing-library
 - hosting : Vercel
 ```
 
@@ -65,23 +65,16 @@ See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client
 - frontend : Next.js App Router
 - backend : Next.js Route Handler
 - orm : Drizzle
-- database : PGlite
-- ui : Base UI + CSS Modules
+- database : SQLite（Cloudflare D1）
+- ui : Base UI, CSS Modules
 - auth : NextAuth
-- test : Vitest + react-testing-library, Playwright
-- Lefthook, Eslint, Oxlint, Oxfmt
-- hosting : Vercel
+- test : Vitest, react-testing-library, Playwright
+- hosting : Cloudflare Workers
 ```
 
 ## Troubleshoot
 
-### デプロイが失敗する
-
-Supabaseをhobbyプランで使用しているため定期的に稼働させないとロックされます。Supabaseのダッシュボードでリストアさせてください。
-
-### nodeエラーが発生する
-
-nodeのバージョンを本案件のバージョンに合わせてください。nodeのバージョン管理ツールをVoltaに設定している場合は不要です。
+null
 
 ## その他ドキュメント
 

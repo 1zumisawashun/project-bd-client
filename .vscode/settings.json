@@ -4,7 +4,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.fixAll.stylelint": "explicit",
-    "source.organizeImports": "explicit"
+    "source.organizeImports": "explicit",
+    "source.fixAll.oxc": "explicit"
   },
   "editor.guides.bracketPairs": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -13,13 +14,5 @@
   "typescript.referencesCodeLens.enabled": true,
   "editor.stickyScroll.enabled": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "json.schemaDownload.enable": true,
-  "github.copilot.chat.codeGeneration.instructions": [
-    {
-      "file": ".github/instructions/test.instructions.md"
-    },
-    {
-      "file": ".github/instructions/commit-message.instructions.md"
-    }
-  ]
+  "json.schemaDownload.enable": true
 }

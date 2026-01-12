@@ -20,7 +20,7 @@ import {
   SubmitHandler,
   useForm,
 } from 'react-hook-form'
-import { tos } from '../tos/tos.constant'
+import { TOS } from '../tos/tos.constants'
 import { signUp } from './signUp.action'
 import { schema, Schema } from './signUp.schema'
 
@@ -87,7 +87,7 @@ export const SignUp: FC = () => {
           </VStack>
           <Card scrollable style={{ height: '150px' }}>
             <CardBody>
-              <Nl2br>{tos}</Nl2br>
+              <Nl2br>{TOS}</Nl2br>
             </CardBody>
           </Card>
           <Checkbox checked={checked} onClick={() => setChecked(!checked)}>

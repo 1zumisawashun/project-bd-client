@@ -1,19 +1,21 @@
 'use server'
 
-import { updateArticle } from '@/functions/db/article'
+import { likedArticles } from '@/../drizzle/schema'
+import { getArticleById } from '@/functions/db/article'
 import { actionResult } from '@/functions/helpers/utils'
+import db from '@/functions/libs/drizzle-client/drizzle'
 import { auth } from '@/functions/libs/next-auth/auth'
-import { ActionsResult, Article } from '@/functions/types'
+import { and, eq } from 'drizzle-orm'
 
-type Return = ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
+type DislikeArticleArgs = {
+  articleId: string
+  userId: string
+}
 
 export const dislikeArticle = async ({
   articleId,
   userId,
-}: {
-  articleId: string
-  userId: string
-}): Promise<Return> => {
+}: DislikeArticleArgs) => {
   try {
     const session = await auth()
 
@@ -21,9 +23,27 @@ export const dislikeArticle = async ({
       return actionResult.end('ログインしてください')
     }
 
-    const params = { likedUsers: { disconnect: { id: userId } } }
-    const response = await updateArticle({ id: articleId, data: params })
-    return actionResult.success(response)
+    // Remove the like by deleting from junction table
+    await db
+      .delete(likedArticles)
+      .where(
+        and(
+          eq(likedArticles.articleId, articleId),
+          eq(likedArticles.userId, userId),
+        ),
+      )
+
+    const article = await getArticleById({ id: articleId })
+    if (!article) {
+      return actionResult.end('記事が見つかりません')
+    }
+
+    const {
+      likedUsers: _likedUsers,
+      categories: _categories,
+      ...articleData
+    } = article
+    return actionResult.success(articleData)
   } catch (error) {
     return actionResult.error(error)
   }

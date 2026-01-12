@@ -1,4 +1,4 @@
-export const content = `
+export const CONTENT = `
 <h2>
   Hi there,
 </h2>

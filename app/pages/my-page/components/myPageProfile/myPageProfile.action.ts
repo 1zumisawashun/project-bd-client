@@ -1,34 +1,32 @@
 'use server'
 
-import { updateUser } from '@/functions/db/user'
+import { updateUserByEmail } from '@/functions/db/user'
 import { actionResult } from '@/functions/helpers/utils'
 import { auth } from '@/functions/libs/next-auth/auth'
-import { ActionsResult, User } from '@/functions/types'
-import { ProfileSchema, profileSchema } from './myPageProfile.schema'
+import { Schema, schema } from './myPageProfile.schema'
 
-type Return = ActionsResult<Omit<User, 'posts' | 'likedArticles'>>
+type UpdateProfileArgs = {
+  data: Schema
+}
 
-export const updateProfile = async ({
-  data,
-}: {
-  data: ProfileSchema
-}): Promise<Return> => {
+export const updateProfile = async (args: UpdateProfileArgs) => {
   try {
     const session = await auth()
 
-    if (!session?.user.id) {
+    if (!session?.user.email) {
       return actionResult.end('ログインしてください')
     }
 
-    const validatedFields = profileSchema.safeParse(data)
+    const validatedFields = schema.safeParse(args.data)
+    const { success, error, data } = validatedFields
 
-    if (!validatedFields.success) {
-      return actionResult.end(validatedFields.error.message)
+    if (!success) {
+      return actionResult.end(error.message)
     }
 
-    const response = await updateUser({
-      id: session.user.id,
-      data: validatedFields.data,
+    const response = await updateUserByEmail({
+      email: session.user.email,
+      data: data,
     })
 
     return actionResult.success(response)

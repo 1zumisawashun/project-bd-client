@@ -17,10 +17,14 @@ import { editArticle } from './articleEditHeader.action'
 import styles from './articleEditHeader.module.css'
 
 const BLOCK_NAME = 'articleEditHeader'
-type Props = {
+
+type ArticleEditHeaderProps = {
   articleId: string
 }
-export const ArticleEditHeader: FC<Props> = ({ articleId }) => {
+
+export const ArticleEditHeader: FC<ArticleEditHeaderProps> = ({
+  articleId,
+}) => {
   const router = useRouter()
   const toast = useToast()
   const {

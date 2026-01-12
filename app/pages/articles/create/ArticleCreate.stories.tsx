@@ -1,7 +1,7 @@
-import { content } from '@/functions/constants/content'
 import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 
+import { CONTENT } from '@/drizzle/constants/articles'
 import { FC } from 'react'
 import { ArticleCreate } from './ArticleCreate'
 
@@ -11,7 +11,9 @@ const meta: Meta<typeof ArticleCreate> = {
   parameters: { layout: 'fullscreen' },
   decorators: [FullWidthDecorator],
 }
+
 export default meta
+
 type Story = StoryObj<typeof ArticleCreate>
 
 const Render: FC = () => {
@@ -19,7 +21,7 @@ const Render: FC = () => {
     <ArticleCreate
       defaultValues={{
         title: '',
-        content,
+        content: CONTENT,
         categories: [],
         status: 'PUBLISHED',
       }}

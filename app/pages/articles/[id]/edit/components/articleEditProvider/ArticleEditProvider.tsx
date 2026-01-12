@@ -8,13 +8,13 @@ import {
   schema,
 } from '../../../../shared/articleForm/articleForm.schema'
 
-type Props = {
+type ArticleEditProviderProps = {
   defaultValues: Schema
 }
-export const ArticleEditProvider: FC<PropsWithChildren<Props>> = ({
-  children,
-  defaultValues,
-}) => {
+
+export const ArticleEditProvider: FC<
+  PropsWithChildren<ArticleEditProviderProps>
+> = ({ children, defaultValues }) => {
   const methods = useForm<Schema>({
     mode: 'onTouched',
     resolver: zodResolver(schema),

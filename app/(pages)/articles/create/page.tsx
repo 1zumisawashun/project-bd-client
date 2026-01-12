@@ -1,4 +1,4 @@
-import { content } from '@/functions/constants/content'
+import { CONTENT } from '@/functions/constants/content'
 import { getCategories } from '@/functions/db/category'
 import { ArticleCreate } from '@/pages/articles/create/ArticleCreate'
 
@@ -9,7 +9,7 @@ export default async function Page() {
 
   const defaultValues = {
     title: '',
-    content,
+    content: CONTENT,
     categories: [],
     status: 'PUBLISHED' as const,
   }

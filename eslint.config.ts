@@ -1,4 +1,3 @@
-// @ts-expect-error
 import oxlint from 'eslint-plugin-oxlint'
 import pluginCustomRules from './app/functions/libs/eslint'
 import eslint from './app/functions/libs/eslint/configs/eslint'

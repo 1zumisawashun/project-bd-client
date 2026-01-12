@@ -5,12 +5,15 @@ import { HStack } from '@/components/layouts/HStack'
 import { useRouter } from 'next/navigation'
 import { FC, useOptimistic } from 'react'
 
-type Props = {
+type SearchFormProps = {
   categoryOptions: string[]
   defaultValues: string[]
 }
 
-export const SearchForm: FC<Props> = ({ categoryOptions, defaultValues }) => {
+export const SearchForm: FC<SearchFormProps> = ({
+  categoryOptions,
+  defaultValues,
+}) => {
   const router = useRouter()
 
   const [categories, setCategories] = useOptimistic<string[]>(defaultValues)

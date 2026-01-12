@@ -16,11 +16,11 @@ export const genRandomId = () => Math.random().toString(32).substring(2)
 
 export const actionResult = {
   end: (error: unknown) => {
-    console.error(error)
+    console.error(error, 'actionResult end')
     throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
   },
   success: <T>(response: T) => {
-    console.log(response)
+    console.log(response, 'actionResult success')
     return {
       isSuccess: true as const,
       data: response,
@@ -28,7 +28,7 @@ export const actionResult = {
     }
   },
   error: (error: unknown) => {
-    console.error(error)
+    console.error(error, 'actionResult error')
     return {
       isSuccess: false as const,
       data: null,

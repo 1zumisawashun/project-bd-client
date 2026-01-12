@@ -1,6 +1,3 @@
-import { getArticleById, getArticles } from '@/functions/db/article'
-import { getCategories } from '@/functions/db/category'
-import { getUserById } from '@/functions/db/user'
 import { ReactNode } from 'react'
 
 const _THEME_OPTIONS = ['primary', 'danger'] as const
@@ -49,11 +46,3 @@ export type ActionsResult<T> =
         message: string
       }
     }
-
-export type User = NonNullable<Awaited<ReturnType<typeof getUserById>>>
-
-export type Articles = NonNullable<Awaited<ReturnType<typeof getArticles>>>
-
-export type Article = NonNullable<Awaited<ReturnType<typeof getArticleById>>>
-
-export type Categories = NonNullable<Awaited<ReturnType<typeof getCategories>>>

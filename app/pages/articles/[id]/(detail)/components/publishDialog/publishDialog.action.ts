@@ -3,15 +3,12 @@
 import { updateArticle } from '@/functions/db/article'
 import { actionResult } from '@/functions/helpers/utils'
 import { auth } from '@/functions/libs/next-auth/auth'
-import { ActionsResult, Article } from '@/functions/types'
 
-type Return = ActionsResult<Omit<Article, 'likedUsers' | 'categories'>>
-
-export const publishArticle = async ({
-  id,
-}: {
+type PublishArticleArgs = {
   id: string
-}): Promise<Return> => {
+}
+
+export const publishArticle = async ({ id }: PublishArticleArgs) => {
   try {
     const session = await auth()
 

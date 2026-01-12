@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 
 import { Button } from '@/components/buttons/Button'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
@@ -10,7 +10,9 @@ const meta: Meta<typeof DraftDialog> = {
   title: 'feature/articles/DraftDialog',
   component: DraftDialog,
 }
+
 export default meta
+
 type Story = StoryObj<typeof DraftDialog>
 
 const Render: FC = () => {

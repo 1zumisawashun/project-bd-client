@@ -36,9 +36,7 @@ export default {
           if (!hasUseServerDirective) {
             return
           }
-          if (
-            node.declaration?.type !== 'VariableDeclaration'
-          ) {
+          if (node.declaration?.type !== 'VariableDeclaration') {
             return
           }
           for (const declaration of node.declaration.declarations) {

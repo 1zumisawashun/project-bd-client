@@ -9,7 +9,6 @@ import { TextInput } from '@/components/forms/TextInput'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { User } from '@/functions/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { FC, startTransition } from 'react'
@@ -20,15 +19,17 @@ import {
   useForm,
 } from 'react-hook-form'
 import { updateEmail } from './myPageEmail.action'
-import { EmailSchema, emailSchema } from './myPageEmail.schema'
+import { Schema, schema } from './myPageEmail.schema'
 
-const EmailPreview: FC<{ email: string; open: () => void }> = ({
-  email,
-  open,
-}) => {
+type EmailPreviewProps = {
+  email: string | null
+  open: () => void
+}
+
+const EmailPreview: FC<EmailPreviewProps> = ({ email, open }) => {
   return (
     <VStack>
-      <p>現在のメールアドレス: {email}</p>
+      <p>現在のメールアドレス: {email ?? '未設定'}</p>
       <HStack>
         <Button onClick={open}>変更する</Button>
       </HStack>
@@ -36,22 +37,24 @@ const EmailPreview: FC<{ email: string; open: () => void }> = ({
   )
 }
 
-const EmailEditForm: FC<{ email: string; close: () => void }> = ({
-  email,
-  close,
-}) => {
+type EmailEditFormProps = {
+  email: string | null
+  close: () => void
+}
+
+const EmailEditForm: FC<EmailEditFormProps> = ({ email, close }) => {
   const router = useRouter()
   const toast = useToast()
 
-  const { control, handleSubmit } = useForm<EmailSchema>({
+  const { control, handleSubmit } = useForm<Schema>({
     mode: 'onTouched',
-    resolver: zodResolver(emailSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
-      email,
+      email: email ?? '',
     },
   })
 
-  const onSubmit: SubmitHandler<EmailSchema> = (data) => {
+  const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
       const response = await updateEmail({ data })
 
@@ -72,7 +75,7 @@ const EmailEditForm: FC<{ email: string; close: () => void }> = ({
     })
   }
 
-  const onError: SubmitErrorHandler<EmailSchema> = (error) => {
+  const onError: SubmitErrorHandler<Schema> = (error) => {
     toast.add({
       title: 'エラーが発生しました',
       description: JSON.stringify(error, null, 2),
@@ -102,9 +105,12 @@ const EmailEditForm: FC<{ email: string; close: () => void }> = ({
   )
 }
 
-export const MyPageEmail: FC<{ user: User }> = ({ user }) => {
+type MyPageEmailProps = {
+  email: string | null
+}
+
+export const MyPageEmail: FC<MyPageEmailProps> = ({ email }) => {
   const { isOpen, open, close } = useDisclosure()
-  const email = user.email ?? ''
 
   return (
     <Card>

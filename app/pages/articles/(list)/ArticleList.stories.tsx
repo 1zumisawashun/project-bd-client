@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 
-import { mockArticles } from '@/functions/constants/articles'
 import { FC } from 'react'
 import { ArticleList } from './ArticleList'
+import { MOCK_ARTICLE_LIST_ARTICLE } from './articleList.mocks'
 
 const meta: Meta<typeof ArticleList> = {
   title: 'feature/articles/ArticleList',
@@ -14,7 +14,7 @@ type Story = StoryObj<typeof ArticleList>
 const Render: FC = () => {
   return (
     <ArticleList
-      articles={mockArticles}
+      articles={MOCK_ARTICLE_LIST_ARTICLE}
       categoryOptions={[]}
       defaultValues={[]}
     />

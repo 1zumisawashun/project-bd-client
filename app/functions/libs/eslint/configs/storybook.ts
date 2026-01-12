@@ -1,4 +1,3 @@
-// @ts-expect-error
 import pluginImport from 'eslint-plugin-import'
 import pluginStorybook from 'eslint-plugin-storybook'
 

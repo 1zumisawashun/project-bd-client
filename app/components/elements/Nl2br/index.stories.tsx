@@ -1,5 +1,5 @@
-import { faq } from '@/pages/faq/faq.constant'
-import type { Meta, StoryObj } from '@storybook/react'
+import { FAQ } from '@/pages/faq/faq.constants'
+import { type Meta, type StoryObj } from '@storybook/react'
 
 import { FC } from 'react'
 import { Nl2br } from './index'
@@ -14,7 +14,7 @@ export default meta
 type Story = StoryObj<typeof Nl2br>
 
 const Render: FC = () => {
-  return <Nl2br>{faq}</Nl2br>
+  return <Nl2br>{FAQ}</Nl2br>
 }
 
 export const Default: Story = {

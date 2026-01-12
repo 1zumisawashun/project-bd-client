@@ -302,5 +302,3 @@ describe('AnchorButton', () => {
     })
   })
 })
-
-// Contains AI-generated edits.

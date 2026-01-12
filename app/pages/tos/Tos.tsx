@@ -1,5 +1,5 @@
 import { Nl2br } from '@/components/elements/Nl2br'
 import { FC } from 'react'
-import { tos } from './tos.constant'
+import { TOS } from './tos.constants'
 
-export const Tos: FC = () => <Nl2br>{tos}</Nl2br>
+export const Tos: FC = () => <Nl2br>{TOS}</Nl2br>

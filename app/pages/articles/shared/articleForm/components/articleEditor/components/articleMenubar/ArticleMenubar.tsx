@@ -12,10 +12,12 @@ import { FC } from 'react'
 import styles from './articleMenubar.module.css'
 
 const BLOCK_NAME = 'articleMenubar'
-type Props = {
+
+type ArticleMenubarProps = {
   editor: Editor
 }
-export const ArticleMenubar: FC<Props> = ({ editor }) => {
+
+export const ArticleMenubar: FC<ArticleMenubarProps> = ({ editor }) => {
   const {
     // typography
     bold,

@@ -4,10 +4,12 @@ import { TextInput } from '../../../forms/TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
 type Ref = ElementRef<'input'>
+
 type Props = {
   onChange: (value?: string) => void // react-hook-form's onChange
   options: string[]
 } & Omit<ComponentProps<typeof TextInput>, 'onChange'>
+
 export const AutocompleteInputControl = forwardRef<Ref, Props>((props, ref) => {
   const { menu, suggestions, onChange, onClick, onKeyDown, onFocus } =
     useAutocompleteInput({ options: props.options, value: props.value })

@@ -70,7 +70,6 @@ export const AuthorArticleDetail: FC<AuthorArticleDetailProps> = (props) => {
           />
         }
       />
-      {/* NOTE: プリミティブであればdatasourceに依存させなくても良さそう？ */}
       <DeleteDialog
         isOpen={deleteDialog.isOpen}
         onClose={deleteDialog.close}

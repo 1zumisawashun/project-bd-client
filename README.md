@@ -75,6 +75,11 @@ See [Configuration Reference](https://github.com/1zumisawashun/project-bd-client
 ## TODO
 
 - import db from '@/functions/libs/drizzle/client' を db dir に集約させる
+- QueryAPI to SQL-like API
+- shared は I/F を datasource に依存させない方が良さそう
+  - ディレクトリのテンプレートに記載済み
+  - プリミティブであればdatasourceに依存させなくても良さそう？
+- ENV読み込めていないので修正する
 
 ## Troubleshoot
 

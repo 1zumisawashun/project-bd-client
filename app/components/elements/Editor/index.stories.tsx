@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react'
 
-import { CONTENT } from '@/functions/constants/content'
+import { CONTENT } from '@/functions/libs/drizzle/constants/articles'
 import { FC } from 'react'
 import { useEditor } from './hooks/useEditor'
 import { EditorContent } from './index'

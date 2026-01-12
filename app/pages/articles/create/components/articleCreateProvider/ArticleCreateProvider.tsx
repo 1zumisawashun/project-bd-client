@@ -1,6 +1,6 @@
 'use client'
 
-import { CONTENT } from '@/functions/constants/content'
+import { CONTENT } from '@/functions/libs/drizzle/constants/articles'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, PropsWithChildren } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'

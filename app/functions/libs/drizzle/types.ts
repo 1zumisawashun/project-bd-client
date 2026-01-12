@@ -20,11 +20,13 @@ type QueryConfig<TableName extends keyof TSchema> = DBQueryConfig<
 
 export type InferQueryModel<
   TableName extends keyof TSchema,
-  // oxlint-disable-next-line no-empty-object-type
   QBConfig extends QueryConfig<TableName> = {},
 > = BuildQueryResult<TSchema, TSchema[TableName], QBConfig>
 
-// Junction tableを排除するユーティリティ型
+/**
+ * NOTE:
+ * Junction tableを排除するユーティリティ型
+ */
 export type RemoveJunctionTable<
   T,
   JunctionKey extends keyof T,
@@ -36,10 +38,10 @@ export type RemoveJunctionTable<
       : T
     : T
 
+// ex)
 // type RemoveJunctionTable<T> = T extends { likedArticles: (infer J)[] }
 //   ? J extends { article: infer A }
 //     ? Omit<T, 'likedArticles'> & { likedArticles: A[] }
 //     : T
 //   : T
-
 // export type ResultWithoutJunction = RemoveJunctionTable<Result>

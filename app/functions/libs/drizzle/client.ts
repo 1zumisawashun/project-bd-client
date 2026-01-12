@@ -4,7 +4,6 @@ import 'dotenv/config'
 import { drizzle } from 'drizzle-orm/better-sqlite3'
 
 const drizzleClientSingleton = () => {
-  // FIXME: ENV読み込めていないので修正する
   const sqlite = new Database(process.env['DATABASE_URL']! ?? './sqlite.db')
   // NOTE: schemaを渡すことで型安全になる
   return drizzle(sqlite, { schema })

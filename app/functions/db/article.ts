@@ -2,7 +2,6 @@ import db from '@/functions/libs/drizzle/client'
 import { articles, type InsertArticle } from '@/functions/libs/drizzle/schema'
 import { eq } from 'drizzle-orm'
 
-// FIXME: QueryAPI to SQL-like API
 export const getArticles = async ({ categories }: { categories: string[] }) => {
   try {
     if (categories.length === 0) {
@@ -76,11 +75,11 @@ export const createArticle = async ({ data }: { data: InsertArticle }) => {
 
 export const deleteArticle = async ({ id }: { id: string }) => {
   try {
-    const article = await db
+    const [article] = await db
       .delete(articles)
       .where(eq(articles.id, id))
       .returning()
-    return article[0] ?? null
+    return article ?? null
   } catch {
     throw new Error('Failed to delete article')
   }
@@ -94,12 +93,12 @@ export const updateArticle = async ({
   data: Partial<InsertArticle>
 }) => {
   try {
-    const article = await db
+    const [article] = await db
       .update(articles)
       .set({ ...data, updatedAt: new Date() })
       .where(eq(articles.id, id))
       .returning()
-    return article[0] ?? null
+    return article ?? null
   } catch {
     throw new Error('Failed to update article')
   }

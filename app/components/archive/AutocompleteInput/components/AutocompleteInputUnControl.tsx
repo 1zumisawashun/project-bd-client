@@ -11,7 +11,9 @@ import { TextInput } from '../../../forms/TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 
 type Ref = ElementRef<'input'>
+
 type Props = { options: string[] } & ComponentProps<typeof TextInput>
+
 export const AutocompleteInputUnControl = forwardRef<Ref, Props>(
   (props, ref) => {
     const { menu, suggestions, onChange, onClick, onKeyDown, onFocus } =
@@ -53,7 +55,8 @@ export const AutocompleteInputUnControl = forwardRef<Ref, Props>(
                   target: { value: d, name: props.name },
                 } as ChangeEvent<HTMLInputElement>
                 // TODO
-                // @ts-ignore
+                // oxlint-disable-next-line ban-ts-comment
+                // @ts-expect-error
                 props.onChange?.(e)
                 updateInputRef(d)
               }}

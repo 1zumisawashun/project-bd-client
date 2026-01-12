@@ -25,7 +25,6 @@ export const ArticleCreate: FC<ArticleCreateProps> = ({ categories }) => {
           <ArticleCreateHeader />
         </StickyWrapper>
         <main className={styles[`${BLOCK_NAME}-inner`]}>
-          {/* NOTE: sharedはI/Fをdatasourceに依存させない方が良さそう */}
           <ArticleForm categoryOptions={categoryOptions} />
         </main>
         <Footer />

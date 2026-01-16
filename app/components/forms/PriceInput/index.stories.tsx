@@ -1,9 +1,11 @@
+'use client'
+
+import { useLens } from '@hookform/lenses'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 import { FC } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import * as z from 'zod'
-import { Field, FieldError, FieldLabel } from '../Field'
 import { PriceInput } from './index'
 
 const meta: Meta<typeof PriceInput> = {
@@ -28,19 +30,9 @@ const Render: FC = () => {
     },
   })
 
-  return (
-    <Controller
-      control={control}
-      name="price"
-      render={({ field, fieldState: { invalid, error } }) => (
-        <Field invalid={invalid}>
-          <FieldLabel>PriceInput</FieldLabel>
-          <PriceInput {...field} />
-          <FieldError match={!!error}>{error?.message}</FieldError>
-        </Field>
-      )}
-    />
-  )
+  const lens = useLens({ control })
+
+  return <PriceInput lens={lens} />
 }
 
 export const Default: Story = {

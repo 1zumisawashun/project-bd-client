@@ -1,27 +1,33 @@
 import { HStack } from '@/components/layouts/HStack'
+import { Lens } from '@hookform/lenses'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
+import { useController } from 'react-hook-form'
+import { Field, FieldError, FieldLabel } from '../Field'
 import { TextInput } from '../TextInput'
-import { CustomProps } from './types'
-import { usePriceInput } from './usePriceInput'
+import { usePriceInput } from './hooks/usePriceInput'
 
-type PriceInputProps = Omit<
-  ComponentProps<typeof TextInput>,
-  'value' | 'onChange' | 'onBlur'
->
+type PriceInputProps = ComponentProps<typeof TextInput>
+
+type CustomProps = { lens: Lens<{ price: number }> }
 
 type Props = PriceInputProps & CustomProps
 
 type Ref = ElementRef<'input'>
 
-export const PriceInput = forwardRef<Ref, Props>(
-  ({ value, onChange, onBlur, ...props }, ref) => {
-    const { price, priceInputHandler } = usePriceInput({
-      value,
-      onChange,
-      onBlur,
-    })
+export const PriceInput = forwardRef<Ref, Props>(({ lens, ...props }, ref) => {
+  const interop = lens.focus('price').interop()
+  const { field, fieldState } = useController(interop)
+  const { invalid, error } = fieldState
 
-    return (
+  const { price, priceInputHandler } = usePriceInput({
+    value: field.value,
+    onChange: field.onChange,
+    onBlur: field.onBlur,
+  })
+
+  return (
+    <Field invalid={invalid}>
+      <FieldLabel>金額</FieldLabel>
       <HStack align="center">
         <TextInput
           {...props}
@@ -33,8 +39,9 @@ export const PriceInput = forwardRef<Ref, Props>(
         />
         <span>円</span>
       </HStack>
-    )
-  },
-)
+      <FieldError match={!!error}>{error?.message}</FieldError>
+    </Field>
+  )
+})
 
 PriceInput.displayName = 'PriceInput'

@@ -4,20 +4,16 @@ import { Button } from '@/components/buttons/Button'
 import { Card, CardBody } from '@/components/elements/Card'
 import { Link } from '@/components/elements/Link'
 import { SimpleDialog } from '@/components/elements/SimpleDialog'
-import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
-import { TextInput } from '@/components/forms/TextInput'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
+import { EmailInput } from '@/features/authentication/emailInput/EmailInput'
+import { PasswordInput } from '@/features/authentication/passwordInput/PasswordInput'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
+import { useLens } from '@hookform/lenses'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { FC, startTransition, useState } from 'react'
-import {
-  Controller,
-  SubmitErrorHandler,
-  SubmitHandler,
-  useForm,
-} from 'react-hook-form'
+import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
 import { signIn } from './signIn.action'
 import { schema, Schema } from './signIn.schema'
 
@@ -27,7 +23,7 @@ export const SignIn: FC = () => {
 
   const [errorMessage, setErrorMessage] = useState('')
 
-  const { control, handleSubmit } = useForm<Schema>({
+  const { handleSubmit, control } = useForm<Schema>({
     mode: 'onTouched',
     resolver: zodResolver(schema),
     defaultValues: {
@@ -35,6 +31,11 @@ export const SignIn: FC = () => {
       password: '',
     },
   })
+
+  const lens = useLens<Schema>({ control })
+
+  const emailLens = lens.reflect(({ email }) => ({ email }))
+  const passwordLens = lens.reflect(({ password }) => ({ password }))
 
   const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
@@ -58,28 +59,8 @@ export const SignIn: FC = () => {
         <CardBody>
           <h1 style={{ fontSize: '1.5rem' }}>project-bd へようこそ</h1>
           <VStack>
-            <Controller
-              name="email"
-              control={control}
-              render={({ field, fieldState: { invalid, error } }) => (
-                <Field invalid={invalid}>
-                  <FieldLabel>メールアドレス</FieldLabel>
-                  <TextInput type="email" {...field} />
-                  <FieldError match={!!error}>{error?.message}</FieldError>
-                </Field>
-              )}
-            />
-            <Controller
-              name="password"
-              control={control}
-              render={({ field, fieldState: { invalid, error } }) => (
-                <Field invalid={invalid}>
-                  <FieldLabel>パスワード</FieldLabel>
-                  <TextInput {...field} />
-                  <FieldError match={!!error}>{error?.message}</FieldError>
-                </Field>
-              )}
-            />
+            <EmailInput lens={emailLens} />
+            <PasswordInput lens={passwordLens} />
           </VStack>
           <HStack style={{ justifyContent: 'space-between' }}>
             <HStack>

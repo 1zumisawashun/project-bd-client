@@ -10,16 +10,20 @@ import {
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menu'
+
 type MenuContextParams = Omit<
   ReturnType<typeof useDisclosure>,
   'setIsOpen' | 'toggle'
 >
+
 export const MenuContext = createContext<MenuContextParams | undefined>(
   undefined,
 )
 
 const MenuProvider = MenuContext.Provider
+
 type Props = MenuContextParams & ComponentPropsWithoutRef<'div'>
+
 type Ref = ElementRef<'div'>
 
 export const Menu = forwardRef<Ref, Props>(

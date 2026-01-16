@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 
 import { FC } from 'react'
-import { Tabs, TabsTab, TabsList, TabsPanel } from './index'
+import { Tabs, TabsList, TabsPanel, TabsTab } from './index'
 
 const meta: Meta<typeof Tabs> = {
   title: 'element/Tabs',

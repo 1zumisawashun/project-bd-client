@@ -1,6 +1,6 @@
 import { Card, CardBody } from '@/components/elements/Card'
 import { VStack } from '@/components/layouts/VStack'
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 import { FC } from 'react'
 import { HeartFilledIcon, HeartOutlineIcon } from '../../elements/Icon'
 import { Label } from '../../elements/Label/index'
@@ -56,12 +56,12 @@ const Render: FC = () => {
     <VStack>
       <Card>
         <CardBody>
-          <Multiple></Multiple>
+          <Multiple />
         </CardBody>
       </Card>
       <Card>
         <CardBody>
-          <Single></Single>
+          <Single />
         </CardBody>
       </Card>
     </VStack>

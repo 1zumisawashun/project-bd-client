@@ -1,4 +1,4 @@
-import { CONTENT } from '@/features/articles/constants'
+import { CONTENT } from '@/functions/libs/drizzle/constants/articles'
 
 export const defaultValues = {
   title: '',

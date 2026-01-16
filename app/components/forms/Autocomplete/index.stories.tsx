@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 
 import { FC } from 'react'
 import { Autocomplete, AutocompleteInput, AutocompleteMenu } from './index'
@@ -15,8 +15,8 @@ type Story = StoryObj<typeof Autocomplete>
 const Render: FC = () => {
   return (
     <Autocomplete items={tags}>
-      <AutocompleteInput></AutocompleteInput>
-      <AutocompleteMenu></AutocompleteMenu>
+      <AutocompleteInput />
+      <AutocompleteMenu />
     </Autocomplete>
   )
 }

@@ -2,7 +2,7 @@ import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
 import { PlusIcon } from '@radix-ui/react-icons'
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 import { FC } from 'react'
 import { AnchorButton } from './index'
 

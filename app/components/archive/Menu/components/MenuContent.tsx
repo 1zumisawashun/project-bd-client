@@ -4,8 +4,11 @@ import { useMenu } from '../hooks/useMenu'
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menu'
+
 type Ref = ElementRef<'div'>
+
 type Props = {} & ComponentPropsWithoutRef<'div'>
+
 export const MenuContent = forwardRef<Ref, Props>(
   ({ className, ...props }, ref) => {
     const menu = useMenu()

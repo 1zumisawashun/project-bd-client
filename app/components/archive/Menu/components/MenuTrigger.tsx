@@ -6,8 +6,11 @@ import { useMenu } from '../hooks/useMenu'
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menu'
+
 type Ref = ElementRef<'button'>
+
 type Props = {} & ComponentPropsWithoutRef<'button'>
+
 export const MenuTrigger = forwardRef<Ref, Props>(
   ({ className, ...props }, ref) => {
     const menu = useMenu()

@@ -1,11 +1,16 @@
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { ChangeEventHandler, FocusEventHandler } from 'react'
-import { CustomProps as UsePriceInput } from './types'
 
 type PriceInputHandlerReturnType = {
   onFocus: FocusEventHandler<HTMLInputElement>
   onChange: ChangeEventHandler<HTMLInputElement>
   onBlur: FocusEventHandler<HTMLInputElement>
+}
+
+type UsePriceInput = {
+  value: number
+  onChange: (value?: number) => void
+  onBlur: () => void
 }
 
 const transformFullWidthNumbers = (value: string) => {

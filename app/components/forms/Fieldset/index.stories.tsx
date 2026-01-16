@@ -5,14 +5,15 @@ import { Controller, useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { Checkbox, CheckboxGroup } from '../Checkbox'
 import { Field, FieldError } from '../Field'
-import { TextInput } from '../TextInput'
 import { Fieldset, FieldsetLegend } from './index'
 
-const meta: Meta<typeof TextInput> = {
+const meta: Meta<typeof Fieldset> = {
   title: 'form/Fieldset',
   component: Fieldset,
 }
+
 export default meta
+
 type Story = StoryObj<typeof Fieldset>
 
 const schema = z.object({

@@ -3,9 +3,11 @@ import { Button } from '../../../buttons/Button'
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menu'
+
 type Props = {
   onClick: () => void
 }
+
 export const MenuItem: FC<PropsWithChildren<Props>> = ({
   onClick,
   children,

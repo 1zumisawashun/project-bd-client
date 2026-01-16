@@ -13,6 +13,7 @@ type CustomProps = {
   status?: _Status
   title: string
 }
+
 type Props = StatusProps & CustomProps
 
 type Ref = ElementRef<'div'>

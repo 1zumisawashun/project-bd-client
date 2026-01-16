@@ -1,5 +1,5 @@
 import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 
 import { FC } from 'react'
 import { Footer } from './index'

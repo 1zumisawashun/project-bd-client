@@ -1,5 +1,5 @@
 import { VStack } from '@/components/layouts/VStack'
-import type { Meta, StoryObj } from '@storybook/react'
+import { type Meta, type StoryObj } from '@storybook/react'
 import { Card, CardBody } from '../../elements/Card'
 import { Field } from '../Field'
 import { Fieldset, FieldsetLegend } from '../Fieldset'
@@ -82,17 +82,17 @@ const Render: FC = () => {
     <VStack>
       <Card>
         <CardBody>
-          <State></State>
+          <State />
         </CardBody>
       </Card>
       <Card>
         <CardBody>
-          <Multiple></Multiple>
+          <Multiple />
         </CardBody>
       </Card>
       <Card>
         <CardBody>
-          <Single></Single>
+          <Single />
         </CardBody>
       </Card>
     </VStack>

@@ -43,4 +43,3 @@ database
 *.db
 *.db-shm
 *.db-wal
-# Contains AI-generated edits.

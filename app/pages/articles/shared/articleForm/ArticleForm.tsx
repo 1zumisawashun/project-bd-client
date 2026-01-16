@@ -1,78 +1,35 @@
 'use client'
 
-import { AutocompleteInputGroup } from '@/components/archive/AutocompleteInput'
-import { Label } from '@/components/elements/Label'
-import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
-import { TextInput } from '@/components/forms/TextInput'
-import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
+import { Lens } from '@hookform/lenses'
 import { FC } from 'react'
-import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { Schema } from './articleForm.schema'
-import { ArticleEditor } from './components/articleEditor/ArticleEditor'
+import { CategoriesInput } from './components/categoriesInput/CategoriesInput'
+import { ContentInput } from './components/contentInput/ContentInput'
+import { TitleInput } from './components/titleInput/TitleInput'
 
 type ArticleFormProps = {
+  lens: Lens<Schema>
   categoryOptions: string[]
 }
 
-export const ArticleForm: FC<ArticleFormProps> = ({ categoryOptions }) => {
-  const { control } = useFormContext<Schema>()
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'categories',
-  })
-
-  const names = fields.map((d) => d.name)
-  const options = categoryOptions.filter((d) => !names.includes(d))
+// reflectで部分的なLensを作成する場合
+export const ArticleForm: FC<ArticleFormProps> = ({
+  lens,
+  categoryOptions,
+}) => {
+  const titleLens = lens.reflect(({ title }) => ({ title }))
+  const categoriesLens = lens.reflect(({ categories }) => ({ categories }))
+  const contentLens = lens.reflect(({ content }) => ({ content }))
 
   return (
     <VStack>
-      <Controller
-        name="title"
-        control={control}
-        render={({ field, fieldState: { invalid, error } }) => (
-          <Field invalid={invalid}>
-            <FieldLabel>タイトル</FieldLabel>
-            <TextInput {...field} />
-            <FieldError match={!!error}>{error?.message}</FieldError>
-          </Field>
-        )}
+      <TitleInput lens={titleLens} />
+      <CategoriesInput
+        lens={categoriesLens}
+        categoryOptions={categoryOptions}
       />
-      <Controller
-        name="categories"
-        control={control}
-        render={({ fieldState: { invalid, error } }) => (
-          <Field invalid={invalid}>
-            <FieldLabel>カテゴリー</FieldLabel>
-            <AutocompleteInputGroup
-              onChange={(value) => append({ name: value })}
-              options={options}
-            />
-            {fields?.length > 0 && (
-              <HStack gap={2} style={{ flexWrap: 'wrap' }}>
-                {fields?.map((d, index) => (
-                  <Label key={d.id} onClick={() => remove(index)}>
-                    {d.name}
-                  </Label>
-                ))}
-              </HStack>
-            )}
-            <FieldError match={!!error}>{error?.message}</FieldError>
-          </Field>
-        )}
-      />
-      <Controller
-        name="content"
-        control={control}
-        render={({ field, fieldState: { invalid, error } }) => (
-          <Field invalid={invalid}>
-            <FieldLabel>本文</FieldLabel>
-            <ArticleEditor onChange={field.onChange} value={field.value} />
-            <FieldError match={!!error}>{error?.message}</FieldError>
-          </Field>
-        )}
-      />
+      <ContentInput lens={contentLens} />
     </VStack>
   )
 }

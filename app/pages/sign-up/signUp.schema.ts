@@ -1,5 +1,5 @@
-import { z } from 'zod'
 import isStrongPassword from 'validator/lib/isStrongPassword'
+import { z } from 'zod'
 
 /** @see https://dninomiya.github.io/form-guide/ */
 
@@ -25,6 +25,9 @@ export const schema = z.object({
     .refine(isStrongPassword, {
       message: '大文字を含む半角英数字と記号を含めてください。',
     }),
+  agreement: z.boolean().refine((val) => val === true, {
+    message: '利用規約に同意してください。',
+  }),
 })
 
 export type Schema = z.infer<typeof schema>

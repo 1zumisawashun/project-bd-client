@@ -102,5 +102,7 @@ export const RouteProvider = ({ children }: PropsWithChildren) => {
     DEFAULT_LOGIN_REDIRECT,
   ])
 
+  // セッション読み込み中は子コンポーネントをそのまま表示
+  // ローディング状態を表示する場合は、ここでカスタマイズ可能
   return <>{children}</>
 }

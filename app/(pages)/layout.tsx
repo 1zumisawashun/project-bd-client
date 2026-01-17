@@ -5,6 +5,7 @@ import { type Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import { PropsWithChildren } from 'react'
 import { ToastProvider } from '@/components/elements/Toast'
+import { RouteProvider } from '@/functions/libs/next-auth/RouteProvider'
 import { SessionProvider } from '@/functions/libs/next-auth/SessionProvider'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
@@ -19,7 +20,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="en">
       <body className={montserrat.className}>
         <SessionProvider>
-          <ToastProvider>{children}</ToastProvider>
+          <RouteProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </RouteProvider>
         </SessionProvider>
         <Analytics />
       </body>

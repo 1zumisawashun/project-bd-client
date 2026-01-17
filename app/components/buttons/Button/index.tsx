@@ -1,7 +1,7 @@
-import { Shape, Theme, Variant } from '@/functions/types'
 import { Button as RowButton } from '@base-ui/react/button'
 import clsx from 'clsx'
 import { ComponentProps, ElementRef, forwardRef, ReactNode } from 'react'
+import { Shape, Theme, Variant } from '@/functions/types'
 import styles from './index.module.css'
 
 const BLOCK_NAME = 'button'

@@ -1,7 +1,6 @@
-import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
 import { type Meta, type StoryObj } from '@storybook/react'
-
 import { FC } from 'react'
+import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
 import {
   _MOCK_ARTICLE_PUBLIC,
   MOCK_ARTICLE_CATEGORIES,

@@ -1,5 +1,5 @@
-import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import { FC } from 'react'
+import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import styles from './articleCard.module.css'
 
 const BLOCK_NAME = 'articleCard'

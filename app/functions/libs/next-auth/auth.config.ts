@@ -1,7 +1,6 @@
-import { schema } from '@/pages/sign-up/signUp.schema'
 import { type NextAuthConfig } from 'next-auth'
-
 import Credentials from 'next-auth/providers/credentials'
+import { schema } from '@/pages/sign-up/signUp.schema'
 
 /**
  * NOTE:

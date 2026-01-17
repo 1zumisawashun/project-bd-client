@@ -1,7 +1,7 @@
-import { HStack } from '@/components/layouts/HStack'
 import { Lens } from '@hookform/lenses'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
 import { useController } from 'react-hook-form'
+import { HStack } from '@/components/layouts/HStack'
 import { Field, FieldError, FieldLabel } from '../Field'
 import { TextInput } from '../TextInput'
 import { usePriceInput } from './hooks/usePriceInput'

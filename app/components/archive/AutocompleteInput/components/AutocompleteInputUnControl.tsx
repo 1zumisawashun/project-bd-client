@@ -1,5 +1,3 @@
-import { Menu, MenuContent, MenuItem } from '@/components/archive/Menu'
-import { useMergeRef } from '@/functions/hooks/useMergeRef'
 import {
   ChangeEvent,
   ComponentProps,
@@ -7,6 +5,8 @@ import {
   forwardRef,
   useRef,
 } from 'react'
+import { Menu, MenuContent, MenuItem } from '@/components/archive/Menu'
+import { useMergeRef } from '@/functions/hooks/useMergeRef'
 import { TextInput } from '../../../forms/TextInput'
 import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
 

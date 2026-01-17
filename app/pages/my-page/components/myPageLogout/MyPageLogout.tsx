@@ -1,5 +1,8 @@
 'use client'
 
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { FC } from 'react'
 import { Button } from '@/components/buttons/Button'
 import { Card, CardBody } from '@/components/elements/Card'
 import {
@@ -11,9 +14,6 @@ import { Description, Title } from '@/components/elements/Typography'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { signOut } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { FC } from 'react'
 
 type LogoutDialogProps = {
   isOpen: boolean

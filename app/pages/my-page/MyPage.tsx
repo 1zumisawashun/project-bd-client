@@ -1,5 +1,5 @@
-import { Tabs, TabsList, TabsPanel, TabsTab } from '@/components/elements/Tabs'
 import { FC } from 'react'
+import { Tabs, TabsList, TabsPanel, TabsTab } from '@/components/elements/Tabs'
 import { MyPageArticleCard } from './components/myPageArticleCard/MyPageArticleCard'
 import { MyPageSetting } from './components/myPageSetting/MyPageSetting'
 import { MypageUser } from './myPage.types'

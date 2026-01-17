@@ -1,6 +1,6 @@
-import { AnchorButton } from '@/components/buttons/AnchorButton'
 import clsx from 'clsx'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
+import { AnchorButton } from '@/components/buttons/AnchorButton'
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'breadcrumb-link'

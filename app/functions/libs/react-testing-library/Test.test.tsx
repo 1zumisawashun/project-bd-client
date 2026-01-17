@@ -1,9 +1,9 @@
+import { mockRouter } from '@/functions/libs/react-testing-library/next-router-utils'
 import {
   render,
   screen,
   waitFor,
 } from '@/functions/libs/react-testing-library/test-utils'
-import { mockRouter } from '@/functions/libs/react-testing-library/next-router-utils'
 import Page from './Test'
 
 describe('Page', () => {

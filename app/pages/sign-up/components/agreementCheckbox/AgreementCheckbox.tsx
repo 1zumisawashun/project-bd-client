@@ -1,10 +1,10 @@
 'use client'
 
-import { Checkbox } from '@/components/forms/Checkbox'
-import { Field, FieldError } from '@/components/forms/Field'
 import { Lens } from '@hookform/lenses'
 import { FC } from 'react'
 import { useController } from 'react-hook-form'
+import { Checkbox } from '@/components/forms/Checkbox'
+import { Field, FieldError } from '@/components/forms/Field'
 
 type AgreementCheckboxProps = {
   lens: Lens<{ agreement: boolean }>

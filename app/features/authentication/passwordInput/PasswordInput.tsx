@@ -1,10 +1,10 @@
 'use client'
 
-import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
-import { TextInput } from '@/components/forms/TextInput'
 import { Lens } from '@hookform/lenses'
 import { FC } from 'react'
 import { useController } from 'react-hook-form'
+import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
+import { TextInput } from '@/components/forms/TextInput'
 
 type PasswordInputProps = {
   lens: Lens<{ password: string }>

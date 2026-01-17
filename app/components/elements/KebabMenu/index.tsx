@@ -1,6 +1,6 @@
-import { IconButton } from '@/components/buttons/IconButton'
 import { DotsVerticalIcon } from '@radix-ui/react-icons'
 import { FC } from 'react'
+import { IconButton } from '@/components/buttons/IconButton'
 import { Menu, MenuList, MenuTrigger } from '../Menu'
 
 type KebabMenuProps = {

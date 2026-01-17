@@ -1,5 +1,4 @@
 import { type Meta, type StoryObj } from '@storybook/react'
-
 import { userEvent, within } from '@storybook/test'
 import { FC } from 'react'
 import { MyPage } from './MyPage'

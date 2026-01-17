@@ -1,9 +1,9 @@
+import { DrizzleAdapter } from '@auth/drizzle-adapter'
+import NextAuth, { NextAuthConfig } from 'next-auth'
 import { getUserByEmail } from '@/functions/db/user'
 import { isPasswordValid } from '@/functions/helpers/hash'
 import db from '@/functions/libs/drizzle/client'
 import { accounts, sessions, users } from '@/functions/libs/drizzle/schema'
-import { DrizzleAdapter } from '@auth/drizzle-adapter'
-import NextAuth, { NextAuthConfig } from 'next-auth'
 import authConfig from './auth.config'
 
 type Credentials = {

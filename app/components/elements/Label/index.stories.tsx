@@ -1,7 +1,7 @@
-import { HStack } from '@/components/layouts/HStack'
-import { VStack } from '@/components/layouts/VStack'
 import { type Meta, type StoryObj } from '@storybook/react'
 import { FC } from 'react'
+import { HStack } from '@/components/layouts/HStack'
+import { VStack } from '@/components/layouts/VStack'
 import { Label } from './index'
 
 const meta: Meta<typeof Label> = {

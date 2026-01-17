@@ -1,9 +1,9 @@
+import { useRouter } from 'next/navigation'
+import { FC, useOptimistic } from 'react'
 import { AutocompleteInputGroup } from '@/components/archive/AutocompleteInput'
 import { Label } from '@/components/elements/Label'
 import { Field } from '@/components/forms/Field'
 import { HStack } from '@/components/layouts/HStack'
-import { useRouter } from 'next/navigation'
-import { FC, useOptimistic } from 'react'
 
 type SearchFormProps = {
   categoryOptions: string[]

@@ -1,11 +1,11 @@
 'use server'
 
+import { and, eq } from 'drizzle-orm'
 import { getArticleById } from '@/functions/db/article'
 import { actionResult } from '@/functions/helpers/utils'
 import db from '@/functions/libs/drizzle/client'
 import { likedArticles } from '@/functions/libs/drizzle/schema'
 import { auth } from '@/functions/libs/next-auth/auth'
-import { and, eq } from 'drizzle-orm'
 
 type DislikeArticleArgs = {
   articleId: string

@@ -1,8 +1,8 @@
+import { Editor } from '@tiptap/react'
+import { FC } from 'react'
 import { Button } from '@/components/buttons/Button'
 import { MenuBubble } from '@/components/elements/Editor'
 import { tiptapClient } from '@/components/elements/Editor/helpers/tiptapClient'
-import { Editor } from '@tiptap/react'
-import { FC } from 'react'
 import styles from './articleMenuBubble.module.css'
 
 const BLOCK_NAME = 'articleMenuBubble'

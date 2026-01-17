@@ -1,8 +1,7 @@
 import { type Meta, type StoryObj } from '@storybook/react'
-
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { userEvent, within } from '@storybook/test'
 import { FC } from 'react'
+import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import { Button } from '../../buttons/Button'
 import { SimpleDialog } from './index'
 

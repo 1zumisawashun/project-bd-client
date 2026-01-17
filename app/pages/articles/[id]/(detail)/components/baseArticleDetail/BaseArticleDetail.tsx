@@ -1,13 +1,13 @@
 'use client'
 
+import DOMPurify from 'dompurify'
+import NextLink from 'next/link'
+import { FC, ReactNode } from 'react'
 import { Label } from '@/components/elements/Label'
 import { Title } from '@/components/elements/Typography'
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
-import DOMPurify from 'dompurify'
-import NextLink from 'next/link'
-import { FC, ReactNode } from 'react'
 import { Article } from '../../../../shared/article.types'
 import styles from './baseArticleDetail.module.css'
 

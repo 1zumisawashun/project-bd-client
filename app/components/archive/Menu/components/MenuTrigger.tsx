@@ -1,7 +1,7 @@
-import { useMergeRef } from '@/functions/hooks/useMergeRef'
-import { useOuterClick } from '@/functions/hooks/useOuterClick'
 import clsx from 'clsx'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useRef } from 'react'
+import { useMergeRef } from '@/functions/hooks/useMergeRef'
+import { useOuterClick } from '@/functions/hooks/useOuterClick'
 import { useMenu } from '../hooks/useMenu'
 import styles from '../index.module.css'
 

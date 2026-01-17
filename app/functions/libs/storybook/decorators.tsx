@@ -1,5 +1,5 @@
-import AppProviders from '@/providers'
 import { FC } from 'react'
+import AppProviders from '@/providers'
 
 export const FullWidthDecorator = (Story: FC) => (
   <AppProviders>

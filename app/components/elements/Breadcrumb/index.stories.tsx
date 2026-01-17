@@ -1,7 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react'
-
-import { VStack } from '@/components/layouts/VStack'
 import { FC } from 'react'
+import { VStack } from '@/components/layouts/VStack'
 import { Card, CardBody } from '../Card'
 import { Breadcrumb, BreadcrumbLink } from './index'
 

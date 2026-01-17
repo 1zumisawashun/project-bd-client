@@ -1,10 +1,10 @@
 import '@/assets/global.css'
 import '@/assets/the-new-css-reset.css'
-import AppProviders from '@/providers'
 import { Analytics } from '@vercel/analytics/react'
 import { type Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import { PropsWithChildren } from 'react'
+import AppProviders from '@/providers'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 

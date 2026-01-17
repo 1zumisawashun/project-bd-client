@@ -3,7 +3,7 @@
 import { eq } from 'drizzle-orm'
 import { getArticleById, updateArticle } from '@/functions/db/article'
 import { createCategory, getCategoryByName } from '@/functions/db/category'
-import { actionResult } from '@/functions/helpers/utils'
+import { actionResult } from '@/functions/helpers/actionResult'
 import db from '@/functions/libs/drizzle/client'
 import { articlesCategories } from '@/functions/libs/drizzle/schema'
 import { auth } from '@/functions/libs/next-auth/auth'

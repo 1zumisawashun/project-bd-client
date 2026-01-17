@@ -14,29 +14,6 @@ export const resolve = async <T>(promise: Promise<T>) => {
 
 export const genRandomId = () => Math.random().toString(32).substring(2)
 
-export const actionResult = {
-  end: (error: unknown) => {
-    console.error(error, 'actionResult end')
-    throw new Error(typeof error === 'string' ? error : JSON.stringify(error))
-  },
-  success: <T>(response: T) => {
-    console.log(response, 'actionResult success')
-    return {
-      isSuccess: true as const,
-      data: response,
-      message: '成功しました',
-    }
-  },
-  error: (error: unknown) => {
-    console.error(error, 'actionResult error')
-    return {
-      isSuccess: false as const,
-      data: null,
-      error: { message: (error as Error)?.message ?? '失敗しました' },
-    }
-  },
-}
-
 /** @see https://x.com/sujjeeee/status/1837412263432511929?s=12&t=0Bs_ltBYiO3nhiiL9YZAEw */
 export const getErrorMessage = (error: unknown) => {
   if (error instanceof z.ZodError) {

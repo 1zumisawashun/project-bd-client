@@ -1,7 +1,7 @@
 'use server'
 
 import { updateUserByEmail } from '@/functions/db/user'
-import { actionResult } from '@/functions/helpers/utils'
+import { actionResult } from '@/functions/helpers/actionResult'
 import { auth } from '@/functions/libs/next-auth/auth'
 import { Schema, schema } from './myPageProfile.schema'
 

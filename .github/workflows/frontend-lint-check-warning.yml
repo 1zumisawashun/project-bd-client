@@ -14,10 +14,10 @@ jobs:
         uses: actions/setup-node@v3
       - name: npm ci
         run: npm ci
-      - name: npm run lint:js
+      - name: npm run lint
         id: lint
         run: |
-          result=$(npm run lint:js)
+          result=$(npm run lint)
           echo "result<<EOF" >> $GITHUB_OUTPUT
           echo "$result" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT

@@ -24,8 +24,8 @@ jobs:
         uses: actions/setup-node@v3
       - name: npm ci
         run: npm ci
-      - name: lint:js
-        run: npm run lint:js
+      - name: lint
+        run: npm run lint
 
   format:
     needs: setup

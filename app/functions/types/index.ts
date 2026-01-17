@@ -1,5 +1,3 @@
-import { ReactNode } from 'react'
-
 const _THEME_OPTIONS = ['primary', 'danger'] as const
 export type Theme = (typeof _THEME_OPTIONS)[number] | (string & {})
 
@@ -21,28 +19,7 @@ export type Align = (typeof _ALIGN_OPTIONS)[number] | (string & {})
 const _ACTION_OPTIONS = ['delete'] as const
 export type Action = (typeof _ACTION_OPTIONS)[number]
 
-export type Toast = {
-  id: string
-  theme: Theme
-  title: ReactNode
-  description?: ReactNode
-  isOpen: boolean
-}
-export type SearchParams = Record<string, string | string[] | undefined>
-
 const _ARTICLE_STATUS_OPTIONS = ['PUBLISHED', 'DRAFT'] as const
 export type ArticleStatus = (typeof _ARTICLE_STATUS_OPTIONS)[number]
 
-export type ActionsResult<T> =
-  | {
-      isSuccess: true
-      data: T
-      message: string
-    }
-  | {
-      isSuccess: false
-      data: null
-      error: {
-        message: string
-      }
-    }
+export type SearchParams = Record<string, string | string[] | undefined>

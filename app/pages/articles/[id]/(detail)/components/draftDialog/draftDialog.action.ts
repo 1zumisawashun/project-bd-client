@@ -1,7 +1,7 @@
 'use server'
 
 import { updateArticle } from '@/functions/db/article'
-import { actionResult } from '@/functions/helpers/utils'
+import { actionResult } from '@/functions/helpers/actionResult'
 import { auth } from '@/functions/libs/next-auth/auth'
 
 type DraftArticleArgs = {

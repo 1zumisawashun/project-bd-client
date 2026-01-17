@@ -1,3 +1,12 @@
+/**
+ * NOTE: Edge Runtime Middleware
+ * 
+ * このファイルはEdge Runtimeで実行されるため、SQLiteなどのNode.js専用機能との互換性に問題があります。
+ * Node Runtimeで同じルーティングロジックを実行したい場合は、
+ * RouteProvider.tsx（app/functions/libs/next-auth/RouteProvider.tsx）を使用してください。
+ * 
+ * @see app/functions/libs/next-auth/RouteProvider.tsx - Node Runtime対応版
+ */
 import NextAuth from 'next-auth'
 import { MIDDLEWARE_ROUTES } from '@/functions/constants/routes'
 import authConfig from '@/functions/libs/next-auth/auth.config'

@@ -1,6 +1,6 @@
-import { VStack } from '@/components/layouts/VStack'
 import { type Meta, type StoryObj } from '@storybook/react'
 import { FC } from 'react'
+import { VStack } from '@/components/layouts/VStack'
 import { Field, FieldLabel } from '../Field'
 import { TextInput } from './index'
 

@@ -1,12 +1,11 @@
-import { mergeAttributes } from '@tiptap/react'
-import { HTMLAttributes } from 'react'
-
 import TiptapCharacterCount from '@tiptap/extension-character-count'
 import TiptapFocus from '@tiptap/extension-focus'
 import TiptapImage from '@tiptap/extension-image'
 import TiptapLink from '@tiptap/extension-link'
 import TiptapPlaceholder from '@tiptap/extension-placeholder'
 import TiptapTextAlign from '@tiptap/extension-text-align'
+import { mergeAttributes } from '@tiptap/react'
+import { HTMLAttributes } from 'react'
 
 // NOTE:https://tiptap.dev/api/nodes/image
 // NOTE:https://codesandbox.io/s/tiptap-image-forked-bvchsz?file=/src/Editor.jsx:409-416

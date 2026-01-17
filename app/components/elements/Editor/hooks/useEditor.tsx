@@ -1,5 +1,4 @@
 import { UseEditorOptions, useEditor as useRowEditor } from '@tiptap/react'
-
 import StarterKit from '@tiptap/starter-kit'
 import {
   CharacterCount,

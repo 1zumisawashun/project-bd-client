@@ -1,7 +1,7 @@
 'use server'
 
-import { signIn as NextAuthSignIn } from '@/functions/libs/next-auth/auth'
 import { AuthError } from 'next-auth'
+import { signIn as NextAuthSignIn } from '@/functions/libs/next-auth/auth'
 import { Schema } from './signIn.schema'
 
 type SignInProps = { data: Schema }

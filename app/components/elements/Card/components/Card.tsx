@@ -1,6 +1,6 @@
-import { Shape, Theme } from '@/functions/types'
 import clsx from 'clsx'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { Shape, Theme } from '@/functions/types'
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'card'

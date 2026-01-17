@@ -1,5 +1,4 @@
 import { type Meta, type StoryObj } from '@storybook/react'
-
 import { FC } from 'react'
 import { Autocomplete, AutocompleteInput, AutocompleteMenu } from './index'
 

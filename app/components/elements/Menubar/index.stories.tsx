@@ -1,7 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react'
-
-import { Button } from '@/components/buttons/Button'
 import { FC } from 'react'
+import { Button } from '@/components/buttons/Button'
 import { Menu, MenuItem, MenuList, MenuSeparator, MenuTrigger } from '../Menu'
 import { Menubar } from './index'
 

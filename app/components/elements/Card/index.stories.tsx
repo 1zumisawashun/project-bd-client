@@ -1,5 +1,4 @@
 import { type Meta, type StoryObj } from '@storybook/react'
-
 import { ComponentProps, FC } from 'react'
 import { Card, CardBody } from './index'
 

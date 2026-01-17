@@ -1,0 +1,36 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "arrowParens": "always",
+  "printWidth": 80,
+  "bracketSpacing": true,
+  // https://oxc.rs/docs/guide/usage/formatter/sorting.html
+  "experimentalSortImports": {
+    "order": "asc",
+    "newlinesBetween": false
+  },
+  "experimentalSortPackageJson": {
+    "sortScripts": true
+  },
+  // https://oxc.rs/docs/guide/usage/formatter/embedded-formatting.html
+  "embeddedLanguageFormatting": "auto",
+  // https://oxc.rs/docs/guide/usage/formatter/ignore-files.html
+  "ignorePatterns": [
+    "node_modules/",
+    ".next/",
+    ".nuxt/",
+    ".astro/",
+    "build/",
+    "dist/",
+    "out/",
+    "public/",
+    "package-lock.json",
+    "yarn.lock",
+    "pnpm-lock.yaml"
+  ]
+}

@@ -1,3 +1,6 @@
+import { TextIcon } from '@radix-ui/react-icons'
+import { Editor } from '@tiptap/react'
+import { FC } from 'react'
 import { tiptapClient } from '@/components/elements/Editor/helpers/tiptapClient'
 import {
   Menu,
@@ -6,9 +9,6 @@ import {
   MenuTrigger,
 } from '@/components/elements/Menu'
 import { Menubar } from '@/components/elements/Menubar'
-import { TextIcon } from '@radix-ui/react-icons'
-import { Editor } from '@tiptap/react'
-import { FC } from 'react'
 import styles from './articleMenubar.module.css'
 
 const BLOCK_NAME = 'articleMenubar'

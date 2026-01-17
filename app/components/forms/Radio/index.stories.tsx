@@ -1,11 +1,9 @@
-import { VStack } from '@/components/layouts/VStack'
 import { type Meta, type StoryObj } from '@storybook/react'
+import { FC, useState } from 'react'
+import { VStack } from '@/components/layouts/VStack'
 import { Card, CardBody } from '../../elements/Card'
-
 import { Field } from '../Field'
 import { Fieldset, FieldsetLegend } from '../Fieldset'
-
-import { FC, useState } from 'react'
 import { Radio, RadioGroup } from './index'
 
 const options = [

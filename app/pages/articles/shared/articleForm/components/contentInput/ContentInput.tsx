@@ -1,9 +1,9 @@
 'use client'
 
-import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
 import { Lens } from '@hookform/lenses'
 import { FC } from 'react'
 import { Controller } from 'react-hook-form'
+import { Field, FieldError, FieldLabel } from '@/components/forms/Field'
 import { ArticleEditor } from './components/articleEditor/ArticleEditor'
 
 type ContentFieldProps = {

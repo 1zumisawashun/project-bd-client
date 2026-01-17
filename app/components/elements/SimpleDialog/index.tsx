@@ -1,5 +1,6 @@
 'use client'
 
+import { FC } from 'react'
 import { Button } from '@/components/buttons/Button'
 import {
   Dialog,
@@ -9,7 +10,6 @@ import {
 import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { FC } from 'react'
 
 type SimpleDialogProps = {
   isOpen: ReturnType<typeof useDisclosure>['isOpen']

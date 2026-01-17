@@ -1,6 +1,6 @@
-import { Align, Justify } from '@/functions/types'
 import clsx from 'clsx'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { Align, Justify } from '@/functions/types'
 import styles from './index.module.css'
 
 const BLOCK_NAME = 'h-stack'

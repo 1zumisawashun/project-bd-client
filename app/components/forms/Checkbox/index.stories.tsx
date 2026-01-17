@@ -1,11 +1,10 @@
-import { VStack } from '@/components/layouts/VStack'
 import { type Meta, type StoryObj } from '@storybook/react'
+import { FC, useState } from 'react'
+import { VStack } from '@/components/layouts/VStack'
+import { useArrayState } from '@/functions/hooks/useArrayState'
 import { Card, CardBody } from '../../elements/Card'
 import { Field } from '../Field'
 import { Fieldset, FieldsetLegend } from '../Fieldset'
-
-import { useArrayState } from '@/functions/hooks/useArrayState'
-import { FC, useState } from 'react'
 import { Checkbox, CheckboxGroup } from './index'
 
 const options = [

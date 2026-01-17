@@ -1,7 +1,7 @@
-import { IconAnchorButton } from '@/components/buttons/IconAnchorButton'
 import { ChevronLeftIcon } from '@radix-ui/react-icons'
 import clsx from 'clsx'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { IconAnchorButton } from '@/components/buttons/IconAnchorButton'
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'breadcrumb'

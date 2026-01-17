@@ -1,7 +1,6 @@
-import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
 import { type Meta, type StoryObj } from '@storybook/react'
-
 import { FC } from 'react'
+import { FullWidthDecorator } from '@/functions/libs/storybook/decorators'
 import { Footer } from './index'
 
 const meta: Meta<typeof Footer> = {

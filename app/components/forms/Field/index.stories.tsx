@@ -1,9 +1,9 @@
-import { VStack } from '@/components/layouts/VStack'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { type Meta, type StoryObj } from '@storybook/react'
 import { FC } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as z from 'zod'
+import { VStack } from '@/components/layouts/VStack'
 import { TextInput } from '../TextInput'
 import { Field, FieldError, FieldLabel } from './index'
 

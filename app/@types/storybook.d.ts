@@ -1,6 +1,6 @@
-import type { Config, PARAM_KEY } from '@storybook/addon-designs'
-import type { NextJsParameters } from '@storybook/nextjs'
-import type { StorybookParameters } from '@storybook/types'
+import { type Config, type PARAM_KEY } from '@storybook/addon-designs'
+import { type NextJsParameters } from '@storybook/nextjs'
+import { type StorybookParameters } from '@storybook/types'
 
 // v9でNextJsParametersとStorybookParametersが追加される
 declare module '@storybook/react' {

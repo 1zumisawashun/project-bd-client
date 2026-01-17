@@ -1,5 +1,3 @@
-import { type Editor } from '@tiptap/core'
-
 import {
   CodeIcon,
   DividerHorizontalIcon,
@@ -18,6 +16,7 @@ import {
   TextIcon,
   TrashIcon,
 } from '@radix-ui/react-icons'
+import { type Editor } from '@tiptap/core'
 
 export const tiptapClient = (editor: Editor | null) => {
   /**

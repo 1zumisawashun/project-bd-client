@@ -1,6 +1,6 @@
-import { SiteWrapper } from '@/components/layouts/SiteWrapper'
 import { Metadata } from 'next'
 import { PropsWithChildren } from 'react'
+import { SiteWrapper } from '@/components/layouts/SiteWrapper'
 
 const title = 'FAQ'
 

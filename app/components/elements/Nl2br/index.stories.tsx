@@ -1,7 +1,6 @@
-import { FAQ } from '@/pages/faq/faq.constants'
 import { type Meta, type StoryObj } from '@storybook/react'
-
 import { FC } from 'react'
+import { FAQ } from '@/pages/faq/faq.constants'
 import { Nl2br } from './index'
 
 const meta: Meta<typeof Nl2br> = {

@@ -1,5 +1,4 @@
 import { type Meta, type StoryObj } from '@storybook/react'
-
 import { FC } from 'react'
 import { _MOCK_ARTICLE_PUBLIC } from '../../../../shared/article.mocks'
 import { LikeButton } from '../likeButton/LikeButton'

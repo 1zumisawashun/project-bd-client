@@ -1,7 +1,7 @@
 'use client'
 
-import { VStack } from '@/components/layouts/VStack'
 import { FC } from 'react'
+import { VStack } from '@/components/layouts/VStack'
 import { MypageUser } from '../../myPage.types'
 import { MyPageEmail } from '../myPageEmail/MyPageEmail'
 import { MyPageLogout } from '../myPageLogout/MyPageLogout'

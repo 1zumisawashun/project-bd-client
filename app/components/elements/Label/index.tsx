@@ -1,8 +1,8 @@
-import { IconButton } from '@/components/buttons/IconButton'
-import { Theme } from '@/functions/types'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import clsx from 'clsx'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { IconButton } from '@/components/buttons/IconButton'
+import { Theme } from '@/functions/types'
 import styles from './index.module.css'
 
 const BLOCK_NAME = 'label'

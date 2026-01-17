@@ -1,12 +1,12 @@
 'use client'
 
-import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import {
   ComponentPropsWithoutRef,
   createContext,
   ElementRef,
   forwardRef,
 } from 'react'
+import { useDisclosure } from '@/functions/hooks/useDisclosure'
 import styles from '../index.module.css'
 
 const BLOCK_NAME = 'menu'

@@ -1,18 +1,27 @@
 {
   "css.validate": false,
   "scss.validate": false,
+  "[json][jsonc][typescript][typescriptreact][javascript][javascriptreact]": {
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true
+  },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit",
+    // "source.fixAll.stylelint": "explicit",
     "source.organizeImports": "explicit",
     "source.fixAll.oxc": "explicit"
   },
   "editor.guides.bracketPairs": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "stylelint.validate": ["css", "scss", "typescript", "typescriptreact"],
+  // "stylelint.validate": ["css", "scss", "typescript", "typescriptreact"],
   "typescript.referencesCodeLens.enabled": true,
   "editor.stickyScroll.enabled": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "json.schemaDownload.enable": true
+  "json.schemaDownload.enable": true,
+  // oxc settings
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.enable": true,
+  "oxc.tsConfigPath": "./tsconfig.json",
+  "oxc.typeAware": true,
+  "oxc.unusedDisableDirectives": "deny"
 }

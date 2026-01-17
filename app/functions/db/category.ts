@@ -1,6 +1,6 @@
+import { eq } from 'drizzle-orm'
 import db from '@/functions/libs/drizzle/client'
 import { categories } from '@/functions/libs/drizzle/schema'
-import { eq } from 'drizzle-orm'
 
 export const getCategories = async () => {
   try {

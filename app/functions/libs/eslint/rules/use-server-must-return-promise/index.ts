@@ -1,4 +1,4 @@
-import type { Rule } from 'eslint'
+import { type Rule } from 'eslint'
 
 /**
  * use-server を使用しているファイルでは、強制的に promise を返すため、

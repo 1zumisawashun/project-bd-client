@@ -1,12 +1,12 @@
 'use client'
 
+import { FC } from 'react'
 import { EditorContent } from '@/components/elements/Editor'
 import { useEditor } from '@/components/elements/Editor/hooks/useEditor'
 import { VStack } from '@/components/layouts/VStack'
-import { FC } from 'react'
 import styles from './articleEditor.module.css'
-import { ArticleMenuBubble } from './components/articleMenuBubble/ArticleMenuBubble'
 import { ArticleMenubar } from './components/articleMenubar/ArticleMenubar'
+import { ArticleMenuBubble } from './components/articleMenuBubble/ArticleMenuBubble'
 
 const BLOCK_NAME = 'articleEditor'
 

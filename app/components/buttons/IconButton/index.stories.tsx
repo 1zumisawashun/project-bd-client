@@ -1,7 +1,3 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-
-import { HStack } from '@/components/layouts/HStack'
-import { VStack } from '@/components/layouts/VStack'
 import {
   Cross1Icon,
   HamburgerMenuIcon,
@@ -9,7 +5,10 @@ import {
   HeartIcon,
   PlusIcon,
 } from '@radix-ui/react-icons'
+import { type Meta, type StoryObj } from '@storybook/react'
 import { FC } from 'react'
+import { HStack } from '@/components/layouts/HStack'
+import { VStack } from '@/components/layouts/VStack'
 import { IconButton } from './index'
 
 const items = [

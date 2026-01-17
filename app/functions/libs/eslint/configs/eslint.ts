@@ -1,7 +1,6 @@
+import type { Linter } from 'eslint'
 import eslint from '@eslint/js'
 import pluginImport from 'eslint-plugin-import'
-
-import type { Linter } from 'eslint'
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [

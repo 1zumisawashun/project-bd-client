@@ -1,6 +1,6 @@
+import { FC } from 'react'
 import { getFlatMenu } from '@/functions/helpers/getFlatMenu'
 import { auth } from '@/functions/libs/next-auth/auth'
-import { FC } from 'react'
 import { AnchorButton } from '../../buttons/AnchorButton'
 import { HamburgerMenu } from '../HamburgerMenu'
 import styles from './index.module.css'

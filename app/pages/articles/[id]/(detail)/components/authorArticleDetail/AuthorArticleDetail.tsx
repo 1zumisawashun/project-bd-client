@@ -1,11 +1,11 @@
 'use client'
 
+import { FC, ReactNode } from 'react'
 import { AnchorButton } from '@/components/buttons/AnchorButton'
 import { Button } from '@/components/buttons/Button'
 import { KebabMenu } from '@/components/elements/KebabMenu'
 import { Status } from '@/components/elements/Status'
 import { useDisclosure } from '@/functions/hooks/useDisclosure'
-import { FC, ReactNode } from 'react'
 import { Article } from '../../../../shared/article.types'
 import { BaseArticleDetail } from '../baseArticleDetail/BaseArticleDetail'
 import { DeleteDialog } from '../deleteDialog/DeleteDialog'

@@ -10,4 +10,5 @@
 /* override the base-button styles */
 .header-anchor-button.header-anchor-button {
   justify-content: flex-start;
+  width: 200px;
 }

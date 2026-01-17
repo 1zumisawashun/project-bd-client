@@ -1,11 +1,12 @@
 .card {
-  border-radius: 0.5rem;
-
   /* shape */
-  &[data-shape='square'] {
+  &[data-shape='sharp'] {
     border-radius: 0.25rem;
   }
-  &[data-shape='round'] {
+  &[data-shape='rounded'] {
+    border-radius: 0.5rem;
+  }
+  &[data-shape='circle'] {
     border-radius: 1rem;
   }
 

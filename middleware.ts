@@ -1,10 +1,5 @@
 import NextAuth from 'next-auth'
-import {
-  DEFAULT_LOGIN_REDIRECT,
-  apiAuthPrefix,
-  authRoutes,
-  publicRoutes,
-} from '@/functions/constants/routes'
+import { MIDDLEWARE_ROUTES } from '@/functions/constants/routes'
 import authConfig from '@/functions/libs/next-auth/auth.config'
 
 const { auth } = NextAuth(authConfig)
@@ -12,10 +7,16 @@ const { auth } = NextAuth(authConfig)
 export default auth((req) => {
   const { nextUrl } = req
   const isLoggedIn = !!req.auth
+  const {
+    API_AUTH_PREFIX,
+    PUBLIC_OPTIONS,
+    AUTH_OPTIONS,
+    DEFAULT_LOGIN_REDIRECT,
+  } = MIDDLEWARE_ROUTES
 
-  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
-  const isAuthRoute = authRoutes.includes(nextUrl.pathname)
+  const isApiAuthRoute = nextUrl.pathname.startsWith(API_AUTH_PREFIX)
+  const isPublicRoute = PUBLIC_OPTIONS.includes(nextUrl.pathname)
+  const isAuthRoute = AUTH_OPTIONS.includes(nextUrl.pathname)
 
   if (isApiAuthRoute) {
     return undefined

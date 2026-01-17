@@ -1,6 +1,4 @@
-// なんか知らんけど一時的にno-restricted-syntaxが外れた？
-
-export const dateFormat = {
+export const DATE_FORMAT = {
   DATE: 'MM/DD/YYYY',
   DATE_WITH_SHORT_YEAR: 'MM/DD/YY',
   DATE_WITH_SHORT_YEAR_MILITARY: 'MM/DD/YY, HHmm',
@@ -18,5 +16,3 @@ export const dateFormat = {
   MILITARY_TIME: 'HHmm',
   LOCAL_TIME: 'hh:mm:ss',
 } as const
-
-export type DateFormat = (typeof dateFormat)[keyof typeof dateFormat]

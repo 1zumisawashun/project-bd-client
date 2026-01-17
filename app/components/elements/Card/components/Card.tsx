@@ -27,7 +27,7 @@ export const Card = forwardRef<Ref, Props>(
       theme = 'transparent',
       scrollable = false,
       hasBorder = true,
-      shape,
+      shape = 'rounded',
       // other props
       ...props
     },

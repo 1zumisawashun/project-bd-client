@@ -1,7 +1,6 @@
 .base-button {
   &:hover {
     cursor: pointer;
-    /* filter: brightness(90%); */
     filter: brightness(0.75) contrast(120%);
     transition: filter 0.3s ease;
   }
@@ -17,6 +16,17 @@
   &:focus-visible {
     outline: 2px solid;
     outline-offset: 2px;
+  }
+
+  /* shape */
+  &[data-shape='sharp'] {
+    border-radius: 0%;
+  }
+  &[data-shape='rounded'] {
+    border-radius: 0.5em;
+  }
+  &[data-shape='circle'] {
+    border-radius: 1em;
   }
 
   &[data-variant='contained'] {

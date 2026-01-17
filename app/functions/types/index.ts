@@ -9,7 +9,7 @@ export type Variant = (typeof _VARIANT_OPTIONS)[number] | (string & {})
 const _SIZE_OPTIONS = ['sm', 'md', 'lg'] as const
 export type Size = (typeof _SIZE_OPTIONS)[number] | (string & {})
 
-const _SHAPE_OPTIONS = ['rounded', 'circle'] as const
+const _SHAPE_OPTIONS = ['sharp', 'rounded', 'circle'] as const
 export type Shape = (typeof _SHAPE_OPTIONS)[number] | (string & {})
 
 const _JUSTIFY_OPTIONS = ['start', 'center', 'end'] as const

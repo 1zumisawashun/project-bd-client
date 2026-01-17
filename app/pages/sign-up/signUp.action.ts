@@ -1,7 +1,7 @@
 'use server'
 
 import { getUserByEmail } from '@/functions/db/user'
-import { hashPassword } from '@/functions/helpers/hash'
+import { hashPassword } from '@/functions/helpers/password'
 import { actionResult } from '@/functions/helpers/utils'
 import db from '@/functions/libs/drizzle/client'
 import { users } from '@/functions/libs/drizzle/schema'

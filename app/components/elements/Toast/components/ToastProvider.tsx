@@ -1,3 +1,5 @@
+'use client'
+
 import { Toast as RowToast } from '@base-ui/react/toast'
 import { FC, PropsWithChildren } from 'react'
 import styles from '../index.module.css'

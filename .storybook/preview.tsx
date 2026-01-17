@@ -1,12 +1,15 @@
 import '@/assets/global.css'
 import '@/assets/the-new-css-reset.css'
 import type { Preview } from '@storybook/react'
-import { SpWidthDecorator } from '../app/functions/libs/storybook/decorators'
+import {
+  ProviderDecorator,
+  SpWidthDecorator,
+} from '../app/functions/libs/storybook/decorators'
 
 /** @see https://stackoverflow.com/questions/76933793/how-to-write-decorator-in-typescript-for-storybook */
 
 const preview: Preview = {
-  decorators: [SpWidthDecorator],
+  decorators: [ProviderDecorator, SpWidthDecorator],
   parameters: {
     pseudo: {
       hover: '#hover',

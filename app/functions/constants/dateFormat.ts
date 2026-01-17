@@ -1,6 +1,6 @@
 export const DATE_FORMAT = {
   DATE: 'YYYY/MM/DD',
-  DATE_JAPANESE: 'YYYY年MM月DD日',
+  DATE_JAPANESE: 'yyyy年MM月dd日',
   DATE_WITH_SHORT_YEAR: 'YY/MM/DD',
   DATE_WITH_SHORT_YEAR_MILITARY: 'YY/MM/DD, HHmm',
   TIME_12: 'hh:mm A',

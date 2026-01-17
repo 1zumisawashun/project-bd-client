@@ -4,7 +4,8 @@ import { Analytics } from '@vercel/analytics/react'
 import { type Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import { PropsWithChildren } from 'react'
-import AppProviders from '@/providers'
+import { ToastProvider } from '@/components/elements/Toast'
+import { SessionProvider } from '@/functions/libs/next-auth/SessionProvider'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <AppProviders>{children}</AppProviders>
+        <SessionProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </SessionProvider>
         <Analytics />
       </body>
     </html>

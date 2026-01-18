@@ -2,7 +2,7 @@
 
 import { getUserByEmail, updateUserByEmail } from '@/functions/db/user'
 import { actionResult } from '@/functions/helpers/actionResult'
-import { auth } from '@/functions/libs/next-auth/auth'
+import { getSession } from '@/functions/libs/next-auth/session'
 import { Schema, schema } from './myPageEmail.schema'
 
 type UpdateEmailArgs = {
@@ -11,7 +11,7 @@ type UpdateEmailArgs = {
 
 export const updateEmail = async (args: UpdateEmailArgs) => {
   try {
-    const session = await auth()
+    const session = await getSession()
 
     if (!session?.user.email) {
       return actionResult.end('ログインしてください')

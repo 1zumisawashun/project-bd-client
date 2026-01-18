@@ -2,7 +2,7 @@
 
 import { deleteArticle as _deleteArticle } from '@/functions/db/article'
 import { actionResult } from '@/functions/helpers/actionResult'
-import { auth } from '@/functions/libs/next-auth/auth'
+import { getSession } from '@/functions/libs/next-auth/session'
 
 type DeleteArticleArgs = {
   id: string
@@ -10,7 +10,7 @@ type DeleteArticleArgs = {
 
 export const deleteArticle = async ({ id }: DeleteArticleArgs) => {
   try {
-    const session = await auth()
+    const session = await getSession()
 
     if (!session?.user.id) {
       actionResult.end('ログインしてください')

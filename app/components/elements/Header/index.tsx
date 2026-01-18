@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { VStack } from '@/components/layouts/VStack'
-import { auth } from '@/functions/libs/next-auth/auth'
+import { getSession } from '@/functions/libs/next-auth/session'
 import { AnchorButton } from '../../buttons/AnchorButton'
 import { HamburgerMenu } from '../HamburgerMenu'
 import { getFlatMenu } from './helpers/getFlatMenu'
@@ -10,7 +10,7 @@ const BLOCK_NAME = 'header'
 
 // NOTE: RSCに依存しているためカタログに追加できない
 export const Header: FC = async () => {
-  const session = await auth()
+  const session = await getSession()
   const routes = getFlatMenu({ isPrivate: !!session, isAuth: !session })
 
   return (

@@ -4,7 +4,7 @@ import { getArticleById } from '@/functions/db/article'
 import { actionResult } from '@/functions/helpers/actionResult'
 import db from '@/functions/libs/drizzle/client'
 import { likedArticles } from '@/functions/libs/drizzle/schema'
-import { auth } from '@/functions/libs/next-auth/auth'
+import { getSession } from '@/functions/libs/next-auth/session'
 
 type LikeArticleArgs = {
   articleId: string
@@ -13,7 +13,7 @@ type LikeArticleArgs = {
 
 export const likeArticle = async ({ articleId, userId }: LikeArticleArgs) => {
   try {
-    const session = await auth()
+    const session = await getSession()
 
     if (!session?.user.id) {
       return actionResult.end('ログインしてください')

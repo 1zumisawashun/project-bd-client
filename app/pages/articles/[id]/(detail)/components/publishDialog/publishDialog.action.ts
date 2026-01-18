@@ -2,7 +2,7 @@
 
 import { updateArticle } from '@/functions/db/article'
 import { actionResult } from '@/functions/helpers/actionResult'
-import { auth } from '@/functions/libs/next-auth/auth'
+import { getSession } from '@/functions/libs/next-auth/session'
 
 type PublishArticleArgs = {
   id: string
@@ -10,7 +10,7 @@ type PublishArticleArgs = {
 
 export const publishArticle = async ({ id }: PublishArticleArgs) => {
   try {
-    const session = await auth()
+    const session = await getSession()
 
     if (!session?.user.id) {
       return actionResult.end('ログインしてください')

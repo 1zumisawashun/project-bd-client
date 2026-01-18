@@ -2,7 +2,7 @@
 
 import { updateUserByEmail } from '@/functions/db/user'
 import { actionResult } from '@/functions/helpers/actionResult'
-import { auth } from '@/functions/libs/next-auth/auth'
+import { getSession } from '@/functions/libs/next-auth/session'
 import { Schema, schema } from './myPageProfile.schema'
 
 type UpdateProfileArgs = {
@@ -11,7 +11,7 @@ type UpdateProfileArgs = {
 
 export const updateProfile = async (args: UpdateProfileArgs) => {
   try {
-    const session = await auth()
+    const session = await getSession()
 
     if (!session?.user.email) {
       return actionResult.end('ログインしてください')

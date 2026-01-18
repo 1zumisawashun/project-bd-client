@@ -6,7 +6,7 @@ import { createCategory, getCategoryByName } from '@/functions/db/category'
 import { actionResult } from '@/functions/helpers/actionResult'
 import db from '@/functions/libs/drizzle/client'
 import { articlesCategories } from '@/functions/libs/drizzle/schema'
-import { auth } from '@/functions/libs/next-auth/auth'
+import { getSession } from '@/functions/libs/next-auth/session'
 import {
   Schema,
   schema,
@@ -19,7 +19,7 @@ type EditArticleArgs = {
 
 export const editArticle = async (args: EditArticleArgs) => {
   try {
-    const session = await auth()
+    const session = await getSession()
 
     if (!session?.user.email) {
       return actionResult.end('ログインしてください')

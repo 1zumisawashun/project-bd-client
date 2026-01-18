@@ -1,5 +1,6 @@
 import { type NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
+import GitHub from 'next-auth/providers/github'
 import { schema } from '@/pages/sign-in/signIn.schema'
 
 /**
@@ -8,6 +9,7 @@ import { schema } from '@/pages/sign-in/signIn.schema'
  * auth.config.ts は edge runtime 対応のために分けている
  */
 const providers = [
+  GitHub,
   Credentials({
     credentials: {
       email: { label: 'Email', type: 'email' },

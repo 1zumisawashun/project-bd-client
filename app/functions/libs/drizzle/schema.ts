@@ -1,13 +1,16 @@
 import { relations, sql } from 'drizzle-orm'
 import { integer, primaryKey, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { type AdapterAccountType } from 'next-auth/adapters'
 
 // Users Table
-export const users = sqliteTable('users', {
+export const users = sqliteTable('user', {
   // auth.js must have below here
-  id: text('id').primaryKey(),
+  id: text('id')
+    .primaryKey()
+    .$defaultFn(() => crypto.randomUUID()),
   name: text('name'),
   email: text('email').unique(),
-  emailVerified: integer('emailVerified', { mode: 'timestamp' }),
+  emailVerified: integer('emailVerified', { mode: 'timestamp_ms' }),
   image: text('image'),
   // auth.js must have above here
   hashedPassword: text('hashedPassword'),
@@ -24,8 +27,6 @@ export const users = sqliteTable('users', {
 export const usersRelations = relations(users, ({ many }) => ({
   posts: many(articles),
   likedArticles: many(likedArticles),
-  accounts: many(accounts),
-  sessions: many(sessions),
 }))
 
 // Articles table
@@ -132,29 +133,36 @@ export const likedArticlesRelations = relations(likedArticles, ({ one }) => ({
 
 /**
  * ================================
- * NextAuth tables
+ * auth.js tables for drizzle adapter
+ * @see https://authjs.dev/getting-started/adapters/drizzle
  * ===============================
  */
 
-export const accounts = sqliteTable('accounts', {
-  id: integer('id').primaryKey({ autoIncrement: true }),
-  userId: text('userId')
-    .notNull()
-    .references(() => users.id, { onDelete: 'cascade' }),
-  type: text('type').notNull(),
-  provider: text('provider').notNull(),
-  providerAccountId: text('providerAccountId').notNull(),
-  refresh_token: text('refresh_token'),
-  access_token: text('access_token'),
-  expires_at: integer('expires_at'),
-  token_type: text('token_type'),
-  scope: text('scope'),
-  id_token: text('id_token'),
-  session_state: text('session_state'),
-})
+export const accounts = sqliteTable(
+  'account',
+  {
+    userId: text('userId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    type: text('type').$type<AdapterAccountType>().notNull(),
+    provider: text('provider').notNull(),
+    providerAccountId: text('providerAccountId').notNull(),
+    refresh_token: text('refresh_token'),
+    access_token: text('access_token'),
+    expires_at: integer('expires_at'),
+    token_type: text('token_type'),
+    scope: text('scope'),
+    id_token: text('id_token'),
+    session_state: text('session_state'),
+  },
+  (account) => [
+    primaryKey({
+      columns: [account.provider, account.providerAccountId],
+    }),
+  ],
+)
 
-// Sessions
-export const sessions = sqliteTable('sessions', {
+export const sessions = sqliteTable('session', {
   sessionToken: text('sessionToken').primaryKey(),
   userId: text('userId')
     .notNull()
@@ -162,12 +170,42 @@ export const sessions = sqliteTable('sessions', {
   expires: integer('expires', { mode: 'timestamp_ms' }).notNull(),
 })
 
-// Verification Tokens
-export const verificationTokens = sqliteTable('verificationTokens', {
-  identifier: text('identifier').notNull(),
-  token: text('token').notNull(),
-  expires: integer('expires', { mode: 'timestamp_ms' }).notNull(),
-})
+export const verificationTokens = sqliteTable(
+  'verificationToken',
+  {
+    identifier: text('identifier').notNull(),
+    token: text('token').notNull(),
+    expires: integer('expires', { mode: 'timestamp_ms' }).notNull(),
+  },
+  (verificationToken) => [
+    primaryKey({
+      columns: [verificationToken.identifier, verificationToken.token],
+    }),
+  ],
+)
+
+export const authenticators = sqliteTable(
+  'authenticator',
+  {
+    credentialID: text('credentialID').notNull().unique(),
+    userId: text('userId')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    providerAccountId: text('providerAccountId').notNull(),
+    credentialPublicKey: text('credentialPublicKey').notNull(),
+    counter: integer('counter').notNull(),
+    credentialDeviceType: text('credentialDeviceType').notNull(),
+    credentialBackedUp: integer('credentialBackedUp', {
+      mode: 'boolean',
+    }).notNull(),
+    transports: text('transports'),
+  },
+  (authenticator) => [
+    primaryKey({
+      columns: [authenticator.userId, authenticator.credentialID],
+    }),
+  ],
+)
 
 // Type exports for inference
 export type User = typeof users.$inferSelect

@@ -3,7 +3,13 @@ import NextAuth, { NextAuthConfig } from 'next-auth'
 import { getUserByEmail } from '@/functions/db/user'
 import { isPasswordValid } from '@/functions/helpers/password'
 import db from '@/functions/libs/drizzle/client'
-import { accounts, sessions, users } from '@/functions/libs/drizzle/schema'
+import {
+  accounts,
+  authenticators,
+  sessions,
+  users,
+  verificationTokens,
+} from '@/functions/libs/drizzle/schema'
 import authConfig from './auth.config'
 
 type Credentials = {
@@ -18,8 +24,9 @@ type Credentials = {
  */
 const callbacks = {
   // NOTE: credentials は authorize の返り値を受け取る
-  async signIn({ credentials }) {
-    // console.log('signIn callback', { credentials })
+  async signIn({ credentials, account }) {
+    // console.log('signIn callback', { credentials, account })
+    if (account?.type === 'oauth') return true
 
     // FIXME: 型定義が不十分なので type assertion で対応する。next-auth.d に型定義を追加するべき
     const { email, password } = credentials as Credentials
@@ -77,8 +84,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     usersTable: users,
     accountsTable: accounts,
     sessionsTable: sessions,
+    verificationTokensTable: verificationTokens,
+    authenticatorsTable: authenticators,
   }),
-  session: { strategy: 'jwt' },
+  session: { strategy: 'database' },
   callbacks,
   ...authConfig,
 })

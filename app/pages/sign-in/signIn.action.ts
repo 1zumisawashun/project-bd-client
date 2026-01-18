@@ -4,11 +4,13 @@ import { AuthError } from 'next-auth'
 import { signIn as NextAuthSignIn } from '@/functions/libs/next-auth/auth'
 import { Schema } from './signIn.schema'
 
-type SignInProps = { data: Schema }
+type SignInProps = Partial<Schema> & {
+  provider: Parameters<typeof NextAuthSignIn>[0]
+}
 
-export const signIn = async (props: SignInProps) => {
+export const signIn = async ({ provider, ...props }: SignInProps) => {
   try {
-    await NextAuthSignIn('credentials', props.data)
+    await NextAuthSignIn(provider, { ...props })
 
     return {
       isSuccess: true,

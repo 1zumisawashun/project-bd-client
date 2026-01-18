@@ -39,7 +39,7 @@ export const SignIn: FC = () => {
 
   const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
-      const response = await signIn({ data })
+      const response = await signIn({ provider: 'credentials', ...data })
 
       if (!response?.isSuccess) {
         setErrorMessage(response?.error?.message ?? 'ログインに失敗しました')
@@ -52,6 +52,20 @@ export const SignIn: FC = () => {
   }
 
   const onError: SubmitErrorHandler<Schema> = (error) => console.error(error)
+
+  const handleGitHubSignIn = () => {
+    startTransition(async () => {
+      const response = await signIn({ provider: 'github' })
+
+      if (!response?.isSuccess) {
+        setErrorMessage(response?.error?.message ?? 'ログインに失敗しました')
+        dialog.open()
+        return
+      }
+
+      router.push('/')
+    })
+  }
 
   return (
     <>
@@ -66,9 +80,12 @@ export const SignIn: FC = () => {
             <HStack>
               <Link href="/sign-up">新規登録はこちら</Link>
             </HStack>
-            <Button onClick={(e) => void handleSubmit(onSubmit, onError)(e)}>
-              ログイン
-            </Button>
+            <HStack>
+              <Button onClick={handleGitHubSignIn}>Sign in with GitHub</Button>
+              <Button onClick={(e) => void handleSubmit(onSubmit, onError)(e)}>
+                ログイン
+              </Button>
+            </HStack>
           </HStack>
         </CardBody>
       </Card>

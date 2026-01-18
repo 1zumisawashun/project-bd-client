@@ -11,7 +11,7 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
-    "db:reset": "pkill -f \"next dev\" && sleep 1 && rm -f sqlite.db && npm run db:push && npm run db:seed",
+    "db:reset": "pkill -f 'next dev' || true && sleep 1 && rm -f sqlite.db && npm run db:push && npm run db:seed",
     "db:seed": "tsx ./app/functions/libs/drizzle/seed.ts",
     "db:studio": "drizzle-kit studio",
     "dev": "next dev",

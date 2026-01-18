@@ -1,3 +1,7 @@
+import NextAuth from 'next-auth'
+import { MIDDLEWARE_ROUTES } from '@/functions/constants/routes'
+import authConfig from '@/functions/libs/next-auth/auth.config'
+
 /**
  * NOTE: Edge Runtime Middleware
  *
@@ -7,9 +11,6 @@
  *
  * @see app/functions/libs/next-auth/RouteProvider.tsx - Node Runtime対応版
  */
-import NextAuth from 'next-auth'
-import { MIDDLEWARE_ROUTES } from '@/functions/constants/routes'
-import authConfig from '@/functions/libs/next-auth/auth.config'
 
 const { auth } = NextAuth(authConfig)
 

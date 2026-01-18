@@ -38,17 +38,6 @@ import { MIDDLEWARE_ROUTES } from '@/functions/constants/routes'
  *   )
  * }
  * ```
- *
- * ## middleware.tsとの違い
- * | 項目 | middleware.ts | RouteProvider.tsx |
- * |------|--------------|-------------------|
- * | Runtime | Edge Runtime | Node Runtime (Client) |
- * | 実行タイミング | リクエスト前 | 初回レンダリング後 |
- * | リダイレクト方法 | Response.redirect | router.replace() |
- * | Node.js機能 | 制限あり | 完全にサポート |
- * | SEO影響 | なし | 初回レンダリング時にコンテンツが表示される可能性 |
- *
- * @see middleware.ts - Edge Runtime版
  */
 export const RouteProvider = ({ children }: PropsWithChildren) => {
   const pathname = usePathname()

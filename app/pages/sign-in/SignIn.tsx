@@ -2,7 +2,6 @@
 
 import { useLens } from '@hookform/lenses'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
 import { FC, startTransition, useState } from 'react'
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
 import { Button } from '@/components/buttons/Button'
@@ -19,7 +18,6 @@ import { schema, Schema } from './signIn.schema'
 
 export const SignIn: FC = () => {
   const dialog = useDisclosure()
-  const router = useRouter()
 
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -41,13 +39,10 @@ export const SignIn: FC = () => {
     startTransition(async () => {
       const response = await signIn({ provider: 'credentials', ...data })
 
-      if (!response?.isSuccess) {
+      if (response?.error) {
         setErrorMessage(response?.error?.message ?? 'ログインに失敗しました')
         dialog.open()
-        return
       }
-
-      router.push('/')
     })
   }
 
@@ -57,13 +52,10 @@ export const SignIn: FC = () => {
     startTransition(async () => {
       const response = await signIn({ provider: 'github' })
 
-      if (!response?.isSuccess) {
+      if (response?.error) {
         setErrorMessage(response?.error?.message ?? 'ログインに失敗しました')
         dialog.open()
-        return
       }
-
-      router.push('/')
     })
   }
 

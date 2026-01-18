@@ -3,7 +3,7 @@ import { integer, primaryKey, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import { type AdapterAccountType } from 'next-auth/adapters'
 
 // Users Table
-export const users = sqliteTable('user', {
+export const users = sqliteTable('users', {
   // auth.js must have below here
   id: text('id')
     .primaryKey()
@@ -139,7 +139,7 @@ export const likedArticlesRelations = relations(likedArticles, ({ one }) => ({
  */
 
 export const accounts = sqliteTable(
-  'account',
+  'accounts',
   {
     userId: text('userId')
       .notNull()
@@ -162,7 +162,7 @@ export const accounts = sqliteTable(
   ],
 )
 
-export const sessions = sqliteTable('session', {
+export const sessions = sqliteTable('sessions', {
   sessionToken: text('sessionToken').primaryKey(),
   userId: text('userId')
     .notNull()
@@ -171,7 +171,7 @@ export const sessions = sqliteTable('session', {
 })
 
 export const verificationTokens = sqliteTable(
-  'verificationToken',
+  'verificationTokens',
   {
     identifier: text('identifier').notNull(),
     token: text('token').notNull(),
@@ -185,7 +185,7 @@ export const verificationTokens = sqliteTable(
 )
 
 export const authenticators = sqliteTable(
-  'authenticator',
+  'authenticators',
   {
     credentialID: text('credentialID').notNull().unique(),
     userId: text('userId')

@@ -55,9 +55,12 @@ const callbacks = {
    * next-authの公式ドキュメントでも触れられている（This means that the expires value is stripped away from session in Server Components.） @see https://next-auth.js.org/configuration/nextjs#in-app-directory
    */
   session({ token, session }) {
-    // console.log('session callback', { token, session, user })
-    session.user.id = token.id
-    session.user.role = token.role
+    // console.log('session callback', { token, session })
+    // NOTE: Database Session の場合 token は undefined になるので注意
+    if (token) {
+      session.user.id = token.id
+      session.user.role = token.role
+    }
     return session
   },
   /**
@@ -87,7 +90,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     verificationTokensTable: verificationTokens,
     authenticatorsTable: authenticators,
   }),
-  session: { strategy: 'database' },
+  session: { strategy: 'jwt' },
   callbacks,
   ...authConfig,
 })

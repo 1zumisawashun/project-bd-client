@@ -6,6 +6,6 @@ export default defineConfig({
   schema: './app/functions/libs/drizzle/schema.ts',
   dialect: 'sqlite',
   dbCredentials: {
-    url: process.env['DATABASE_URL']! ?? './sqlite.db',
+    url: './sqlite.db',
   },
 }) satisfies Config

@@ -4,7 +4,7 @@ import 'dotenv/config'
 import * as schema from '@/functions/libs/drizzle/schema'
 
 const drizzleClientSingleton = () => {
-  const sqlite = new Database(process.env['DATABASE_URL']! ?? './sqlite.db')
+  const sqlite = new Database('./sqlite.db')
   // NOTE: schemaを渡すことで型安全になる
   return drizzle(sqlite, { schema })
 }

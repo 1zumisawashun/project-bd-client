@@ -1,12 +1,17 @@
-import { eq } from 'drizzle-orm'
+import { desc, eq } from 'drizzle-orm'
 import db from '@/functions/libs/drizzle/client'
 import { categories } from '@/functions/libs/drizzle/schema'
 
 export const getCategories = async () => {
   try {
     const allCategories = await db
-      .select({ id: categories.id, name: categories.name })
+      .select({
+        id: categories.id,
+        name: categories.name,
+        createdAt: categories.createdAt,
+      })
       .from(categories)
+      .orderBy(desc(categories.createdAt))
 
     return allCategories ?? null
   } catch {

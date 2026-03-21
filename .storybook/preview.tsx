@@ -1,5 +1,4 @@
-import '@/assets/global.css'
-import '@/assets/the-new-css-reset.css'
+import '@/assets/styles/app.css'
 import type { Preview } from '@storybook/react'
 import {
   ProviderDecorator,

@@ -1,3 +1,18 @@
+/* html {
+  font-size: 62.5%;
+} */
+
+/* body {
+  font-family: var(--font-family);
+  font-size: 1.6rem;
+  font-weight: normal;
+  line-height: 1.6;
+  color: var(--black-dark-grey);
+  -webkit-font-smoothing: antialiased;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+} */
+
 /* @see https://coliss.com/articles/build-websites/operation/css/sensible-defaults-for-img-elements.html */
 img {
   max-width: 100%;

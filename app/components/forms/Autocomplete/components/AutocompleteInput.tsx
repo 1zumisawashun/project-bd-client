@@ -1,9 +1,6 @@
 import { Autocomplete as RowAutocomplete } from '@base-ui/react/autocomplete'
 import clsx from 'clsx'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
-import styles from '../index.module.css'
-
-const BLOCK_NAME = 'autocomplete-input'
 
 type AutocompleteInputProps = ComponentProps<typeof RowAutocomplete.Input>
 
@@ -19,7 +16,7 @@ export const AutocompleteInput = forwardRef<Ref, Props>(
       <RowAutocomplete.Input
         {...props}
         // native props
-        className={clsx(styles[`${BLOCK_NAME}`], className)}
+        className={clsx('ui-input', className)}
         ref={ref}
       />
     )

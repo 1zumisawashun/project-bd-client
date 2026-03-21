@@ -1,0 +1,29 @@
+@import '@radix-ui/colors/mauve.css';
+@import '@radix-ui/colors/green.css';
+@import '@radix-ui/colors/blue.css';
+@import '@radix-ui/colors/indigo.css';
+@import '@radix-ui/colors/red.css';
+@import '@radix-ui/colors/black-alpha.css';
+@import '@radix-ui/colors/slate.css';
+
+:root {
+  /* black */
+  --black: #000;
+  --black-dark-grey: #363636;
+
+  /* grey */
+  --grey: #808080;
+
+  /* white */
+  --white: #ffffff;
+  --white-dr-white: #fafafa;
+
+  /* blue */
+
+  /* green */
+
+  /* red */
+
+  /* shadow color */
+  --black-shadow: rgba(0, 0, 0, 0.1);
+}

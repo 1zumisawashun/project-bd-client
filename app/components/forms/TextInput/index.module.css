@@ -1,3 +1,0 @@
-.text-input {
-  composes: base-input from '@/assets/base-input.module.css';
-}

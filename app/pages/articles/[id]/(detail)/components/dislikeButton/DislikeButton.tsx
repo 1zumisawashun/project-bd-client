@@ -1,23 +1,23 @@
 'use client'
 
 import { HeartIcon } from '@radix-ui/react-icons'
+import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import { FC, startTransition } from 'react'
 import { IconButton } from '@/components/buttons/IconButton'
 import { useToast } from '@/components/elements/Toast'
 import { likeArticle } from './dislikeButton.action'
-import styles from './dislikeButton.module.css'
-
-const BLOCK_NAME = 'dislikeButton'
 
 type DislikeButtonProps = {
   articleId: string
   userId: string
+  className?: string
 }
 
 export const DislikeButton: FC<DislikeButtonProps> = ({
   articleId,
   userId,
+  className,
 }) => {
   const router = useRouter()
   const toast = useToast()
@@ -39,7 +39,7 @@ export const DislikeButton: FC<DislikeButtonProps> = ({
 
   return (
     <IconButton shape="circle" variant="outlined" onClick={handleLike}>
-      <HeartIcon className={styles[`${BLOCK_NAME}-icon`]} />
+      <HeartIcon className={clsx('ui-icon', className)} />
     </IconButton>
   )
 }

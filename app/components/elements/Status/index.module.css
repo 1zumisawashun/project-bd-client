@@ -17,7 +17,3 @@
     border: 1px solid var(--red-12);
   }
 }
-
-.status-icon {
-  composes: svg from '@/assets/base-icon.module.css';
-}

@@ -1,10 +1,10 @@
-.toggle-group {
+.ui-option-group {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.toggle-label {
+.ui-option-label {
   align-items: center;
   color: var(--indigo-12);
   display: inline-flex;
@@ -13,7 +13,7 @@
   width: fit-content;
 }
 
-.toggle {
+.ui-option {
   &:focus-visible {
     outline: 2px solid;
     outline-offset: 2px;
@@ -50,7 +50,7 @@
   }
 }
 
-.toggle-text {
+.ui-option-text {
   &:not(:empty) {
     margin-left: 8px;
   }

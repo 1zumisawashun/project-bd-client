@@ -1,4 +1,4 @@
-.base-button {
+.ui-button {
   &:hover {
     cursor: pointer;
     filter: brightness(0.75) contrast(120%);

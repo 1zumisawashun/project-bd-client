@@ -26,7 +26,7 @@ export const EditorContent = forwardRef<Ref, Props>(
     <RowEditorContent
       {...props}
       ref={ref}
-      className={clsx(styles[`${BLOCK_NAME}`], className)}
+      className={clsx('ui-editor-content', styles[`${BLOCK_NAME}`], className)}
     />
   ),
 )

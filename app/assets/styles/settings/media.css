@@ -1,0 +1,6 @@
+:root {
+  --breakpoint-iphone5: 320px;
+  --breakpoint-sp: 576px;
+  --breakpoint-tab: 768px;
+  --breakpoint-pc: 1042px;
+}

@@ -1,5 +1,6 @@
 'use client'
 
+import clsx from 'clsx'
 import DOMPurify from 'dompurify'
 import NextLink from 'next/link'
 import { FC, ReactNode } from 'react'
@@ -9,9 +10,6 @@ import { HStack } from '@/components/layouts/HStack'
 import { VStack } from '@/components/layouts/VStack'
 import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
 import { Article } from '../../../../shared/article.types'
-import styles from './baseArticleDetail.module.css'
-
-const BLOCK_NAME = 'baseArticleDetail'
 
 type BaseArticleDetailProps = {
   article: Article
@@ -56,7 +54,7 @@ export const BaseArticleDetail: FC<BaseArticleDetailProps> = ({
       </HStack>
 
       <div
-        className={styles[`${BLOCK_NAME}-content`]}
+        className={clsx('ui-editor-content')}
         dangerouslySetInnerHTML={{ __html: clean }}
       />
     </VStack>

@@ -48,7 +48,7 @@ export const IconAnchorButton = forwardRef<Ref, Props>(
         nativeButton={false}
         render={<NextLink href={props.href} />}
         // native props
-        className={clsx(styles[`${BLOCK_NAME}`], className)}
+        className={clsx('ui-button', styles[`${BLOCK_NAME}`], className)}
         disabled={disabled}
         ref={ref}
         // custom props

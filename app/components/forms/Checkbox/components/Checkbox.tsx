@@ -17,11 +17,11 @@ type Ref = HTMLElement
 export const Checkbox = forwardRef<Ref, Props>(
   ({ className, children, error, ...props }, ref) => {
     return (
-      <label className={styles[`${BLOCK_NAME}-label`]}>
+      <label className={clsx('ui-option-label')}>
         <RowCheckbox.Root
           {...props}
           // native props
-          className={clsx(styles[`${BLOCK_NAME}`], className)}
+          className={clsx('ui-option', styles[`${BLOCK_NAME}`], className)}
           ref={ref}
           // custom props
           data-error={error}
@@ -30,7 +30,7 @@ export const Checkbox = forwardRef<Ref, Props>(
             <CheckIcon />
           </RowCheckbox.Indicator>
         </RowCheckbox.Root>
-        <span className={styles[`${BLOCK_NAME}-text`]}>{children}</span>
+        <span className={clsx('ui-option-text')}>{children}</span>
       </label>
     )
   },

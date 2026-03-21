@@ -1,9 +1,6 @@
 import { Fieldset as RowFieldset } from '@base-ui/react/fieldset'
 import clsx from 'clsx'
 import { ComponentProps, forwardRef } from 'react'
-import styles from '../index.module.css'
-
-const BLOCK_NAME = 'fieldset'
 
 type RowFieldsetProps = ComponentProps<typeof RowFieldset.Root>
 
@@ -20,7 +17,7 @@ export const Fieldset = forwardRef<Ref, Props>(
         {...props}
         // native props
         ref={ref}
-        className={clsx(styles[`${BLOCK_NAME}`], className)}
+        className={clsx(className)}
       />
     )
   },

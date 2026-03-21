@@ -19,7 +19,7 @@ export const AutocompleteInput = forwardRef<Ref, Props>(
       <RowAutocomplete.Input
         {...props}
         // native props
-        className={clsx(styles[`${BLOCK_NAME}`], className)}
+        className={clsx('ui-input', styles[`${BLOCK_NAME}`], className)}
         ref={ref}
       />
     )

@@ -1,5 +1,4 @@
 .autocomplete-input {
-  composes: base-input from '@/assets/base-input.module.css';
 }
 
 .autocomplete-menu-popup {

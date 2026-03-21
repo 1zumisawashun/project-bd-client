@@ -86,3 +86,11 @@ null
 ## その他ドキュメント
 
 See [Configuration Reference](https://github.com/1zumisawashun).
+
+## memo
+
+css-modulesではcomposesは利用しない
+アフォーダンス層としてcomponentsを利用する
+詳細度バトルは
+
+stylelintではなくeslint/cssを使う

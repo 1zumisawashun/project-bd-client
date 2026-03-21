@@ -10,18 +10,18 @@
 
 /* generic */
 @import './generics/the-new-css-reset.css';
-@import './generics/reset.css';
+/* @import './generics/reset.css'; */
 
 /* elements */
-@import './elements/main.css';
+/* @import './elements/main.css'; */
 @import './elements/image-reset.css';
 
 /* objects */
-@import './objects/common-container.css';
-@import './objects/flex-container.css';
+/* @import './objects/common-container.css';
+@import './objects/flex-container.css'; */
 
 /* components */
-@import './components/main.css';
+/* @import './components/main.css'; */
 @import './components/ui-button.css';
 @import './components/ui-input.css';
 @import './components/ui-toggle.css';

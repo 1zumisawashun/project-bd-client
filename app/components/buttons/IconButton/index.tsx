@@ -45,7 +45,7 @@ export const IconButton = forwardRef<Ref, Props>(
         // base-ui props
         nativeButton={true}
         // native props
-        className={clsx(styles[`${BLOCK_NAME}`], className)}
+        className={clsx('ui-button', styles[`${BLOCK_NAME}`], className)}
         type={type}
         disabled={disabled}
         ref={ref}

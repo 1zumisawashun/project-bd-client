@@ -1,5 +1,4 @@
 .icon-button {
-  composes: base-button from '@/assets/base-button.module.css';
   /* override the base-button styles */
   line-height: 1;
   align-items: center;

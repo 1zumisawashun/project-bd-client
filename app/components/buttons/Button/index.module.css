@@ -1,5 +1,4 @@
 .button {
-  /* composes: ui-button from global; */
   /* override the base-button styles */
   box-sizing: border-box;
   font-size: 1rem;

@@ -1,0 +1,15 @@
+/* Component Layer */
+
+.ui-icon {
+  /* base */
+  display: block;
+  vertical-align: middle;
+  overflow: visible;
+  /* custom */
+  --svg-size: 1rem;
+  --path-size: 14.13px;
+
+  margin-top: calc(var(--svg-size) - var(--path-size));
+  width: var(--svg-size);
+  height: var(--svg-size);
+}

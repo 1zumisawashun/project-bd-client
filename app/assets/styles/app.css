@@ -1,4 +1,5 @@
 /* settings */
+@import './settings/global.css';
 @import './settings/color.css';
 @import './settings/font.css';
 @import './settings/media.css';
@@ -8,10 +9,12 @@
 @import './tools/main.css';
 
 /* generic */
+@import './generics/the-new-css-reset.css';
 @import './generics/reset.css';
 
 /* elements */
 @import './elements/main.css';
+@import './elements/image-reset.css';
 
 /* objects */
 @import './objects/common-container.css';
@@ -19,6 +22,11 @@
 
 /* components */
 @import './components/main.css';
+@import './components/ui-button.css';
+@import './components/ui-input.css';
+@import './components/ui-toggle.css';
+@import './components/ui-editor.css';
+@import './components/ui-icon.css';
 
 /* utilities */
 @import './utilities/main.css';

@@ -1,10 +1,8 @@
-/* Element Layer */
-
-html {
+/* html {
   font-size: 62.5%;
-}
+} */
 
-body {
+/* body {
   font-family: var(--font-family);
   font-size: 1.6rem;
   font-weight: normal;
@@ -13,4 +11,18 @@ body {
   -webkit-font-smoothing: antialiased;
   word-wrap: break-word;
   overflow-wrap: break-word;
+} */
+
+/* @see https://coliss.com/articles/build-websites/operation/css/sensible-defaults-for-img-elements.html */
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  font-style: italic;
+  background-repeat: no-repeat;
+  background-size: cover;
+  shape-margin: 0.75rem;
+
+  /* NOTE: 画像やiframeの下に謎の隙間が入る */
+  /* vertical-align: :bottom; */
 }

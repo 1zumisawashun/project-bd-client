@@ -22,7 +22,7 @@
 /* components */
 @import './components/ui-button.css' layer(components);
 @import './components/ui-input.css' layer(components);
-@import './components/ui-toggle.css' layer(components);
+@import './components/ui-option.css' layer(components);
 @import './components/ui-editor.css' layer(components);
 @import './components/ui-icon.css' layer(components);
 

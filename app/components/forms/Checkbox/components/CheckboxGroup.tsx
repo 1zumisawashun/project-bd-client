@@ -1,9 +1,6 @@
 import { CheckboxGroup as RowCheckboxGroup } from '@base-ui/react/checkbox-group'
 import clsx from 'clsx'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
-import styles from '../index.module.css'
-
-const BLOCK_NAME = 'checkbox-group'
 
 type CheckboxGroupProps = ComponentProps<typeof RowCheckboxGroup>
 
@@ -20,7 +17,7 @@ export const CheckboxGroup = forwardRef<Ref, Props>(
         {...props}
         // native props
         ref={ref}
-        className={clsx(styles[`${BLOCK_NAME}`], className)}
+        className={clsx('ui-option-group', className)}
       />
     )
   },

@@ -17,11 +17,11 @@ type Ref = HTMLElement
 export const Radio = forwardRef<Ref, Props>(
   ({ className, children, error, ...props }, ref) => {
     return (
-      <label className={styles[`${BLOCK_NAME}-label`]}>
+      <label className={clsx('ui-option-label')}>
         <RowRadio.Root
           {...props}
           // native props
-          className={clsx(styles[`${BLOCK_NAME}`], className)}
+          className={clsx('ui-option', styles[`${BLOCK_NAME}`], className)}
           ref={ref}
           // custom props
           data-error={error}
@@ -30,7 +30,7 @@ export const Radio = forwardRef<Ref, Props>(
             <CheckIcon />
           </RowRadio.Indicator>
         </RowRadio.Root>
-        <span className={styles[`${BLOCK_NAME}-text`]}>{children}</span>
+        <span className={clsx('ui-option-text')}>{children}</span>
       </label>
     )
   },

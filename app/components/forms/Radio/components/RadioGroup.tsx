@@ -1,9 +1,6 @@
 import { RadioGroup as RowRadioGroup } from '@base-ui/react/radio-group'
 import clsx from 'clsx'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
-import styles from '../index.module.css'
-
-const BLOCK_NAME = 'radio-group'
 
 type RadioGroupProps = ComponentProps<typeof RowRadioGroup>
 
@@ -20,7 +17,7 @@ export const RadioGroup = forwardRef<Ref, Props>(
         {...props}
         // native props
         ref={ref}
-        className={clsx(styles[`${BLOCK_NAME}`], className)}
+        className={clsx('ui-option-group', className)}
       />
     )
   },

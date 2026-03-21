@@ -11,17 +11,12 @@
 .articleCard-title {
   font-weight: 600;
   color: var(--mauve-11);
-
-  composes: _line-clamp-3 from '@/assets/line-clump.module.css';
 }
 .articleCard-content {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   text-align: left;
-
-  composes: _line-clamp-1 from '@/assets/line-clump.module.css';
-
   & :is(p) {
     font-size: 0.875rem;
     color: var(--mauve-10);

@@ -1,9 +1,6 @@
 import { Input } from '@base-ui/react/input'
 import clsx from 'clsx'
 import { ComponentProps, ElementRef, forwardRef } from 'react'
-import styles from './index.module.css'
-
-const BLOCK_NAME = 'text-input'
 
 type InputProps = ComponentProps<typeof Input>
 
@@ -23,7 +20,7 @@ export const TextInput = forwardRef<Ref, Props>(
       <Input
         {...props}
         // native props
-        className={clsx('ui-input', styles[`${BLOCK_NAME}`], className)}
+        className={clsx('ui-input', className)}
         ref={ref}
       />
     )

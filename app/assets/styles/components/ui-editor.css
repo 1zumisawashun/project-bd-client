@@ -1,5 +1,5 @@
 /* @see https://github.com/vercel/next.js/discussions/31705 */
-.ui-editor-reset {
+.ui-editor-content {
   /* revert reset css */
   &:where(
     :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)

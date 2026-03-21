@@ -39,9 +39,7 @@ export const Status = forwardRef<Ref, Props>(
         data-status={status}
       >
         <HStack align="center" gap={2}>
-          <InfoCircledIcon
-            className={clsx('ui-icon', styles[`${BLOCK_NAME}-icon`])}
-          />
+          <InfoCircledIcon className={clsx('ui-icon')} />
           <Title>{title}</Title>
         </HStack>
         <Description>{children}</Description>

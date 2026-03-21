@@ -1,0 +1,23 @@
+/* Setting Layer */
+
+:root {
+  /* black */
+  --black: #000;
+  --black-dark-grey: #363636;
+
+  /* grey */
+  --grey: #808080;
+
+  /* white */
+  --white: #ffffff;
+  --white-dr-white: #fafafa;
+
+  /* blue */
+
+  /* green */
+
+  /* red */
+
+  /* shadow color */
+  --black-shadow: rgba(0, 0, 0, 0.1);
+}

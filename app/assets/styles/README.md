@@ -1,30 +1,31 @@
-# sass-template
+# css-template
 
-ITCSS と RSCSS のサンプルです
+ITCSS のサンプルです
 
 ## 全体のディレクトリ構成図
 
 ```bash
 .
 ├── components
-│   └── _main.scss
+│   └── main.css
 ├── elements
-│   └── _main.scss
+│   └── main.css
 ├── generics
-│   └── _reset.scss
+│   └── reset.css
 ├── objects
-│   └── _main.scss
+│   ├── common-container.css
+│   └── flex-container.css
 ├── settings
-│   ├── _color.scss
-│   ├── _font.scss
-│   ├── _media.scss
-│   └── _shadow.scss
+│   ├── color.css
+│   ├── font.css
+│   ├── media.css
+│   └── shadow.css
 ├── tools
-│   └── _main.scss
+│   └── main.css
 ├── utilities
-│    └── _main.scss
+│    └── main.css
 ├── README.md
-└── app.scss
+└── app.css
 ```
 
 ## その他ドキュメント
@@ -32,10 +33,3 @@ ITCSS と RSCSS のサンプルです
 - [ITCSS: Scalable and Maintainable CSS Architecture](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/)
 
   > ITCSS stands for Inverted Triangle CSS and it helps you to organize your project CSS files in such way that you can better deal with (not always easy-to-deal with) CSS specifics like global namespace, cascade and selectors specificity.
-
-- [rscss](https://rscss.io/)
-
-  > Reasonable System for CSS Stylesheet Structure.
-  > A set of simple ideas to guide your process of building maintainable CSS.
-
-- [📄 stylelint-config-rscss](https://github.com/Masaki-Yamanaka/stylelint-config-rscss)

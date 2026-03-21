@@ -1,30 +1,30 @@
-/* @layer settings, tools, generics, elements, objects, components, utilities; */
+@layer settings, tools, generics, elements, objects, components, utilities;
 
 /* settings */
-@import './settings/color.css';
-@import './settings/font.css';
-@import './settings/media.css';
-@import './settings/shadow.css';
+@import './settings/color.css' layer(settings);
+@import './settings/font.css' layer(settings);
+@import './settings/media.css' layer(settings);
+@import './settings/shadow.css' layer(settings);
 
 /* tools */
-@import './tools/main.css';
+@import './tools/main.css' layer(tools);
 
 /* generic */
-@import './generics/the-new-css-reset.css';
+@import './generics/the-new-css-reset.css' layer(generics);
 
 /* elements */
-@import './elements/main.css';
+@import './elements/main.css' layer(elements);
 
 /* objects */
-@import './objects/common-container.css';
-@import './objects/flex-container.css';
+@import './objects/common-container.css' layer(objects);
+@import './objects/flex-container.css' layer(objects);
 
 /* components */
-@import './components/ui-button.css';
-@import './components/ui-input.css';
-@import './components/ui-toggle.css';
-@import './components/ui-editor.css';
-@import './components/ui-icon.css';
+@import './components/ui-button.css' layer(components);
+@import './components/ui-input.css' layer(components);
+@import './components/ui-toggle.css' layer(components);
+@import './components/ui-editor.css' layer(components);
+@import './components/ui-icon.css' layer(components);
 
 /* utilities */
-@import './utilities/main.css';
+@import './utilities/main.css' layer(utilities);

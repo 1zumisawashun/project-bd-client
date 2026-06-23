@@ -1,4 +1,6 @@
 import type { StorybookConfig } from '@storybook/nextjs'
+import { mergeConfig } from 'vite'
+import path from 'node:path'
 
 const config: StorybookConfig = {
   stories: ['../app/**/*.mdx', '../app/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -14,6 +16,14 @@ const config: StorybookConfig = {
   core: {
     builder: '@storybook/builder-vite',
   },
+  viteFinal: async (config) =>
+    mergeConfig(config, {
+      resolve: {
+        alias: {
+          '@': path.resolve(__dirname, '../app'),
+        },
+      },
+    }),
   framework: {
     name: '@storybook/nextjs',
     options: {},

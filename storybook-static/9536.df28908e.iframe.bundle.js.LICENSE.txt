@@ -1,5 +1,0 @@
-/**
- * @source https://github.com/jshttp/cookie
- * @author blakeembrey
- * @license MIT
- */

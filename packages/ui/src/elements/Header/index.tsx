@@ -7,7 +7,15 @@ import styles from './index.module.css'
 
 const BLOCK_NAME = 'header'
 
-type Session = { user?: { id?: string; [key: string]: unknown } } | null
+type Session = {
+  user?: {
+    id?: string | null
+    name?: string | null
+    email?: string | null
+    image?: string | null
+    role?: string
+  }
+} | null
 
 type Props = {
   session: Session

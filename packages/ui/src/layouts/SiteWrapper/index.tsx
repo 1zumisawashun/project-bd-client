@@ -5,7 +5,15 @@ import styles from './index.module.css'
 
 const BLOCK_NAME = 'site-wrapper'
 
-type Session = { user?: { id?: string; [key: string]: unknown } } | null
+type Session = {
+  user?: {
+    id?: string | null
+    name?: string | null
+    email?: string | null
+    image?: string | null
+    role?: string
+  }
+} | null
 
 type StickyWrapperProps = ComponentPropsWithoutRef<'div'>
 

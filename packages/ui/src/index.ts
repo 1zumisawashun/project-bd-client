@@ -1,6 +1,5 @@
 // Archive (legacy components)
-export * from './archive/AutocompleteInput'
-export * from './archive/Menu'
+export { AutocompleteInput, AutocompleteInputControl, AutocompleteInputGroup, AutocompleteInputUnControl } from './archive/AutocompleteInput'
 
 // Buttons
 export * from './buttons/AnchorButton'

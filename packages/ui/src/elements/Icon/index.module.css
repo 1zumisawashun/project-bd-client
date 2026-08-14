@@ -1,0 +1,7 @@
+.arrow-fill {
+  fill: canvas;
+}
+
+.arrow-outer-stroke {
+  fill: var(--mauve-6);
+}

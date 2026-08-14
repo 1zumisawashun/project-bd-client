@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import { FC } from 'react'
-import { VStack } from '@project-bd-client/ui'
-import { MypageUser } from '../../myPage.types'
-import { MyPageEmail } from '../myPageEmail/MyPageEmail'
-import { MyPageLogout } from '../myPageLogout/MyPageLogout'
-import { MyPageProfile } from '../myPageProfile/MyPageProfile'
+import { FC } from "react";
+import { VStack } from "@project-bd-client/ui";
+import { MypageUser } from "../../myPage.types";
+import { MyPageEmail } from "../myPageEmail/MyPageEmail";
+import { MyPageLogout } from "../myPageLogout/MyPageLogout";
+import { MyPageProfile } from "../myPageProfile/MyPageProfile";
 
 type MyPageSettingProps = {
-  user: MypageUser
-}
+  user: MypageUser;
+};
 
 export const MyPageSetting: FC<MyPageSettingProps> = ({ user }) => {
   return (
@@ -18,5 +18,5 @@ export const MyPageSetting: FC<MyPageSettingProps> = ({ user }) => {
       <MyPageEmail email={user.email} />
       <MyPageLogout />
     </VStack>
-  )
-}
+  );
+};

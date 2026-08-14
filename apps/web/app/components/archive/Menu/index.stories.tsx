@@ -1,21 +1,21 @@
-import { HamburgerMenuIcon } from '@radix-ui/react-icons'
-import { type Meta, type StoryObj } from '@storybook/react'
-import { userEvent, within } from '@storybook/test'
-import { FC } from 'react'
-import { useDisclosure } from '@project-bd-client/ui'
-import { Menu, MenuContent, MenuItem, MenuTrigger } from './index'
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { type Meta, type StoryObj } from "@storybook/react";
+import { userEvent, within } from "@storybook/test";
+import { FC } from "react";
+import { useDisclosure } from "@project-bd-client/ui";
+import { Menu, MenuContent, MenuItem, MenuTrigger } from "./index";
 
 const meta: Meta<typeof Menu> = {
-  title: 'archive/Menu',
+  title: "archive/Menu",
   component: Menu,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Menu>
+type Story = StoryObj<typeof Menu>;
 
 const Render: FC = () => {
-  const { isOpen, open, close } = useDisclosure()
+  const { isOpen, open, close } = useDisclosure();
   return (
     <Menu isOpen={isOpen} open={open} close={close}>
       <MenuTrigger>
@@ -28,14 +28,14 @@ const Render: FC = () => {
         <MenuItem onClick={() => null}>New Private Window</MenuItem>
       </MenuContent>
     </Menu>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   args: {},
   render: () => <Render />,
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByLabelText('hamburger-menu'))
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByLabelText("hamburger-menu"));
   },
-}
+};

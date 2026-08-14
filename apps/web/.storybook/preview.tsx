@@ -1,9 +1,6 @@
-import '@/assets/styles/app.css'
-import type { Preview } from '@storybook/react'
-import {
-  ProviderDecorator,
-  SpWidthDecorator,
-} from '../app/functions/libs/storybook/decorators'
+import "@/assets/styles/app.css";
+import type { Preview } from "@storybook/react";
+import { ProviderDecorator, SpWidthDecorator } from "../app/functions/libs/storybook/decorators";
 
 /** @see https://stackoverflow.com/questions/76933793/how-to-write-decorator-in-typescript-for-storybook */
 
@@ -11,14 +8,14 @@ const preview: Preview = {
   decorators: [ProviderDecorator, SpWidthDecorator],
   parameters: {
     pseudo: {
-      hover: '#hover',
-      active: '#active',
-      focusVisible: '#focus-visible',
-      focus: '#focus',
+      hover: "#hover",
+      active: "#active",
+      focusVisible: "#focus-visible",
+      focus: "#focus",
     },
     design: {
-      type: 'figma',
-      url: 'https://www.figma.com/board/eslbvJyXd5j6vRXNF7ZFVV/Welcome-to-FigJam?node-id=0-1&node-type=CANVAS&t=N0PqZCAdPjIsDLZv-0',
+      type: "figma",
+      url: "https://www.figma.com/board/eslbvJyXd5j6vRXNF7ZFVV/Welcome-to-FigJam?node-id=0-1&node-type=CANVAS&t=N0PqZCAdPjIsDLZv-0",
     },
     nextjs: {
       /**
@@ -34,6 +31,6 @@ const preview: Preview = {
       },
     },
   },
-}
+};
 
-export default preview
+export default preview;

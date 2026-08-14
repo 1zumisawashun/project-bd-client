@@ -26,7 +26,7 @@ const mutation = useMutation(SOME_MUTATION, {
       variables: { sampleId } satisfies RefetchVariablesType,
     },
   ],
-})
+});
 ```
 
 #### ❌ 間違ったコード例
@@ -39,7 +39,7 @@ const mutation = useMutation(SOME_MUTATION, {
       variables: { sampleId },
     },
   ],
-})
+});
 ```
 
 ## 実装の詳細

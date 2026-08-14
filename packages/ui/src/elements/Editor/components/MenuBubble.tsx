@@ -1,15 +1,15 @@
-import { BubbleMenu as RowBubbleMenu } from '@tiptap/react'
-import clsx from 'clsx'
-import { ComponentProps, FC } from 'react'
-import styles from '../index.module.css'
+import { BubbleMenu as RowBubbleMenu } from "@tiptap/react";
+import clsx from "clsx";
+import { ComponentProps, FC } from "react";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'menu-bubble'
+const BLOCK_NAME = "menu-bubble";
 
-type BubbleMenuProps = ComponentProps<typeof RowBubbleMenu>
+type BubbleMenuProps = ComponentProps<typeof RowBubbleMenu>;
 
-type CustomProps = {}
+type CustomProps = {};
 
-type Props = BubbleMenuProps & CustomProps
+type Props = BubbleMenuProps & CustomProps;
 
 /**
  * NOTE:
@@ -31,4 +31,4 @@ export const MenuBubble: FC<Props> = ({
     tippyOptions={{ duration: 100, maxWidth: 600 }}
     className={clsx(styles[`${BLOCK_NAME}`], className)}
   />
-)
+);

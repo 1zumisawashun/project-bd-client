@@ -1,13 +1,13 @@
-import { Metadata } from 'next'
-import { PropsWithChildren } from 'react'
-import { SiteWrapper } from '@/components/SiteWrapper'
+import { Metadata } from "next";
+import { PropsWithChildren } from "react";
+import { SiteWrapper } from "@/components/SiteWrapper";
 
-const title = 'Article Detail'
+const title = "Article Detail";
 
 export const metadata: Metadata = {
   title: `Project BD | ${title}`,
-}
+};
 
 export default function Layout({ children }: PropsWithChildren) {
-  return <SiteWrapper>{children}</SiteWrapper>
+  return <SiteWrapper>{children}</SiteWrapper>;
 }

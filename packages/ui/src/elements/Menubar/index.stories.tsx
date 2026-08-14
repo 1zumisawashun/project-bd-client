@@ -1,17 +1,17 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { Button } from '../../buttons/Button'
-import { Menu, MenuItem, MenuList, MenuSeparator, MenuTrigger } from '../Menu'
-import { Menubar } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { Button } from "../../buttons/Button";
+import { Menu, MenuItem, MenuList, MenuSeparator, MenuTrigger } from "../Menu";
+import { Menubar } from "./index";
 
 const meta: Meta<typeof Menubar> = {
-  title: 'element/Menubar',
+  title: "element/Menubar",
   component: Menubar,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Menubar>
+type Story = StoryObj<typeof Menubar>;
 
 const Render: FC = () => {
   return (
@@ -42,10 +42,10 @@ const Render: FC = () => {
         </MenuList>
       </Menu>
     </Menubar>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   args: {},
   render: () => <Render />,
-}
+};

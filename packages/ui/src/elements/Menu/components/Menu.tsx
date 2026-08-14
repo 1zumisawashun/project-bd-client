@@ -1,12 +1,12 @@
-import { Menu as RowMenu } from '@base-ui/react/menu'
-import { ComponentProps, FC } from 'react'
+import { Menu as RowMenu } from "@base-ui/react/menu";
+import { ComponentProps, FC } from "react";
 
-type MenuProps = ComponentProps<typeof RowMenu.Root>
+type MenuProps = ComponentProps<typeof RowMenu.Root>;
 
-type CustomProps = {}
+type CustomProps = {};
 
-type Props = MenuProps & CustomProps
+type Props = MenuProps & CustomProps;
 
 export const Menu: FC<Props> = (props) => {
-  return <RowMenu.Root {...props} />
-}
+  return <RowMenu.Root {...props} />;
+};

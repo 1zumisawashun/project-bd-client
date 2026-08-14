@@ -1,17 +1,17 @@
-import clsx from 'clsx'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { Align, Justify } from '../../types'
-import styles from './index.module.css'
+import clsx from "clsx";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import { Align, Justify } from "../../types";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'v-stack'
+const BLOCK_NAME = "v-stack";
 
-type VStackProps = ComponentPropsWithoutRef<'div'>
+type VStackProps = ComponentPropsWithoutRef<"div">;
 
-type CustomProps = { gap?: number; align?: Align; justify?: Justify }
+type CustomProps = { gap?: number; align?: Align; justify?: Justify };
 
-type Props = VStackProps & CustomProps
+type Props = VStackProps & CustomProps;
 
-type Ref = ElementRef<'div'>
+type Ref = ElementRef<"div">;
 
 export const VStack = forwardRef<Ref, Props>(
   (
@@ -38,8 +38,8 @@ export const VStack = forwardRef<Ref, Props>(
         data-align={align}
         data-justify={justify}
       />
-    )
+    );
   },
-)
+);
 
-VStack.displayName = 'VStack'
+VStack.displayName = "VStack";

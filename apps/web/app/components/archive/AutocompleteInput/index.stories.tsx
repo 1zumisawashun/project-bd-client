@@ -1,35 +1,23 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { Controller, useFieldArray, useForm, useWatch } from 'react-hook-form'
-import * as z from 'zod'
-import { Label } from '@project-bd-client/ui'
-import { Field, FieldError, FieldLabel } from '@project-bd-client/ui'
-import { HStack } from '@project-bd-client/ui'
-import { VStack } from '@project-bd-client/ui'
-import {
-  AutocompleteInput,
-  AutocompleteInputControl,
-  AutocompleteInputGroup,
-} from '.'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form";
+import * as z from "zod";
+import { Label } from "@project-bd-client/ui";
+import { Field, FieldError, FieldLabel } from "@project-bd-client/ui";
+import { HStack } from "@project-bd-client/ui";
+import { VStack } from "@project-bd-client/ui";
+import { AutocompleteInput, AutocompleteInputControl, AutocompleteInputGroup } from ".";
 
-const options = [
-  'React',
-  'Ruby on Rails',
-  'JavaScript',
-  'TypeScript',
-  'Go',
-  'HTML',
-  'CSS',
-]
+const options = ["React", "Ruby on Rails", "JavaScript", "TypeScript", "Go", "HTML", "CSS"];
 
 const meta = {
-  title: 'archive/AutocompleteInput',
+  title: "archive/AutocompleteInput",
   component: AutocompleteInputControl,
-} satisfies Meta<typeof AutocompleteInputControl>
+} satisfies Meta<typeof AutocompleteInputControl>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 /**
  * ================================================
@@ -39,19 +27,19 @@ type Story = StoryObj<typeof meta>
 const DefaultRender: FC = () => {
   const schema = z.object({
     category: z.string(),
-  })
+  });
 
-  type Schema = z.infer<typeof schema>
+  type Schema = z.infer<typeof schema>;
 
   const { control } = useForm<Schema>({
-    mode: 'onTouched',
+    mode: "onTouched",
     resolver: zodResolver(schema),
     defaultValues: {
-      category: '',
+      category: "",
     },
-  })
+  });
 
-  const preview = useWatch({ control, name: 'category' }) ?? '-----'
+  const preview = useWatch({ control, name: "category" }) ?? "-----";
 
   return (
     <VStack>
@@ -68,8 +56,8 @@ const DefaultRender: FC = () => {
         )}
       />
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   args: {
@@ -77,7 +65,7 @@ export const Default: Story = {
     options: [],
   },
   render: () => <DefaultRender />,
-}
+};
 
 /**
  * ================================================
@@ -86,28 +74,25 @@ export const Default: Story = {
  */
 const MultipleRender: FC = () => {
   const schema = z.object({
-    categories: z
-      .object({ name: z.string() })
-      .array()
-      .max(5, '最大で5つまで登録できます'),
-  })
+    categories: z.object({ name: z.string() }).array().max(5, "最大で5つまで登録できます"),
+  });
 
-  type Schema = z.infer<typeof schema>
+  type Schema = z.infer<typeof schema>;
 
   const { control } = useForm<Schema>({
-    mode: 'onTouched',
+    mode: "onTouched",
     resolver: zodResolver(schema),
     defaultValues: {
       categories: [],
     },
-  })
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'categories',
-  })
+    name: "categories",
+  });
 
-  const names = fields.map((d) => d.name)
+  const names = fields.map((d) => d.name);
 
   return (
     <VStack>
@@ -121,7 +106,7 @@ const MultipleRender: FC = () => {
               onChange={(value) => append({ name: value })}
               options={options.filter((d) => !names.includes(d))}
             />
-            <HStack gap={2} style={{ margin: '0.5rem', flexWrap: 'wrap' }}>
+            <HStack gap={2} style={{ margin: "0.5rem", flexWrap: "wrap" }}>
               {fields?.map((d, index) => (
                 <Label key={d.id} onClick={() => remove(index)}>
                   {d.name}
@@ -133,8 +118,8 @@ const MultipleRender: FC = () => {
         )}
       />
     </VStack>
-  )
-}
+  );
+};
 
 export const Multiple: Story = {
   args: {
@@ -142,4 +127,4 @@ export const Multiple: Story = {
     options: [],
   },
   render: () => <MultipleRender />,
-}
+};

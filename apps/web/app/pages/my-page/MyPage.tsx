@@ -1,18 +1,18 @@
-import { FC } from 'react'
-import { Tabs, TabsList, TabsPanel, TabsTab } from '@project-bd-client/ui'
-import { MyPageArticleCard } from './components/myPageArticleCard/MyPageArticleCard'
-import { MyPageSetting } from './components/myPageSetting/MyPageSetting'
-import { MypageUser } from './myPage.types'
+import { FC } from "react";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@project-bd-client/ui";
+import { MyPageArticleCard } from "./components/myPageArticleCard/MyPageArticleCard";
+import { MyPageSetting } from "./components/myPageSetting/MyPageSetting";
+import { MypageUser } from "./myPage.types";
 
 type MyPageProps = {
-  user: MypageUser
-}
+  user: MypageUser;
+};
 
 export const MyPage: FC<MyPageProps> = ({ user }) => {
-  const { posts, likedArticles } = user
-  const published = posts?.filter(({ status }) => status === 'PUBLISHED') ?? []
-  const draft = posts?.filter(({ status }) => status === 'DRAFT') ?? []
-  const liked = likedArticles.map(({ article }) => article) ?? []
+  const { posts, likedArticles } = user;
+  const published = posts?.filter(({ status }) => status === "PUBLISHED") ?? [];
+  const draft = posts?.filter(({ status }) => status === "DRAFT") ?? [];
+  const liked = likedArticles.map(({ article }) => article) ?? [];
 
   return (
     <Tabs defaultValue="setting">
@@ -35,5 +35,5 @@ export const MyPage: FC<MyPageProps> = ({ user }) => {
         <MyPageArticleCard articles={liked} />
       </TabsPanel>
     </Tabs>
-  )
-}
+  );
+};

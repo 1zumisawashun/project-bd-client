@@ -1,13 +1,13 @@
 const isString = (value: unknown): value is string => {
-  return typeof value === 'string'
-}
+  return typeof value === "string";
+};
 
 function isNumber(value: unknown): value is number {
-  return typeof value === 'number'
+  return typeof value === "number";
 }
 
 const isFile = (file: unknown): file is File => {
-  return file instanceof File
-}
+  return file instanceof File;
+};
 
-export { isFile, isNumber, isString }
+export { isFile, isNumber, isString };

@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { Toast as RowToast } from '@base-ui/react/toast'
-import { FC } from 'react'
-import { XIcon } from '../../Icon'
-import styles from '../index.module.css'
+import { Toast as RowToast } from "@base-ui/react/toast";
+import { FC } from "react";
+import { XIcon } from "../../Icon";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'toast'
+const BLOCK_NAME = "toast";
 
 export const Toast: FC = () => {
-  const { toasts } = RowToast.useToastManager()
+  const { toasts } = RowToast.useToastManager();
 
   return toasts.map((toast) => (
     <RowToast.Root
@@ -19,16 +19,11 @@ export const Toast: FC = () => {
     >
       <RowToast.Content className={styles[`${BLOCK_NAME}-content`]!}>
         <RowToast.Title className={styles[`${BLOCK_NAME}-title`]!} />
-        <RowToast.Description
-          className={styles[`${BLOCK_NAME}-description`]!}
-        />
-        <RowToast.Close
-          className={styles[`${BLOCK_NAME}-close`]!}
-          aria-label="Close"
-        >
+        <RowToast.Description className={styles[`${BLOCK_NAME}-description`]!} />
+        <RowToast.Close className={styles[`${BLOCK_NAME}-close`]!} aria-label="Close">
           <XIcon />
         </RowToast.Close>
       </RowToast.Content>
     </RowToast.Root>
-  ))
-}
+  ));
+};

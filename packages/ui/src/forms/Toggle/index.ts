@@ -1,2 +1,2 @@
-export * from './components/Toggle'
-export * from './components/ToggleGroup'
+export * from "./components/Toggle";
+export * from "./components/ToggleGroup";

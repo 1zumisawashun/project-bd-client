@@ -1,10 +1,10 @@
-import { InferQueryModel } from '@/functions/libs/drizzle/types'
+import { InferQueryModel } from "@/functions/libs/drizzle/types";
 
 export type ArticleListArticle = InferQueryModel<
-  'articles',
+  "articles",
   {
     with: {
-      author: true
-    }
+      author: true;
+    };
   }
->
+>;

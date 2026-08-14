@@ -1,2 +1,2 @@
-export * from './components/Checkbox'
-export * from './components/CheckboxGroup'
+export * from "./components/Checkbox";
+export * from "./components/CheckboxGroup";

@@ -40,7 +40,7 @@
       outline-color: var(--indigo-6);
     }
   }
-  &[data-error='true'] {
+  &[data-error="true"] {
     border: 1px solid var(--red-10);
     background-color: var(--red-3);
     color: var(--red-10);

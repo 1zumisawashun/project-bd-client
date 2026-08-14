@@ -1,39 +1,36 @@
-import { Button as RowButton } from '@base-ui/react/button'
-import clsx from 'clsx'
-import { ComponentProps, ElementRef, forwardRef } from 'react'
-import { Shape, Theme, Variant } from '../../types'
-import styles from './index.module.css'
+import { Button as RowButton } from "@base-ui/react/button";
+import clsx from "clsx";
+import { ComponentProps, ElementRef, forwardRef } from "react";
+import { Shape, Theme, Variant } from "../../types";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'icon-button'
+const BLOCK_NAME = "icon-button";
 
 // NOTE: ButtonPropsからButtonNativePropsの部分だけを抽出する
-type ButtonNativeProps = Extract<
-  ComponentProps<typeof RowButton>,
-  { nativeButton?: true }
->
+type ButtonNativeProps = Extract<ComponentProps<typeof RowButton>, { nativeButton?: true }>;
 
 type CustomProps = {
-  theme?: Theme
-  variant?: Variant
-  shape?: Shape
-}
+  theme?: Theme;
+  variant?: Variant;
+  shape?: Shape;
+};
 
-type Props = ButtonNativeProps & CustomProps
+type Props = ButtonNativeProps & CustomProps;
 
-type Ref = ElementRef<'button'>
+type Ref = ElementRef<"button">;
 
 export const IconButton = forwardRef<Ref, Props>(
   (
     {
       // custom props
-      theme = 'primary',
-      variant = 'contained',
-      shape = 'rounded',
+      theme = "primary",
+      variant = "contained",
+      shape = "rounded",
       // native props
       children,
       disabled = false,
       className = undefined,
-      type = 'button',
+      type = "button",
       // other props
       ...props
     },
@@ -45,7 +42,7 @@ export const IconButton = forwardRef<Ref, Props>(
         // base-ui props
         nativeButton={true}
         // native props
-        className={clsx('ui-button', styles[`${BLOCK_NAME}`], className)}
+        className={clsx("ui-button", styles[`${BLOCK_NAME}`], className)}
         type={type}
         disabled={disabled}
         ref={ref}
@@ -56,8 +53,8 @@ export const IconButton = forwardRef<Ref, Props>(
       >
         {children}
       </RowButton>
-    )
+    );
   },
-)
+);
 
-IconButton.displayName = 'IconButton'
+IconButton.displayName = "IconButton";

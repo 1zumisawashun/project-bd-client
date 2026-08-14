@@ -1,24 +1,24 @@
-'use server'
+"use server";
 
-import { deleteArticle as _deleteArticle } from '@/functions/db/article'
-import { actionResult } from '@/functions/helpers/actionResult'
-import { getSession } from '@/functions/libs/next-auth/session'
+import { deleteArticle as _deleteArticle } from "@/functions/db/article";
+import { actionResult } from "@/functions/helpers/actionResult";
+import { getSession } from "@/functions/libs/next-auth/session";
 
 type DeleteArticleArgs = {
-  id: string
-}
+  id: string;
+};
 
 export const deleteArticle = async ({ id }: DeleteArticleArgs) => {
   try {
-    const session = await getSession()
+    const session = await getSession();
 
     if (!session?.user.id) {
-      actionResult.end('ログインしてください')
+      actionResult.end("ログインしてください");
     }
 
-    const response = await _deleteArticle({ id })
-    return actionResult.success(response)
+    const response = await _deleteArticle({ id });
+    return actionResult.success(response);
   } catch (error) {
-    return actionResult.error(error)
+    return actionResult.error(error);
   }
-}
+};

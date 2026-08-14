@@ -1,19 +1,19 @@
-import { Cross1Icon } from '@radix-ui/react-icons'
-import clsx from 'clsx'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { IconButton } from '../../buttons/IconButton'
-import { Theme } from '../../types'
-import styles from './index.module.css'
+import { Cross1Icon } from "@radix-ui/react-icons";
+import clsx from "clsx";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import { IconButton } from "../../buttons/IconButton";
+import { Theme } from "../../types";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'label'
+const BLOCK_NAME = "label";
 
-type LabelProps = ComponentPropsWithoutRef<'span'>
+type LabelProps = ComponentPropsWithoutRef<"span">;
 
-type CustomProps = { theme?: Theme; onClick?: () => void }
+type CustomProps = { theme?: Theme; onClick?: () => void };
 
-type Props = LabelProps & CustomProps
+type Props = LabelProps & CustomProps;
 
-type Ref = ElementRef<'span'>
+type Ref = ElementRef<"span">;
 
 export const Label = forwardRef<Ref, Props>(
   (
@@ -21,7 +21,7 @@ export const Label = forwardRef<Ref, Props>(
       // native props
       className,
       // custom props
-      theme = 'primary',
+      theme = "primary",
       onClick,
       // other props
       ...props
@@ -49,8 +49,8 @@ export const Label = forwardRef<Ref, Props>(
           </IconButton>
         )}
       </span>
-    )
+    );
   },
-)
+);
 
-Label.displayName = 'Label'
+Label.displayName = "Label";

@@ -1,21 +1,21 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { userEvent, within } from '@storybook/test'
-import { FC } from 'react'
-import { useDisclosure } from '../../hooks/useDisclosure'
-import { Button } from '../../buttons/Button'
-import { SimpleDialog } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { userEvent, within } from "@storybook/test";
+import { FC } from "react";
+import { useDisclosure } from "../../hooks/useDisclosure";
+import { Button } from "../../buttons/Button";
+import { SimpleDialog } from "./index";
 
 const meta: Meta<typeof SimpleDialog> = {
-  title: 'element/SimpleDialog',
+  title: "element/SimpleDialog",
   component: SimpleDialog,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof SimpleDialog>
+type Story = StoryObj<typeof SimpleDialog>;
 
 const Render: FC = () => {
-  const { isOpen, close, open } = useDisclosure()
+  const { isOpen, close, open } = useDisclosure();
   return (
     <>
       <Button onClick={open}>Open SimpleDialog</Button>
@@ -26,13 +26,13 @@ const Render: FC = () => {
         description="メールアドレスまたはパスワードが間違っています"
       />
     </>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByRole('button'))
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button"));
   },
-}
+};

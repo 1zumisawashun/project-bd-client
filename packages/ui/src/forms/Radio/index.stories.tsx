@@ -1,25 +1,25 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC, useState } from 'react'
-import { VStack } from '../../layouts/VStack'
-import { Card, CardBody } from '../../elements/Card'
-import { Field } from '../Field'
-import { Fieldset, FieldsetLegend } from '../Fieldset'
-import { Radio, RadioGroup } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC, useState } from "react";
+import { VStack } from "../../layouts/VStack";
+import { Card, CardBody } from "../../elements/Card";
+import { Field } from "../Field";
+import { Fieldset, FieldsetLegend } from "../Fieldset";
+import { Radio, RadioGroup } from "./index";
 
 const options = [
-  { value: 'http', label: 'HTTP' },
-  { value: 'https', label: 'HTTPS' },
-  { value: 'ssh', label: 'SSH' },
-]
+  { value: "http", label: "HTTP" },
+  { value: "https", label: "HTTPS" },
+  { value: "ssh", label: "SSH" },
+];
 
 const meta: Meta<typeof Radio> = {
-  title: 'form/Radio',
+  title: "form/Radio",
   component: Radio,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Radio>
+type Story = StoryObj<typeof Radio>;
 
 const State: FC = () => {
   return (
@@ -36,21 +36,16 @@ const State: FC = () => {
         </Radio>
       </Fieldset>
     </Field>
-  )
-}
+  );
+};
 
 const Multiple: FC = () => {
-  const [value, setValue] = useState('http')
+  const [value, setValue] = useState("http");
 
   return (
     <Field>
       <Fieldset
-        render={
-          <RadioGroup
-            value={value}
-            onValueChange={(value) => setValue(value as string)}
-          />
-        }
+        render={<RadioGroup value={value} onValueChange={(value) => setValue(value as string)} />}
       >
         <FieldsetLegend>Radio Multiple</FieldsetLegend>
         {options.map(({ value, label }) => (
@@ -60,8 +55,8 @@ const Multiple: FC = () => {
         ))}
       </Fieldset>
     </Field>
-  )
-}
+  );
+};
 
 const Render: FC = () => {
   return (
@@ -77,9 +72,9 @@ const Render: FC = () => {
         </CardBody>
       </Card>
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

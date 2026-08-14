@@ -1,5 +1,5 @@
-import type { StorybookConfig } from '@storybook/nextjs'
-const path = require('path')
+import type { StorybookConfig } from "@storybook/nextjs";
+const path = require("path");
 
 // @ts-check
 /**
@@ -7,18 +7,18 @@ const path = require('path')
  */
 const config: StorybookConfig = {
   stories: [
-    '../app/**/*.mdx',
-    '../app/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-    '../../packages/ui/src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    "../app/**/*.mdx",
+    "../app/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../../packages/ui/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   addons: [
-    '@storybook/addon-onboarding',
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@chromatic-com/storybook',
-    '@storybook/addon-interactions',
-    'storybook-addon-pseudo-states',
-    '@storybook/addon-designs',
+    "@storybook/addon-onboarding",
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@chromatic-com/storybook",
+    "@storybook/addon-interactions",
+    "storybook-addon-pseudo-states",
+    "@storybook/addon-designs",
   ],
   /**
    * @see https://github.com/storybookjs/storybook/issues/3916#issuecomment-871283551
@@ -27,14 +27,14 @@ const config: StorybookConfig = {
   webpackFinal(config: any) {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': path.resolve(__dirname, '../app'),
-    }
-    return config
+      "@": path.resolve(__dirname, "../app"),
+    };
+    return config;
   },
   framework: {
-    name: '@storybook/nextjs',
+    name: "@storybook/nextjs",
     options: {},
   },
-  staticDirs: ['../public'],
-}
-export default config
+  staticDirs: ["../public"],
+};
+export default config;

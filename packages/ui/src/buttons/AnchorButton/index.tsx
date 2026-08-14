@@ -1,39 +1,34 @@
-import { Button as RowButton } from '@base-ui/react/button'
-import clsx from 'clsx'
-import NextLink, { LinkProps } from 'next/link'
-import { ComponentProps, ElementRef, forwardRef, ReactNode } from 'react'
-import { Shape, Theme, Variant } from '../../types'
-import styles from './index.module.css'
+import { Button as RowButton } from "@base-ui/react/button";
+import clsx from "clsx";
+import NextLink, { LinkProps } from "next/link";
+import { ComponentProps, ElementRef, forwardRef, ReactNode } from "react";
+import { Shape, Theme, Variant } from "../../types";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'anchor-button'
+const BLOCK_NAME = "anchor-button";
 
 // NOTE: ButtonPropsからButtonNonNativePropsの部分だけを抽出する
-type ButtonNonNativeProps = Extract<
-  ComponentProps<typeof RowButton>,
-  { nativeButton: false }
->
+type ButtonNonNativeProps = Extract<ComponentProps<typeof RowButton>, { nativeButton: false }>;
 
 type CustomProps = {
-  theme?: Theme
-  variant?: Variant
-  shape?: Shape
-  prefix?: ReactNode
-  suffix?: ReactNode
-}
+  theme?: Theme;
+  variant?: Variant;
+  shape?: Shape;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
+};
 
-type Props = LinkProps &
-  Omit<ButtonNonNativeProps, 'prefix' | 'nativeButton'> &
-  CustomProps
+type Props = LinkProps & Omit<ButtonNonNativeProps, "prefix" | "nativeButton"> & CustomProps;
 
-type Ref = ElementRef<'button'>
+type Ref = ElementRef<"button">;
 
 export const AnchorButton = forwardRef<Ref, Props>(
   (
     {
       // custom props
-      theme = 'primary',
-      variant = 'contained',
-      shape = 'rounded',
+      theme = "primary",
+      variant = "contained",
+      shape = "rounded",
       prefix,
       suffix,
       // native props
@@ -52,7 +47,7 @@ export const AnchorButton = forwardRef<Ref, Props>(
         nativeButton={false}
         render={<NextLink href={props.href} />}
         // native props
-        className={clsx('ui-button', styles[`${BLOCK_NAME}`], className)}
+        className={clsx("ui-button", styles[`${BLOCK_NAME}`], className)}
         disabled={disabled}
         ref={ref}
         // custom props
@@ -64,8 +59,8 @@ export const AnchorButton = forwardRef<Ref, Props>(
         {children}
         {suffix ?? null}
       </RowButton>
-    )
+    );
   },
-)
+);
 
-AnchorButton.displayName = 'AnchorButton'
+AnchorButton.displayName = "AnchorButton";

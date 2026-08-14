@@ -1,7 +1,7 @@
-import { type NextAuthConfig } from 'next-auth'
-import Credentials from 'next-auth/providers/credentials'
-import GitHub from 'next-auth/providers/github'
-import { schema } from '@/pages/sign-in/signIn.schema'
+import { type NextAuthConfig } from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import GitHub from "next-auth/providers/github";
+import { schema } from "@/pages/sign-in/signIn.schema";
 
 /**
  * NOTE:
@@ -12,8 +12,8 @@ const providers = [
   GitHub,
   Credentials({
     credentials: {
-      email: { label: 'Email', type: 'email' },
-      password: { label: 'Password', type: 'password' },
+      email: { label: "Email", type: "email" },
+      password: { label: "Password", type: "password" },
     },
     /**
      * NOTE:
@@ -22,13 +22,13 @@ const providers = [
      */
     authorize(credentials) {
       // console.log('authorize callback', { credentials })
-      const { success, data } = schema.safeParse(credentials)
-      if (!success) throw new Error('Invalid input')
-      return data
+      const { success, data } = schema.safeParse(credentials);
+      if (!success) throw new Error("Invalid input");
+      return data;
     },
   }),
-] satisfies NextAuthConfig['providers']
+] satisfies NextAuthConfig["providers"];
 
 export default {
   providers,
-} satisfies NextAuthConfig
+} satisfies NextAuthConfig;

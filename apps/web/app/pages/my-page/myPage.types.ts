@@ -1,23 +1,23 @@
-import { InferQueryModel } from '@/functions/libs/drizzle/types'
+import { InferQueryModel } from "@/functions/libs/drizzle/types";
 
 export type MypageUser = InferQueryModel<
-  'users',
+  "users",
   {
     with: {
       posts: {
         with: {
-          author: true
-        }
-      }
+          author: true;
+        };
+      };
       likedArticles: {
         with: {
           article: {
             with: {
-              author: true
-            }
-          }
-        }
-      }
-    }
+              author: true;
+            };
+          };
+        };
+      };
+    };
   }
->
+>;

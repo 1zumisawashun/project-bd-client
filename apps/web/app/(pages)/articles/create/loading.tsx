@@ -1,5 +1,5 @@
-import { LoadingSpinner } from '@project-bd-client/ui'
+import { LoadingSpinner } from "@project-bd-client/ui";
 
 export default function Loading() {
-  return <LoadingSpinner />
+  return <LoadingSpinner />;
 }

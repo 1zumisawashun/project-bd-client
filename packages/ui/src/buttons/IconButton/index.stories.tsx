@@ -4,27 +4,27 @@ import {
   HeartFilledIcon,
   HeartIcon,
   PlusIcon,
-} from '@radix-ui/react-icons'
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { HStack } from '../../layouts/HStack'
-import { VStack } from '../../layouts/VStack'
-import { IconButton } from './index'
+} from "@radix-ui/react-icons";
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { HStack } from "../../layouts/HStack";
+import { VStack } from "../../layouts/VStack";
+import { IconButton } from "./index";
 
 const items = [
-  { id: 1, variant: 'contained', theme: 'primary' },
-  { id: 2, variant: 'outlined', theme: 'primary' },
-  { id: 3, variant: 'ghost', theme: 'primary' },
-]
+  { id: 1, variant: "contained", theme: "primary" },
+  { id: 2, variant: "outlined", theme: "primary" },
+  { id: 3, variant: "ghost", theme: "primary" },
+];
 
 const meta: Meta<typeof IconButton> = {
-  title: 'button/IconButton',
+  title: "button/IconButton",
   component: IconButton,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof IconButton>
+type Story = StoryObj<typeof IconButton>;
 
 const Render: FC = () => {
   return (
@@ -40,11 +40,7 @@ const Render: FC = () => {
           <IconButton variant={item.variant} theme={item.theme} id="active">
             <PlusIcon />
           </IconButton>
-          <IconButton
-            variant={item.variant}
-            theme={item.theme}
-            id="focus-visible"
-          >
+          <IconButton variant={item.variant} theme={item.theme} id="focus-visible">
             <HeartIcon />
           </IconButton>
           <IconButton variant={item.variant} theme={item.theme} disabled>
@@ -53,9 +49,9 @@ const Render: FC = () => {
         </HStack>
       ))}
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

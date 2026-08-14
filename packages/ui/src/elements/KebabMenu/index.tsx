@@ -1,11 +1,11 @@
-import { DotsVerticalIcon } from '@radix-ui/react-icons'
-import { FC } from 'react'
-import { IconButton } from '../../buttons/IconButton'
-import { Menu, MenuList, MenuTrigger } from '../Menu'
+import { DotsVerticalIcon } from "@radix-ui/react-icons";
+import { FC } from "react";
+import { IconButton } from "../../buttons/IconButton";
+import { Menu, MenuList, MenuTrigger } from "../Menu";
 
 type KebabMenuProps = {
-  render: FC
-}
+  render: FC;
+};
 
 export const KebabMenu: FC<KebabMenuProps> = (props) => {
   return (
@@ -21,5 +21,5 @@ export const KebabMenu: FC<KebabMenuProps> = (props) => {
         <props.render />
       </MenuList>
     </Menu>
-  )
-}
+  );
+};

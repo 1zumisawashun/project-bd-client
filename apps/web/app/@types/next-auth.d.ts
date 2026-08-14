@@ -1,12 +1,12 @@
-import { DefaultSession } from 'next-auth'
+import { DefaultSession } from "next-auth";
 // The `JWT` interface can be found in the `next-auth/jwt` submodule
-import 'next-auth/jwt'
+import "next-auth/jwt";
 
-type Role = 'USER' | 'ADMIN'
+type Role = "USER" | "ADMIN";
 
 // https://authjs.dev/getting-started/typescript#module-augmentation
 
-declare module 'next-auth' {
+declare module "next-auth" {
   /**
    * The shape of the user object returned in the OAuth providers' `profile` callback,
    * or the second parameter of the `session` callback, when using a database.
@@ -23,16 +23,16 @@ declare module 'next-auth' {
    */
   interface Session {
     user: {
-      id: string
-      role: Role
-    } & DefaultSession['user']
+      id: string;
+      role: Role;
+    } & DefaultSession["user"];
   }
 }
 
-declare module 'next-auth/jwt' {
+declare module "next-auth/jwt" {
   /** Returned by the `jwt` callback and `auth`, when using JWT sessions */
   interface JWT {
-    id: string
-    role: Role
+    id: string;
+    role: Role;
   }
 }

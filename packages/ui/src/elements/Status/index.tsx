@@ -1,36 +1,29 @@
-import { InfoCircledIcon } from '@radix-ui/react-icons'
-import clsx from 'clsx'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { HStack } from '../../layouts/HStack'
-import { Description, Title } from '../Typography'
-import styles from './index.module.css'
+import { InfoCircledIcon } from "@radix-ui/react-icons";
+import clsx from "clsx";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import { HStack } from "../../layouts/HStack";
+import { Description, Title } from "../Typography";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'status'
+const BLOCK_NAME = "status";
 
-type StatusProps = ComponentPropsWithoutRef<'div'>
+type StatusProps = ComponentPropsWithoutRef<"div">;
 
 type CustomProps = {
-  status?: _Status
-  title: string
-}
+  status?: _Status;
+  title: string;
+};
 
-type Props = StatusProps & CustomProps
+type Props = StatusProps & CustomProps;
 
-type Ref = ElementRef<'div'>
+type Ref = ElementRef<"div">;
 
-const _STATUS_OPTIONS = [
-  'empty',
-  'loading',
-  'error',
-  'success',
-  'warning',
-  'info',
-] as const
+const _STATUS_OPTIONS = ["empty", "loading", "error", "success", "warning", "info"] as const;
 
-export type _Status = (typeof _STATUS_OPTIONS)[number]
+export type _Status = (typeof _STATUS_OPTIONS)[number];
 
 export const Status = forwardRef<Ref, Props>(
-  ({ className, status = 'empty', title, children, ...props }, ref) => {
+  ({ className, status = "empty", title, children, ...props }, ref) => {
     return (
       <div
         {...props}
@@ -39,13 +32,13 @@ export const Status = forwardRef<Ref, Props>(
         data-status={status}
       >
         <HStack align="center" gap={2}>
-          <InfoCircledIcon className={clsx('ui-icon')} />
+          <InfoCircledIcon className={clsx("ui-icon")} />
           <Title>{title}</Title>
         </HStack>
         <Description>{children}</Description>
       </div>
-    )
+    );
   },
-)
+);
 
-Status.displayName = 'Status'
+Status.displayName = "Status";

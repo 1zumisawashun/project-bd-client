@@ -7,15 +7,15 @@
   align-items: center;
   gap: 0.25rem;
 
-  &[data-theme='primary'] {
+  &[data-theme="primary"] {
     background-color: var(--indigo-3);
     color: var(--indigo-12);
   }
-  &[data-theme='danger'] {
+  &[data-theme="danger"] {
     background-color: var(--red-3);
     color: var(--red-10);
   }
-  &[data-theme='success'] {
+  &[data-theme="success"] {
     background-color: var(--green-3);
     color: var(--green-9);
   }

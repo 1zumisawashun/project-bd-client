@@ -1,4 +1,4 @@
-import { createRule } from '../utilities/createRule'
+import { createRule } from "../utilities/createRule";
 
 export const rule = createRule({
   create(context) {
@@ -6,27 +6,27 @@ export const rule = createRule({
       TSTypeReference(node) {
         if (
           // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-          node.typeName.type === 'Identifier' &&
-          node.typeName.name === 'Omit'
+          node.typeName.type === "Identifier" &&
+          node.typeName.name === "Omit"
         ) {
           context.report({
             node,
-            messageId: 'no-omit-utility-type',
-          })
+            messageId: "no-omit-utility-type",
+          });
         }
       },
-    }
+    };
   },
   meta: {
-    type: 'problem',
+    type: "problem",
     docs: {
-      description: 'disallow the use of the `Omit` utility type',
+      description: "disallow the use of the `Omit` utility type",
     },
     messages: {
-      'no-omit-utility-type': 'The `Omit` utility type is forbidden',
+      "no-omit-utility-type": "The `Omit` utility type is forbidden",
     },
     schema: [],
   },
-  name: 'no-omit-utility-type',
+  name: "no-omit-utility-type",
   defaultOptions: [],
-})
+});

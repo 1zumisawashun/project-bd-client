@@ -1,6 +1,6 @@
-import { eq } from 'drizzle-orm'
-import db from '@/functions/libs/drizzle/client'
-import { articles, type InsertArticle } from '@/functions/libs/drizzle/schema'
+import { eq } from "drizzle-orm";
+import db from "@/functions/libs/drizzle/client";
+import { articles, type InsertArticle } from "@/functions/libs/drizzle/schema";
 
 export const getArticles = async ({ categories }: { categories: string[] }) => {
   try {
@@ -9,8 +9,8 @@ export const getArticles = async ({ categories }: { categories: string[] }) => {
         with: {
           author: true,
         },
-      })
-      return allArticles ?? null
+      });
+      return allArticles ?? null;
     }
 
     const articlesList = await db.query.articles.findMany({
@@ -22,19 +22,17 @@ export const getArticles = async ({ categories }: { categories: string[] }) => {
           },
         },
       },
-    })
+    });
 
     const filtered = articlesList.filter((article) =>
-      article.categories.some(({ category }) =>
-        categories.includes(category.name),
-      ),
-    )
+      article.categories.some(({ category }) => categories.includes(category.name)),
+    );
 
-    return filtered
+    return filtered;
   } catch {
-    return null
+    return null;
   }
-}
+};
 
 export const getArticleById = async ({ id }: { id: string }) => {
   try {
@@ -56,50 +54,41 @@ export const getArticleById = async ({ id }: { id: string }) => {
           },
         },
       },
-    })
+    });
 
-    return article ?? null
+    return article ?? null;
   } catch {
-    return null
+    return null;
   }
-}
+};
 
 export const createArticle = async ({ data }: { data: InsertArticle }) => {
   try {
-    const article = await db.insert(articles).values(data).returning()
-    return article[0] ?? null
+    const article = await db.insert(articles).values(data).returning();
+    return article[0] ?? null;
   } catch {
-    throw new Error('Failed to create article')
+    throw new Error("Failed to create article");
   }
-}
+};
 
 export const deleteArticle = async ({ id }: { id: string }) => {
   try {
-    const [article] = await db
-      .delete(articles)
-      .where(eq(articles.id, id))
-      .returning()
-    return article ?? null
+    const [article] = await db.delete(articles).where(eq(articles.id, id)).returning();
+    return article ?? null;
   } catch {
-    throw new Error('Failed to delete article')
+    throw new Error("Failed to delete article");
   }
-}
+};
 
-export const updateArticle = async ({
-  id,
-  data,
-}: {
-  id: string
-  data: Partial<InsertArticle>
-}) => {
+export const updateArticle = async ({ id, data }: { id: string; data: Partial<InsertArticle> }) => {
   try {
     const [article] = await db
       .update(articles)
       .set({ ...data, updatedAt: new Date() })
       .where(eq(articles.id, id))
-      .returning()
-    return article ?? null
+      .returning();
+    return article ?? null;
   } catch {
-    throw new Error('Failed to update article')
+    throw new Error("Failed to update article");
   }
-}
+};

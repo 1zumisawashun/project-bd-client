@@ -1,73 +1,67 @@
-import {
-  ChangeEvent,
-  ComponentProps,
-  ElementRef,
-  forwardRef,
-  useRef,
-} from 'react'
-import { Menu, MenuContent, MenuItem } from '@/components/archive/Menu'
-import { useMergeRef } from '@project-bd-client/ui'
-import { TextInput } from '@project-bd-client/ui'
-import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
+import { ChangeEvent, ComponentProps, ElementRef, forwardRef, useRef } from "react";
+import { Menu, MenuContent, MenuItem } from "@/components/archive/Menu";
+import { useMergeRef } from "@project-bd-client/ui";
+import { TextInput } from "@project-bd-client/ui";
+import { useAutocompleteInput } from "../hooks/useAutocompleteInput";
 
-type Ref = ElementRef<'input'>
+type Ref = ElementRef<"input">;
 
-type Props = { options: string[] } & ComponentProps<typeof TextInput>
+type Props = { options: string[] } & ComponentProps<typeof TextInput>;
 
-export const AutocompleteInputUnControl = forwardRef<Ref, Props>(
-  (props, ref) => {
-    const { menu, suggestions, onChange, onClick, onKeyDown, onFocus } =
-      useAutocompleteInput({ options: props.options, value: props.value })
+export const AutocompleteInputUnControl = forwardRef<Ref, Props>((props, ref) => {
+  const { menu, suggestions, onChange, onClick, onKeyDown, onFocus } = useAutocompleteInput({
+    options: props.options,
+    value: props.value,
+  });
 
-    const inputRef = useRef<Ref>(null!)
+  const inputRef = useRef<Ref>(null!);
 
-    const mergeRef = useMergeRef(inputRef, ref)
+  const mergeRef = useMergeRef(inputRef, ref);
 
-    const updateInputRef = (value: string) => {
-      inputRef.current.value = value
-    }
+  const updateInputRef = (value: string) => {
+    inputRef.current.value = value;
+  };
 
-    return (
-      <Menu isOpen={menu.isOpen} open={menu.open} close={menu.close}>
-        <TextInput
-          type="text"
-          autoComplete="off"
-          {...props}
-          onChange={(e) => {
-            onChange(e)
-            props.onChange?.(e)
-          }}
-          onKeyDown={(e) => {
-            // NOTE: submitされるのでブロックする
-            onKeyDown(e, () => null)
-          }}
-          onFocus={onFocus}
-          ref={mergeRef}
-        />
+  return (
+    <Menu isOpen={menu.isOpen} open={menu.open} close={menu.close}>
+      <TextInput
+        type="text"
+        autoComplete="off"
+        {...props}
+        onChange={(e) => {
+          onChange(e);
+          props.onChange?.(e);
+        }}
+        onKeyDown={(e) => {
+          // NOTE: submitされるのでブロックする
+          onKeyDown(e, () => null);
+        }}
+        onFocus={onFocus}
+        ref={mergeRef}
+      />
 
-        <MenuContent>
-          {suggestions.map((d, index) => (
-            <MenuItem
-              key={index}
-              onClick={() => {
-                onClick()
-                const e = {
-                  target: { value: d, name: props.name },
-                } as ChangeEvent<HTMLInputElement>
-                // TODO
-                // oxlint-disable-next-line ban-ts-comment
-                // @ts-expect-error
-                props.onChange?.(e)
-                updateInputRef(d)
-              }}
-            >
-              {d}
-            </MenuItem>
-          ))}
-        </MenuContent>
-      </Menu>
-    )
-  },
-)
+      <MenuContent>
+        {suggestions.map((d, index) => (
+          <MenuItem
+            key={index}
+            onClick={() => {
+              onClick();
+              const e = {
+                target: { value: d, name: props.name },
+              } as ChangeEvent<HTMLInputElement>;
+              // TODO
+              // oxlint-disable-next-line ban-ts-comment
+              // @ts-expect-error
+              props.onChange?.(e);
+              updateInputRef(d);
+            }}
+          >
+            {d}
+          </MenuItem>
+        ))}
+      </MenuContent>
+    </Menu>
+  );
+});
 
-AutocompleteInputUnControl.displayName = 'AutocompleteInputUnControl'
+AutocompleteInputUnControl.displayName = "AutocompleteInputUnControl";

@@ -1,33 +1,33 @@
-import { InferQueryModel } from '@/functions/libs/drizzle/types'
+import { InferQueryModel } from "@/functions/libs/drizzle/types";
 
 export type ArticleCategory = InferQueryModel<
-  'categories',
+  "categories",
   {
     columns: {
-      id: true
-      name: true
-    }
+      id: true;
+      name: true;
+    };
   }
->
+>;
 
 export type Article = InferQueryModel<
-  'articles',
+  "articles",
   {
     with: {
       categories: {
         with: {
-          category: true
-        }
-      }
+          category: true;
+        };
+      };
       likedUsers: {
         with: {
           user: {
             columns: {
-              id: true
-            }
-          }
-        }
-      }
-    }
+              id: true;
+            };
+          };
+        };
+      };
+    };
   }
->
+>;

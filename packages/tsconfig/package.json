@@ -2,7 +2,9 @@
   "name": "@project-bd-client/tsconfig",
   "version": "0.0.1",
   "private": true,
-  "files": ["*.json"],
+  "files": [
+    "*.json"
+  ],
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.5"
   }

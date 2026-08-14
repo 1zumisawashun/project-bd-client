@@ -1,17 +1,17 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { Footer } from '@project-bd-client/ui'
-import { Header } from '../Header'
-import styles from './index.module.css'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import { Footer } from "@project-bd-client/ui";
+import { Header } from "../Header";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'site-wrapper'
+const BLOCK_NAME = "site-wrapper";
 
-type StickyWrapperProps = ComponentPropsWithoutRef<'div'>
+type StickyWrapperProps = ComponentPropsWithoutRef<"div">;
 
-type CustomProps = {}
+type CustomProps = {};
 
-type Props = StickyWrapperProps & CustomProps
+type Props = StickyWrapperProps & CustomProps;
 
-type Ref = ElementRef<'div'>
+type Ref = ElementRef<"div">;
 
 /**
  * NOTE:
@@ -25,7 +25,7 @@ export const SiteWrapper = forwardRef<Ref, Props>(({ children }, ref) => {
       <main className={styles[`${BLOCK_NAME}-inner`]}>{children}</main>
       <Footer />
     </div>
-  )
-})
+  );
+});
 
-SiteWrapper.displayName = 'SiteWrapper'
+SiteWrapper.displayName = "SiteWrapper";

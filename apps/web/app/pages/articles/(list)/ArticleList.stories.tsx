@@ -1,17 +1,17 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { MOCK_ARTICLE_CATEGORIES } from '../shared/article.mocks'
-import { ArticleList } from './ArticleList'
-import { MOCK_ARTICLE_LIST_ARTICLE } from './articleList.mocks'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { MOCK_ARTICLE_CATEGORIES } from "../shared/article.mocks";
+import { ArticleList } from "./ArticleList";
+import { MOCK_ARTICLE_LIST_ARTICLE } from "./articleList.mocks";
 
 const meta: Meta<typeof ArticleList> = {
-  title: 'feature/articles/ArticleList',
+  title: "feature/articles/ArticleList",
   component: ArticleList,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof ArticleList>
+type Story = StoryObj<typeof ArticleList>;
 
 const Render: FC = () => {
   return (
@@ -20,8 +20,8 @@ const Render: FC = () => {
       categories={MOCK_ARTICLE_CATEGORIES}
       defaultValues={[]}
     />
-  )
-}
+  );
+};
 export const Default: Story = {
   render: () => <Render />,
-}
+};

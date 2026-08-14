@@ -1,7 +1,7 @@
 :is(.breadcrumb-link, .breadcrumb-back-button) {
   padding: 0.25rem;
   font-size: 0.875rem;
-  &[aria-current='true'] {
+  &[aria-current="true"] {
     font-weight: bold;
     cursor: not-allowed;
   }
@@ -20,6 +20,6 @@
   &:not(:last-child)::after {
     display: inline-block;
     margin-left: 0.5rem;
-    content: '/';
+    content: "/";
   }
 }

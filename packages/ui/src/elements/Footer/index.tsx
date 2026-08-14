@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { FC } from 'react'
-import styles from './index.module.css'
+import { FC } from "react";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'footer'
+const BLOCK_NAME = "footer";
 
 export const Footer: FC = () => {
   return (
@@ -13,12 +13,12 @@ export const Footer: FC = () => {
         <span
           id="year"
           ref={(node) => {
-            if (!node) return
-            node.innerHTML = new Date().getFullYear().toString()
+            if (!node) return;
+            node.innerHTML = new Date().getFullYear().toString();
           }}
         />
         &nbsp; All Rights Reserved
       </p>
     </footer>
-  )
-}
+  );
+};

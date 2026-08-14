@@ -1,52 +1,44 @@
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
-import { FC, startTransition } from 'react'
-import { Button } from '@project-bd-client/ui'
-import {
-  Dialog,
-  DialogDescription,
-  DialogTitle,
-} from '@project-bd-client/ui'
-import { useToast } from '@project-bd-client/ui'
-import { HStack } from '@project-bd-client/ui'
-import { VStack } from '@project-bd-client/ui'
-import { draftArticle } from './draftDialog.action'
+import { useRouter } from "next/navigation";
+import { FC, startTransition } from "react";
+import { Button } from "@project-bd-client/ui";
+import { Dialog, DialogDescription, DialogTitle } from "@project-bd-client/ui";
+import { useToast } from "@project-bd-client/ui";
+import { HStack } from "@project-bd-client/ui";
+import { VStack } from "@project-bd-client/ui";
+import { draftArticle } from "./draftDialog.action";
 
 type DraftDialogProps = {
-  isOpen: boolean
-  onClose: () => void
-  articleId: string
-}
+  isOpen: boolean;
+  onClose: () => void;
+  articleId: string;
+};
 
-export const DraftDialog: FC<DraftDialogProps> = ({
-  isOpen,
-  onClose,
-  articleId,
-}) => {
-  const toast = useToast()
-  const router = useRouter()
+export const DraftDialog: FC<DraftDialogProps> = ({ isOpen, onClose, articleId }) => {
+  const toast = useToast();
+  const router = useRouter();
 
   const handleDraft = () => {
     startTransition(async () => {
-      const response = await draftArticle({ id: articleId })
+      const response = await draftArticle({ id: articleId });
 
       if (!response?.isSuccess) {
         toast.add({
-          title: 'エラーが発生しました',
-          description: response.error.message ?? 'エラーが発生しました',
-        })
-        return
+          title: "エラーが発生しました",
+          description: response.error.message ?? "エラーが発生しました",
+        });
+        return;
       }
       toast.add({
-        title: '成功しました',
-        description: response.message ?? '成功しました',
-      })
+        title: "成功しました",
+        description: response.message ?? "成功しました",
+      });
 
-      onClose()
-      router.refresh()
-    })
-  }
+      onClose();
+      router.refresh();
+    });
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -63,5 +55,5 @@ export const DraftDialog: FC<DraftDialogProps> = ({
         </HStack>
       </VStack>
     </Dialog>
-  )
-}
+  );
+};

@@ -1,43 +1,41 @@
-'use client'
+"use client";
 
-import { useLens } from '@hookform/lenses'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { FC } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { Footer } from '@project-bd-client/ui'
-import styles from '@/components/SiteWrapper/index.module.css'
-import { StickyWrapper } from '@project-bd-client/ui'
-import { Article, ArticleCategory } from '../../shared/article.types'
-import { ArticleForm } from '../../shared/articleForm/ArticleForm'
-import { Schema, schema } from '../../shared/articleForm/articleForm.schema'
-import { ArticleEditHeader } from './components/articleEditHeader/ArticleEditHeader'
+import { useLens } from "@hookform/lenses";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FC } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { Footer } from "@project-bd-client/ui";
+import styles from "@/components/SiteWrapper/index.module.css";
+import { StickyWrapper } from "@project-bd-client/ui";
+import { Article, ArticleCategory } from "../../shared/article.types";
+import { ArticleForm } from "../../shared/articleForm/ArticleForm";
+import { Schema, schema } from "../../shared/articleForm/articleForm.schema";
+import { ArticleEditHeader } from "./components/articleEditHeader/ArticleEditHeader";
 
-const BLOCK_NAME = 'site-wrapper'
+const BLOCK_NAME = "site-wrapper";
 
 type ArticleEditProps = {
-  article: Article
-  categories: ArticleCategory[]
-}
+  article: Article;
+  categories: ArticleCategory[];
+};
 
 export const ArticleEdit: FC<ArticleEditProps> = ({ article, categories }) => {
-  const categoryOptions = categories?.map((category) => category.name) ?? []
+  const categoryOptions = categories?.map((category) => category.name) ?? [];
 
   const defaultValues = {
-    title: article?.title ?? '',
-    content: article?.content ?? '',
-    categories:
-      article?.categories?.map(({ category }) => ({ name: category.name })) ??
-      [],
-    status: (article?.status ?? 'PUBLISHED') as Schema['status'],
-  }
+    title: article?.title ?? "",
+    content: article?.content ?? "",
+    categories: article?.categories?.map(({ category }) => ({ name: category.name })) ?? [],
+    status: (article?.status ?? "PUBLISHED") as Schema["status"],
+  };
 
   const methods = useForm<Schema>({
-    mode: 'onTouched',
+    mode: "onTouched",
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  });
 
-  const lens = useLens<Schema>({ control: methods.control })
+  const lens = useLens<Schema>({ control: methods.control });
 
   // NOTE: useLensを使うことでArticleFormがFormProviderの外にあっても動作するようになる
   return (
@@ -52,5 +50,5 @@ export const ArticleEdit: FC<ArticleEditProps> = ({ article, categories }) => {
       </main>
       <Footer />
     </div>
-  )
-}
+  );
+};

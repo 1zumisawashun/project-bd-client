@@ -1,19 +1,19 @@
-import clsx from 'clsx'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import styles from '../index.module.css'
+import clsx from "clsx";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'description'
+const BLOCK_NAME = "description";
 
-type DescriptionProps = ComponentPropsWithoutRef<'p'>
+type DescriptionProps = ComponentPropsWithoutRef<"p">;
 
 type CustomProps = {
-  fontSize?: number
-  lineClamp?: number
-}
+  fontSize?: number;
+  lineClamp?: number;
+};
 
-type Props = DescriptionProps & CustomProps
+type Props = DescriptionProps & CustomProps;
 
-type Ref = ElementRef<'p'>
+type Ref = ElementRef<"p">;
 
 export const Description = forwardRef<Ref, Props>(
   ({ className, fontSize = 3, lineClamp = 1, ...props }, ref) => (
@@ -25,6 +25,6 @@ export const Description = forwardRef<Ref, Props>(
       data-line-clamp={lineClamp}
     />
   ),
-)
+);
 
-Description.displayName = 'Description'
+Description.displayName = "Description";

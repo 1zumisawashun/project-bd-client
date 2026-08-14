@@ -1,17 +1,17 @@
-import { EditorContent as RowEditorContent } from '@tiptap/react'
-import clsx from 'clsx'
-import { ComponentProps, ElementRef, forwardRef } from 'react'
-import styles from '../index.module.css'
+import { EditorContent as RowEditorContent } from "@tiptap/react";
+import clsx from "clsx";
+import { ComponentProps, ElementRef, forwardRef } from "react";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'editor-content'
+const BLOCK_NAME = "editor-content";
 
-type EditorContentProps = ComponentProps<typeof RowEditorContent>
+type EditorContentProps = ComponentProps<typeof RowEditorContent>;
 
-type CustomProps = {}
+type CustomProps = {};
 
-type Props = EditorContentProps & CustomProps
+type Props = EditorContentProps & CustomProps;
 
-type Ref = ElementRef<'div'>
+type Ref = ElementRef<"div">;
 
 export const EditorContent = forwardRef<Ref, Props>(
   (
@@ -26,9 +26,9 @@ export const EditorContent = forwardRef<Ref, Props>(
     <RowEditorContent
       {...props}
       ref={ref}
-      className={clsx('ui-editor-content', styles[`${BLOCK_NAME}`], className)}
+      className={clsx("ui-editor-content", styles[`${BLOCK_NAME}`], className)}
     />
   ),
-)
+);
 
-EditorContent.displayName = 'EditorContent'
+EditorContent.displayName = "EditorContent";

@@ -1,59 +1,55 @@
-'use client'
+"use client";
 
-import { ChevronLeftIcon } from '@radix-ui/react-icons'
-import { useRouter } from 'next/navigation'
-import { FC, startTransition } from 'react'
-import {
-  SubmitErrorHandler,
-  SubmitHandler,
-  useFormContext,
-} from 'react-hook-form'
-import { Button } from '@project-bd-client/ui'
-import { IconAnchorButton } from '@project-bd-client/ui'
-import { useToast } from '@project-bd-client/ui'
-import { HStack } from '@project-bd-client/ui'
-import { Schema } from '../../../shared/articleForm/articleForm.schema'
-import { createArticle } from './articleCreateHeader.action'
-import styles from './articleCreateHeader.module.css'
+import { ChevronLeftIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/navigation";
+import { FC, startTransition } from "react";
+import { SubmitErrorHandler, SubmitHandler, useFormContext } from "react-hook-form";
+import { Button } from "@project-bd-client/ui";
+import { IconAnchorButton } from "@project-bd-client/ui";
+import { useToast } from "@project-bd-client/ui";
+import { HStack } from "@project-bd-client/ui";
+import { Schema } from "../../../shared/articleForm/articleForm.schema";
+import { createArticle } from "./articleCreateHeader.action";
+import styles from "./articleCreateHeader.module.css";
 
-const BLOCK_NAME = 'articleCreateHeader'
+const BLOCK_NAME = "articleCreateHeader";
 
 export const ArticleCreateHeader: FC = () => {
-  const router = useRouter()
-  const toast = useToast()
+  const router = useRouter();
+  const toast = useToast();
   const {
     handleSubmit,
     setValue,
     formState: { isDirty },
-  } = useFormContext<Schema>()
+  } = useFormContext<Schema>();
 
   const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
-      const response = await createArticle({ data })
+      const response = await createArticle({ data });
 
       if (!response?.isSuccess) {
         toast.add({
-          title: 'エラーが発生しました',
-          description: response?.error?.message ?? 'エラーが発生しました',
-        })
-        return
+          title: "エラーが発生しました",
+          description: response?.error?.message ?? "エラーが発生しました",
+        });
+        return;
       }
       toast.add({
-        title: '成功しました',
-        description: response.message ?? '成功しました',
-      })
+        title: "成功しました",
+        description: response.message ?? "成功しました",
+      });
 
       // router.push(`/articles/${response.data.id ?? ''}`)
-      router.refresh()
-    })
-  }
+      router.refresh();
+    });
+  };
 
   const onError: SubmitErrorHandler<Schema> = (error) => {
     toast.add({
-      title: 'エラーが発生しました',
+      title: "エラーが発生しました",
       description: JSON.stringify(error, null, 2),
-    })
-  }
+    });
+  };
 
   return (
     <header className={styles[`${BLOCK_NAME}`]}>
@@ -63,8 +59,8 @@ export const ArticleCreateHeader: FC = () => {
       <HStack>
         <Button
           onClick={(e) => {
-            setValue('status', 'DRAFT', { shouldDirty: true })
-            void handleSubmit(onSubmit, onError)(e)
+            setValue("status", "DRAFT", { shouldDirty: true });
+            void handleSubmit(onSubmit, onError)(e);
           }}
           disabled={!isDirty}
         >
@@ -72,8 +68,8 @@ export const ArticleCreateHeader: FC = () => {
         </Button>
         <Button
           onClick={(e) => {
-            setValue('status', 'PUBLISHED', { shouldDirty: true })
-            void handleSubmit(onSubmit, onError)(e)
+            setValue("status", "PUBLISHED", { shouldDirty: true });
+            void handleSubmit(onSubmit, onError)(e);
           }}
           disabled={!isDirty}
         >
@@ -81,5 +77,5 @@ export const ArticleCreateHeader: FC = () => {
         </Button>
       </HStack>
     </header>
-  )
-}
+  );
+};

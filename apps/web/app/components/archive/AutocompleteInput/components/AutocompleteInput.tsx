@@ -1,9 +1,9 @@
-import { ComponentProps, ElementRef, forwardRef } from 'react'
-import { TextInput } from '@project-bd-client/ui'
+import { ComponentProps, ElementRef, forwardRef } from "react";
+import { TextInput } from "@project-bd-client/ui";
 
-type Ref = ElementRef<'input'>
+type Ref = ElementRef<"input">;
 
-type Props = { options: string[] } & ComponentProps<typeof TextInput>
+type Props = { options: string[] } & ComponentProps<typeof TextInput>;
 
 /**
  * datalistで表現することができる
@@ -12,13 +12,7 @@ type Props = { options: string[] } & ComponentProps<typeof TextInput>
 export const AutocompleteInput = forwardRef<Ref, Props>((props, ref) => {
   return (
     <div>
-      <TextInput
-        type="text"
-        autoComplete="off"
-        {...props}
-        ref={ref}
-        list={props.name}
-      />
+      <TextInput type="text" autoComplete="off" {...props} ref={ref} list={props.name} />
 
       <datalist id={props.name}>
         {props.options.map((d, index) => (
@@ -26,7 +20,7 @@ export const AutocompleteInput = forwardRef<Ref, Props>((props, ref) => {
         ))}
       </datalist>
     </div>
-  )
-})
+  );
+});
 
-AutocompleteInput.displayName = 'AutocompleteInput'
+AutocompleteInput.displayName = "AutocompleteInput";

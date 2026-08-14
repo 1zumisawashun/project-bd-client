@@ -1,19 +1,19 @@
-'use client'
+"use client";
 
-import { Lens } from '@hookform/lenses'
-import { FC } from 'react'
-import { Controller } from 'react-hook-form'
-import { Field, FieldError, FieldLabel } from '@project-bd-client/ui'
-import { ArticleEditor } from './components/articleEditor/ArticleEditor'
+import { Lens } from "@hookform/lenses";
+import { FC } from "react";
+import { Controller } from "react-hook-form";
+import { Field, FieldError, FieldLabel } from "@project-bd-client/ui";
+import { ArticleEditor } from "./components/articleEditor/ArticleEditor";
 
 type ContentFieldProps = {
-  lens: Lens<{ content: string }>
-}
+  lens: Lens<{ content: string }>;
+};
 
 // Controllerで表現する場合
 export const ContentInput: FC<ContentFieldProps> = ({ lens }) => {
-  const interop = lens.focus('content').interop()
-  const { control, name } = interop
+  const interop = lens.focus("content").interop();
+  const { control, name } = interop;
 
   return (
     <Controller
@@ -27,5 +27,5 @@ export const ContentInput: FC<ContentFieldProps> = ({ lens }) => {
         </Field>
       )}
     />
-  )
-}
+  );
+};

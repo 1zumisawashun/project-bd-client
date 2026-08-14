@@ -23,22 +23,22 @@
 .menu-arrow {
   display: flex;
 
-  &[data-side='top'] {
+  &[data-side="top"] {
     bottom: -8px;
     rotate: 180deg;
   }
 
-  &[data-side='bottom'] {
+  &[data-side="bottom"] {
     top: -8px;
     rotate: 0deg;
   }
 
-  &[data-side='left'] {
+  &[data-side="left"] {
     right: -13px;
     rotate: 90deg;
   }
 
-  &[data-side='right'] {
+  &[data-side="right"] {
     left: -13px;
     rotate: -90deg;
   }
@@ -61,7 +61,7 @@
   }
 
   &[data-highlighted]::before {
-    content: '';
+    content: "";
     z-index: -1;
     position: absolute;
     inset-block: 0;

@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import clsx from 'clsx'
-import DOMPurify from 'dompurify'
-import NextLink from 'next/link'
-import { FC, ReactNode } from 'react'
-import { Label } from '@project-bd-client/ui'
-import { Title } from '@project-bd-client/ui'
-import { HStack } from '@project-bd-client/ui'
-import { VStack } from '@project-bd-client/ui'
-import { formatDateToJapaneseDate } from '@/functions/helpers/dateFormatter'
-import { Article } from '../../../../shared/article.types'
+import clsx from "clsx";
+import DOMPurify from "dompurify";
+import NextLink from "next/link";
+import { FC, ReactNode } from "react";
+import { Label } from "@project-bd-client/ui";
+import { Title } from "@project-bd-client/ui";
+import { HStack } from "@project-bd-client/ui";
+import { VStack } from "@project-bd-client/ui";
+import { formatDateToJapaneseDate } from "@/functions/helpers/dateFormatter";
+import { Article } from "../../../../shared/article.types";
 
 type BaseArticleDetailProps = {
-  article: Article
-  status: ReactNode
-  likeButton: ReactNode
-  kebabMenu: ReactNode
-}
+  article: Article;
+  status: ReactNode;
+  likeButton: ReactNode;
+  kebabMenu: ReactNode;
+};
 
 export const BaseArticleDetail: FC<BaseArticleDetailProps> = ({
   article,
@@ -24,7 +24,7 @@ export const BaseArticleDetail: FC<BaseArticleDetailProps> = ({
   likeButton,
   kebabMenu,
 }) => {
-  const clean = DOMPurify.sanitize(article.content)
+  const clean = DOMPurify.sanitize(article.content);
 
   return (
     <VStack>
@@ -34,7 +34,7 @@ export const BaseArticleDetail: FC<BaseArticleDetailProps> = ({
         {article.title}
       </Title>
 
-      <HStack align="center" style={{ justifyContent: 'space-between' }}>
+      <HStack align="center" style={{ justifyContent: "space-between" }}>
         公開日 {formatDateToJapaneseDate(new Date(article.createdAt))}
         <HStack>
           {likeButton}
@@ -42,21 +42,15 @@ export const BaseArticleDetail: FC<BaseArticleDetailProps> = ({
         </HStack>
       </HStack>
 
-      <HStack style={{ flexWrap: 'wrap' }} gap={2}>
+      <HStack style={{ flexWrap: "wrap" }} gap={2}>
         {article.categories.map(({ category }) => (
-          <NextLink
-            key={category.id}
-            href={`/articles?category=${category.name}`}
-          >
+          <NextLink key={category.id} href={`/articles?category=${category.name}`}>
             <Label>{category.name}</Label>
           </NextLink>
         ))}
       </HStack>
 
-      <div
-        className={clsx('ui-editor-content')}
-        dangerouslySetInnerHTML={{ __html: clean }}
-      />
+      <div className={clsx("ui-editor-content")} dangerouslySetInnerHTML={{ __html: clean }} />
     </VStack>
-  )
-}
+  );
+};

@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { AnchorButton, HamburgerMenu, VStack } from '@project-bd-client/ui'
-import styles from '../index.module.css'
+import { AnchorButton, HamburgerMenu, VStack } from "@project-bd-client/ui";
+import styles from "../index.module.css";
 
-type Route = { label: string; href: string }
+type Route = { label: string; href: string };
 
 type HeaderNavProps = {
-  routes: Route[]
-  blockName: string
-}
+  routes: Route[];
+  blockName: string;
+};
 
 export const HeaderNav = ({ routes, blockName }: HeaderNavProps) => {
   return (
@@ -29,5 +29,5 @@ export const HeaderNav = ({ routes, blockName }: HeaderNavProps) => {
         </VStack>
       )}
     />
-  )
-}
+  );
+};

@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: "pnpm"
       - name: install dependencies
         run: pnpm install --frozen-lockfile
       - name: pnpm lint
@@ -34,7 +34,7 @@ jobs:
         if: steps.lint.outputs.result != '0'
         uses: slackapi/slack-github-action@v1.27.1
         with:
-          channel-id: 'C07UDB7HK3Q'
+          channel-id: "C07UDB7HK3Q"
           payload: |
             {
               "text": "lintでWarningが出ています。修正をお願いします！\n${{ github.event.pull_request.html_url }}"
@@ -45,7 +45,7 @@ jobs:
         if: steps.lint.outputs.result != '0'
         uses: slackapi/slack-github-action@v1.27.1
         with:
-          channel-id: 'C07UDB7HK3Q'
+          channel-id: "C07UDB7HK3Q"
           payload: |
             {
               "thread_ts": "${{ steps.slack.outputs.ts }}",

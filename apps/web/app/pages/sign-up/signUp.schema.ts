@@ -1,5 +1,5 @@
-import isStrongPassword from 'validator/lib/isStrongPassword'
-import { z } from 'zod'
+import isStrongPassword from "validator/lib/isStrongPassword";
+import { z } from "zod";
 
 /** @see https://dninomiya.github.io/form-guide/ */
 
@@ -8,26 +8,26 @@ export const schema = z.object({
     .string()
     .trim()
     .min(1, {
-      message: 'メールアドレスを入力してください。',
+      message: "メールアドレスを入力してください。",
     })
     .email({
-      message: 'メールアドレスの形式で入力してください。',
+      message: "メールアドレスの形式で入力してください。",
     })
     .max(254, {
-      message: '最大254文字までです。',
+      message: "最大254文字までです。",
     }),
   password: z
     .string()
     .trim()
     .min(8, {
-      message: '最小8文字以上です。',
+      message: "最小8文字以上です。",
     })
     .refine(isStrongPassword, {
-      message: '大文字を含む半角英数字と記号を含めてください。',
+      message: "大文字を含む半角英数字と記号を含めてください。",
     }),
   agreement: z.boolean().refine((val) => val === true, {
-    message: '利用規約に同意してください。',
+    message: "利用規約に同意してください。",
   }),
-})
+});
 
-export type Schema = z.infer<typeof schema>
+export type Schema = z.infer<typeof schema>;

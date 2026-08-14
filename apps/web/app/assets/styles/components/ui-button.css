@@ -19,18 +19,18 @@
   }
 
   /* shape */
-  &[data-shape='sharp'] {
+  &[data-shape="sharp"] {
     border-radius: 0%;
   }
-  &[data-shape='rounded'] {
+  &[data-shape="rounded"] {
     border-radius: 0.5em;
   }
-  &[data-shape='circle'] {
+  &[data-shape="circle"] {
     border-radius: 1em;
   }
 
-  &[data-variant='contained'] {
-    &[data-theme='primary'] {
+  &[data-variant="contained"] {
+    &[data-theme="primary"] {
       color: var(--indigo-1);
       background-color: var(--indigo-12);
       border: 1px solid var(--indigo-12);
@@ -38,7 +38,7 @@
         outline-color: var(--indigo-6);
       }
     }
-    &[data-theme='danger'] {
+    &[data-theme="danger"] {
       color: var(--red-1);
       background-color: var(--red-10);
       border: 1px solid var(--red-10);
@@ -46,7 +46,7 @@
         outline-color: var(--red-6);
       }
     }
-    &[data-theme='success'] {
+    &[data-theme="success"] {
       color: var(--green-1);
       background-color: var(--green-9);
       border: 1px solid var(--green-9);
@@ -55,8 +55,8 @@
       }
     }
   }
-  &[data-variant='outlined'] {
-    &[data-theme='primary'] {
+  &[data-variant="outlined"] {
+    &[data-theme="primary"] {
       color: var(--indigo-12);
       background-color: var(--indigo-1);
       border: 1px solid var(--indigo-12);
@@ -64,7 +64,7 @@
         outline-color: var(--indigo-6);
       }
     }
-    &[data-theme='danger'] {
+    &[data-theme="danger"] {
       color: var(--red-10);
       background-color: var(--red-1);
       border: 1px solid var(--red-10);
@@ -72,7 +72,7 @@
         outline-color: var(--red-6);
       }
     }
-    &[data-theme='success'] {
+    &[data-theme="success"] {
       color: var(--green-10);
       background-color: var(--green-1);
       border: 1px solid var(--green-9);
@@ -81,8 +81,8 @@
       }
     }
   }
-  &[data-variant='ghost'] {
-    &[data-theme='primary'] {
+  &[data-variant="ghost"] {
+    &[data-theme="primary"] {
       color: var(--indigo-12);
       background-color: var(--indigo-1);
       border: 1px solid var(--indigo-1);
@@ -90,7 +90,7 @@
         outline-color: var(--indigo-6);
       }
     }
-    &[data-theme='danger'] {
+    &[data-theme="danger"] {
       color: var(--red-10);
       background-color: var(--red-1);
       border: 1px solid var(--red-1);
@@ -98,7 +98,7 @@
         outline-color: var(--red-6);
       }
     }
-    &[data-theme='success'] {
+    &[data-theme="success"] {
       color: var(--green-9);
       background-color: var(--green-1);
       border: 1px solid var(--green-1);

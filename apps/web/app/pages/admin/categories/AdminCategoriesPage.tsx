@@ -1,25 +1,25 @@
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
-import { CategoryForm } from './components/CategoryForm'
-import { CategoryList } from './components/CategoryList'
+import { useRouter } from "next/navigation";
+import { CategoryForm } from "./components/CategoryForm";
+import { CategoryList } from "./components/CategoryList";
 
 type Category = {
-  id: string
-  name: string
-  createdAt: Date
-}
+  id: string;
+  name: string;
+  createdAt: Date;
+};
 
 type AdminCategoriesPageProps = {
-  categories: Category[]
-}
+  categories: Category[];
+};
 
 export function AdminCategoriesPage({ categories }: AdminCategoriesPageProps) {
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSuccess = () => {
-    router.refresh()
-  }
+    router.refresh();
+  };
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -35,5 +35,5 @@ export function AdminCategoriesPage({ categories }: AdminCategoriesPageProps) {
         <CategoryList categories={categories} />
       </section>
     </div>
-  )
+  );
 }

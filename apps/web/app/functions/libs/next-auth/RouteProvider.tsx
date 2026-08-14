@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { useSession } from 'next-auth/react'
-import { usePathname, useRouter } from 'next/navigation'
-import { type PropsWithChildren, useEffect } from 'react'
-import { MIDDLEWARE_ROUTES } from '@/functions/constants/routes'
+import { useSession } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
+import { type PropsWithChildren, useEffect } from "react";
+import { MIDDLEWARE_ROUTES } from "@/functions/constants/routes";
 
 /**
  * RouteProvider - Node Runtime対応のルート保護コンポーネント
@@ -40,45 +40,41 @@ import { MIDDLEWARE_ROUTES } from '@/functions/constants/routes'
  * ```
  */
 export const RouteProvider = ({ children }: PropsWithChildren) => {
-  const pathname = usePathname()
-  const router = useRouter()
-  const { data: session, status } = useSession()
+  const pathname = usePathname();
+  const router = useRouter();
+  const { data: session, status } = useSession();
 
-  const {
-    API_AUTH_PREFIX,
-    PUBLIC_OPTIONS,
-    AUTH_OPTIONS,
-    DEFAULT_LOGIN_REDIRECT,
-  } = MIDDLEWARE_ROUTES
+  const { API_AUTH_PREFIX, PUBLIC_OPTIONS, AUTH_OPTIONS, DEFAULT_LOGIN_REDIRECT } =
+    MIDDLEWARE_ROUTES;
 
   useEffect(() => {
     // セッションの読み込み中は何もしない
-    if (status === 'loading') {
-      return
+    if (status === "loading") {
+      return;
     }
 
-    const isLoggedIn = !!session
-    const isApiAuthRoute = pathname.startsWith(API_AUTH_PREFIX)
-    const isPublicRoute = PUBLIC_OPTIONS.includes(pathname)
-    const isAuthRoute = AUTH_OPTIONS.includes(pathname)
+    const isLoggedIn = !!session;
+    const isApiAuthRoute = pathname.startsWith(API_AUTH_PREFIX);
+    const isPublicRoute = PUBLIC_OPTIONS.includes(pathname);
+    const isAuthRoute = AUTH_OPTIONS.includes(pathname);
 
     // API認証ルートの場合は何もしない
     if (isApiAuthRoute) {
-      return
+      return;
     }
 
     // 認証ルート（ログイン・サインアップページなど）の場合
     if (isAuthRoute) {
       // ログイン済みの場合はデフォルトのログイン後ページにリダイレクト
       if (isLoggedIn) {
-        router.replace(DEFAULT_LOGIN_REDIRECT)
+        router.replace(DEFAULT_LOGIN_REDIRECT);
       }
-      return
+      return;
     }
 
     // 未認証で非公開ルートにアクセスしようとした場合
     if (!isLoggedIn && !isPublicRoute) {
-      router.replace('/sign-in')
+      router.replace("/sign-in");
     }
   }, [
     pathname,
@@ -89,9 +85,9 @@ export const RouteProvider = ({ children }: PropsWithChildren) => {
     PUBLIC_OPTIONS,
     AUTH_OPTIONS,
     DEFAULT_LOGIN_REDIRECT,
-  ])
+  ]);
 
   // セッション読み込み中は子コンポーネントをそのまま表示
   // ローディング状態を表示する場合は、ここでカスタマイズ可能
-  return <>{children}</>
-}
+  return <>{children}</>;
+};

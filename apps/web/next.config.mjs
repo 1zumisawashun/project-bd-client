@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ['@project-bd-client/ui'],
-}
+  transpilePackages: ["@project-bd-client/ui"],
+};
 
-export default nextConfig
+export default nextConfig;

@@ -1,17 +1,17 @@
-import clsx from 'clsx'
-import { ComponentProps, ElementRef, forwardRef } from 'react'
-import { AnchorButton } from '../../../buttons/AnchorButton'
-import styles from '../index.module.css'
+import clsx from "clsx";
+import { ComponentProps, ElementRef, forwardRef } from "react";
+import { AnchorButton } from "../../../buttons/AnchorButton";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'breadcrumb-link'
+const BLOCK_NAME = "breadcrumb-link";
 
-type BreadcrumbLinkProps = ComponentProps<typeof AnchorButton>
+type BreadcrumbLinkProps = ComponentProps<typeof AnchorButton>;
 
-type CustomProps = { isCurrent?: boolean }
+type CustomProps = { isCurrent?: boolean };
 
-type Props = BreadcrumbLinkProps & CustomProps
+type Props = BreadcrumbLinkProps & CustomProps;
 
-type Ref = ElementRef<'button'>
+type Ref = ElementRef<"button">;
 
 /**
  * NOTE:
@@ -39,8 +39,8 @@ export const BreadcrumbLink = forwardRef<Ref, Props>(
           ref={ref}
         />
       </li>
-    )
+    );
   },
-)
+);
 
-BreadcrumbLink.displayName = 'BreadcrumbLink'
+BreadcrumbLink.displayName = "BreadcrumbLink";

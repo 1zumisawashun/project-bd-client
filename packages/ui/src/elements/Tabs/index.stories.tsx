@@ -1,15 +1,15 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { Tabs, TabsList, TabsPanel, TabsTab } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "./index";
 
 const meta: Meta<typeof Tabs> = {
-  title: 'element/Tabs',
+  title: "element/Tabs",
   component: Tabs,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Tabs>
+type Story = StoryObj<typeof Tabs>;
 
 const Render: FC = () => {
   return (
@@ -23,10 +23,10 @@ const Render: FC = () => {
       <TabsPanel value="tab2">Content2</TabsPanel>
       <TabsPanel value="tab3">Content3</TabsPanel>
     </Tabs>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   args: {},
   render: () => <Render />,
-}
+};

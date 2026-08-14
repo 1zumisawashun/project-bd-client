@@ -1,5 +1,5 @@
-import { SignUp } from '@/pages/sign-up/SignUp'
+import { SignUp } from "@/pages/sign-up/SignUp";
 
 export default function Page() {
-  return <SignUp />
+  return <SignUp />;
 }

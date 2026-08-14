@@ -1,25 +1,25 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import * as z from 'zod'
-import { VStack } from '../../layouts/VStack'
-import { TextInput } from '../TextInput'
-import { Field, FieldError, FieldLabel } from './index'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { Controller, useForm } from "react-hook-form";
+import * as z from "zod";
+import { VStack } from "../../layouts/VStack";
+import { TextInput } from "../TextInput";
+import { Field, FieldError, FieldLabel } from "./index";
 
 const meta: Meta<typeof Field> = {
-  title: 'form/Field',
+  title: "form/Field",
   component: Field,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Field>
+type Story = StoryObj<typeof Field>;
 
 const schema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(1, 'This field is required'),
-})
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(1, "This field is required"),
+});
 
 /**
  * NOTE:
@@ -27,13 +27,13 @@ const schema = z.object({
  */
 const Render: FC = () => {
   const { control } = useForm({
-    mode: 'onTouched',
+    mode: "onTouched",
     resolver: zodResolver(schema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
-  })
+  });
 
   return (
     <VStack>
@@ -60,9 +60,9 @@ const Render: FC = () => {
         )}
       />
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

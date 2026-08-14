@@ -1,17 +1,17 @@
-import clsx from 'clsx'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { Align, Justify } from '../../types'
-import styles from './index.module.css'
+import clsx from "clsx";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import { Align, Justify } from "../../types";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'h-stack'
+const BLOCK_NAME = "h-stack";
 
-type HStackProps = ComponentPropsWithoutRef<'div'>
+type HStackProps = ComponentPropsWithoutRef<"div">;
 
-type CustomProps = { gap?: number; align?: Align; justify?: Justify }
+type CustomProps = { gap?: number; align?: Align; justify?: Justify };
 
-type Props = HStackProps & CustomProps
+type Props = HStackProps & CustomProps;
 
-type Ref = ElementRef<'div'>
+type Ref = ElementRef<"div">;
 
 export const HStack = forwardRef<Ref, Props>(
   (
@@ -38,8 +38,8 @@ export const HStack = forwardRef<Ref, Props>(
         data-align={align}
         data-justify={justify}
       />
-    )
+    );
   },
-)
+);
 
-HStack.displayName = 'HStack'
+HStack.displayName = "HStack";

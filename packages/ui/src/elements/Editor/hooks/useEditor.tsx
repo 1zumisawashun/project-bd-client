@@ -1,5 +1,5 @@
-import { UseEditorOptions, useEditor as useRowEditor } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
+import { UseEditorOptions, useEditor as useRowEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 import {
   CharacterCount,
   Focus,
@@ -7,7 +7,7 @@ import {
   Link,
   Placeholder,
   TextAlign,
-} from '../helpers/tiptapExtendClient'
+} from "../helpers/tiptapExtendClient";
 
 export const useEditor = ({ extensions = [], ...rest }: UseEditorOptions) =>
   useRowEditor({
@@ -22,4 +22,4 @@ export const useEditor = ({ extensions = [], ...rest }: UseEditorOptions) =>
       ...extensions,
     ],
     ...rest,
-  })
+  });

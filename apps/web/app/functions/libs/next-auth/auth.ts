@@ -1,21 +1,21 @@
-import { DrizzleAdapter } from '@auth/drizzle-adapter'
-import NextAuth, { NextAuthConfig } from 'next-auth'
-import { getUserByEmail } from '@/functions/db/user'
-import { isPasswordValid } from '@/functions/helpers/password'
-import db from '@/functions/libs/drizzle/client'
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import NextAuth, { NextAuthConfig } from "next-auth";
+import { getUserByEmail } from "@/functions/db/user";
+import { isPasswordValid } from "@/functions/helpers/password";
+import db from "@/functions/libs/drizzle/client";
 import {
   accounts,
   authenticators,
   sessions,
   users,
   verificationTokens,
-} from '@/functions/libs/drizzle/schema'
-import authConfig from './auth.config'
+} from "@/functions/libs/drizzle/schema";
+import authConfig from "./auth.config";
 
 type Credentials = {
-  email: string
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 /**
  * NOTE:
@@ -25,25 +25,22 @@ type Credentials = {
 const callbacks = {
   // NOTE: credentials は authorize の返り値を受け取る
   async signIn({ credentials, account }) {
-    if (account?.type === 'oauth') return true
+    if (account?.type === "oauth") return true;
 
     // FIXME: 型定義が不十分なので type assertion で対応する。next-auth.d に型定義を追加するべき
-    const { email, password } = credentials as Credentials
-    if (!email) throw new Error('No email found on user')
-    if (!password) throw new Error('No password found on user')
+    const { email, password } = credentials as Credentials;
+    if (!email) throw new Error("No email found on user");
+    if (!password) throw new Error("No password found on user");
 
-    const response = await getUserByEmail({ email })
-    if (!response?.hashedPassword) throw new Error('User has no password')
+    const response = await getUserByEmail({ email });
+    if (!response?.hashedPassword) throw new Error("User has no password");
 
-    const passwordValid = await isPasswordValid(
-      password,
-      response.hashedPassword,
-    )
-    if (!passwordValid) throw new Error('Incorrect password')
-    return true
+    const passwordValid = await isPasswordValid(password, response.hashedPassword);
+    if (!passwordValid) throw new Error("Incorrect password");
+    return true;
   },
   redirect({ baseUrl }) {
-    return baseUrl
+    return baseUrl;
   },
   /**
    * NOTE:
@@ -55,10 +52,10 @@ const callbacks = {
   session({ token, session }) {
     // NOTE: Database Session の場合 token は undefined になるので注意
     if (token) {
-      session.user.id = token.id
-      session.user.role = token.role
+      session.user.id = token.id;
+      session.user.role = token.role;
     }
-    return session
+    return session;
   },
   /**
    * NOTE:
@@ -68,26 +65,26 @@ const callbacks = {
    * user の情報を session でも利用したい場合は jwtの返り値に含める必要がある（今回は token を上書きする形で対応）
    */
   async jwt({ token, user, trigger }) {
-    if (trigger === 'signIn' && user.email) {
+    if (trigger === "signIn" && user.email) {
       // user は signIn 時にしか存在しない
-      const response = await getUserByEmail({ email: user.email })
-      token.id = response?.id ?? ''
-      token.role = (response?.role as 'USER' | 'ADMIN') ?? 'USER'
+      const response = await getUserByEmail({ email: user.email });
+      token.id = response?.id ?? "";
+      token.role = (response?.role as "USER" | "ADMIN") ?? "USER";
     }
-    return token
+    return token;
   },
-} satisfies NextAuthConfig['callbacks']
+} satisfies NextAuthConfig["callbacks"];
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   logger: {
     error(code, ...message) {
-      console.error(code, message)
+      console.error(code, message);
     },
     warn(code, ...message) {
-      console.warn(code, message)
+      console.warn(code, message);
     },
     debug(code, ...message) {
-      console.debug(code, message)
+      console.debug(code, message);
     },
   },
   adapter: DrizzleAdapter(db, {
@@ -97,7 +94,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     verificationTokensTable: verificationTokens,
     authenticatorsTable: authenticators,
   }),
-  session: { strategy: 'jwt' },
+  session: { strategy: "jwt" },
   callbacks,
   ...authConfig,
-})
+});

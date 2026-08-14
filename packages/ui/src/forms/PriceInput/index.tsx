@@ -1,29 +1,29 @@
-import { Lens } from '@hookform/lenses'
-import { ComponentProps, ElementRef, forwardRef } from 'react'
-import { useController } from 'react-hook-form'
-import { HStack } from '../../layouts/HStack'
-import { Field, FieldError, FieldLabel } from '../Field'
-import { TextInput } from '../TextInput'
-import { usePriceInput } from './hooks/usePriceInput'
+import { Lens } from "@hookform/lenses";
+import { ComponentProps, ElementRef, forwardRef } from "react";
+import { useController } from "react-hook-form";
+import { HStack } from "../../layouts/HStack";
+import { Field, FieldError, FieldLabel } from "../Field";
+import { TextInput } from "../TextInput";
+import { usePriceInput } from "./hooks/usePriceInput";
 
-type PriceInputProps = ComponentProps<typeof TextInput>
+type PriceInputProps = ComponentProps<typeof TextInput>;
 
-type CustomProps = { lens: Lens<{ price: number }> }
+type CustomProps = { lens: Lens<{ price: number }> };
 
-type Props = PriceInputProps & CustomProps
+type Props = PriceInputProps & CustomProps;
 
-type Ref = ElementRef<'input'>
+type Ref = ElementRef<"input">;
 
 export const PriceInput = forwardRef<Ref, Props>(({ lens, ...props }, ref) => {
-  const interop = lens.focus('price').interop()
-  const { field, fieldState } = useController(interop)
-  const { invalid, error } = fieldState
+  const interop = lens.focus("price").interop();
+  const { field, fieldState } = useController(interop);
+  const { invalid, error } = fieldState;
 
   const { price, priceInputHandler } = usePriceInput({
     value: field.value,
     onChange: field.onChange,
     onBlur: field.onBlur,
-  })
+  });
 
   return (
     <Field invalid={invalid}>
@@ -41,7 +41,7 @@ export const PriceInput = forwardRef<Ref, Props>(({ lens, ...props }, ref) => {
       </HStack>
       <FieldError match={!!error}>{error?.message}</FieldError>
     </Field>
-  )
-})
+  );
+});
 
-PriceInput.displayName = 'PriceInput'
+PriceInput.displayName = "PriceInput";

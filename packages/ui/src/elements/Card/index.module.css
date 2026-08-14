@@ -1,34 +1,34 @@
 .card {
   /* shape */
-  &[data-shape='sharp'] {
+  &[data-shape="sharp"] {
     border-radius: 0.25rem;
   }
-  &[data-shape='rounded'] {
+  &[data-shape="rounded"] {
     border-radius: 0.5rem;
   }
-  &[data-shape='circle'] {
+  &[data-shape="circle"] {
     border-radius: 1rem;
   }
 
   /* scroll */
-  &[data-scroll='true'] {
+  &[data-scroll="true"] {
     overflow-y: scroll;
   }
 
   /* panel theme and border */
-  &[data-theme='transparent'] {
+  &[data-theme="transparent"] {
     background-color: transparent;
     color: inherit;
-    &[data-border='true'] {
+    &[data-border="true"] {
       border: 1px solid var(--mauve-6);
     }
   }
 
   /* variant and color */
-  &[data-theme='danger'] {
+  &[data-theme="danger"] {
     background-color: var(--red-1);
     color: var(--red-10);
-    &[data-border='true'] {
+    &[data-border="true"] {
       border: 1px solid var(--red-10);
     }
   }

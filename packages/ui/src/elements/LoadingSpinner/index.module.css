@@ -28,7 +28,7 @@
   border-radius: 50%;
   margin: 30px auto;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     display: block;
     top: 0;

@@ -1,20 +1,20 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { LoadingSpinner } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { LoadingSpinner } from "./index";
 
 const meta: Meta<typeof LoadingSpinner> = {
-  title: 'element/LoadingSpinner',
+  title: "element/LoadingSpinner",
   component: LoadingSpinner,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof LoadingSpinner>
+type Story = StoryObj<typeof LoadingSpinner>;
 
 const Render: FC = () => {
-  return <LoadingSpinner />
-}
+  return <LoadingSpinner />;
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

@@ -1,16 +1,16 @@
-import { FC } from 'react'
-import { AnchorButton } from '@project-bd-client/ui'
-import { getSession } from '@/functions/libs/next-auth/session'
-import { HeaderNav } from './components/HeaderNav'
-import { getFlatMenu } from './helpers/getFlatMenu'
-import styles from './index.module.css'
+import { FC } from "react";
+import { AnchorButton } from "@project-bd-client/ui";
+import { getSession } from "@/functions/libs/next-auth/session";
+import { HeaderNav } from "./components/HeaderNav";
+import { getFlatMenu } from "./helpers/getFlatMenu";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'header'
+const BLOCK_NAME = "header";
 
 // NOTE: RSCに依存しているためカタログに追加できない
 export const Header: FC = async () => {
-  const session = await getSession()
-  const routes = getFlatMenu({ isPrivate: !!session, isAuth: !session })
+  const session = await getSession();
+  const routes = getFlatMenu({ isPrivate: !!session, isAuth: !session });
 
   return (
     <header className={styles[`${BLOCK_NAME}`]}>
@@ -19,5 +19,5 @@ export const Header: FC = async () => {
       </AnchorButton>
       <HeaderNav routes={routes} blockName={BLOCK_NAME} />
     </header>
-  )
-}
+  );
+};

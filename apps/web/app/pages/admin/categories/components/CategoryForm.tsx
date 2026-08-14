@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { Button } from '@project-bd-client/ui'
-import { Field } from '@project-bd-client/ui'
-import { FieldLabel } from '@project-bd-client/ui'
-import { TextInput } from '@project-bd-client/ui'
-import { createCategoryAction } from '../categories.action'
-import { categoryFormSchema, CategoryFormValues } from '../categoryForm.schema'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Button } from "@project-bd-client/ui";
+import { Field } from "@project-bd-client/ui";
+import { FieldLabel } from "@project-bd-client/ui";
+import { TextInput } from "@project-bd-client/ui";
+import { createCategoryAction } from "../categories.action";
+import { categoryFormSchema, CategoryFormValues } from "../categoryForm.schema";
 
 type CategoryFormProps = {
-  onSuccess?: () => void
-}
+  onSuccess?: () => void;
+};
 
 export function CategoryForm({ onSuccess }: CategoryFormProps) {
-  const [serverError, setServerError] = useState<string | null>(null)
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const {
     register,
@@ -25,44 +25,40 @@ export function CategoryForm({ onSuccess }: CategoryFormProps) {
   } = useForm<CategoryFormValues>({
     resolver: zodResolver(categoryFormSchema),
     defaultValues: {
-      name: '',
+      name: "",
     },
-  })
+  });
 
   const onSubmit = async (data: CategoryFormValues) => {
-    setServerError(null)
+    setServerError(null);
 
-    const result = await createCategoryAction(data)
+    const result = await createCategoryAction(data);
 
     if (!result.isSuccess) {
-      setServerError(result.error.message)
-      return
+      setServerError(result.error.message);
+      return;
     }
 
-    reset()
-    onSuccess?.()
-  }
+    reset();
+    onSuccess?.();
+  };
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form onSubmit={handleSubmit(onSubmit)}>
       <Field>
         <FieldLabel>カテゴリー名</FieldLabel>
-        <TextInput {...register('name')} placeholder="カテゴリー名を入力" />
-        {errors.name && (
-          <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-        )}
+        <TextInput {...register("name")} placeholder="カテゴリー名を入力" />
+        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
       </Field>
 
-      {serverError && (
-        <p className="text-red-500 text-sm mt-2">{serverError}</p>
-      )}
+      {serverError && <p className="text-red-500 text-sm mt-2">{serverError}</p>}
 
       <div className="mt-4">
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? '作成中...' : '作成'}
+          {isSubmitting ? "作成中..." : "作成"}
         </Button>
       </div>
     </form>
-  )
+  );
 }

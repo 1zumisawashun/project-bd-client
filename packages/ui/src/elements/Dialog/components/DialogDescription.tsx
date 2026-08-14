@@ -1,17 +1,17 @@
-import { Dialog } from '@base-ui/react/dialog'
-import clsx from 'clsx'
-import { ComponentProps, ElementRef, forwardRef } from 'react'
-import styles from '../index.module.css'
+import { Dialog } from "@base-ui/react/dialog";
+import clsx from "clsx";
+import { ComponentProps, ElementRef, forwardRef } from "react";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'dialog-description'
+const BLOCK_NAME = "dialog-description";
 
-type DialogDescriptionProps = ComponentProps<typeof Dialog.Description>
+type DialogDescriptionProps = ComponentProps<typeof Dialog.Description>;
 
-type CustomProps = {}
+type CustomProps = {};
 
-type Props = DialogDescriptionProps & CustomProps
+type Props = DialogDescriptionProps & CustomProps;
 
-type Ref = ElementRef<'p'>
+type Ref = ElementRef<"p">;
 
 export const DialogDescription = forwardRef<Ref, Props>(
   (
@@ -23,12 +23,8 @@ export const DialogDescription = forwardRef<Ref, Props>(
     },
     ref,
   ) => (
-    <Dialog.Description
-      {...props}
-      ref={ref}
-      className={clsx(styles[`${BLOCK_NAME}`], className)}
-    />
+    <Dialog.Description {...props} ref={ref} className={clsx(styles[`${BLOCK_NAME}`], className)} />
   ),
-)
+);
 
-DialogDescription.displayName = 'DialogDescription'
+DialogDescription.displayName = "DialogDescription";

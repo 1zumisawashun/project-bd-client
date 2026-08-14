@@ -1,19 +1,17 @@
-import NextLink from 'next/link'
-import { FC } from 'react'
-import { NotFound } from '@project-bd-client/ui'
-import { ArticleCard } from '@/features/articles/articleCard/ArticleCard'
-import { ArticleCardGroup } from '@/features/articles/articleCardGroup/ArticleCardGroup'
-import { MypageUser } from '../../myPage.types'
+import NextLink from "next/link";
+import { FC } from "react";
+import { NotFound } from "@project-bd-client/ui";
+import { ArticleCard } from "@/features/articles/articleCard/ArticleCard";
+import { ArticleCardGroup } from "@/features/articles/articleCardGroup/ArticleCardGroup";
+import { MypageUser } from "../../myPage.types";
 
 type MyPageArticleCardProps = {
-  articles:
-    | MypageUser['posts']
-    | MypageUser['likedArticles'][number]['article'][]
-}
+  articles: MypageUser["posts"] | MypageUser["likedArticles"][number]["article"][];
+};
 
 export const MyPageArticleCard: FC<MyPageArticleCardProps> = ({ articles }) => {
   if (articles.length === 0) {
-    return <NotFound />
+    return <NotFound />;
   }
 
   return (
@@ -24,5 +22,5 @@ export const MyPageArticleCard: FC<MyPageArticleCardProps> = ({ articles }) => {
         </NextLink>
       ))}
     </ArticleCardGroup>
-  )
-}
+  );
+};

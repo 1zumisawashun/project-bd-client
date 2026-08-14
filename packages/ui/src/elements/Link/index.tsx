@@ -1,27 +1,22 @@
-import clsx from 'clsx'
-import NextLink, { LinkProps as RowLinkProps } from 'next/link'
-import {
-  ComponentPropsWithoutRef,
-  ElementRef,
-  forwardRef,
-  ReactNode,
-} from 'react'
-import styles from './index.module.css'
+import clsx from "clsx";
+import NextLink, { LinkProps as RowLinkProps } from "next/link";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactNode } from "react";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'link'
+const BLOCK_NAME = "link";
 
-type LinkProps = Omit<ComponentPropsWithoutRef<'a'>, 'prefix'> & RowLinkProps
+type LinkProps = Omit<ComponentPropsWithoutRef<"a">, "prefix"> & RowLinkProps;
 
 type CustomProps = {
-  disabled?: boolean
-  isExternal?: boolean
-  prefix?: ReactNode
-  suffix?: ReactNode
-}
+  disabled?: boolean;
+  isExternal?: boolean;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
+};
 
-type Props = LinkProps & CustomProps
+type Props = LinkProps & CustomProps;
 
-type Ref = ElementRef<'a'>
+type Ref = ElementRef<"a">;
 
 export const Link = forwardRef<Ref, Props>(
   (
@@ -41,10 +36,10 @@ export const Link = forwardRef<Ref, Props>(
   ) => {
     const externalProps = isExternal
       ? {
-          target: '_blank',
-          rel: 'noopener noreferrer',
+          target: "_blank",
+          rel: "noopener noreferrer",
         }
-      : {}
+      : {};
     return (
       <NextLink
         {...props}
@@ -59,8 +54,8 @@ export const Link = forwardRef<Ref, Props>(
         {children}
         {suffix ?? null}
       </NextLink>
-    )
+    );
   },
-)
+);
 
-Link.displayName = 'Link'
+Link.displayName = "Link";

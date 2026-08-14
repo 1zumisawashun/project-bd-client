@@ -15,8 +15,8 @@ import {
   TextAlignRightIcon,
   TextIcon,
   TrashIcon,
-} from '@radix-ui/react-icons'
-import { type Editor } from '@tiptap/core'
+} from "@radix-ui/react-icons";
+import { type Editor } from "@tiptap/core";
 
 export const tiptapClient = (editor: Editor | null) => {
   /**
@@ -26,37 +26,37 @@ export const tiptapClient = (editor: Editor | null) => {
    */
 
   const bold = {
-    type: 'typography',
+    type: "typography",
     onClick: () => editor?.chain().focus().toggleBold().run(),
     disabled: !editor?.can().chain().focus().toggleBold().run(),
-    className: editor?.isActive('bold') ? 'is-active' : '',
+    className: editor?.isActive("bold") ? "is-active" : "",
     icon: FontBoldIcon,
-    label: '太字',
-  }
+    label: "太字",
+  };
   const italic = {
-    type: 'typography',
+    type: "typography",
     onClick: () => editor?.chain().focus().toggleItalic().run(),
     disabled: !editor?.can().chain().focus().toggleItalic().run(),
-    className: editor?.isActive('italic') ? 'is-active' : '',
+    className: editor?.isActive("italic") ? "is-active" : "",
     icon: FontItalicIcon,
-    label: 'イタリック体',
-  }
+    label: "イタリック体",
+  };
   const strike = {
-    type: 'typography',
+    type: "typography",
     onClick: () => editor?.chain().focus().toggleStrike().run(),
     disabled: !editor?.can().chain().focus().toggleStrike().run(),
-    className: editor?.isActive('strike') ? 'is-active' : '',
+    className: editor?.isActive("strike") ? "is-active" : "",
     icon: StrikethroughIcon,
-    label: '取り消し線',
-  }
+    label: "取り消し線",
+  };
   const hardBreak = {
-    type: 'typography',
+    type: "typography",
     onClick: () => editor?.chain().focus().setHardBreak().run(),
     disabled: !editor?.can().chain().focus().setHardBreak().run(),
-    className: editor?.isActive('hardBreak') ? 'is-active' : '',
+    className: editor?.isActive("hardBreak") ? "is-active" : "",
     icon: null,
-    label: '改行',
-  }
+    label: "改行",
+  };
 
   /**
    * ==================================================
@@ -65,37 +65,37 @@ export const tiptapClient = (editor: Editor | null) => {
    */
 
   const heading1 = {
-    type: 'heading',
+    type: "heading",
     onClick: () => editor?.chain().focus().toggleHeading({ level: 1 }).run(),
     disabled: !editor?.can().chain().focus().toggleHeading({ level: 1 }).run(),
-    className: editor?.isActive('heading', { level: 1 }) ? 'is-active' : '',
+    className: editor?.isActive("heading", { level: 1 }) ? "is-active" : "",
     icon: HeadingIcon,
-    label: '大見出し',
-  }
+    label: "大見出し",
+  };
   const heading2 = {
-    type: 'heading',
+    type: "heading",
     onClick: () => editor?.chain().focus().toggleHeading({ level: 2 }).run(),
     disabled: !editor?.can().chain().focus().toggleHeading({ level: 2 }).run(),
-    className: editor?.isActive('heading', { level: 2 }) ? 'is-active' : '',
+    className: editor?.isActive("heading", { level: 2 }) ? "is-active" : "",
     icon: HeadingIcon,
-    label: '中見出し',
-  }
+    label: "中見出し",
+  };
   const heading3 = {
-    type: 'heading',
+    type: "heading",
     onClick: () => editor?.chain().focus().toggleHeading({ level: 3 }).run(),
     disabled: !editor?.can().chain().focus().toggleHeading({ level: 3 }).run(),
-    className: editor?.isActive('heading', { level: 3 }) ? 'is-active' : '',
+    className: editor?.isActive("heading", { level: 3 }) ? "is-active" : "",
     icon: HeadingIcon,
-    label: '小見出し',
-  }
+    label: "小見出し",
+  };
   const paragraph = {
-    type: 'heading',
+    type: "heading",
     onClick: () => editor?.chain().focus().setParagraph().run(),
     disabled: !editor?.can().chain().focus().setParagraph().run(),
-    className: editor?.isActive('paragraph') ? 'is-active' : '',
+    className: editor?.isActive("paragraph") ? "is-active" : "",
     icon: TextIcon,
-    label: '指定なし',
-  }
+    label: "指定なし",
+  };
 
   /**
    * ==================================================
@@ -104,21 +104,21 @@ export const tiptapClient = (editor: Editor | null) => {
    */
 
   const bulletList = {
-    type: 'list',
+    type: "list",
     onClick: () => editor?.chain().focus().toggleBulletList().run(),
     disabled: !editor?.can().chain().focus().toggleBulletList().run(),
-    className: editor?.isActive('bulletList') ? 'is-active' : '',
+    className: editor?.isActive("bulletList") ? "is-active" : "",
     icon: ListBulletIcon,
-    label: '箇条書きリスト',
-  }
+    label: "箇条書きリスト",
+  };
   const orderedList = {
-    type: 'list',
+    type: "list",
     onClick: () => editor?.chain().focus().toggleOrderedList().run(),
     disabled: !editor?.can().chain().focus().toggleOrderedList().run(),
-    className: editor?.isActive('orderedList') ? 'is-active' : '',
+    className: editor?.isActive("orderedList") ? "is-active" : "",
     icon: null,
-    label: '番号付きリスト',
-  }
+    label: "番号付きリスト",
+  };
 
   /**
    * ==================================================
@@ -127,37 +127,37 @@ export const tiptapClient = (editor: Editor | null) => {
    */
 
   const textAlignLeft = {
-    type: 'textAlign',
-    onClick: () => editor?.chain().focus().setTextAlign('left').run(),
-    disabled: !editor?.can().chain().focus().setTextAlign('left').run(),
-    className: editor?.isActive({ textAlign: 'left' }) ? 'is-active' : '',
+    type: "textAlign",
+    onClick: () => editor?.chain().focus().setTextAlign("left").run(),
+    disabled: !editor?.can().chain().focus().setTextAlign("left").run(),
+    className: editor?.isActive({ textAlign: "left" }) ? "is-active" : "",
     icon: TextAlignLeftIcon,
-    label: '左寄せ',
-  }
+    label: "左寄せ",
+  };
   const textAlignCenter = {
-    type: 'textAlign',
-    onClick: () => editor?.chain().focus().setTextAlign('center').run(),
-    disabled: !editor?.can().chain().focus().setTextAlign('center').run(),
-    className: editor?.isActive({ textAlign: 'center' }) ? 'is-active' : '',
+    type: "textAlign",
+    onClick: () => editor?.chain().focus().setTextAlign("center").run(),
+    disabled: !editor?.can().chain().focus().setTextAlign("center").run(),
+    className: editor?.isActive({ textAlign: "center" }) ? "is-active" : "",
     icon: TextAlignCenterIcon,
-    label: '中央寄せ',
-  }
+    label: "中央寄せ",
+  };
   const textAlignRight = {
-    type: 'textAlign',
-    onClick: () => editor?.chain().focus().setTextAlign('right').run(),
-    disabled: !editor?.can().chain().focus().setTextAlign('right').run(),
-    className: editor?.isActive({ textAlign: 'right' }) ? 'is-active' : '',
+    type: "textAlign",
+    onClick: () => editor?.chain().focus().setTextAlign("right").run(),
+    disabled: !editor?.can().chain().focus().setTextAlign("right").run(),
+    className: editor?.isActive({ textAlign: "right" }) ? "is-active" : "",
     icon: TextAlignRightIcon,
-    label: '右寄せ',
-  }
+    label: "右寄せ",
+  };
   const textAlignJustify = {
-    type: 'textAlign',
-    onClick: () => editor?.chain().focus().setTextAlign('justify').run(),
-    disabled: !editor?.can().chain().focus().setTextAlign('justify').run(),
-    className: editor?.isActive({ textAlign: 'justify' }) ? 'is-active' : '',
+    type: "textAlign",
+    onClick: () => editor?.chain().focus().setTextAlign("justify").run(),
+    disabled: !editor?.can().chain().focus().setTextAlign("justify").run(),
+    className: editor?.isActive({ textAlign: "justify" }) ? "is-active" : "",
     icon: TextAlignJustifyIcon,
-    label: '均等寄せ',
-  }
+    label: "均等寄せ",
+  };
 
   /**
    * ==================================================
@@ -166,21 +166,21 @@ export const tiptapClient = (editor: Editor | null) => {
    */
 
   const code = {
-    type: 'code',
+    type: "code",
     onClick: () => editor?.chain().focus().toggleCode().run(),
     disabled: !editor?.can().chain().focus().toggleCode().run(),
-    className: editor?.isActive('code') ? 'is-active' : '',
+    className: editor?.isActive("code") ? "is-active" : "",
     icon: CodeIcon,
-    label: 'コード',
-  }
+    label: "コード",
+  };
   const codeBlock = {
-    type: 'code',
+    type: "code",
     onClick: () => editor?.chain().focus().toggleCodeBlock().run(),
     disabled: !editor?.can().chain().focus().toggleCodeBlock().run(),
-    className: editor?.isActive('codeBlock') ? 'is-active' : '',
+    className: editor?.isActive("codeBlock") ? "is-active" : "",
     icon: CodeIcon,
-    label: 'コードブロック',
-  }
+    label: "コードブロック",
+  };
 
   /**
    * ==================================================
@@ -189,21 +189,21 @@ export const tiptapClient = (editor: Editor | null) => {
    */
 
   const link = {
-    type: 'link',
+    type: "link",
     onClick: () => setLink(editor),
     disabled: false,
-    className: editor?.isActive('link') ? 'is-active' : '',
+    className: editor?.isActive("link") ? "is-active" : "",
     icon: Link1Icon,
-    label: '埋め込み',
-  }
+    label: "埋め込み",
+  };
   const linkBreak = {
-    type: 'link',
+    type: "link",
     onClick: () => editor?.chain().focus().unsetLink().run(),
-    disabled: !editor?.isActive('link'),
-    className: '',
+    disabled: !editor?.isActive("link"),
+    className: "",
     icon: LinkBreak1Icon,
-    label: '埋め込み 解除',
-  }
+    label: "埋め込み 解除",
+  };
 
   /**
    * ==================================================
@@ -212,29 +212,29 @@ export const tiptapClient = (editor: Editor | null) => {
    */
 
   const blockquote = {
-    type: 'blockquote',
+    type: "blockquote",
     onClick: () => editor?.chain().focus().toggleBlockquote().run(),
     disabled: !editor?.can().chain().focus().toggleBlockquote().run(),
-    className: editor?.isActive('blockquote') ? 'is-active' : '',
+    className: editor?.isActive("blockquote") ? "is-active" : "",
     icon: QuoteIcon,
-    label: '引用',
-  }
+    label: "引用",
+  };
   const horizontal = {
-    type: 'horizontal',
+    type: "horizontal",
     onClick: () => editor?.chain().focus().setHorizontalRule().run(),
     disabled: !editor?.can().chain().focus().setHorizontalRule().run(),
-    className: editor?.isActive('horizontal') ? 'is-active' : '',
+    className: editor?.isActive("horizontal") ? "is-active" : "",
     icon: DividerHorizontalIcon,
-    label: '区切り線',
-  }
+    label: "区切り線",
+  };
   const trash = {
-    type: 'trash',
+    type: "trash",
     onClick: () => editor?.chain().focus().deleteSelection().run(),
     disabled: !editor?.can().chain().focus().deleteSelection().run(),
-    className: editor?.isActive('trash') ? 'is-active' : '',
+    className: editor?.isActive("trash") ? "is-active" : "",
     icon: TrashIcon,
-    label: '削除',
-  }
+    label: "削除",
+  };
 
   /**
    * ==================================================
@@ -243,37 +243,37 @@ export const tiptapClient = (editor: Editor | null) => {
    */
 
   const clearMarks = {
-    type: 'clear',
+    type: "clear",
     onClick: () => editor?.chain().focus().unsetAllMarks().run(),
     disabled: !editor?.can().chain().focus().unsetAllMarks().run(),
-    className: editor?.isActive('clear') ? 'is-active' : '',
+    className: editor?.isActive("clear") ? "is-active" : "",
     icon: null,
-    label: 'clear marks',
-  }
+    label: "clear marks",
+  };
   const clearNodes = {
-    type: 'clear',
+    type: "clear",
     onClick: () => editor?.chain().focus().clearNodes().run(),
     disabled: !editor?.can().chain().focus().clearNodes().run(),
-    className: '',
+    className: "",
     icon: null,
-    label: 'clear nodes',
-  }
+    label: "clear nodes",
+  };
   const undo = {
-    type: 'undo',
+    type: "undo",
     onClick: () => editor?.chain().focus().undo().run(),
     disabled: !editor?.can().chain().focus().undo().run(),
-    className: '',
+    className: "",
     icon: null,
-    label: 'undo',
-  }
+    label: "undo",
+  };
   const redo = {
-    type: 'redo',
+    type: "redo",
     onClick: () => editor?.chain().focus().redo().run(),
     disabled: !editor?.can().chain().focus().redo().run(),
-    className: '',
+    className: "",
     icon: null,
-    label: 'redo',
-  }
+    label: "redo",
+  };
 
   return {
     bold,
@@ -301,23 +301,23 @@ export const tiptapClient = (editor: Editor | null) => {
     undo,
     redo,
     textAlignJustify,
-  }
-}
+  };
+};
 
 const setLink = (editor: Editor | null) => {
-  const link = editor?.getAttributes('link') as { href: string } | undefined
-  if (!link) return
+  const link = editor?.getAttributes("link") as { href: string } | undefined;
+  if (!link) return;
 
-  const previousUrl = link.href
-  const url = window.prompt('URL', previousUrl)
+  const previousUrl = link.href;
+  const url = window.prompt("URL", previousUrl);
 
   // cancelled
-  if (url === null) return
+  if (url === null) return;
   // empty
-  if (url === '') {
-    editor?.chain().focus().extendMarkRange('link').unsetLink().run()
-    return
+  if (url === "") {
+    editor?.chain().focus().extendMarkRange("link").unsetLink().run();
+    return;
   }
   // update link
-  editor?.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
-}
+  editor?.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+};

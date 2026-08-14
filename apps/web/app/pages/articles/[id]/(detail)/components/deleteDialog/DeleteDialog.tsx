@@ -1,52 +1,44 @@
-'use client'
+"use client";
 
-import { useRouter } from 'next/navigation'
-import { FC, startTransition } from 'react'
-import { Button } from '@project-bd-client/ui'
-import {
-  Dialog,
-  DialogDescription,
-  DialogTitle,
-} from '@project-bd-client/ui'
-import { useToast } from '@project-bd-client/ui'
-import { HStack } from '@project-bd-client/ui'
-import { VStack } from '@project-bd-client/ui'
-import { deleteArticle } from './deleteDialog.action'
+import { useRouter } from "next/navigation";
+import { FC, startTransition } from "react";
+import { Button } from "@project-bd-client/ui";
+import { Dialog, DialogDescription, DialogTitle } from "@project-bd-client/ui";
+import { useToast } from "@project-bd-client/ui";
+import { HStack } from "@project-bd-client/ui";
+import { VStack } from "@project-bd-client/ui";
+import { deleteArticle } from "./deleteDialog.action";
 
 type DeleteDialogProps = {
-  isOpen: boolean
-  onClose: () => void
-  articleId: string
-}
+  isOpen: boolean;
+  onClose: () => void;
+  articleId: string;
+};
 
-export const DeleteDialog: FC<DeleteDialogProps> = ({
-  isOpen,
-  onClose,
-  articleId,
-}) => {
-  const toast = useToast()
-  const router = useRouter()
+export const DeleteDialog: FC<DeleteDialogProps> = ({ isOpen, onClose, articleId }) => {
+  const toast = useToast();
+  const router = useRouter();
 
   const handleDelete = () => {
     startTransition(async () => {
-      const response = await deleteArticle({ id: articleId })
+      const response = await deleteArticle({ id: articleId });
 
       if (!response?.isSuccess) {
         toast.add({
-          title: 'エラーが発生しました',
-          description: response.error.message ?? 'エラーが発生しました',
-        })
-        return
+          title: "エラーが発生しました",
+          description: response.error.message ?? "エラーが発生しました",
+        });
+        return;
       }
       toast.add({
-        title: '成功しました',
-        description: response.message ?? '成功しました',
-      })
+        title: "成功しました",
+        description: response.message ?? "成功しました",
+      });
 
-      router.push(`/articles`)
-      router.refresh()
-    })
-  }
+      router.push(`/articles`);
+      router.refresh();
+    });
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -63,5 +55,5 @@ export const DeleteDialog: FC<DeleteDialogProps> = ({
         </HStack>
       </VStack>
     </Dialog>
-  )
-}
+  );
+};

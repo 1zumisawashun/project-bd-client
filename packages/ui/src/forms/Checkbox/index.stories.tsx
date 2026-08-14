@@ -1,26 +1,26 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC, useState } from 'react'
-import { VStack } from '../../layouts/VStack'
-import { useArrayState } from '../../hooks/useArrayState'
-import { Card, CardBody } from '../../elements/Card'
-import { Field } from '../Field'
-import { Fieldset, FieldsetLegend } from '../Fieldset'
-import { Checkbox, CheckboxGroup } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC, useState } from "react";
+import { VStack } from "../../layouts/VStack";
+import { useArrayState } from "../../hooks/useArrayState";
+import { Card, CardBody } from "../../elements/Card";
+import { Field } from "../Field";
+import { Fieldset, FieldsetLegend } from "../Fieldset";
+import { Checkbox, CheckboxGroup } from "./index";
 
 const options = [
-  { value: 'http', label: 'HTTP' },
-  { value: 'https', label: 'HTTPS' },
-  { value: 'ssh', label: 'SSH' },
-]
+  { value: "http", label: "HTTP" },
+  { value: "https", label: "HTTPS" },
+  { value: "ssh", label: "SSH" },
+];
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'form/Checkbox',
+  title: "form/Checkbox",
   component: Checkbox,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Checkbox>
+type Story = StoryObj<typeof Checkbox>;
 
 const State: FC = () => {
   return (
@@ -35,11 +35,11 @@ const State: FC = () => {
         </Checkbox>
       </Fieldset>
     </Field>
-  )
-}
+  );
+};
 
 const Multiple: FC = () => {
-  const [state, { add, remove }] = useArrayState<string>(['http'])
+  const [state, { add, remove }] = useArrayState<string>(["http"]);
   return (
     <Field>
       <Fieldset render={<CheckboxGroup />}>
@@ -47,11 +47,11 @@ const Multiple: FC = () => {
         {options.map(({ value, label }) => (
           <Checkbox
             onClick={() => {
-              const checked = state.includes(value)
+              const checked = state.includes(value);
               if (checked) {
-                remove(value)
+                remove(value);
               } else {
-                add(value)
+                add(value);
               }
             }}
             checked={state.includes(value)}
@@ -62,19 +62,19 @@ const Multiple: FC = () => {
         ))}
       </Fieldset>
     </Field>
-  )
-}
+  );
+};
 
 const Single: FC = () => {
-  const [checked, setChecked] = useState(true)
+  const [checked, setChecked] = useState(true);
   return (
     <Field>
       <Checkbox checked={checked} onClick={() => setChecked(!checked)}>
         Checkbox Single
       </Checkbox>
     </Field>
-  )
-}
+  );
+};
 
 const Render: FC = () => {
   return (
@@ -95,9 +95,9 @@ const Render: FC = () => {
         </CardBody>
       </Card>
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

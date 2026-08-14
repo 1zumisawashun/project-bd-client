@@ -1,16 +1,16 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { MenuItem } from '../Menu'
-import { HamburgerMenu } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { MenuItem } from "../Menu";
+import { HamburgerMenu } from "./index";
 
 const meta: Meta<typeof HamburgerMenu> = {
-  title: 'element/HamburgerMenu',
+  title: "element/HamburgerMenu",
   component: HamburgerMenu,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof HamburgerMenu>
+type Story = StoryObj<typeof HamburgerMenu>;
 
 const Render: FC = () => {
   return (
@@ -23,9 +23,9 @@ const Render: FC = () => {
         </>
       )}
     />
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

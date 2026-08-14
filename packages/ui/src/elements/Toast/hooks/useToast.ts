@@ -1,3 +1,3 @@
-import { Toast } from '@base-ui/react/toast'
+import { Toast } from "@base-ui/react/toast";
 
-export const useToast = Toast.useToastManager
+export const useToast = Toast.useToastManager;

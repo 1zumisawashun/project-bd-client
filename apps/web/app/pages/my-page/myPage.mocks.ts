@@ -1,6 +1,6 @@
-import { MOCK_ARTICLES } from '@/functions/libs/drizzle/constants/articles'
-import { MOCK_USER } from '@/functions/libs/drizzle/constants/users'
-import { MypageUser } from './myPage.types'
+import { MOCK_ARTICLES } from "@/functions/libs/drizzle/constants/articles";
+import { MOCK_USER } from "@/functions/libs/drizzle/constants/users";
+import { MypageUser } from "./myPage.types";
 
 export const MOCK_MYPAGE_USER = {
   ...MOCK_USER,
@@ -9,8 +9,8 @@ export const MOCK_MYPAGE_USER = {
     author: MOCK_USER,
   })),
   likedArticles: MOCK_ARTICLES.map((article) => ({
-    userId: 'userId',
-    articleId: 'articleId',
+    userId: "userId",
+    articleId: "articleId",
     article: { ...article, author: MOCK_USER },
   })),
-} satisfies MypageUser
+} satisfies MypageUser;

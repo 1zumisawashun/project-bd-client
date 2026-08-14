@@ -1,16 +1,16 @@
-import clsx from 'clsx'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import styles from '../index.module.css'
+import clsx from "clsx";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'card-body'
+const BLOCK_NAME = "card-body";
 
-type CardBodyProps = ComponentPropsWithoutRef<'div'>
+type CardBodyProps = ComponentPropsWithoutRef<"div">;
 
-type CustomProps = {}
+type CustomProps = {};
 
-type Props = CardBodyProps & CustomProps
+type Props = CardBodyProps & CustomProps;
 
-type Ref = ElementRef<'div'>
+type Ref = ElementRef<"div">;
 
 export const CardBody = forwardRef<Ref, Props>(
   (
@@ -22,14 +22,8 @@ export const CardBody = forwardRef<Ref, Props>(
     },
     ref,
   ) => {
-    return (
-      <div
-        className={clsx(styles[`${BLOCK_NAME}`], className)}
-        ref={ref}
-        {...props}
-      />
-    )
+    return <div className={clsx(styles[`${BLOCK_NAME}`], className)} ref={ref} {...props} />;
   },
-)
+);
 
-CardBody.displayName = 'CardBody'
+CardBody.displayName = "CardBody";

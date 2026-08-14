@@ -1,15 +1,15 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { VStack } from '../../layouts/VStack'
-import { Field, FieldLabel } from '../Field'
-import { TextInput } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { VStack } from "../../layouts/VStack";
+import { Field, FieldLabel } from "../Field";
+import { TextInput } from "./index";
 
 const meta: Meta<typeof TextInput> = {
-  title: 'form/TextInput',
+  title: "form/TextInput",
   component: TextInput,
-}
-export default meta
-type Story = StoryObj<typeof TextInput>
+};
+export default meta;
+type Story = StoryObj<typeof TextInput>;
 
 const Render: FC = () => {
   return (
@@ -31,9 +31,9 @@ const Render: FC = () => {
         <TextInput id="focus" />
       </Field>
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

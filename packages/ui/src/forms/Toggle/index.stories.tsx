@@ -1,23 +1,23 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { Card, CardBody } from '../../elements/Card'
-import { VStack } from '../../layouts/VStack'
-import { HeartFilledIcon, HeartOutlineIcon } from '../../elements/Icon'
-import { Label } from '../../elements/Label/index'
-import { Toggle, ToggleGroup } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { Card, CardBody } from "../../elements/Card";
+import { VStack } from "../../layouts/VStack";
+import { HeartFilledIcon, HeartOutlineIcon } from "../../elements/Icon";
+import { Label } from "../../elements/Label/index";
+import { Toggle, ToggleGroup } from "./index";
 
 const meta: Meta<typeof Toggle> = {
-  title: 'form/Toggle',
+  title: "form/Toggle",
   component: Toggle,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Toggle>
+type Story = StoryObj<typeof Toggle>;
 
 const Multiple: FC = () => {
   return (
-    <ToggleGroup defaultValue={['left']}>
+    <ToggleGroup defaultValue={["left"]}>
       <Toggle value="left">
         <Label>ToggleGroupItem 1</Label>
       </Toggle>
@@ -25,8 +25,8 @@ const Multiple: FC = () => {
         <Label>ToggleGroupItem 2</Label>
       </Toggle>
     </ToggleGroup>
-  )
-}
+  );
+};
 
 const Single: FC = () => {
   return (
@@ -38,18 +38,18 @@ const Single: FC = () => {
             <button type="button" {...props}>
               <HeartFilledIcon />
             </button>
-          )
+          );
         }
 
         return (
           <button type="button" {...props}>
             <HeartOutlineIcon />
           </button>
-        )
+        );
       }}
     />
-  )
-}
+  );
+};
 
 const Render: FC = () => {
   return (
@@ -65,9 +65,9 @@ const Render: FC = () => {
         </CardBody>
       </Card>
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

@@ -1,32 +1,28 @@
-'use client'
+"use client";
 
-import { signOut } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { FC } from 'react'
-import { Button } from '@project-bd-client/ui'
-import { Card, CardBody } from '@project-bd-client/ui'
-import {
-  Dialog,
-  DialogDescription,
-  DialogTitle,
-} from '@project-bd-client/ui'
-import { Description, Title } from '@project-bd-client/ui'
-import { HStack } from '@project-bd-client/ui'
-import { VStack } from '@project-bd-client/ui'
-import { useDisclosure } from '@project-bd-client/ui'
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { FC } from "react";
+import { Button } from "@project-bd-client/ui";
+import { Card, CardBody } from "@project-bd-client/ui";
+import { Dialog, DialogDescription, DialogTitle } from "@project-bd-client/ui";
+import { Description, Title } from "@project-bd-client/ui";
+import { HStack } from "@project-bd-client/ui";
+import { VStack } from "@project-bd-client/ui";
+import { useDisclosure } from "@project-bd-client/ui";
 
 type LogoutDialogProps = {
-  isOpen: boolean
-  close: () => void
-}
+  isOpen: boolean;
+  close: () => void;
+};
 
 export const LogoutDialog: FC<LogoutDialogProps> = ({ isOpen, close }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   const logout = async () => {
-    await signOut({ redirect: false })
-    router.push('/login')
-  }
+    await signOut({ redirect: false });
+    router.push("/login");
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={close}>
@@ -43,11 +39,11 @@ export const LogoutDialog: FC<LogoutDialogProps> = ({ isOpen, close }) => {
         </HStack>
       </VStack>
     </Dialog>
-  )
-}
+  );
+};
 
 export const MyPageLogout: FC = () => {
-  const { isOpen, open, close } = useDisclosure()
+  const { isOpen, open, close } = useDisclosure();
 
   return (
     <Card>
@@ -64,5 +60,5 @@ export const MyPageLogout: FC = () => {
       </CardBody>
       <LogoutDialog isOpen={isOpen} close={close} />
     </Card>
-  )
-}
+  );
+};

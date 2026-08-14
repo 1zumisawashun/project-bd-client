@@ -1,86 +1,81 @@
-'use client'
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
-import { FC, startTransition } from 'react'
-import {
-  Controller,
-  SubmitErrorHandler,
-  SubmitHandler,
-  useForm,
-} from 'react-hook-form'
-import { Button } from '@project-bd-client/ui'
-import { Card, CardBody } from '@project-bd-client/ui'
-import { useToast } from '@project-bd-client/ui'
-import { Description, Title } from '@project-bd-client/ui'
-import { Field, FieldError, FieldLabel } from '@project-bd-client/ui'
-import { TextInput } from '@project-bd-client/ui'
-import { HStack } from '@project-bd-client/ui'
-import { VStack } from '@project-bd-client/ui'
-import { useDisclosure } from '@project-bd-client/ui'
-import { updateEmail } from './myPageEmail.action'
-import { Schema, schema } from './myPageEmail.schema'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { FC, startTransition } from "react";
+import { Controller, SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import { Button } from "@project-bd-client/ui";
+import { Card, CardBody } from "@project-bd-client/ui";
+import { useToast } from "@project-bd-client/ui";
+import { Description, Title } from "@project-bd-client/ui";
+import { Field, FieldError, FieldLabel } from "@project-bd-client/ui";
+import { TextInput } from "@project-bd-client/ui";
+import { HStack } from "@project-bd-client/ui";
+import { VStack } from "@project-bd-client/ui";
+import { useDisclosure } from "@project-bd-client/ui";
+import { updateEmail } from "./myPageEmail.action";
+import { Schema, schema } from "./myPageEmail.schema";
 
 type EmailPreviewProps = {
-  email: string | null
-  open: () => void
-}
+  email: string | null;
+  open: () => void;
+};
 
 const EmailPreview: FC<EmailPreviewProps> = ({ email, open }) => {
   return (
     <VStack>
-      <p>現在のメールアドレス: {email ?? '未設定'}</p>
+      <p>現在のメールアドレス: {email ?? "未設定"}</p>
       <HStack>
         <Button onClick={open}>変更する</Button>
       </HStack>
     </VStack>
-  )
-}
+  );
+};
 
 type EmailEditFormProps = {
-  email: string | null
-  close: () => void
-}
+  email: string | null;
+  close: () => void;
+};
 
 const EmailEditForm: FC<EmailEditFormProps> = ({ email, close }) => {
-  const router = useRouter()
-  const toast = useToast()
+  const router = useRouter();
+  const toast = useToast();
 
   const { control, handleSubmit } = useForm<Schema>({
-    mode: 'onTouched',
+    mode: "onTouched",
     resolver: zodResolver(schema),
     defaultValues: {
-      email: email ?? '',
+      email: email ?? "",
     },
-  })
+  });
 
   const onSubmit: SubmitHandler<Schema> = (data) => {
     startTransition(async () => {
-      const response = await updateEmail({ data })
+      const response = await updateEmail({ data });
 
       if (!response?.isSuccess) {
         toast.add({
-          title: 'エラーが発生しました',
-          description: response.error.message ?? 'エラーが発生しました',
-        })
-        return
+          title: "エラーが発生しました",
+          description: response.error.message ?? "エラーが発生しました",
+        });
+        return;
       }
       toast.add({
-        title: '成功しました',
-        description: response.message ?? '成功しました',
-      })
+        title: "成功しました",
+        description: response.message ?? "成功しました",
+      });
 
-      router.refresh()
-      close()
-    })
-  }
+      router.refresh();
+      close();
+    });
+  };
 
   const onError: SubmitErrorHandler<Schema> = (error) => {
     toast.add({
-      title: 'エラーが発生しました',
+      title: "エラーが発生しました",
       description: JSON.stringify(error, null, 2),
-    })
-  }
+    });
+  };
 
   return (
     <VStack>
@@ -97,20 +92,18 @@ const EmailEditForm: FC<EmailEditFormProps> = ({ email, close }) => {
       />
       <HStack>
         <Button onClick={close}>キャンセル</Button>
-        <Button onClick={(e) => void handleSubmit(onSubmit, onError)(e)}>
-          変更する
-        </Button>
+        <Button onClick={(e) => void handleSubmit(onSubmit, onError)(e)}>変更する</Button>
       </HStack>
     </VStack>
-  )
-}
+  );
+};
 
 type MyPageEmailProps = {
-  email: string | null
-}
+  email: string | null;
+};
 
 export const MyPageEmail: FC<MyPageEmailProps> = ({ email }) => {
-  const { isOpen, open, close } = useDisclosure()
+  const { isOpen, open, close } = useDisclosure();
 
   return (
     <Card>
@@ -128,5 +121,5 @@ export const MyPageEmail: FC<MyPageEmailProps> = ({ email }) => {
         )}
       </CardBody>
     </Card>
-  )
-}
+  );
+};

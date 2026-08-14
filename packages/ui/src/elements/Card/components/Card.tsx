@@ -1,22 +1,22 @@
-import clsx from 'clsx'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { Shape, Theme } from '../../../types'
-import styles from '../index.module.css'
+import clsx from "clsx";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import { Shape, Theme } from "../../../types";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'card'
+const BLOCK_NAME = "card";
 
-type CardProps = ComponentPropsWithoutRef<'div'>
+type CardProps = ComponentPropsWithoutRef<"div">;
 
 type CustomProps = {
-  theme?: Theme
-  scrollable?: boolean
-  hasBorder?: boolean
-  shape?: Shape
-}
+  theme?: Theme;
+  scrollable?: boolean;
+  hasBorder?: boolean;
+  shape?: Shape;
+};
 
-type Props = CardProps & CustomProps
+type Props = CardProps & CustomProps;
 
-type Ref = ElementRef<'div'>
+type Ref = ElementRef<"div">;
 
 export const Card = forwardRef<Ref, Props>(
   (
@@ -24,10 +24,10 @@ export const Card = forwardRef<Ref, Props>(
       // native props
       className,
       // custom props
-      theme = 'transparent',
+      theme = "transparent",
       scrollable = false,
       hasBorder = true,
-      shape = 'rounded',
+      shape = "rounded",
       // other props
       ...props
     },
@@ -44,8 +44,8 @@ export const Card = forwardRef<Ref, Props>(
         data-border={hasBorder}
         data-shape={shape}
       />
-    )
+    );
   },
-)
+);
 
-Card.displayName = 'Card'
+Card.displayName = "Card";

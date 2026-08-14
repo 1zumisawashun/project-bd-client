@@ -1,9 +1,7 @@
 /* @see https://github.com/vercel/next.js/discussions/31705 */
 .ui-editor-content {
   /* revert reset css */
-  &:where(
-    :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
-  ) {
+  &:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
     all: revert;
   }
 
@@ -72,7 +70,7 @@
     background: var(--mauve-12);
     border-radius: 0.5rem;
     color: var(--mauve-1);
-    font-family: 'JetBrainsMono', monospace;
+    font-family: "JetBrainsMono", monospace;
     margin: 1.5rem 0;
     padding: 0.75rem 1rem;
 

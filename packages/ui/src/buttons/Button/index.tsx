@@ -1,43 +1,40 @@
-import { Button as RowButton } from '@base-ui/react/button'
-import clsx from 'clsx'
-import { ComponentProps, ElementRef, forwardRef, ReactNode } from 'react'
-import { Shape, Theme, Variant } from '../../types'
-import styles from './index.module.css'
+import { Button as RowButton } from "@base-ui/react/button";
+import clsx from "clsx";
+import { ComponentProps, ElementRef, forwardRef, ReactNode } from "react";
+import { Shape, Theme, Variant } from "../../types";
+import styles from "./index.module.css";
 
-const BLOCK_NAME = 'button'
+const BLOCK_NAME = "button";
 
 // NOTE: ButtonPropsからButtonNativePropsの部分だけを抽出する
-type ButtonNativeProps = Extract<
-  ComponentProps<typeof RowButton>,
-  { nativeButton?: true }
->
+type ButtonNativeProps = Extract<ComponentProps<typeof RowButton>, { nativeButton?: true }>;
 
 type CustomProps = {
-  theme?: Theme
-  variant?: Variant
-  shape?: Shape
-  prefix?: ReactNode
-  suffix?: ReactNode
-}
+  theme?: Theme;
+  variant?: Variant;
+  shape?: Shape;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
+};
 
-type Props = Omit<ButtonNativeProps, 'prefix'> & CustomProps
+type Props = Omit<ButtonNativeProps, "prefix"> & CustomProps;
 
-type Ref = ElementRef<'button'>
+type Ref = ElementRef<"button">;
 
 export const Button = forwardRef<Ref, Props>(
   (
     {
       // custom props
-      theme = 'primary',
-      variant = 'contained',
-      shape = 'rounded',
+      theme = "primary",
+      variant = "contained",
+      shape = "rounded",
       prefix,
       suffix,
       // native props
       children,
       disabled = false,
       className = undefined,
-      type = 'button',
+      type = "button",
       // other props
       ...props
     },
@@ -49,7 +46,7 @@ export const Button = forwardRef<Ref, Props>(
         // base-ui props
         nativeButton={true}
         // native props
-        className={clsx('ui-button', styles[`${BLOCK_NAME}`], className)}
+        className={clsx("ui-button", styles[`${BLOCK_NAME}`], className)}
         type={type}
         disabled={disabled}
         ref={ref}
@@ -62,8 +59,8 @@ export const Button = forwardRef<Ref, Props>(
         {children}
         {suffix ?? null}
       </RowButton>
-    )
+    );
   },
-)
+);
 
-Button.displayName = 'Button'
+Button.displayName = "Button";

@@ -1,17 +1,17 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { HStack } from '../../layouts/HStack'
-import { VStack } from '../../layouts/VStack'
-import { Label } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { HStack } from "../../layouts/HStack";
+import { VStack } from "../../layouts/VStack";
+import { Label } from "./index";
 
 const meta: Meta<typeof Label> = {
-  title: 'element/Label',
+  title: "element/Label",
   component: Label,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Label>
+type Story = StoryObj<typeof Label>;
 
 const Render: FC = () => {
   return (
@@ -34,9 +34,9 @@ const Render: FC = () => {
         </Label>
       </HStack>
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

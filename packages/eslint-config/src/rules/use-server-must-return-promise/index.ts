@@ -1,4 +1,4 @@
-import { type Rule } from 'eslint'
+import { type Rule } from "eslint";
 
 /**
  * use-server を使用しているファイルでは、強制的に promise を返すため、
@@ -9,72 +9,71 @@ import { type Rule } from 'eslint'
  */
 
 export default {
-  'use-server-must-return-promise': {
+  "use-server-must-return-promise": {
     meta: {
-      type: 'problem',
+      type: "problem",
       docs: {
         description:
           "Ensure exported functions in files with 'use server' directive return a Promise or are async",
-        category: 'Possible Errors',
+        category: "Possible Errors",
         recommended: true,
       },
       schema: [],
     },
     create(context) {
-      let hasUseServerDirective = false
+      let hasUseServerDirective = false;
       return {
         Program(node) {
           // ファイル内に use server が含まれているかどうかをチェック
           hasUseServerDirective = node.body.some(
             (n) =>
-              n.type === 'ExpressionStatement' &&
-              n.expression.type === 'Literal' &&
-              n.expression.value === 'use server',
-          )
+              n.type === "ExpressionStatement" &&
+              n.expression.type === "Literal" &&
+              n.expression.value === "use server",
+          );
         },
         ExportNamedDeclaration(node) {
           if (!hasUseServerDirective) {
-            return
+            return;
           }
-          if (node.declaration?.type !== 'VariableDeclaration') {
-            return
+          if (node.declaration?.type !== "VariableDeclaration") {
+            return;
           }
           for (const declaration of node.declaration.declarations) {
             // 関数宣言以外は無視
             if (
               !declaration.init ||
               !(
-                declaration.init.type === 'ArrowFunctionExpression' ||
-                declaration.init.type === 'FunctionExpression'
+                declaration.init.type === "ArrowFunctionExpression" ||
+                declaration.init.type === "FunctionExpression"
               ) ||
-              declaration.init.body.type !== 'BlockStatement' ||
-              declaration.id.type !== 'Identifier'
+              declaration.init.body.type !== "BlockStatement" ||
+              declaration.id.type !== "Identifier"
             ) {
-              continue
+              continue;
             }
 
-            const isAsync = declaration.init.async
+            const isAsync = declaration.init.async;
             // Promise を返しているかどうかをチェック
             const isPromiseReturned = declaration.init.body.body.some(
               (statement) =>
-                statement.type === 'ReturnStatement' &&
-                statement.argument?.type === 'CallExpression' &&
-                statement.argument.callee.type === 'Identifier' &&
-                statement.argument.callee.name === 'Promise',
-            )
+                statement.type === "ReturnStatement" &&
+                statement.argument?.type === "CallExpression" &&
+                statement.argument.callee.type === "Identifier" &&
+                statement.argument.callee.name === "Promise",
+            );
             if (!isPromiseReturned && !isAsync) {
               context.report({
                 node,
-                message:
-                  "Exported function '{{name}}' must return a Promise or be async.",
+                message: "Exported function '{{name}}' must return a Promise or be async.",
                 data: {
                   name: declaration.id.name,
                 },
-              })
+              });
             }
           }
         },
-      }
+      };
     },
   },
-} satisfies Record<string, Rule.RuleModule>
+} satisfies Record<string, Rule.RuleModule>;

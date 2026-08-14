@@ -1,26 +1,26 @@
-import { PlusIcon } from '@radix-ui/react-icons'
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { HStack } from '../../layouts/HStack'
-import { VStack } from '../../layouts/VStack'
-import { FullWidthDecorator } from '../../.storybook/decorators'
-import { AnchorButton } from './index'
+import { PlusIcon } from "@radix-ui/react-icons";
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { HStack } from "../../layouts/HStack";
+import { VStack } from "../../layouts/VStack";
+import { FullWidthDecorator } from "../../.storybook/decorators";
+import { AnchorButton } from "./index";
 
 const items = [
-  { id: 1, variant: 'contained', theme: 'primary' },
-  { id: 2, variant: 'outlined', theme: 'primary' },
-  { id: 3, variant: 'ghost', theme: 'primary' },
-]
+  { id: 1, variant: "contained", theme: "primary" },
+  { id: 2, variant: "outlined", theme: "primary" },
+  { id: 3, variant: "ghost", theme: "primary" },
+];
 
 const meta: Meta<typeof AnchorButton> = {
-  title: 'button/AnchorButton',
+  title: "button/AnchorButton",
   component: AnchorButton,
   decorators: [FullWidthDecorator],
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof AnchorButton>
+type Story = StoryObj<typeof AnchorButton>;
 
 const Render: FC = () => {
   return (
@@ -30,60 +30,30 @@ const Render: FC = () => {
           <AnchorButton href="#" variant={item.variant} theme={item.theme}>
             default
           </AnchorButton>
-          <AnchorButton
-            href="#"
-            variant={item.variant}
-            theme={item.theme}
-            prefix={<PlusIcon />}
-          >
+          <AnchorButton href="#" variant={item.variant} theme={item.theme} prefix={<PlusIcon />}>
             prefix
           </AnchorButton>
-          <AnchorButton
-            href="#"
-            variant={item.variant}
-            theme={item.theme}
-            suffix={<PlusIcon />}
-          >
+          <AnchorButton href="#" variant={item.variant} theme={item.theme} suffix={<PlusIcon />}>
             suffix
           </AnchorButton>
-          <AnchorButton
-            href="#"
-            variant={item.variant}
-            theme={item.theme}
-            id="hover"
-          >
+          <AnchorButton href="#" variant={item.variant} theme={item.theme} id="hover">
             hover
           </AnchorButton>
-          <AnchorButton
-            href="#"
-            variant={item.variant}
-            theme={item.theme}
-            id="active"
-          >
+          <AnchorButton href="#" variant={item.variant} theme={item.theme} id="active">
             active
           </AnchorButton>
-          <AnchorButton
-            href="#"
-            variant={item.variant}
-            theme={item.theme}
-            id="focus-visible"
-          >
+          <AnchorButton href="#" variant={item.variant} theme={item.theme} id="focus-visible">
             focus visible
           </AnchorButton>
-          <AnchorButton
-            href="#"
-            variant={item.variant}
-            theme={item.theme}
-            disabled
-          >
+          <AnchorButton href="#" variant={item.variant} theme={item.theme} disabled>
             disabled
           </AnchorButton>
         </HStack>
       ))}
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

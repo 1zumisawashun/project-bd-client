@@ -1,29 +1,27 @@
-import { Field } from '@base-ui/react/field'
-import clsx from 'clsx'
-import { ComponentProps, ElementRef, forwardRef } from 'react'
-import styles from '../index.module.css'
+import { Field } from "@base-ui/react/field";
+import clsx from "clsx";
+import { ComponentProps, ElementRef, forwardRef } from "react";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'field-error'
+const BLOCK_NAME = "field-error";
 
-type FieldErrorProps = ComponentProps<typeof Field.Error>
+type FieldErrorProps = ComponentProps<typeof Field.Error>;
 
-type CustomProps = {}
+type CustomProps = {};
 
-type Props = FieldErrorProps & CustomProps
+type Props = FieldErrorProps & CustomProps;
 
-type Ref = ElementRef<'div'>
+type Ref = ElementRef<"div">;
 
-export const FieldError = forwardRef<Ref, Props>(
-  ({ className, ...props }, ref) => {
-    return (
-      <Field.Error
-        {...props}
-        // native props
-        ref={ref}
-        className={clsx(styles[`${BLOCK_NAME}`], className)}
-      />
-    )
-  },
-)
+export const FieldError = forwardRef<Ref, Props>(({ className, ...props }, ref) => {
+  return (
+    <Field.Error
+      {...props}
+      // native props
+      ref={ref}
+      className={clsx(styles[`${BLOCK_NAME}`], className)}
+    />
+  );
+});
 
-FieldError.displayName = 'FieldError'
+FieldError.displayName = "FieldError";

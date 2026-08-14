@@ -1,46 +1,43 @@
-'use server'
+"use server";
 
-import {
-  createArticle as _createArticle,
-  getArticleById,
-} from '@/functions/db/article'
-import { createCategory, getCategoryByName } from '@/functions/db/category'
-import { actionResult } from '@/functions/helpers/actionResult'
-import db from '@/functions/libs/drizzle/client'
-import { articlesCategories } from '@/functions/libs/drizzle/schema'
-import { getSession } from '@/functions/libs/next-auth/session'
-import { Schema, schema } from '../../../shared/articleForm/articleForm.schema'
+import { createArticle as _createArticle, getArticleById } from "@/functions/db/article";
+import { createCategory, getCategoryByName } from "@/functions/db/category";
+import { actionResult } from "@/functions/helpers/actionResult";
+import db from "@/functions/libs/drizzle/client";
+import { articlesCategories } from "@/functions/libs/drizzle/schema";
+import { getSession } from "@/functions/libs/next-auth/session";
+import { Schema, schema } from "../../../shared/articleForm/articleForm.schema";
 
 type CreateArticleArgs = {
-  data: Schema
-}
+  data: Schema;
+};
 
 export const createArticle = async (args: CreateArticleArgs) => {
   try {
-    const session = await getSession()
+    const session = await getSession();
 
     if (!session?.user?.email) {
-      return actionResult.end('ログインしてください')
+      return actionResult.end("ログインしてください");
     }
 
-    const validatedFields = schema.safeParse(args.data)
-    const { success, error, data } = validatedFields
+    const validatedFields = schema.safeParse(args.data);
+    const { success, error, data } = validatedFields;
 
     if (!success) {
-      return actionResult.end(error.message)
+      return actionResult.end(error.message);
     }
 
     const promises = data.categories.map(async ({ name }) => {
-      const category = await getCategoryByName({ name })
+      const category = await getCategoryByName({ name });
       if (!category) {
-        const response = await createCategory({ name })
-        return response?.id ?? ''
+        const response = await createCategory({ name });
+        return response?.id ?? "";
       }
-      return category.id
-    })
+      return category.id;
+    });
 
     // 空文字排除のためfilter(Boolean)を追加
-    const categoryIds = (await Promise.all(promises)).filter(Boolean)
+    const categoryIds = (await Promise.all(promises)).filter(Boolean);
 
     const article = await _createArticle({
       data: {
@@ -50,10 +47,10 @@ export const createArticle = async (args: CreateArticleArgs) => {
         status: data.status,
         authorId: session.user.id,
       },
-    })
+    });
 
     if (!article) {
-      return actionResult.end('記事の作成に失敗しました')
+      return actionResult.end("記事の作成に失敗しました");
     }
 
     if (categoryIds.length > 0) {
@@ -62,21 +59,17 @@ export const createArticle = async (args: CreateArticleArgs) => {
           articleId: article.id,
           categoryId,
         })),
-      )
+      );
     }
 
-    const fullArticle = await getArticleById({ id: article.id })
+    const fullArticle = await getArticleById({ id: article.id });
     if (!fullArticle) {
-      return actionResult.end('記事の作成に失敗しました')
+      return actionResult.end("記事の作成に失敗しました");
     }
 
-    const {
-      likedUsers: _likedUsers,
-      categories: _categories,
-      ...articleData
-    } = fullArticle
-    return actionResult.success(articleData)
+    const { likedUsers: _likedUsers, categories: _categories, ...articleData } = fullArticle;
+    return actionResult.success(articleData);
   } catch (error) {
-    return actionResult.error(error)
+    return actionResult.error(error);
   }
-}
+};

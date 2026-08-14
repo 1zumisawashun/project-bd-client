@@ -1,11 +1,11 @@
-import { type Rule } from 'eslint'
+import { type Rule } from "eslint";
 
 export default {
-  'disallow-identifiers': {
+  "disallow-identifiers": {
     meta: {
       docs: {
-        description: 'disallow identifiers',
-        category: 'Possible Errors',
+        description: "disallow identifiers",
+        category: "Possible Errors",
       },
       schema: [],
     },
@@ -14,10 +14,10 @@ export default {
         Identifier(node) {
           context.report({
             node,
-            message: 'Identifiers not allowed for Super Important reasons.',
-          })
+            message: "Identifiers not allowed for Super Important reasons.",
+          });
         },
-      }
+      };
     },
   },
-} satisfies Record<string, Rule.RuleModule>
+} satisfies Record<string, Rule.RuleModule>;

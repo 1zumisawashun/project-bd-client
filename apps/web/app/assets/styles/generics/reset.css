@@ -124,13 +124,13 @@ textarea {
   resize: none;
 }
 
-input[type='checkbox'],
-input[type='radio'] {
+input[type="checkbox"],
+input[type="radio"] {
   display: none;
 }
 
-input[type='submit'],
-input[type='button'],
+input[type="submit"],
+input[type="button"],
 label,
 button,
 select {
@@ -141,12 +141,12 @@ select::-ms-expand {
   display: none;
 }
 
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }

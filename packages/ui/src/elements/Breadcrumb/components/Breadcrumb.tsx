@@ -1,18 +1,18 @@
-import { ChevronLeftIcon } from '@radix-ui/react-icons'
-import clsx from 'clsx'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { IconAnchorButton } from '../../../buttons/IconAnchorButton'
-import styles from '../index.module.css'
+import { ChevronLeftIcon } from "@radix-ui/react-icons";
+import clsx from "clsx";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from "react";
+import { IconAnchorButton } from "../../../buttons/IconAnchorButton";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'breadcrumb'
+const BLOCK_NAME = "breadcrumb";
 
-type BreadcrumbProps = ComponentPropsWithoutRef<'nav'>
+type BreadcrumbProps = ComponentPropsWithoutRef<"nav">;
 
-type CustomProps = { href?: string }
+type CustomProps = { href?: string };
 
-type Props = BreadcrumbProps & CustomProps
+type Props = BreadcrumbProps & CustomProps;
 
-type Ref = ElementRef<'nav'>
+type Ref = ElementRef<"nav">;
 
 /**
  * NOTE:
@@ -49,8 +49,8 @@ export const Breadcrumb = forwardRef<Ref, Props>(
         )}
         <ul className={styles[`${BLOCK_NAME}`]}>{children}</ul>
       </nav>
-    )
+    );
   },
-)
+);
 
-Breadcrumb.displayName = 'Breadcrumb'
+Breadcrumb.displayName = "Breadcrumb";

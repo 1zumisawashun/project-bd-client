@@ -1,20 +1,20 @@
-import Database from 'better-sqlite3'
-import { drizzle } from 'drizzle-orm/better-sqlite3'
-import 'dotenv/config'
-import * as schema from '@/functions/libs/drizzle/schema'
+import Database from "better-sqlite3";
+import { drizzle } from "drizzle-orm/better-sqlite3";
+import "dotenv/config";
+import * as schema from "@/functions/libs/drizzle/schema";
 
 const drizzleClientSingleton = () => {
-  const sqlite = new Database('./sqlite.db')
+  const sqlite = new Database("./sqlite.db");
   // NOTE: schemaを渡すことで型安全になる
-  return drizzle(sqlite, { schema })
-}
+  return drizzle(sqlite, { schema });
+};
 
 declare const globalThis: {
-  drizzleGlobal: ReturnType<typeof drizzleClientSingleton>
-} & typeof global
+  drizzleGlobal: ReturnType<typeof drizzleClientSingleton>;
+} & typeof global;
 
-const db = globalThis.drizzleGlobal ?? drizzleClientSingleton()
+const db = globalThis.drizzleGlobal ?? drizzleClientSingleton();
 
-export default db
+export default db;
 
-if (process.env.NODE_ENV !== 'production') globalThis.drizzleGlobal = db
+if (process.env.NODE_ENV !== "production") globalThis.drizzleGlobal = db;

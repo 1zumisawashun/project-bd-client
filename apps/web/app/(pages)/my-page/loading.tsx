@@ -1,5 +1,5 @@
-import { LoadingDot } from '@project-bd-client/ui'
+import { LoadingDot } from "@project-bd-client/ui";
 
 export default function Loading() {
-  return <LoadingDot />
+  return <LoadingDot />;
 }

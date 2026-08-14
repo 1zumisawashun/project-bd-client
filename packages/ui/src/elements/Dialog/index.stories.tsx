@@ -1,23 +1,23 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { userEvent, within } from '@storybook/test'
-import { FC } from 'react'
-import { HStack } from '../../layouts/HStack'
-import { VStack } from '../../layouts/VStack'
-import { useDisclosure } from '../../hooks/useDisclosure'
-import { Button } from '../../buttons/Button'
-import { Dialog, DialogDescription, DialogTitle } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { userEvent, within } from "@storybook/test";
+import { FC } from "react";
+import { HStack } from "../../layouts/HStack";
+import { VStack } from "../../layouts/VStack";
+import { useDisclosure } from "../../hooks/useDisclosure";
+import { Button } from "../../buttons/Button";
+import { Dialog, DialogDescription, DialogTitle } from "./index";
 
 const meta: Meta<typeof Dialog> = {
-  title: 'element/Dialog',
+  title: "element/Dialog",
   component: Dialog,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Dialog>
+type Story = StoryObj<typeof Dialog>;
 
 const Render: FC = () => {
-  const { isOpen, close, open } = useDisclosure()
+  const { isOpen, close, open } = useDisclosure();
   return (
     <>
       <Button onClick={open}>Open Dialog</Button>
@@ -29,20 +29,20 @@ const Render: FC = () => {
             <Button theme="danger" variant="outlined" onClick={close}>
               キャンセル
             </Button>
-            <Button theme="danger" onClick={() => alert('delete!')}>
+            <Button theme="danger" onClick={() => alert("delete!")}>
               削除する
             </Button>
           </HStack>
         </VStack>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByRole('button'))
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button"));
   },
-}
+};

@@ -1,17 +1,17 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { userEvent, within } from '@storybook/test'
-import { FC } from 'react'
-import { Button } from '../../buttons/Button'
-import { Menu, MenuItem, MenuList, MenuTrigger } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { userEvent, within } from "@storybook/test";
+import { FC } from "react";
+import { Button } from "../../buttons/Button";
+import { Menu, MenuItem, MenuList, MenuTrigger } from "./index";
 
 const meta: Meta<typeof Menu> = {
-  title: 'element/Menu',
+  title: "element/Menu",
   component: Menu,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Menu>
+type Story = StoryObj<typeof Menu>;
 
 const Render: FC = () => {
   return (
@@ -24,14 +24,14 @@ const Render: FC = () => {
         <MenuItem onClick={() => null}>New Private Window</MenuItem>
       </MenuList>
     </Menu>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   args: {},
   render: () => <Render />,
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    await userEvent.click(canvas.getByRole('button', { name: 'Open Menu' }))
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Open Menu" }));
   },
-}
+};

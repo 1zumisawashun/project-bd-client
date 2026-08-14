@@ -1,12 +1,12 @@
-import tseslint from 'typescript-eslint'
+import tseslint from "typescript-eslint";
 
 /** @type {import("eslint").Linter.Config[]} */
 export default [
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   {
-    name: 'typescript-eslint:override',
-    files: ['**/*.{ts,tsx}'],
+    name: "typescript-eslint:override",
+    files: ["**/*.{ts,tsx}"],
     languageOptions: {
       parserOptions: {
         projectService: true,
@@ -14,17 +14,17 @@ export default [
       },
     },
     rules: {
-      '@typescript-eslint/no-unused-vars': [
-        'error',
+      "@typescript-eslint/no-unused-vars": [
+        "error",
         {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_',
-          destructuredArrayIgnorePattern: '^_',
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
         },
       ],
-      '@typescript-eslint/consistent-type-definitions': 'off',
-      '@typescript-eslint/no-empty-object-type': 'off',
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
     },
   },
-]
+];

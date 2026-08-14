@@ -1,16 +1,16 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { VStack } from '../../layouts/VStack'
-import { Description, Title } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { VStack } from "../../layouts/VStack";
+import { Description, Title } from "./index";
 
 const meta: Meta<typeof Title> = {
-  title: 'element/Typography',
+  title: "element/Typography",
   component: Title,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Title>
+type Story = StoryObj<typeof Title>;
 
 const Render: FC = () => {
   return (
@@ -18,9 +18,9 @@ const Render: FC = () => {
       <Title>タイトル</Title>
       <Description>ディスクリプション</Description>
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

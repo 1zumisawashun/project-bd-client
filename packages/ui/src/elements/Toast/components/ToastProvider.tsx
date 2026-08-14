@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { Toast as RowToast } from '@base-ui/react/toast'
-import { FC, PropsWithChildren } from 'react'
-import styles from '../index.module.css'
-import { Toast } from './Toast'
+import { Toast as RowToast } from "@base-ui/react/toast";
+import { FC, PropsWithChildren } from "react";
+import styles from "../index.module.css";
+import { Toast } from "./Toast";
 
-const BLOCK_NAME = 'toast'
+const BLOCK_NAME = "toast";
 
 export const ToastProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -17,5 +17,5 @@ export const ToastProvider: FC<PropsWithChildren> = ({ children }) => {
         </RowToast.Viewport>
       </RowToast.Portal>
     </RowToast.Provider>
-  )
-}
+  );
+};

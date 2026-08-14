@@ -1,38 +1,36 @@
-import clsx from 'clsx'
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, useRef } from 'react'
-import { useMergeRef } from '@project-bd-client/ui'
-import { useOuterClick } from '@project-bd-client/ui'
-import { useMenu } from '../hooks/useMenu'
-import styles from '../index.module.css'
+import clsx from "clsx";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, useRef } from "react";
+import { useMergeRef } from "@project-bd-client/ui";
+import { useOuterClick } from "@project-bd-client/ui";
+import { useMenu } from "../hooks/useMenu";
+import styles from "../index.module.css";
 
-const BLOCK_NAME = 'menu'
+const BLOCK_NAME = "menu";
 
-type Ref = ElementRef<'button'>
+type Ref = ElementRef<"button">;
 
-type Props = {} & ComponentPropsWithoutRef<'button'>
+type Props = {} & ComponentPropsWithoutRef<"button">;
 
-export const MenuTrigger = forwardRef<Ref, Props>(
-  ({ className, ...props }, ref) => {
-    const menu = useMenu()
+export const MenuTrigger = forwardRef<Ref, Props>(({ className, ...props }, ref) => {
+  const menu = useMenu();
 
-    const referenceRef = useRef<ElementRef<'button'>>(null)
+  const referenceRef = useRef<ElementRef<"button">>(null);
 
-    const mergeRef = useMergeRef(ref, referenceRef)
+  const mergeRef = useMergeRef(ref, referenceRef);
 
-    useOuterClick([referenceRef], () => {
-      menu?.close()
-    })
+  useOuterClick([referenceRef], () => {
+    menu?.close();
+  });
 
-    return (
-      <button
-        type="button"
-        className={clsx(styles[`${BLOCK_NAME}-trigger`], className)}
-        {...props}
-        ref={mergeRef}
-        onClick={() => menu?.open()}
-      />
-    )
-  },
-)
+  return (
+    <button
+      type="button"
+      className={clsx(styles[`${BLOCK_NAME}-trigger`], className)}
+      {...props}
+      ref={mergeRef}
+      onClick={() => menu?.open()}
+    />
+  );
+});
 
-MenuTrigger.displayName = 'MenuTrigger'
+MenuTrigger.displayName = "MenuTrigger";

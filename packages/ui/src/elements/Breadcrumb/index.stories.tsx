@@ -1,17 +1,17 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { VStack } from '../../layouts/VStack'
-import { Card, CardBody } from '../Card'
-import { Breadcrumb, BreadcrumbLink } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { VStack } from "../../layouts/VStack";
+import { Card, CardBody } from "../Card";
+import { Breadcrumb, BreadcrumbLink } from "./index";
 
 const meta: Meta<typeof Breadcrumb> = {
-  title: 'element/Breadcrumb',
+  title: "element/Breadcrumb",
   component: Breadcrumb,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Breadcrumb>
+type Story = StoryObj<typeof Breadcrumb>;
 
 const Render: FC = () => {
   return (
@@ -48,9 +48,9 @@ const Render: FC = () => {
         </CardBody>
       </Card>
     </VStack>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

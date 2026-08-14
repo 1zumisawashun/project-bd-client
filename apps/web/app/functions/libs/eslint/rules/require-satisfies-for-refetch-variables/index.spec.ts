@@ -1,12 +1,12 @@
-import { RuleTester } from '@typescript-eslint/rule-tester'
-import { rule } from './index'
+import { RuleTester } from "@typescript-eslint/rule-tester";
+import { rule } from "./index";
 
 /**
  * @see https://typescript-eslint.io/developers/custom-rules/#testing-typed-rules
  */
-const ruleTester = new RuleTester()
+const ruleTester = new RuleTester();
 
-ruleTester.run('require-satisfies-for-refetch-variables', rule, {
+ruleTester.run("require-satisfies-for-refetch-variables", rule, {
   valid: [
     {
       // 通常のパターン
@@ -74,7 +74,7 @@ ruleTester.run('require-satisfies-for-refetch-variables', rule, {
         ],
       })
       `,
-      errors: [{ messageId: 'requireSatisfiesForRefetchVariables' }],
+      errors: [{ messageId: "requireSatisfiesForRefetchVariables" }],
     },
     {
       // refetchQueriesの配列を変数に切り出しているパターン
@@ -89,7 +89,7 @@ ruleTester.run('require-satisfies-for-refetch-variables', rule, {
         refetchQueries,
       })
       `,
-      errors: [{ messageId: 'requireSatisfiesForRefetchVariables' }],
+      errors: [{ messageId: "requireSatisfiesForRefetchVariables" }],
     },
     {
       // refetchQueriesのオブジェクトを変数に切り出しているパターン
@@ -102,7 +102,7 @@ ruleTester.run('require-satisfies-for-refetch-variables', rule, {
         refetchQueries: [refetchQuery],
       })
       `,
-      errors: [{ messageId: 'requireSatisfiesForRefetchVariables' }],
+      errors: [{ messageId: "requireSatisfiesForRefetchVariables" }],
     },
     {
       // refetchQueriesのオブジェクトを変数に切り出しているパターン
@@ -116,7 +116,7 @@ ruleTester.run('require-satisfies-for-refetch-variables', rule, {
         refetchQueries: [refetchQuery],
       })
       `,
-      errors: [{ messageId: 'requireSatisfiesForRefetchVariables' }],
+      errors: [{ messageId: "requireSatisfiesForRefetchVariables" }],
     },
   ],
-})
+});

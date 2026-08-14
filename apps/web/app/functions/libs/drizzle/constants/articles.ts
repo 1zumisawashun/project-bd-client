@@ -1,6 +1,6 @@
-import { type Article } from '@/functions/libs/drizzle/schema'
+import { type Article } from "@/functions/libs/drizzle/schema";
 
-const ID = 'cm07vrx4y00002vwkx0koma0j'
+const ID = "cm07vrx4y00002vwkx0koma0j";
 
 export const CONTENT = `
 <h2>
@@ -31,40 +31,40 @@ export const CONTENT = `
   <br />
   — Mom
 </blockquote>
-`
+`;
 
 const MOCK_ARTICLE = {
   id: `MOCK_ARTICLE_${ID}`,
-  title: 'MOCK_ARTICLE',
+  title: "MOCK_ARTICLE",
   content: CONTENT,
-  status: 'PUBLISHED',
+  status: "PUBLISHED",
   authorId: `AUTHOR_${ID}`, // override authorId to avoid foreign key constraint error
-  createdAt: new Date('2024-08-31T05:16:36.323Z'),
-  updatedAt: new Date('2024-08-31T05:16:36.323Z'),
-} satisfies Article
+  createdAt: new Date("2024-08-31T05:16:36.323Z"),
+  updatedAt: new Date("2024-08-31T05:16:36.323Z"),
+} satisfies Article;
 
 export const MOCK_ARTICLE_PUBLISH = {
   id: `MOCK_ARTICLE_PUBLISH_${ID}`,
-  title: 'MOCK_ARTICLE_PUBLISH',
+  title: "MOCK_ARTICLE_PUBLISH",
   content: CONTENT,
-  status: 'PUBLISHED',
+  status: "PUBLISHED",
   authorId: `AUTHOR_${ID}`, // override authorId to avoid foreign key constraint error
-  createdAt: new Date('2024-08-31T05:16:36.323Z'),
-  updatedAt: new Date('2024-08-31T05:16:36.323Z'),
-} satisfies Article
+  createdAt: new Date("2024-08-31T05:16:36.323Z"),
+  updatedAt: new Date("2024-08-31T05:16:36.323Z"),
+} satisfies Article;
 
 export const MOCK_ARTICLE_DRAFT = {
   id: `MOCK_ARTICLE_DRAFT_${ID}`,
-  title: 'MOCK_ARTICLE_DRAFT',
+  title: "MOCK_ARTICLE_DRAFT",
   content: CONTENT,
-  status: 'DRAFT',
+  status: "DRAFT",
   authorId: `AUTHOR_${ID}`, // override authorId to avoid foreign key constraint error
-  createdAt: new Date('2024-08-31T05:16:36.323Z'),
-  updatedAt: new Date('2024-08-31T05:16:36.323Z'),
-} satisfies Article
+  createdAt: new Date("2024-08-31T05:16:36.323Z"),
+  updatedAt: new Date("2024-08-31T05:16:36.323Z"),
+} satisfies Article;
 
 export const MOCK_ARTICLES = [
   MOCK_ARTICLE,
   MOCK_ARTICLE_PUBLISH,
   MOCK_ARTICLE_DRAFT,
-] satisfies Article[]
+] satisfies Article[];

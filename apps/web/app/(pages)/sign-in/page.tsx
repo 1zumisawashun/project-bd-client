@@ -1,5 +1,5 @@
-import { SignIn } from '@/pages/sign-in/SignIn'
+import { SignIn } from "@/pages/sign-in/SignIn";
 
 export default function Page() {
-  return <SignIn />
+  return <SignIn />;
 }

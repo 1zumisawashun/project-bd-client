@@ -1,8 +1,8 @@
-import { CONTENT } from '@/functions/libs/drizzle/constants/articles'
+import { CONTENT } from "@/functions/libs/drizzle/constants/articles";
 
 export const defaultValues = {
-  title: '',
+  title: "",
   content: CONTENT,
   categories: [],
-  status: 'PUBLISHED' as const,
-}
+  status: "PUBLISHED" as const,
+};

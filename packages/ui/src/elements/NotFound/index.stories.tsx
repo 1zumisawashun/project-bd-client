@@ -1,20 +1,20 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { NotFound } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { NotFound } from "./index";
 
 const meta: Meta<typeof NotFound> = {
-  title: 'element/NotFound',
+  title: "element/NotFound",
   component: NotFound,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof NotFound>
+type Story = StoryObj<typeof NotFound>;
 
 const Render: FC = () => {
-  return <NotFound />
-}
+  return <NotFound />;
+};
 
 export const Default: Story = {
   render: () => <Render />,
-}
+};

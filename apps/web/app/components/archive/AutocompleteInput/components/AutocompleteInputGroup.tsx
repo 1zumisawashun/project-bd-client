@@ -1,87 +1,80 @@
-import { ComponentProps, ElementRef, forwardRef, useRef } from 'react'
-import { Menu, MenuContent, MenuItem } from '@/components/archive/Menu'
-import { useMergeRef } from '@project-bd-client/ui'
-import { useOuterClick } from '@project-bd-client/ui'
-import { TextInput } from '@project-bd-client/ui'
-import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
+import { ComponentProps, ElementRef, forwardRef, useRef } from "react";
+import { Menu, MenuContent, MenuItem } from "@/components/archive/Menu";
+import { useMergeRef } from "@project-bd-client/ui";
+import { useOuterClick } from "@project-bd-client/ui";
+import { TextInput } from "@project-bd-client/ui";
+import { useAutocompleteInput } from "../hooks/useAutocompleteInput";
 
-type InputRef = ElementRef<'input'>
+type InputRef = ElementRef<"input">;
 
-type ReferenceRef = ElementRef<'div'>
+type ReferenceRef = ElementRef<"div">;
 
 type Props = {
-  onChange: (value: string) => void // react-hook-form's onChange
-  options: string[]
-} & Omit<ComponentProps<typeof TextInput>, 'onChange'>
+  onChange: (value: string) => void; // react-hook-form's onChange
+  options: string[];
+} & Omit<ComponentProps<typeof TextInput>, "onChange">;
 
-export const AutocompleteInputGroup = forwardRef<InputRef, Props>(
-  (props, ref) => {
-    const {
-      menu,
-      suggestions,
-      onChange,
-      onClick,
-      onKeyDown,
-      onFocus,
-      onCompositionStart,
-      onCompositionEnd,
-    } = useAutocompleteInput({ options: props.options, value: props.value })
+export const AutocompleteInputGroup = forwardRef<InputRef, Props>((props, ref) => {
+  const {
+    menu,
+    suggestions,
+    onChange,
+    onClick,
+    onKeyDown,
+    onFocus,
+    onCompositionStart,
+    onCompositionEnd,
+  } = useAutocompleteInput({ options: props.options, value: props.value });
 
-    const inputRef = useRef<InputRef>(null)
-    const referenceRef = useRef<ReferenceRef>(null)
+  const inputRef = useRef<InputRef>(null);
+  const referenceRef = useRef<ReferenceRef>(null);
 
-    useOuterClick([referenceRef], () => {
-      menu?.close()
-    })
+  useOuterClick([referenceRef], () => {
+    menu?.close();
+  });
 
-    const mergeRef = useMergeRef(inputRef, ref)
+  const mergeRef = useMergeRef(inputRef, ref);
 
-    const updateInputRef = (value: string) => {
-      if (!inputRef.current) {
-        throw new Error('inputRef is not defined')
-      }
-      inputRef.current.value = value
+  const updateInputRef = (value: string) => {
+    if (!inputRef.current) {
+      throw new Error("inputRef is not defined");
     }
+    inputRef.current.value = value;
+  };
 
-    return (
-      <Menu
-        isOpen={menu.isOpen}
-        open={menu.open}
-        close={menu.close}
-        ref={referenceRef}
-      >
-        <TextInput
-          type="text"
-          autoComplete="off"
-          onChange={onChange}
-          onKeyDown={(e) => {
-            onKeyDown(e, (value) => {
-              props.onChange(value)
-              updateInputRef('')
-            })
-          }}
-          onFocus={onFocus}
-          onCompositionStart={onCompositionStart}
-          onCompositionEnd={onCompositionEnd}
-          ref={mergeRef}
-        />
-        <MenuContent>
-          {suggestions.map((d, index) => (
-            <MenuItem
-              key={index}
-              onClick={() => {
-                onClick()
-                props.onChange(d)
-                updateInputRef('')
-              }}
-            >
-              {d}
-            </MenuItem>
-          ))}
-        </MenuContent>
-      </Menu>
-    )
-  },
-)
+  return (
+    <Menu isOpen={menu.isOpen} open={menu.open} close={menu.close} ref={referenceRef}>
+      <TextInput
+        type="text"
+        autoComplete="off"
+        onChange={onChange}
+        onKeyDown={(e) => {
+          onKeyDown(e, (value) => {
+            props.onChange(value);
+            updateInputRef("");
+          });
+        }}
+        onFocus={onFocus}
+        onCompositionStart={onCompositionStart}
+        onCompositionEnd={onCompositionEnd}
+        ref={mergeRef}
+      />
+      <MenuContent>
+        {suggestions.map((d, index) => (
+          <MenuItem
+            key={index}
+            onClick={() => {
+              onClick();
+              props.onChange(d);
+              updateInputRef("");
+            }}
+          >
+            {d}
+          </MenuItem>
+        ))}
+      </MenuContent>
+    </Menu>
+  );
+});
 
-AutocompleteInputGroup.displayName = 'AutocompleteInputGroup'
+AutocompleteInputGroup.displayName = "AutocompleteInputGroup";

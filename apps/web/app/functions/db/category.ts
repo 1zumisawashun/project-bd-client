@@ -1,6 +1,6 @@
-import { desc, eq } from 'drizzle-orm'
-import db from '@/functions/libs/drizzle/client'
-import { categories } from '@/functions/libs/drizzle/schema'
+import { desc, eq } from "drizzle-orm";
+import db from "@/functions/libs/drizzle/client";
+import { categories } from "@/functions/libs/drizzle/schema";
 
 export const getCategories = async () => {
   try {
@@ -11,35 +11,35 @@ export const getCategories = async () => {
         createdAt: categories.createdAt,
       })
       .from(categories)
-      .orderBy(desc(categories.createdAt))
+      .orderBy(desc(categories.createdAt));
 
-    return allCategories ?? null
+    return allCategories ?? null;
   } catch {
-    throw new Error('Failed to get categories')
+    throw new Error("Failed to get categories");
   }
-}
+};
 
 export const getCategoryByName = async ({ name }: { name: string }) => {
   try {
     const category = await db.query.categories.findFirst({
       where: eq(categories.name, name),
-    })
+    });
 
-    return category ?? null
+    return category ?? null;
   } catch {
-    throw new Error('Failed to get category by name')
+    throw new Error("Failed to get category by name");
   }
-}
+};
 
 export const createCategory = async ({ name }: { name: string }) => {
   try {
     const [category] = await db
       .insert(categories)
       .values({ name, id: crypto.randomUUID() })
-      .returning()
+      .returning();
 
-    return category ?? null
+    return category ?? null;
   } catch {
-    throw new Error('Failed to create category')
+    throw new Error("Failed to create category");
   }
-}
+};

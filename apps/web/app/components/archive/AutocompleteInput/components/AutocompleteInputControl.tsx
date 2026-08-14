@@ -1,18 +1,20 @@
-import { ComponentProps, ElementRef, forwardRef } from 'react'
-import { Menu, MenuContent, MenuItem } from '@/components/archive/Menu'
-import { TextInput } from '@project-bd-client/ui'
-import { useAutocompleteInput } from '../hooks/useAutocompleteInput'
+import { ComponentProps, ElementRef, forwardRef } from "react";
+import { Menu, MenuContent, MenuItem } from "@/components/archive/Menu";
+import { TextInput } from "@project-bd-client/ui";
+import { useAutocompleteInput } from "../hooks/useAutocompleteInput";
 
-type Ref = ElementRef<'input'>
+type Ref = ElementRef<"input">;
 
 type Props = {
-  onChange: (value?: string) => void // react-hook-form's onChange
-  options: string[]
-} & Omit<ComponentProps<typeof TextInput>, 'onChange'>
+  onChange: (value?: string) => void; // react-hook-form's onChange
+  options: string[];
+} & Omit<ComponentProps<typeof TextInput>, "onChange">;
 
 export const AutocompleteInputControl = forwardRef<Ref, Props>((props, ref) => {
-  const { menu, suggestions, onChange, onClick, onKeyDown, onFocus } =
-    useAutocompleteInput({ options: props.options, value: props.value })
+  const { menu, suggestions, onChange, onClick, onKeyDown, onFocus } = useAutocompleteInput({
+    options: props.options,
+    value: props.value,
+  });
 
   return (
     <Menu isOpen={menu.isOpen} open={menu.open} close={menu.close}>
@@ -21,13 +23,13 @@ export const AutocompleteInputControl = forwardRef<Ref, Props>((props, ref) => {
         autoComplete="off"
         {...props}
         onChange={(e) => {
-          const { value } = e.target
-          onChange(e)
-          props.onChange(value)
+          const { value } = e.target;
+          onChange(e);
+          props.onChange(value);
         }}
         onKeyDown={(e) => {
           // NOTE: submitされるのでブロックする
-          onKeyDown(e, () => null)
+          onKeyDown(e, () => null);
         }}
         onFocus={onFocus}
         ref={ref}
@@ -37,8 +39,8 @@ export const AutocompleteInputControl = forwardRef<Ref, Props>((props, ref) => {
           <MenuItem
             key={index}
             onClick={() => {
-              onClick()
-              props.onChange(d)
+              onClick();
+              props.onChange(d);
             }}
           >
             {d}
@@ -46,7 +48,7 @@ export const AutocompleteInputControl = forwardRef<Ref, Props>((props, ref) => {
         ))}
       </MenuContent>
     </Menu>
-  )
-})
+  );
+});
 
-AutocompleteInputControl.displayName = 'AutocompleteInputControl'
+AutocompleteInputControl.displayName = "AutocompleteInputControl";

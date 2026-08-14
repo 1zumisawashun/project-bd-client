@@ -1,16 +1,16 @@
-import { type Meta, type StoryObj } from '@storybook/react'
-import { FC } from 'react'
-import { Button } from '../../buttons/Button'
-import { Tooltip, TooltipContent, TooltipTrigger } from './index'
+import { type Meta, type StoryObj } from "@storybook/react";
+import { FC } from "react";
+import { Button } from "../../buttons/Button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./index";
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'element/Tooltip',
+  title: "element/Tooltip",
   component: Tooltip,
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof Tooltip>
+type Story = StoryObj<typeof Tooltip>;
 
 const Render: FC = () => {
   return (
@@ -18,10 +18,10 @@ const Render: FC = () => {
       <TooltipTrigger render={<Button>Open Menu</Button>} />
       <TooltipContent>Tooltip Content</TooltipContent>
     </Tooltip>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   args: {},
   render: () => <Render />,
-}
+};

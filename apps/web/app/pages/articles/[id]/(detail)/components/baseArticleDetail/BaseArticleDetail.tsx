@@ -4,10 +4,7 @@ import clsx from "clsx";
 import DOMPurify from "dompurify";
 import NextLink from "next/link";
 import { FC, ReactNode } from "react";
-import { Label } from "@project-bd-client/ui";
-import { Title } from "@project-bd-client/ui";
-import { HStack } from "@project-bd-client/ui";
-import { VStack } from "@project-bd-client/ui";
+import { Label,Title,HStack,VStack } from "@project-bd-client/ui";
 import { formatDateToJapaneseDate } from "@/functions/helpers/dateFormatter";
 import { Article } from "../../../../shared/article.types";
 

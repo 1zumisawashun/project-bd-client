@@ -5,9 +5,7 @@ import { useFieldArray } from "@hookform/lenses/rhf";
 import { FC } from "react";
 import { useController } from "react-hook-form";
 import { AutocompleteInputGroup } from "@/components/archive/AutocompleteInput";
-import { Label } from "@project-bd-client/ui";
-import { Field, FieldError, FieldLabel } from "@project-bd-client/ui";
-import { HStack } from "@project-bd-client/ui";
+import { Label,Field,FieldError,FieldLabel,HStack } from "@project-bd-client/ui";
 
 type CategoriesFieldProps = {
   categoryOptions: string[];

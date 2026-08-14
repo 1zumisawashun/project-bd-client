@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useRef } from "react";
-import { useMergeRef } from "@project-bd-client/ui";
-import { useOuterClick } from "@project-bd-client/ui";
+import { useMergeRef,useOuterClick } from "@project-bd-client/ui";
 import { useMenu } from "../hooks/useMenu";
 import styles from "../index.module.css";
 

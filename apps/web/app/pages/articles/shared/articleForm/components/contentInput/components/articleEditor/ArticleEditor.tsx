@@ -1,9 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import { EditorContent } from "@project-bd-client/ui";
-import { useEditor } from "@project-bd-client/ui";
-import { VStack } from "@project-bd-client/ui";
+import { EditorContent,useEditor,VStack } from "@project-bd-client/ui";
 import styles from "./articleEditor.module.css";
 import { ArticleMenubar } from "./components/articleMenubar/ArticleMenubar";
 import { ArticleMenuBubble } from "./components/articleMenuBubble/ArticleMenuBubble";

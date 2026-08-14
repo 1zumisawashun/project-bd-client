@@ -1,7 +1,7 @@
-import Database from "better-sqlite3";
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import "dotenv/config";
 import * as schema from "@/functions/libs/drizzle/schema";
+import Database from "better-sqlite3";
+import "dotenv/config";
+import { drizzle } from "drizzle-orm/better-sqlite3";
 
 const drizzleClientSingleton = () => {
   const sqlite = new Database("./sqlite.db");
@@ -9,6 +9,7 @@ const drizzleClientSingleton = () => {
   return drizzle(sqlite, { schema });
 };
 
+// oxlint-disable-next-line
 declare const globalThis: {
   drizzleGlobal: ReturnType<typeof drizzleClientSingleton>;
 } & typeof global;

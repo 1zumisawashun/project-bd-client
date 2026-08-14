@@ -2,11 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { FC, startTransition } from "react";
-import { Button } from "@project-bd-client/ui";
-import { Dialog, DialogDescription, DialogTitle } from "@project-bd-client/ui";
-import { useToast } from "@project-bd-client/ui";
-import { HStack } from "@project-bd-client/ui";
-import { VStack } from "@project-bd-client/ui";
+import { Button,Dialog,DialogDescription,DialogTitle,useToast,HStack,VStack } from "@project-bd-client/ui";
 import { deleteArticle } from "./deleteDialog.action";
 
 type DeleteDialogProps = {

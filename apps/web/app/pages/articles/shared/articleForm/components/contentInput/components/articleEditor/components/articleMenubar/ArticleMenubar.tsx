@@ -1,9 +1,7 @@
 import { TextIcon } from "@radix-ui/react-icons";
 import { Editor } from "@tiptap/react";
 import { FC } from "react";
-import { tiptapClient } from "@project-bd-client/ui";
-import { Menu, MenuItem, MenuList, MenuTrigger } from "@project-bd-client/ui";
-import { Menubar } from "@project-bd-client/ui";
+import { tiptapClient,Menu,MenuItem,MenuList,MenuTrigger,Menubar } from "@project-bd-client/ui";
 import styles from "./articleMenubar.module.css";
 
 const BLOCK_NAME = "articleMenubar";

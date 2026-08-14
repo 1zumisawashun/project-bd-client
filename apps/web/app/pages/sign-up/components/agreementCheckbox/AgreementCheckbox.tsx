@@ -3,8 +3,7 @@
 import { Lens } from "@hookform/lenses";
 import { FC } from "react";
 import { useController } from "react-hook-form";
-import { Checkbox } from "@project-bd-client/ui";
-import { Field, FieldError } from "@project-bd-client/ui";
+import { Checkbox,Field,FieldError } from "@project-bd-client/ui";
 
 type AgreementCheckboxProps = {
   lens: Lens<{ agreement: boolean }>;

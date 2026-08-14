@@ -3,13 +3,7 @@
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
-import { Button } from "@project-bd-client/ui";
-import { Card, CardBody } from "@project-bd-client/ui";
-import { Dialog, DialogDescription, DialogTitle } from "@project-bd-client/ui";
-import { Description, Title } from "@project-bd-client/ui";
-import { HStack } from "@project-bd-client/ui";
-import { VStack } from "@project-bd-client/ui";
-import { useDisclosure } from "@project-bd-client/ui";
+import { Button,Card,CardBody,Dialog,DialogDescription,DialogTitle,Description,Title,HStack,VStack,useDisclosure } from "@project-bd-client/ui";
 
 type LogoutDialogProps = {
   isOpen: boolean;

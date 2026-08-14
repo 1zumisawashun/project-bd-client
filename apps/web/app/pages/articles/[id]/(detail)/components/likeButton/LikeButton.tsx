@@ -4,8 +4,7 @@ import { HeartFilledIcon } from "@radix-ui/react-icons";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { FC, startTransition } from "react";
-import { IconButton } from "@project-bd-client/ui";
-import { useToast } from "@project-bd-client/ui";
+import { IconButton,useToast } from "@project-bd-client/ui";
 import { dislikeArticle } from "./likeButton.action";
 
 type LikeButtonProps = {

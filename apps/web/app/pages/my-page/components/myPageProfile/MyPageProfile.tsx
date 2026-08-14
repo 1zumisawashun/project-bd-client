@@ -4,15 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { FC, startTransition } from "react";
 import { Controller, SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
-import { Button } from "@project-bd-client/ui";
-import { Card, CardBody } from "@project-bd-client/ui";
-import { useToast } from "@project-bd-client/ui";
-import { Description, Title } from "@project-bd-client/ui";
-import { Field, FieldError, FieldLabel } from "@project-bd-client/ui";
-import { TextInput } from "@project-bd-client/ui";
-import { HStack } from "@project-bd-client/ui";
-import { VStack } from "@project-bd-client/ui";
-import { useDisclosure } from "@project-bd-client/ui";
+import { Button,Card,CardBody,useToast,Description,Title,Field,FieldError,FieldLabel,TextInput,HStack,VStack,useDisclosure } from "@project-bd-client/ui";
 import { updateProfile } from "./myPageProfile.action";
 import { Schema, schema } from "./myPageProfile.schema";
 

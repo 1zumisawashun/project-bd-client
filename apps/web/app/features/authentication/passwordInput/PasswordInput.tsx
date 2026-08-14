@@ -3,8 +3,7 @@
 import { Lens } from "@hookform/lenses";
 import { FC } from "react";
 import { useController } from "react-hook-form";
-import { Field, FieldError, FieldLabel } from "@project-bd-client/ui";
-import { TextInput } from "@project-bd-client/ui";
+import { Field, FieldError, FieldLabel,TextInput } from "@project-bd-client/ui";
 
 type PasswordInputProps = {
   lens: Lens<{ password: string }>;

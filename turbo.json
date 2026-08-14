@@ -20,7 +20,8 @@
       "cache": false
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"]
+      "dependsOn": ["^typecheck"],
+      "cache": false
     },
     "test": {
       "dependsOn": ["^build"]

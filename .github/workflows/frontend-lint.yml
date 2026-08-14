@@ -4,51 +4,53 @@ on:
   pull_request:
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout repository
-        uses: actions/checkout@v4
-      - name: setup node.js
-        uses: actions/setup-node@v3
-      - name: npm ci
-        run: npm ci
-
   lint:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
+      - name: setup pnpm
+        uses: pnpm/action-setup@v4
       - name: setup node.js
-        uses: actions/setup-node@v3
-      - name: npm ci
-        run: npm ci
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: install dependencies
+        run: pnpm install --frozen-lockfile
       - name: lint
-        run: npm run lint
+        run: pnpm lint
 
   format:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
+      - name: setup pnpm
+        uses: pnpm/action-setup@v4
       - name: setup node.js
-        uses: actions/setup-node@v3
-      - name: npm ci
-        run: npm ci
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: install dependencies
+        run: pnpm install --frozen-lockfile
       - name: format
-        run: npm run format
+        run: pnpm format
 
   typecheck:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
+      - name: setup pnpm
+        uses: pnpm/action-setup@v4
       - name: setup node.js
-        uses: actions/setup-node@v3
-      - name: npm ci
-        run: npm ci
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: install dependencies
+        run: pnpm install --frozen-lockfile
       - name: typecheck
-        run: npm run typecheck
+        run: pnpm typecheck

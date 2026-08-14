@@ -1,6 +1,6 @@
 packages:
-  - 'apps/*'
-  - 'packages/*'
+  - "apps/*"
+  - "packages/*"
 
 overrides:
   "@base-ui/react": "1.0.0"
@@ -12,6 +12,8 @@ onlyBuiltDependencies:
   - lefthook
   - sharp
   - unrs-resolver
+
+minimumReleaseAge: false
 
 allowBuilds:
   better-sqlite3: true

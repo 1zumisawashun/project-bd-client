@@ -1,6 +1,6 @@
 import { ChangeEvent, ComponentProps, ElementRef, forwardRef, useRef } from "react";
 import { Menu, MenuContent, MenuItem } from "@/components/archive/Menu";
-import { useMergeRef,TextInput } from "@project-bd-client/ui";
+import { useMergeRef, TextInput } from "@project-bd-client/ui";
 import { useAutocompleteInput } from "../hooks/useAutocompleteInput";
 
 type Ref = ElementRef<"input">;

@@ -4,7 +4,7 @@ import { useLens } from "@hookform/lenses";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Footer,StickyWrapper } from "@project-bd-client/ui";
+import { Footer, StickyWrapper } from "@project-bd-client/ui";
 import styles from "@/components/SiteWrapper/index.module.css";
 import { ArticleCategory } from "../shared/article.types";
 import { ArticleForm } from "../shared/articleForm/ArticleForm";

@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, ReactNode } from "react";
-import { AnchorButton,Button,KebabMenu,Status,useDisclosure } from "@project-bd-client/ui";
+import { AnchorButton, Button, KebabMenu, Status, useDisclosure } from "@project-bd-client/ui";
 import { Article } from "../../../../shared/article.types";
 import { BaseArticleDetail } from "../baseArticleDetail/BaseArticleDetail";
 import { DeleteDialog } from "../deleteDialog/DeleteDialog";

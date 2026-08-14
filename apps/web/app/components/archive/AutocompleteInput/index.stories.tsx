@@ -3,7 +3,7 @@ import { type Meta, type StoryObj } from "@storybook/react";
 import { FC } from "react";
 import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form";
 import * as z from "zod";
-import { Label,Field,FieldError,FieldLabel,HStack,VStack } from "@project-bd-client/ui";
+import { Label, Field, FieldError, FieldLabel, HStack, VStack } from "@project-bd-client/ui";
 import { AutocompleteInput, AutocompleteInputControl, AutocompleteInputGroup } from ".";
 
 const options = ["React", "Ruby on Rails", "JavaScript", "TypeScript", "Go", "HTML", "CSS"];

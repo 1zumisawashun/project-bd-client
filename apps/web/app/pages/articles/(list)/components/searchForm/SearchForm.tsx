@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { FC, useOptimistic } from "react";
 import { AutocompleteInputGroup } from "@/components/archive/AutocompleteInput";
-import { Label,Field,HStack } from "@project-bd-client/ui";
+import { Label, Field, HStack } from "@project-bd-client/ui";
 
 type SearchFormProps = {
   categoryOptions: string[];

@@ -3,7 +3,19 @@
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
-import { Button,Card,CardBody,Dialog,DialogDescription,DialogTitle,Description,Title,HStack,VStack,useDisclosure } from "@project-bd-client/ui";
+import {
+  Button,
+  Card,
+  CardBody,
+  Dialog,
+  DialogDescription,
+  DialogTitle,
+  Description,
+  Title,
+  HStack,
+  VStack,
+  useDisclosure,
+} from "@project-bd-client/ui";
 
 type LogoutDialogProps = {
   isOpen: boolean;

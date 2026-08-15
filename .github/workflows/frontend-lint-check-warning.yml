@@ -9,15 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      - name: setup pnpm
+        uses: pnpm/action-setup@v4
       - name: setup Node.js
-        uses: actions/setup-node@v3
-      - name: npm ci
-        run: npm ci
-      - name: npm run lint
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "pnpm"
+      - name: install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: pnpm lint
         id: lint
         run: |
-          result=$(npm run lint)
+          result=$(pnpm lint)
           echo "result<<EOF" >> $GITHUB_OUTPUT
           echo "$result" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -29,7 +34,7 @@ jobs:
         if: steps.lint.outputs.result != '0'
         uses: slackapi/slack-github-action@v1.27.1
         with:
-          channel-id: 'C07UDB7HK3Q'
+          channel-id: "C07UDB7HK3Q"
           payload: |
             {
               "text": "lintでWarningが出ています。修正をお願いします！\n${{ github.event.pull_request.html_url }}"
@@ -40,11 +45,10 @@ jobs:
         if: steps.lint.outputs.result != '0'
         uses: slackapi/slack-github-action@v1.27.1
         with:
-          channel-id: 'C07UDB7HK3Q'
-          # https://github.com/slackapi/slack-github-action/issues/116
+          channel-id: "C07UDB7HK3Q"
           payload: |
             {
-              "thread_ts": "${{ steps.slack.outputs.ts }}", 
+              "thread_ts": "${{ steps.slack.outputs.ts }}",
               "text": ${{ toJSON(steps.lint.outputs.result) }}
             }
         env:

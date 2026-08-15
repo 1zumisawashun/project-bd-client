@@ -2,7 +2,7 @@
 name: retrospective
 description: 隔週1on1用の振り返りレポートを生成する。PR活動・Claude Code利用状況・課題/発見を統合し、Obsidianに保存する。
 user-invocable: true
-argument-hint: '[week-number e.g. 2026-W11]'
+argument-hint: "[week-number e.g. 2026-W11]"
 ---
 
 # Retrospective Report Generator

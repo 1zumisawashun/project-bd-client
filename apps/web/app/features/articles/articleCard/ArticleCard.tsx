@@ -1,0 +1,31 @@
+import clsx from "clsx";
+import { FC } from "react";
+import { formatDateToJapaneseDate } from "@/functions/helpers/dateFormatter";
+import styles from "./articleCard.module.css";
+
+const BLOCK_NAME = "articleCard";
+
+type ArticleCardProps = {
+  article: {
+    title: string;
+    createdAt: Date;
+    content: string;
+    author: {
+      name: string | null;
+    };
+  };
+};
+
+export const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
+  const { title, createdAt } = article;
+
+  return (
+    <div className={styles[`${BLOCK_NAME}`]}>
+      <h2 className={clsx("_line-clamp-3", styles[`${BLOCK_NAME}-title`])}>{title}</h2>
+      <div className={clsx("_line-clamp-1", styles[`${BLOCK_NAME}-content`])}>
+        <p>{article.author?.name}</p>
+        <p>{formatDateToJapaneseDate(new Date(createdAt))}</p>
+      </div>
+    </div>
+  );
+};

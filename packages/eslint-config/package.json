@@ -1,0 +1,30 @@
+{
+  "name": "@project-bd-client/eslint-config",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./configs/*": "./src/configs/*.ts"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^15.1.3",
+    "@types/eslint": "^9.6.1",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
+    "@typescript-eslint/rule-tester": "^8.18.2",
+    "@typescript-eslint/utils": "^8.18.2",
+    "eslint": "^9.26.0",
+    "eslint-config-next": "^15.1.3",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-oxlint": "^1.24.0",
+    "eslint-plugin-react": "^7.37.3",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-storybook": "^0.11.1",
+    "eslint-plugin-testing-library": "^7.1.1",
+    "typescript": "^5",
+    "typescript-eslint": "^8.18.2"
+  }
+}

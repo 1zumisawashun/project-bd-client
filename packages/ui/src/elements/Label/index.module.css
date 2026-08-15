@@ -1,0 +1,32 @@
+.label {
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  &[data-theme="primary"] {
+    background-color: var(--indigo-3);
+    color: var(--indigo-12);
+  }
+  &[data-theme="danger"] {
+    background-color: var(--red-3);
+    color: var(--red-10);
+  }
+  &[data-theme="success"] {
+    background-color: var(--green-3);
+    color: var(--green-9);
+  }
+}
+
+/* 詳細度をあげてスタイルを上書きする */
+.label-button.label-button {
+  padding: 0.2rem;
+}
+
+.label-icon {
+  width: 0.4rem;
+  height: 0.4rem;
+}

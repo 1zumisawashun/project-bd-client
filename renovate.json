@@ -3,5 +3,19 @@
   "extends": ["config:recommended"],
   "timezone": "Asia/Tokyo",
   "schedule": ["every weekend"],
-  "prConcurrentLimit": 10
+  "prConcurrentLimit": 10,
+  "minimumReleaseAge": "3 days",
+  "postUpdateOptions": ["pnpmDedupe"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      "matchPackageNames": ["eslint", "eslint-*", "@typescript-eslint/*", "typescript-eslint"],
+      "groupName": "eslint"
+    }
+  ]
 }

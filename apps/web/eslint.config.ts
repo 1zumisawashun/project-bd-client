@@ -1,12 +1,12 @@
+import pluginCustomRules from "@project-bd-client/eslint-config";
+import eslint from "@project-bd-client/eslint-config/configs/eslint";
+import next from "@project-bd-client/eslint-config/configs/next";
+import prettier from "@project-bd-client/eslint-config/configs/prettier";
+import react from "@project-bd-client/eslint-config/configs/react";
+import storybook from "@project-bd-client/eslint-config/configs/storybook";
+import testingLibrary from "@project-bd-client/eslint-config/configs/testing-library";
+import typescript from "@project-bd-client/eslint-config/configs/typescript";
 import oxlint from "eslint-plugin-oxlint";
-import pluginCustomRules from "./app/functions/libs/eslint";
-import eslint from "./app/functions/libs/eslint/configs/eslint";
-import next from "./app/functions/libs/eslint/configs/next";
-import prettier from "./app/functions/libs/eslint/configs/prettier";
-import react from "./app/functions/libs/eslint/configs/react";
-import storybook from "./app/functions/libs/eslint/configs/storybook";
-import testingLibrary from "./app/functions/libs/eslint/configs/testing-library";
-import typescript from "./app/functions/libs/eslint/configs/typescript";
 
 const typescriptReactConfig = [...eslint, ...typescript, ...react, ...next];
 
@@ -39,7 +39,6 @@ export default [
       "**/tsconfig.json",
       "**/.storybook/",
       "**/jest.setup.ts",
-      "app/functions/libs/eslint/configs/**/*.ts",
       "next.config.mjs",
       "eslint.config.ts",
     ],

@@ -30,8 +30,8 @@ importers:
         specifier: ^0.5.0
         version: 0.5.5
       '@hookform/lenses':
-        specifier: ^0.9.0
-        version: 0.9.1(react-hook-form@7.85.0(react@18.3.1))(react@18.3.1)
+        specifier: ^0.10.0
+        version: 0.10.0(react-hook-form@7.85.0(react@18.3.1))(react@18.3.1)
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.10.0(react-hook-form@7.85.0(react@18.3.1))
@@ -364,8 +364,8 @@ importers:
         specifier: 1.0.0
         version: 1.0.0(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@hookform/lenses':
-        specifier: ^0.9.0
-        version: 0.9.1(react-hook-form@7.85.0(react@18.3.1))(react@18.3.1)
+        specifier: ^0.9.0 || ^0.10.0
+        version: 0.10.0(react-hook-form@7.85.0(react@18.3.1))(react@18.3.1)
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.10.0(react-hook-form@7.85.0(react@18.3.1))
@@ -1661,8 +1661,8 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
-  '@hookform/lenses@0.9.1':
-    resolution: {integrity: sha512-z11M3b56roLf3IRaqWrhBddbxW4eeMpfop1JF4fNTsHL4LdexREgClwWjI60mDRJUDia96/UcAHkhTKe1K0n4A==}
+  '@hookform/lenses@0.10.0':
+    resolution: {integrity: sha512-7kctnV90o5kioghu9Lzae/x37kB+7cmLpblJmxNd1zsgSVDAqJAG7YOfhzZtDwGViq7Cf218XvNthK8c3xYPjQ==}
     engines: {bun: '>=1.2'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
@@ -8111,7 +8111,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@hookform/lenses@0.9.1(react-hook-form@7.85.0(react@18.3.1))(react@18.3.1)':
+  '@hookform/lenses@0.10.0(react-hook-form@7.85.0(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-hook-form: 7.85.0(react@18.3.1)

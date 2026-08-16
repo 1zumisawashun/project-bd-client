@@ -34,7 +34,7 @@
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.1",
     "@base-ui/react": "1.7.0",
-    "@electric-sql/pglite": "^0.3.14",
+    "@electric-sql/pglite": "^0.5.0",
     "@hookform/lenses": "^0.9.0",
     "@hookform/resolvers": "^3.9.0",
     "@project-bd-client/ui": "workspace:*",

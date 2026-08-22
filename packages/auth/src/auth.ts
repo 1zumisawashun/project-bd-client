@@ -2,7 +2,13 @@ import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { compare } from "bcryptjs";
 import { eq } from "drizzle-orm";
 import db from "@project-bd-client/db";
-import { accounts, authenticators, sessions, users, verificationTokens } from "@project-bd-client/db/schema";
+import {
+  accounts,
+  authenticators,
+  sessions,
+  users,
+  verificationTokens,
+} from "@project-bd-client/db/schema";
 import NextAuth, { NextAuthConfig } from "next-auth";
 import authConfig from "./auth.config";
 

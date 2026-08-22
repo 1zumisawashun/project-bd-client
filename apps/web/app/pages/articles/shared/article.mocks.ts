@@ -1,7 +1,4 @@
-import {
-  MOCK_ARTICLE_DRAFT,
-  MOCK_ARTICLE_PUBLISH,
-} from "@project-bd-client/db/constants/articles";
+import { MOCK_ARTICLE_DRAFT, MOCK_ARTICLE_PUBLISH } from "@project-bd-client/db/constants/articles";
 import { MOCK_CATEGORIES } from "@project-bd-client/db/constants/categories";
 import { MOCK_USERS } from "@project-bd-client/db/constants/users";
 import { Article, ArticleCategory } from "./article.types";

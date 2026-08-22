@@ -17,7 +17,7 @@ GitHub issue の「why」を、調査とgrillingインタビューによって�
 > 由来: [mattpocock/skills](https://github.com/mattpocock/skills) の `grill-me` / `grilling`
 > （MIT License, Copyright (c) 2026 Matt Pocock）を、GitHub issueの調査・書き戻しに合わせて
 > 手を加えたもの。実際のインタビュー技法そのものは `gh skill install mattpocock/skills
-> skills/productivity/grilling --agent claude-code --scope user` でグローバルに導入した
+skills/productivity/grilling --agent claude-code --scope user` でグローバルに導入した
 > `grilling` skill（`~/.claude/skills/grilling/SKILL.md`）を呼び出して使う。`gh skill update`
 > でMatt側の更新に追従できる。
 
@@ -99,10 +99,12 @@ issue本文の下書きに進む。
 ## タスク
 
 ### <フェーズ/グループ1の名前>
+
 - [ ] 具体的で、単独で実装可能なタスク
 - [ ] ...
 
 ### <フェーズ/グループ2の名前>
+
 - [ ] ...
 
 ## 未決定（別issueで検討）

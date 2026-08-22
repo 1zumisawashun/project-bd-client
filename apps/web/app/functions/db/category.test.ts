@@ -1,24 +1,25 @@
 import db from "@project-bd-client/db";
 import { categories } from "@project-bd-client/db/schema";
+import { beforeEach, describe, expect, it, vi, type Mock } from "vitest";
 import { getCategories } from "./category";
 
 // Mock the database
-jest.mock("@project-bd-client/db", () => ({
+vi.mock("@project-bd-client/db", () => ({
   __esModule: true,
   default: {
-    select: jest.fn(),
+    select: vi.fn(),
     query: {
       categories: {
-        findFirst: jest.fn(),
+        findFirst: vi.fn(),
       },
     },
-    insert: jest.fn(),
+    insert: vi.fn(),
   },
 }));
 
 describe("getCategories", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("should return all categories with id, name, and createdAt", async () => {
@@ -27,11 +28,11 @@ describe("getCategories", () => {
       { id: "2", name: "Design", createdAt: new Date("2026-02-02") },
     ];
 
-    const mockFrom = jest.fn().mockReturnValue({
-      orderBy: jest.fn().mockResolvedValue(mockCategories),
+    const mockFrom = vi.fn().mockReturnValue({
+      orderBy: vi.fn().mockResolvedValue(mockCategories),
     });
-    const mockSelect = jest.fn().mockReturnValue({ from: mockFrom });
-    (db.select as jest.Mock).mockImplementation(mockSelect);
+    const mockSelect = vi.fn().mockReturnValue({ from: mockFrom });
+    (db.select as Mock).mockImplementation(mockSelect);
 
     const result = await getCategories();
 
@@ -50,10 +51,10 @@ describe("getCategories", () => {
       { id: "2", name: "Design", createdAt: new Date("2026-02-02") },
     ];
 
-    const mockOrderBy = jest.fn().mockResolvedValue(mockCategories);
-    const mockFrom = jest.fn().mockReturnValue({ orderBy: mockOrderBy });
-    const mockSelect = jest.fn().mockReturnValue({ from: mockFrom });
-    (db.select as jest.Mock).mockImplementation(mockSelect);
+    const mockOrderBy = vi.fn().mockResolvedValue(mockCategories);
+    const mockFrom = vi.fn().mockReturnValue({ orderBy: mockOrderBy });
+    const mockSelect = vi.fn().mockReturnValue({ from: mockFrom });
+    (db.select as Mock).mockImplementation(mockSelect);
 
     await getCategories();
 
@@ -61,10 +62,10 @@ describe("getCategories", () => {
   });
 
   it("should return null when no categories exist", async () => {
-    const mockOrderBy = jest.fn().mockResolvedValue([]);
-    const mockFrom = jest.fn().mockReturnValue({ orderBy: mockOrderBy });
-    const mockSelect = jest.fn().mockReturnValue({ from: mockFrom });
-    (db.select as jest.Mock).mockImplementation(mockSelect);
+    const mockOrderBy = vi.fn().mockResolvedValue([]);
+    const mockFrom = vi.fn().mockReturnValue({ orderBy: mockOrderBy });
+    const mockSelect = vi.fn().mockReturnValue({ from: mockFrom });
+    (db.select as Mock).mockImplementation(mockSelect);
 
     const result = await getCategories();
 
@@ -72,11 +73,11 @@ describe("getCategories", () => {
   });
 
   it("should throw error when database query fails", async () => {
-    const mockFrom = jest.fn().mockReturnValue({
-      orderBy: jest.fn().mockRejectedValue(new Error("DB Error")),
+    const mockFrom = vi.fn().mockReturnValue({
+      orderBy: vi.fn().mockRejectedValue(new Error("DB Error")),
     });
-    const mockSelect = jest.fn().mockReturnValue({ from: mockFrom });
-    (db.select as jest.Mock).mockImplementation(mockSelect);
+    const mockSelect = vi.fn().mockReturnValue({ from: mockFrom });
+    (db.select as Mock).mockImplementation(mockSelect);
 
     await expect(getCategories()).rejects.toThrow("Failed to get categories");
   });

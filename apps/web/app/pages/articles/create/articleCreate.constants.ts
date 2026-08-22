@@ -1,4 +1,4 @@
-import { CONTENT } from "@/functions/libs/drizzle/constants/articles";
+import { CONTENT } from "@project-bd-client/db/constants/articles";
 
 export const defaultValues = {
   title: "",

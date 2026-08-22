@@ -2,7 +2,7 @@
 
 import { deleteArticle as _deleteArticle } from "@/functions/db/article";
 import { actionResult } from "@/functions/helpers/actionResult";
-import { getSession } from "@/functions/libs/next-auth/session";
+import { getSession } from "@project-bd-client/auth/session";
 
 type DeleteArticleArgs = {
   id: string;

@@ -3,7 +3,18 @@
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { type PropsWithChildren, useEffect } from "react";
-import { MIDDLEWARE_ROUTES } from "@/functions/constants/routes";
+
+type MiddlewareRoutes = {
+  API_AUTH_PREFIX: string;
+  PUBLIC_OPTIONS: string[];
+  AUTH_OPTIONS: string[];
+  DEFAULT_LOGIN_REDIRECT: string;
+};
+
+type RouteProviderProps = PropsWithChildren<{
+  /** アプリごとのルート定義（例: apps/webの `MIDDLEWARE_ROUTES`）を呼び出し側から渡す */
+  routes: MiddlewareRoutes;
+}>;
 
 /**
  * RouteProvider - Node Runtime対応のルート保護コンポーネント
@@ -26,12 +37,13 @@ import { MIDDLEWARE_ROUTES } from "@/functions/constants/routes";
  *
  * ## 使い方
  * ```tsx
- * import { RouteProvider } from '@/functions/libs/next-auth/RouteProvider'
+ * import { RouteProvider } from '@project-bd-client/auth/RouteProvider'
+ * import { MIDDLEWARE_ROUTES } from '@/functions/constants/routes'
  *
  * export default function RootLayout({ children }) {
  *   return (
  *     <SessionProvider>
- *       <RouteProvider>
+ *       <RouteProvider routes={MIDDLEWARE_ROUTES}>
  *         {children}
  *       </RouteProvider>
  *     </SessionProvider>
@@ -39,13 +51,12 @@ import { MIDDLEWARE_ROUTES } from "@/functions/constants/routes";
  * }
  * ```
  */
-export const RouteProvider = ({ children }: PropsWithChildren) => {
+export const RouteProvider = ({ children, routes }: RouteProviderProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  const { API_AUTH_PREFIX, PUBLIC_OPTIONS, AUTH_OPTIONS, DEFAULT_LOGIN_REDIRECT } =
-    MIDDLEWARE_ROUTES;
+  const { API_AUTH_PREFIX, PUBLIC_OPTIONS, AUTH_OPTIONS, DEFAULT_LOGIN_REDIRECT } = routes;
 
   useEffect(() => {
     // セッションの読み込み中は何もしない

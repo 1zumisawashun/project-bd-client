@@ -1,12 +1,12 @@
 import { type Session } from "next-auth";
-import { type Category } from "@/functions/libs/drizzle/schema";
+import { type Category } from "@project-bd-client/db/schema";
 
 // Mock dependencies - must be before imports
 jest.mock("next/cache", () => ({
   revalidatePath: jest.fn(),
 }));
 
-jest.mock("@/functions/libs/next-auth/session", () => ({
+jest.mock("@project-bd-client/auth/session", () => ({
   getSession: jest.fn(),
 }));
 
@@ -17,7 +17,7 @@ jest.mock("@/functions/db/category", () => ({
 
 import { revalidatePath } from "next/cache";
 import { createCategory, getCategoryByName } from "@/functions/db/category";
-import { getSession } from "@/functions/libs/next-auth/session";
+import { getSession } from "@project-bd-client/auth/session";
 import { createCategoryAction } from "./categories.action";
 
 const mockRevalidatePath = revalidatePath as jest.MockedFunction<typeof revalidatePath>;

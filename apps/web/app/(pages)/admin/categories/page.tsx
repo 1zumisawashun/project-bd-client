@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { getCategories } from "@/functions/db/category";
-import { getSession } from "@/functions/libs/next-auth/session";
+import { getSession } from "@project-bd-client/auth/session";
 import { AdminCategoriesPage } from "@/pages/admin/categories/AdminCategoriesPage";
 
 export default async function Page() {

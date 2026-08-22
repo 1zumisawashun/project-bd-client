@@ -1,6 +1,6 @@
 import { NotFound } from "@project-bd-client/ui";
 import { getUserById } from "@/functions/db/user";
-import { getSession } from "@/functions/libs/next-auth/session";
+import { getSession } from "@project-bd-client/auth/session";
 import { MyPage } from "@/pages/my-page/MyPage";
 
 export default async function Page() {

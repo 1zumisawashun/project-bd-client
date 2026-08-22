@@ -1,6 +1,6 @@
 import { NotFound } from "@project-bd-client/ui";
 import { getArticleById } from "@/functions/db/article";
-import { getSession } from "@/functions/libs/next-auth/session";
+import { getSession } from "@project-bd-client/auth/session";
 import { ArticleDetail } from "@/pages/articles/[id]/(detail)/ArticleDetail";
 
 export default async function Page({ params }: { params: { id: string } }) {

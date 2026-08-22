@@ -3,8 +3,8 @@
 import { getUserByEmail } from "@/functions/db/user";
 import { actionResult } from "@/functions/helpers/actionResult";
 import { hashPassword } from "@/functions/helpers/password";
-import db from "@/functions/libs/drizzle/client";
-import { users } from "@/functions/libs/drizzle/schema";
+import db from "@project-bd-client/db";
+import { users } from "@project-bd-client/db/schema";
 import { Schema, schema } from "./signUp.schema";
 
 type SignUpProps = { data: Schema };

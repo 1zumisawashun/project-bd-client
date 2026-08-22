@@ -12,7 +12,13 @@ const prettierConfig = [...prettier];
 /** @type {import("eslint").Linter.Config[]} */
 export default [
   {
-    ignores: ["**/node_modules/", "**/.next/", "**/tsconfig.json", "next.config.mjs", "eslint.config.ts"],
+    ignores: [
+      "**/node_modules/",
+      "**/.next/",
+      "**/tsconfig.json",
+      "next.config.mjs",
+      "eslint.config.ts",
+    ],
   },
   ...typescriptReactConfig,
   ...prettierConfig,

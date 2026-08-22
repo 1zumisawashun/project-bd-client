@@ -1,0 +1,16 @@
+{
+  "extends": "@project-bd-client/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./app/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "../../packages/auth/src/next-auth.d.ts"
+  ],
+  "exclude": ["node_modules", "eslint.config.ts"]
+}

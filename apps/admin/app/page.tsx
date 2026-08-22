@@ -1,9 +1,11 @@
 import { redirect } from "next/navigation";
+import { getCategories } from "@/functions/db/category";
 import { getSession } from "@project-bd-client/auth/session";
+import { AdminCategoriesPage } from "@/pages/categories/AdminCategoriesPage";
 
 const WEB_APP_URL = process.env["WEB_APP_URL"] ?? "http://localhost:3000";
 
-export default async function AdminDashboardPage() {
+export default async function Page() {
   const session = await getSession();
 
   // 未認証ユーザーは web 側のログインページへリダイレクト
@@ -16,10 +18,8 @@ export default async function AdminDashboardPage() {
     redirect(WEB_APP_URL);
   }
 
-  return (
-    <div style={{ padding: "2rem" }}>
-      <h1>管理ダッシュボード</h1>
-      <p>{session.user.email} としてログイン中です。</p>
-    </div>
-  );
+  // カテゴリー一覧を取得
+  const categories = await getCategories();
+
+  return <AdminCategoriesPage categories={categories ?? []} />;
 }

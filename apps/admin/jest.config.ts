@@ -16,6 +16,11 @@ const config: Config = {
   },
   // Add more setup options before each test is run
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  // NOTE: vitestに移行済みのファイルはjest側では実行しない（PR2で全体が移行したらこの設定ごと消す）
+  testPathIgnorePatterns: [
+    "<rootDir>/node_modules/",
+    "<rootDir>/app/pages/categories/categoryForm.schema.test.ts",
+  ],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

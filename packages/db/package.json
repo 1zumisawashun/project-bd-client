@@ -1,0 +1,39 @@
+{
+  "name": "@project-bd-client/db",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/client.ts",
+    "./schema": "./src/schema.ts",
+    "./types": "./src/types.ts",
+    "./constants/articles": "./src/constants/articles.ts",
+    "./constants/categories": "./src/constants/categories.ts",
+    "./constants/users": "./src/constants/users.ts"
+  },
+  "scripts": {
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:reset": "pkill -f 'next dev' || true && sleep 1 && rm -f ../../sqlite.db && pnpm db:push && pnpm db:seed",
+    "db:seed": "tsx ./src/seed.ts",
+    "db:studio": "drizzle-kit studio",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.6.0",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.45.1"
+  },
+  "devDependencies": {
+    "@project-bd-client/tsconfig": "workspace:*",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^20",
+    "drizzle-kit": "^0.31.8",
+    "tsx": "^4.21.0",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "next-auth": "^5.0.0-beta.20"
+  }
+}

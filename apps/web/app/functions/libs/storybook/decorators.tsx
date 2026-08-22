@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { ToastProvider } from "@project-bd-client/ui";
-import { SessionProvider } from "@/functions/libs/next-auth/SessionProvider";
+import { SessionProvider } from "@project-bd-client/auth/SessionProvider";
 
 export const ProviderDecorator = (Story: FC) => (
   <SessionProvider>

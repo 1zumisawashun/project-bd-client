@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { AnchorButton } from "@project-bd-client/ui";
-import { getSession } from "@/functions/libs/next-auth/session";
+import { getSession } from "@project-bd-client/auth/session";
 import { HeaderNav } from "./components/HeaderNav";
 import { getFlatMenu } from "./helpers/getFlatMenu";
 import styles from "./index.module.css";

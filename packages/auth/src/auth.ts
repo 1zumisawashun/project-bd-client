@@ -1,20 +1,36 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import NextAuth, { NextAuthConfig } from "next-auth";
-import { getUserByEmail } from "@/functions/db/user";
-import { isPasswordValid } from "@/functions/helpers/password";
-import db from "@/functions/libs/drizzle/client";
+import { compare } from "bcryptjs";
+import { eq } from "drizzle-orm";
+import db from "@project-bd-client/db";
 import {
   accounts,
   authenticators,
   sessions,
   users,
   verificationTokens,
-} from "@/functions/libs/drizzle/schema";
+} from "@project-bd-client/db/schema";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import authConfig from "./auth.config";
 
 type Credentials = {
   email: string;
   password: string;
+};
+
+// NOTE: 認証時のユーザー検索・パスワード照合は、この認証パッケージ内で完結させる
+// （apps側の `functions/db/user` / `functions/helpers/password` とは別実装。
+// どちらも数行のクエリ/比較なので、db/authパッケージの境界を跨がせるより重複させる方が単純）
+const getUserByEmail = async (email: string) => {
+  try {
+    const user = await db.query.users.findFirst({ where: eq(users.email, email) });
+    return user ?? null;
+  } catch {
+    return null;
+  }
+};
+
+const isPasswordValid = async (password: string, hashedPassword: string) => {
+  return compare(password, hashedPassword);
 };
 
 /**
@@ -32,7 +48,7 @@ const callbacks = {
     if (!email) throw new Error("No email found on user");
     if (!password) throw new Error("No password found on user");
 
-    const response = await getUserByEmail({ email });
+    const response = await getUserByEmail(email);
     if (!response?.hashedPassword) throw new Error("User has no password");
 
     const passwordValid = await isPasswordValid(password, response.hashedPassword);
@@ -67,7 +83,7 @@ const callbacks = {
   async jwt({ token, user, trigger }) {
     if (trigger === "signIn" && user.email) {
       // user は signIn 時にしか存在しない
-      const response = await getUserByEmail({ email: user.email });
+      const response = await getUserByEmail(user.email);
       token.id = response?.id ?? "";
       token.role = (response?.role as "USER" | "ADMIN") ?? "USER";
     }

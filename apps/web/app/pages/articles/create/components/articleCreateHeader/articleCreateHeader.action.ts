@@ -3,9 +3,9 @@
 import { createArticle as _createArticle, getArticleById } from "@/functions/db/article";
 import { createCategory, getCategoryByName } from "@/functions/db/category";
 import { actionResult } from "@/functions/helpers/actionResult";
-import db from "@/functions/libs/drizzle/client";
-import { articlesCategories } from "@/functions/libs/drizzle/schema";
-import { getSession } from "@/functions/libs/next-auth/session";
+import db from "@project-bd-client/db";
+import { articlesCategories } from "@project-bd-client/db/schema";
+import { getSession } from "@project-bd-client/auth/session";
 import { Schema, schema } from "../../../shared/articleForm/articleForm.schema";
 
 type CreateArticleArgs = {

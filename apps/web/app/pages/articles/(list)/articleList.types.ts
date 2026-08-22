@@ -1,4 +1,4 @@
-import { InferQueryModel } from "@/functions/libs/drizzle/types";
+import { InferQueryModel } from "@project-bd-client/db/types";
 
 export type ArticleListArticle = InferQueryModel<
   "articles",

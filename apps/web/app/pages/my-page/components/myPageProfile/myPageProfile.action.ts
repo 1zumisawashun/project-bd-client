@@ -2,7 +2,7 @@
 
 import { updateUserByEmail } from "@/functions/db/user";
 import { actionResult } from "@/functions/helpers/actionResult";
-import { getSession } from "@/functions/libs/next-auth/session";
+import { getSession } from "@project-bd-client/auth/session";
 import { Schema, schema } from "./myPageProfile.schema";
 
 type UpdateProfileArgs = {

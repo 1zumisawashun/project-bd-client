@@ -1,9 +1,9 @@
-import db from "@/functions/libs/drizzle/client";
-import { categories } from "@/functions/libs/drizzle/schema";
+import db from "@project-bd-client/db";
+import { categories } from "@project-bd-client/db/schema";
 import { getCategories } from "./category";
 
 // Mock the database
-jest.mock("@/functions/libs/drizzle/client", () => ({
+jest.mock("@project-bd-client/db", () => ({
   __esModule: true,
   default: {
     select: jest.fn(),

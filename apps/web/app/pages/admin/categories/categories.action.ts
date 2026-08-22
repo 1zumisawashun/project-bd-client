@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getCategoryByName, createCategory } from "@/functions/db/category";
 import { actionResult, ActionsResult } from "@/functions/helpers/actionResult";
-import { getSession } from "@/functions/libs/next-auth/session";
+import { getSession } from "@project-bd-client/auth/session";
 
 type CategoryFormValues = {
   name: string;

@@ -2,8 +2,8 @@
 
 import { AuthError } from "next-auth";
 import { isRedirectError } from "next/dist/client/components/redirect";
-import { signIn as NextAuthSignIn } from "@/functions/libs/next-auth/auth";
-import { Schema } from "./signIn.schema";
+import { signIn as NextAuthSignIn } from "@project-bd-client/auth";
+import { Schema } from "@project-bd-client/auth/credentials-schema";
 
 type SignInProps = Partial<Schema> & {
   provider: Parameters<typeof NextAuthSignIn>[0];

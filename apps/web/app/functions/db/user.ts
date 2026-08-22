@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
-import db from "@/functions/libs/drizzle/client";
-import { users, type InsertUser } from "@/functions/libs/drizzle/schema";
+import db from "@project-bd-client/db";
+import { users, type InsertUser } from "@project-bd-client/db/schema";
 
 export const getUserByEmail = async ({ email }: { email: string }) => {
   try {

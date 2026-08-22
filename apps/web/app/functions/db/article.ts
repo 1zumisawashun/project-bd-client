@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
-import db from "@/functions/libs/drizzle/client";
-import { articles, type InsertArticle } from "@/functions/libs/drizzle/schema";
+import db from "@project-bd-client/db";
+import { articles, type InsertArticle } from "@project-bd-client/db/schema";
 
 export const getArticles = async ({ categories }: { categories: string[] }) => {
   try {

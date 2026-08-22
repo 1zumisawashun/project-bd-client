@@ -20,9 +20,6 @@ importers:
 
   apps/web:
     dependencies:
-      '@auth/drizzle-adapter':
-        specifier: ^1.11.1
-        version: 1.11.3
       '@base-ui/react':
         specifier: 1.0.0
         version: 1.0.0(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -35,6 +32,12 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.10.0(react-hook-form@7.85.0(react@18.3.1))
+      '@project-bd-client/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
+      '@project-bd-client/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@project-bd-client/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -83,9 +86,6 @@ importers:
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
-      better-sqlite3:
-        specifier: ^12.6.0
-        version: 12.11.1
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -95,9 +95,6 @@ importers:
       dompurify:
         specifier: ^3.2.2
         version: 3.4.13
-      dotenv:
-        specifier: ^17.2.3
-        version: 17.4.2
       drizzle-orm:
         specifier: ^0.45.1
         version: 0.45.2(@electric-sql/pglite@0.5.5)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
@@ -177,9 +174,6 @@ importers:
       '@types/bcryptjs':
         specifier: ^2.4.6
         version: 2.4.6
-      '@types/better-sqlite3':
-        specifier: ^7.6.13
-        version: 7.6.13
       '@types/eslint':
         specifier: ^9.6.1
         version: 9.6.1
@@ -213,9 +207,6 @@ importers:
       chromatic:
         specifier: ^11.7.1
         version: 11.29.0
-      drizzle-kit:
-        specifier: ^0.31.8
-        version: 0.31.10
       eslint:
         specifier: ^9.26.0
         version: 9.39.5(jiti@2.7.0)(supports-color@8.1.1)
@@ -285,15 +276,92 @@ importers:
       tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0
-      tsx:
-        specifier: ^4.21.0
-        version: 4.23.12
       typescript:
         specifier: ^5
         version: 5.9.3
       typescript-eslint:
         specifier: ^8.18.2
         version: 8.67.0(eslint@9.39.5(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@5.9.3)
+
+  packages/auth:
+    dependencies:
+      '@auth/drizzle-adapter':
+        specifier: ^1.11.1
+        version: 1.11.3
+      '@project-bd-client/db':
+        specifier: workspace:*
+        version: link:../db
+      bcryptjs:
+        specifier: ^2.4.3
+        version: 2.4.3
+      drizzle-orm:
+        specifier: ^0.45.1
+        version: 0.45.2(@electric-sql/pglite@0.5.5)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
+      next:
+        specifier: 14.2.35
+        version: 14.2.35(@babel/core@7.29.7(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next-auth:
+        specifier: ^5.0.0-beta.20
+        version: 5.0.0-beta.32(next@14.2.35(@babel/core@7.29.7(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+      react:
+        specifier: ^18
+        version: 18.3.1
+      validator:
+        specifier: ^13.12.0
+        version: 13.15.35
+      zod:
+        specifier: ^3.23.8
+        version: 3.25.76
+    devDependencies:
+      '@project-bd-client/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@types/bcryptjs':
+        specifier: ^2.4.6
+        version: 2.4.6
+      '@types/react':
+        specifier: ^18
+        version: 18.3.31
+      '@types/validator':
+        specifier: ^13.12.2
+        version: 13.15.10
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
+  packages/db:
+    dependencies:
+      better-sqlite3:
+        specifier: ^12.6.0
+        version: 12.11.1
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.4.2
+      drizzle-orm:
+        specifier: ^0.45.1
+        version: 0.45.2(@electric-sql/pglite@0.5.5)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
+      next-auth:
+        specifier: ^5.0.0-beta.20
+        version: 5.0.0-beta.32(next@14.2.35(@babel/core@7.29.7(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@project-bd-client/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@types/better-sqlite3':
+        specifier: ^7.6.13
+        version: 7.6.13
+      '@types/node':
+        specifier: ^20
+        version: 20.19.43
+      drizzle-kit:
+        specifier: ^0.31.8
+        version: 0.31.10
+      tsx:
+        specifier: ^4.21.0
+        version: 4.23.12
+      typescript:
+        specifier: ^5
+        version: 5.9.3
 
   packages/eslint-config:
     devDependencies:

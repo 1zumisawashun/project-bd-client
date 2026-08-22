@@ -4,7 +4,7 @@ import { type Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { PropsWithChildren } from "react";
 import { ToastProvider } from "@project-bd-client/ui";
-import { SessionProvider } from "@/functions/libs/next-auth/SessionProvider";
+import { SessionProvider } from "@project-bd-client/auth/SessionProvider";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 

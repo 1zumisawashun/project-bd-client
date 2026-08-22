@@ -1,15 +1,15 @@
 import NextAuth from "next-auth";
 import { MIDDLEWARE_ROUTES } from "@/functions/constants/routes";
-import authConfig from "@/functions/libs/next-auth/auth.config";
+import authConfig from "@project-bd-client/auth/config";
 
 /**
  * NOTE: Edge Runtime Middleware
  *
  * このファイルはEdge Runtimeで実行されるため、SQLiteなどのNode.js専用機能との互換性に問題があります。
  * Node Runtimeで同じルーティングロジックを実行したい場合は、
- * RouteProvider.tsx（app/functions/libs/next-auth/RouteProvider.tsx）を使用してください。
+ * RouteProvider.tsx（@project-bd-client/auth/RouteProvider）を使用してください。
  *
- * @see app/functions/libs/next-auth/RouteProvider.tsx - Node Runtime対応版
+ * @see packages/auth/src/RouteProvider.tsx - Node Runtime対応版
  */
 
 const { auth } = NextAuth(authConfig);

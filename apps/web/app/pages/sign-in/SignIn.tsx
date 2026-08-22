@@ -17,7 +17,7 @@ import {
 import { EmailInput } from "@/features/authentication/emailInput/EmailInput";
 import { PasswordInput } from "@/features/authentication/passwordInput/PasswordInput";
 import { signIn } from "./signIn.action";
-import { schema, Schema } from "./signIn.schema";
+import { schema, Schema } from "@project-bd-client/auth/credentials-schema";
 
 export const SignIn: FC = () => {
   const dialog = useDisclosure();

@@ -2,7 +2,7 @@
 
 import { updateArticle } from "@/functions/db/article";
 import { actionResult } from "@/functions/helpers/actionResult";
-import { getSession } from "@/functions/libs/next-auth/session";
+import { getSession } from "@project-bd-client/auth/session";
 
 type DraftArticleArgs = {
   id: string;

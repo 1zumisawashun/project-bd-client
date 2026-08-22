@@ -2,9 +2,9 @@
 
 import { getArticleById } from "@/functions/db/article";
 import { actionResult } from "@/functions/helpers/actionResult";
-import db from "@/functions/libs/drizzle/client";
-import { likedArticles } from "@/functions/libs/drizzle/schema";
-import { getSession } from "@/functions/libs/next-auth/session";
+import db from "@project-bd-client/db";
+import { likedArticles } from "@project-bd-client/db/schema";
+import { getSession } from "@project-bd-client/auth/session";
 
 type LikeArticleArgs = {
   articleId: string;

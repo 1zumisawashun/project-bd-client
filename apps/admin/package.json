@@ -20,7 +20,7 @@
     "typecheck": "npx tsc --noEmit"
   },
   "dependencies": {
-    "@base-ui/react": "1.7.0",
+    "@base-ui/react": "1.8.0",
     "@hookform/resolvers": "^3.9.0",
     "@project-bd-client/auth": "workspace:*",
     "@project-bd-client/db": "workspace:*",

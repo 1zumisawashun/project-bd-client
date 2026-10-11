@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@project-bd-client/ui", "@project-bd-client/db", "@project-bd-client/auth"],
+  transpilePackages: ["@project-bd-client/db", "@project-bd-client/auth"],
   // NOTE: apps/web/next.config.mjs と同じ理由（@project-bd-client/db がtranspilePackages対象になり、
   // その依存のbetter-sqlite3までwebpackがバンドルしようとしてしまう）でexternal化している
   webpack: (config, { isServer }) => {

@@ -1,24 +1,20 @@
-"use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Button, Field, FieldLabel, TextInput } from "@project-bd-client/ui";
-import { createCategoryAction } from "../categories.action";
-import { categoryFormSchema, CategoryFormValues } from "../categoryForm.schema";
+import { createCategory } from "../categories.api";
+import { categoryFormSchema, type CategoryFormValues } from "../categoryForm.schema";
 
 type CategoryFormProps = {
   onSuccess?: () => void;
 };
 
 export function CategoryForm({ onSuccess }: CategoryFormProps) {
-  const [serverError, setServerError] = useState<string | null>(null);
-
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<CategoryFormValues>({
     resolver: zodResolver(categoryFormSchema),
     defaultValues: {
@@ -26,18 +22,16 @@ export function CategoryForm({ onSuccess }: CategoryFormProps) {
     },
   });
 
-  const onSubmit = async (data: CategoryFormValues) => {
-    setServerError(null);
+  const mutation = useMutation({
+    mutationFn: createCategory,
+    onSuccess: () => {
+      reset();
+      onSuccess?.();
+    },
+  });
 
-    const result = await createCategoryAction(data);
-
-    if (!result.isSuccess) {
-      setServerError(result.error.message);
-      return;
-    }
-
-    reset();
-    onSuccess?.();
+  const onSubmit = (data: CategoryFormValues) => {
+    mutation.mutate(data);
   };
 
   return (
@@ -49,11 +43,13 @@ export function CategoryForm({ onSuccess }: CategoryFormProps) {
         {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
       </Field>
 
-      {serverError && <p className="text-red-500 text-sm mt-2">{serverError}</p>}
+      {mutation.isError && (
+        <p className="text-red-500 text-sm mt-2">{mutation.error.message}</p>
+      )}
 
       <div className="mt-4">
-        <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "作成中..." : "作成"}
+        <Button type="submit" disabled={mutation.isPending}>
+          {mutation.isPending ? "作成中..." : "作成"}
         </Button>
       </div>
     </form>

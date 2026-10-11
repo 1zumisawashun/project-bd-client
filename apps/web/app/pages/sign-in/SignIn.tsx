@@ -4,16 +4,8 @@ import { useLens } from "@hookform/lenses";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC, startTransition, useState } from "react";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
-import {
-  Button,
-  Card,
-  CardBody,
-  Link,
-  SimpleDialog,
-  HStack,
-  VStack,
-  useDisclosure,
-} from "@project-bd-client/ui";
+import { Button, Card, CardBody, SimpleDialog, HStack, VStack, useDisclosure } from "@project-bd-client/ui";
+import { Link } from "@project-bd-client/ui/next";
 import { EmailInput } from "@/features/authentication/emailInput/EmailInput";
 import { PasswordInput } from "@/features/authentication/passwordInput/PasswordInput";
 import { signIn } from "./signIn.action";

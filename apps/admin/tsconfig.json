@@ -1,16 +1,18 @@
 {
-  "extends": "@project-bd-client/tsconfig/nextjs.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@project-bd-client/tsconfig/base.json",
   "compilerOptions": {
+    "types": ["vite/client"],
     "paths": {
-      "@/*": ["./app/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "../../packages/auth/src/next-auth.d.ts"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "vitest.setup.ts"
   ],
-  "exclude": ["node_modules", "eslint.config.ts"]
+  "exclude": ["node_modules", "dist"]
 }

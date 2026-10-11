@@ -1,32 +1,38 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { type ReactNode } from "react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { ApiError } from "@/lib/apiError";
 import { CategoryForm } from "./CategoryForm";
 
-// Mock the server action
-jest.mock("../categories.action", () => ({
-  createCategoryAction: jest.fn(),
+vi.mock("../categories.api", () => ({
+  createCategory: vi.fn(),
 }));
 
-import { createCategoryAction } from "../categories.action";
+import { createCategory } from "../categories.api";
 
-const mockCreateCategoryAction = createCategoryAction as jest.MockedFunction<
-  typeof createCategoryAction
->;
+const mockCreateCategory = vi.mocked(createCategory);
+
+function renderWithQueryClient(ui: ReactNode) {
+  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  return render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
+}
 
 describe("CategoryForm", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe("rendering", () => {
     it("should render category name input field", () => {
-      render(<CategoryForm />);
+      renderWithQueryClient(<CategoryForm />);
 
       expect(screen.getByLabelText("カテゴリー名", { exact: false })).toBeInTheDocument();
     });
 
     it("should render submit button", () => {
-      render(<CategoryForm />);
+      renderWithQueryClient(<CategoryForm />);
 
       expect(screen.getByRole("button", { name: "作成" })).toBeInTheDocument();
     });
@@ -35,9 +41,8 @@ describe("CategoryForm", () => {
   describe("validation", () => {
     it("should show error when submitting empty name", async () => {
       const user = userEvent.setup();
-      render(<CategoryForm />);
+      renderWithQueryClient(<CategoryForm />);
 
-      // Focus and blur to trigger validation
       const input = screen.getByLabelText("カテゴリー名", { exact: false });
       await user.clear(input);
       await user.click(screen.getByRole("button", { name: "作成" }));
@@ -46,50 +51,38 @@ describe("CategoryForm", () => {
         expect(screen.getByText("カテゴリー名は必須です")).toBeInTheDocument();
       });
 
-      // Server action should not be called for invalid form
-      expect(mockCreateCategoryAction).not.toHaveBeenCalled();
+      expect(mockCreateCategory).not.toHaveBeenCalled();
     });
   });
 
   describe("submission", () => {
-    it("should call createCategoryAction with form values", async () => {
-      mockCreateCategoryAction.mockResolvedValue({
-        isSuccess: true,
-        data: { id: "1", name: "New Category" },
-        message: "成功しました",
-      });
+    it("should call createCategory with form values", async () => {
+      mockCreateCategory.mockResolvedValue({ id: "1", name: "New Category" });
 
       const user = userEvent.setup();
-      render(<CategoryForm />);
+      renderWithQueryClient(<CategoryForm />);
 
       await user.type(screen.getByLabelText("カテゴリー名", { exact: false }), "New Category");
       await user.click(screen.getByRole("button", { name: "作成" }));
 
       await waitFor(() => {
-        expect(mockCreateCategoryAction).toHaveBeenCalledWith({
-          name: "New Category",
-        });
+        expect(mockCreateCategory).toHaveBeenCalledWith(
+          { name: "New Category" },
+          expect.anything(),
+        );
       });
     });
 
     it("should disable submit button while submitting", async () => {
-      mockCreateCategoryAction.mockImplementation(
+      mockCreateCategory.mockImplementation(
         () =>
           new Promise((resolve) =>
-            setTimeout(
-              () =>
-                resolve({
-                  isSuccess: true,
-                  data: { id: "1", name: "Test" },
-                  message: "成功しました",
-                }),
-              100,
-            ),
+            setTimeout(() => resolve({ id: "1", name: "Test" }), 100),
           ),
       );
 
       const user = userEvent.setup();
-      render(<CategoryForm />);
+      renderWithQueryClient(<CategoryForm />);
 
       await user.type(screen.getByLabelText("カテゴリー名", { exact: false }), "Test");
       await user.click(screen.getByRole("button", { name: "作成" }));
@@ -98,15 +91,11 @@ describe("CategoryForm", () => {
     });
 
     it("should call onSuccess callback after successful submission", async () => {
-      mockCreateCategoryAction.mockResolvedValue({
-        isSuccess: true,
-        data: { id: "1", name: "New Category" },
-        message: "成功しました",
-      });
+      mockCreateCategory.mockResolvedValue({ id: "1", name: "New Category" });
 
-      const onSuccess = jest.fn();
+      const onSuccess = vi.fn();
       const user = userEvent.setup();
-      render(<CategoryForm onSuccess={onSuccess} />);
+      renderWithQueryClient(<CategoryForm onSuccess={onSuccess} />);
 
       await user.type(screen.getByLabelText("カテゴリー名", { exact: false }), "New Category");
       await user.click(screen.getByRole("button", { name: "作成" }));
@@ -117,14 +106,10 @@ describe("CategoryForm", () => {
     });
 
     it("should show error message when submission fails", async () => {
-      mockCreateCategoryAction.mockResolvedValue({
-        isSuccess: false,
-        data: null,
-        error: { message: "このカテゴリー名は既に存在します" },
-      });
+      mockCreateCategory.mockRejectedValue(new ApiError(409, "このカテゴリー名は既に存在します"));
 
       const user = userEvent.setup();
-      render(<CategoryForm />);
+      renderWithQueryClient(<CategoryForm />);
 
       await user.type(screen.getByLabelText("カテゴリー名", { exact: false }), "Existing");
       await user.click(screen.getByRole("button", { name: "作成" }));

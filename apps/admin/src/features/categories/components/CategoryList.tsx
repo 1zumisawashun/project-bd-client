@@ -1,8 +1,4 @@
-type Category = {
-  id: string;
-  name: string;
-  createdAt: Date;
-};
+import { type Category } from "../categories.api";
 
 type CategoryListProps = {
   categories: Category[];
@@ -19,7 +15,7 @@ export function CategoryList({ categories }: CategoryListProps) {
         <li key={category.id} className="flex justify-between items-center p-3 border rounded">
           <span className="font-medium">{category.name}</span>
           <span className="text-sm text-gray-500">
-            {category.createdAt.toLocaleDateString("ja-JP")}
+            {new Date(category.createdAt).toLocaleDateString("ja-JP")}
           </span>
         </li>
       ))}

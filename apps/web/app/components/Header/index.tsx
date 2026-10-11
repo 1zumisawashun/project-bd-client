@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { AnchorButton } from "@project-bd-client/ui";
+import { AnchorButton } from "@project-bd-client/ui/next";
 import { getSession } from "@project-bd-client/auth/session";
 import { HeaderNav } from "./components/HeaderNav";
 import { getFlatMenu } from "./helpers/getFlatMenu";

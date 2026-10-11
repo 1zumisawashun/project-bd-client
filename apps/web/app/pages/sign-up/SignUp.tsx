@@ -9,13 +9,13 @@ import {
   Button,
   Card,
   CardBody,
-  Link,
   Nl2br,
   SimpleDialog,
   HStack,
   VStack,
   useDisclosure,
 } from "@project-bd-client/ui";
+import { Link } from "@project-bd-client/ui/next";
 import { EmailInput } from "@/features/authentication/emailInput/EmailInput";
 import { PasswordInput } from "@/features/authentication/passwordInput/PasswordInput";
 import { TOS } from "../tos/tos.constants";

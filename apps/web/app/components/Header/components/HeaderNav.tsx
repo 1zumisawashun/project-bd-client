@@ -1,6 +1,7 @@
 "use client";
 
-import { AnchorButton, HamburgerMenu, VStack } from "@project-bd-client/ui";
+import { HamburgerMenu, VStack } from "@project-bd-client/ui";
+import { AnchorButton } from "@project-bd-client/ui/next";
 import styles from "../index.module.css";
 
 type Route = { label: string; href: string };

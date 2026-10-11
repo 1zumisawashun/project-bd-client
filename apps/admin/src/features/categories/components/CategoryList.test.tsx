@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import { CategoryList } from "./CategoryList";
 
 describe("CategoryList", () => {
@@ -6,12 +7,12 @@ describe("CategoryList", () => {
     {
       id: "1",
       name: "Technology",
-      createdAt: new Date("2026-02-03T10:00:00"),
+      createdAt: "2026-02-03T10:00:00.000Z",
     },
     {
       id: "2",
       name: "Design",
-      createdAt: new Date("2026-02-02T10:00:00"),
+      createdAt: "2026-02-02T10:00:00.000Z",
     },
   ];
 

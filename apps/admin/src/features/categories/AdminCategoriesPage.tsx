@@ -1,24 +1,16 @@
-"use client";
-
-import { useRouter } from "next/navigation";
+import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { categoriesQueryOptions } from "./categories.queries";
 import { CategoryForm } from "./components/CategoryForm";
 import { CategoryList } from "./components/CategoryList";
 
-type Category = {
-  id: string;
-  name: string;
-  createdAt: Date;
-};
-
-type AdminCategoriesPageProps = {
-  categories: Category[];
-};
-
-export function AdminCategoriesPage({ categories }: AdminCategoriesPageProps) {
-  const router = useRouter();
+export function AdminCategoriesPage() {
+  const queryClient = useQueryClient();
+  // NOTE: ルートの loader（src/routes/index.tsx）が ensureQueryData 済みなので
+  // ここでは suspense query としてキャッシュから同期的に読む
+  const { data: categories } = useSuspenseQuery(categoriesQueryOptions());
 
   const handleSuccess = () => {
-    router.refresh();
+    void queryClient.invalidateQueries({ queryKey: categoriesQueryOptions().queryKey });
   };
 
   return (

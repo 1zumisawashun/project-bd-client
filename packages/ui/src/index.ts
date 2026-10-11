@@ -1,5 +1,10 @@
 "use client";
 
+// NOTE: next/link に依存するコンポーネント（AnchorButton, IconAnchorButton, Link）は
+// `./next`（index.next.ts）側に分離している。ここ（メインエントリーポイント）は
+// Next.jsに依存せず、Vite等の非Next.js環境からも安全にimportできる状態を保つ。
+// @see packages/ui/package.json の exports
+
 // types
 export * from "./types";
 
@@ -14,9 +19,7 @@ export * from "./hooks/useOuterClick";
 
 // buttons
 export * from "./buttons/Button";
-export * from "./buttons/AnchorButton";
 export * from "./buttons/IconButton";
-export * from "./buttons/IconAnchorButton";
 
 // layouts
 export * from "./layouts/HStack";
@@ -38,7 +41,6 @@ export * from "./elements/HamburgerMenu";
 export * from "./elements/Icon";
 export * from "./elements/KebabMenu";
 export * from "./elements/Label";
-export * from "./elements/Link";
 export * from "./elements/LoadingDot";
 export * from "./elements/LoadingSpinner";
 export * from "./elements/Menu";

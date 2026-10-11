@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./next": "./src/index.next.ts"
   },
   "devDependencies": {
     "@project-bd-client/tsconfig": "workspace:*",
@@ -37,5 +38,10 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.2"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
   }
 }

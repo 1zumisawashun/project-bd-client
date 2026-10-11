@@ -9,21 +9,18 @@
   },
   "ignorePatterns": [
     "**/node_modules/",
-    "**/.next/",
+    "**/dist/",
     "**/public/",
     "**/package-lock.json",
     "**/tsconfig.json",
-    "**/.storybook/",
-    "**/jest.setup.ts",
-    "app/functions/libs/eslint/configs/**/*.ts",
-    "next.config.mjs",
+    "src/routeTree.gen.ts",
+    "vite.config.ts",
     "eslint.config.ts"
   ],
   "rules": {
     "@typescript-eslint/ban-ts-comment": "error",
     "no-array-constructor": "error",
     "@typescript-eslint/no-duplicate-enum-values": "error",
-    // "@typescript-eslint/no-empty-object-type": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-extra-non-null-assertion": "error",
     "@typescript-eslint/no-misused-new": "error",
@@ -217,48 +214,6 @@
         "jsx-a11y/tabindex-no-positive": "error"
       },
       "plugins": ["jsx-a11y"]
-    },
-    {
-      "files": ["**/*.{ts,tsx}"],
-      "rules": {
-        "@next/next/google-font-display": "warn",
-        "@next/next/google-font-preconnect": "warn",
-        "@next/next/next-script-for-ga": "warn",
-        "@next/next/no-async-client-component": "warn",
-        "@next/next/no-before-interactive-script-outside-document": "warn",
-        "@next/next/no-css-tags": "warn",
-        "@next/next/no-head-element": "warn",
-        "@next/next/no-html-link-for-pages": "error",
-        "@next/next/no-img-element": "warn",
-        "@next/next/no-page-custom-font": "warn",
-        "@next/next/no-styled-jsx-in-document": "warn",
-        "@next/next/no-sync-scripts": "error",
-        "@next/next/no-title-in-document-head": "warn",
-        "@next/next/no-typos": "warn",
-        "@next/next/no-unwanted-polyfillio": "warn",
-        "@next/next/inline-script-id": "error",
-        "@next/next/no-assign-module-variable": "error",
-        "@next/next/no-document-import-in-page": "error",
-        "@next/next/no-duplicate-head": "error",
-        "@next/next/no-head-import-in-document": "error",
-        "@next/next/no-script-component-in-head": "error"
-      },
-      "plugins": ["nextjs"]
-    },
-    {
-      "files": ["**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)", "**/*.story.@(ts|tsx|js|jsx|mjs|cjs)"],
-      "rules": {
-        "react-hooks/rules-of-hooks": "off",
-        "import/no-anonymous-default-export": "off"
-      },
-      "plugins": ["react", "import"]
-    },
-    {
-      "files": ["*.stories.@(ts|tsx)"],
-      "rules": {
-        "import/prefer-default-export": "off"
-      },
-      "plugins": ["import"]
     }
   ]
 }

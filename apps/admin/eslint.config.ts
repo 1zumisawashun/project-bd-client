@@ -1,11 +1,11 @@
 import eslint from "@project-bd-client/eslint-config/configs/eslint";
-import next from "@project-bd-client/eslint-config/configs/next";
 import prettier from "@project-bd-client/eslint-config/configs/prettier";
 import react from "@project-bd-client/eslint-config/configs/react";
 import typescript from "@project-bd-client/eslint-config/configs/typescript";
 import oxlint from "eslint-plugin-oxlint";
 
-const typescriptReactConfig = [...eslint, ...typescript, ...react, ...next];
+// NOTE: apps/admin-api/eslint.config.ts と異なり、Vite SPAなのでnext configは使わない
+const typescriptReactConfig = [...eslint, ...typescript, ...react];
 
 const prettierConfig = [...prettier];
 
@@ -14,10 +14,11 @@ export default [
   {
     ignores: [
       "**/node_modules/",
-      "**/.next/",
+      "**/dist/",
       "**/tsconfig.json",
-      "next.config.mjs",
+      "vite.config.ts",
       "eslint.config.ts",
+      "src/routeTree.gen.ts",
     ],
   },
   ...typescriptReactConfig,

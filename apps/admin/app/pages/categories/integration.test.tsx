@@ -5,35 +5,36 @@
 
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { AdminCategoriesPage } from "./AdminCategoriesPage";
 
 // Mock next/navigation
-const mockRefresh = jest.fn();
-jest.mock("next/navigation", () => ({
+// NOTE: vi.mockのfactoryは外側スコープの変数を直接参照できないため、
+// mockRefreshはvi.hoisted()で先に確保しておく（jestのmock-prefix特例に相当）
+const { mockRefresh } = vi.hoisted(() => ({ mockRefresh: vi.fn() }));
+vi.mock("next/navigation", () => ({
   useRouter: () => ({
     refresh: mockRefresh,
   }),
 }));
 
 // Mock next/cache
-jest.mock("next/cache", () => ({
-  revalidatePath: jest.fn(),
+vi.mock("next/cache", () => ({
+  revalidatePath: vi.fn(),
 }));
 
 // Mock server action
-jest.mock("./categories.action", () => ({
-  createCategoryAction: jest.fn(),
+vi.mock("./categories.action", () => ({
+  createCategoryAction: vi.fn(),
 }));
 
 import { createCategoryAction } from "./categories.action";
 
-const mockCreateCategoryAction = createCategoryAction as jest.MockedFunction<
-  typeof createCategoryAction
->;
+const mockCreateCategoryAction = vi.mocked(createCategoryAction);
 
 describe("Admin Category Management Integration", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe("カテゴリー作成フロー", () => {

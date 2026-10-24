@@ -1,15 +1,16 @@
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 import { AdminCategoriesPage } from "./AdminCategoriesPage";
 
 // Mock next/navigation
-jest.mock("next/navigation", () => ({
+vi.mock("next/navigation", () => ({
   useRouter: () => ({
-    refresh: jest.fn(),
+    refresh: vi.fn(),
   }),
 }));
 
 // Mock child components
-jest.mock("./components/CategoryForm", () => ({
+vi.mock("./components/CategoryForm", () => ({
   CategoryForm: ({ onSuccess }: { onSuccess?: () => void }) => (
     <div data-testid="category-form">
       <button onClick={onSuccess}>Mock Form</button>
@@ -17,7 +18,7 @@ jest.mock("./components/CategoryForm", () => ({
   ),
 }));
 
-jest.mock("./components/CategoryList", () => ({
+vi.mock("./components/CategoryList", () => ({
   CategoryList: ({ categories }: { categories: unknown[] }) => (
     <div data-testid="category-list">{categories.length} categories</div>
   ),

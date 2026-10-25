@@ -40,7 +40,7 @@ importers:
         version: 2.1.1
       drizzle-orm:
         specifier: ^0.45.1
-        version: 0.45.2(@electric-sql/pglite@0.5.11)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
+        version: 0.45.4(@electric-sql/pglite@0.5.11)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
       next:
         specifier: 14.2.35
         version: 14.2.35(@babel/core@7.29.7(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -227,7 +227,7 @@ importers:
         version: 3.4.17
       drizzle-orm:
         specifier: ^0.45.1
-        version: 0.45.2(@electric-sql/pglite@0.5.11)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
+        version: 0.45.4(@electric-sql/pglite@0.5.11)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
       next:
         specifier: 14.2.35
         version: 14.2.35(@babel/core@7.29.7(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -438,7 +438,7 @@ importers:
         version: 2.4.3
       drizzle-orm:
         specifier: ^0.45.1
-        version: 0.45.2(@electric-sql/pglite@0.5.11)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
+        version: 0.45.4(@electric-sql/pglite@0.5.11)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
       next:
         specifier: 14.2.35
         version: 14.2.35(@babel/core@7.29.7(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -481,7 +481,7 @@ importers:
         version: 17.4.2
       drizzle-orm:
         specifier: ^0.45.1
-        version: 0.45.2(@electric-sql/pglite@0.5.11)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
+        version: 0.45.4(@electric-sql/pglite@0.5.11)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1)
       next-auth:
         specifier: ^5.0.0-beta.20
         version: 5.0.0-beta.32(next@14.2.35(@babel/core@7.29.7(supports-color@8.1.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
@@ -4379,8 +4379,8 @@ packages:
     resolution: {integrity: sha512-YCYqxTLIB2OCqf6w9/Vef13baBVbwQIPcbT4Y56AfO6B9ajZhDhD8Jkveg/hJvT/iuMloKD/IYYkyMMNhr7Kqg==}
     hasBin: true
 
-  drizzle-orm@0.45.2:
-    resolution: {integrity: sha512-kY0BSaTNYWnoDMVoyY8uxmyHjpJW1geOmBMdSSicKo9CIIWkSxMIj2rkeSR51b8KAPB7m+qysjuHme5nKP+E5Q==}
+  drizzle-orm@0.45.4:
+    resolution: {integrity: sha512-NiM1YZpJ2UxyeE67DpDDZ+Tsw4YLX3trSlkNT7Tm9eKoUNb1LvaAaQzXgYQsWs+AQ9TUmmwMmBOCXuqqxUWKKQ==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=4'
@@ -4388,6 +4388,7 @@ packages:
       '@libsql/client': '>=0.10.0'
       '@libsql/client-wasm': '>=0.10.0'
       '@neondatabase/serverless': '>=0.10.0'
+      '@netlify/db': '>=0.4.0'
       '@op-engineering/op-sqlite': '>=2'
       '@opentelemetry/api': ^1.4.1
       '@planetscale/database': '>=1.13'
@@ -4423,6 +4424,8 @@ packages:
       '@libsql/client-wasm':
         optional: true
       '@neondatabase/serverless':
+        optional: true
+      '@netlify/db':
         optional: true
       '@op-engineering/op-sqlite':
         optional: true
@@ -11501,7 +11504,7 @@ snapshots:
       esbuild: 0.25.12
       tsx: 4.23.13
 
-  drizzle-orm@0.45.2(@electric-sql/pglite@0.5.11)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1):
+  drizzle-orm@0.45.4(@electric-sql/pglite@0.5.11)(@types/better-sqlite3@7.6.13)(better-sqlite3@12.11.1):
     optionalDependencies:
       '@electric-sql/pglite': 0.5.11
       '@types/better-sqlite3': 7.6.13

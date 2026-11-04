@@ -1,18 +1,18 @@
 import { type Session } from "next-auth";
-import { type Category } from "@project-bd-client/db/schema";
+import { beforeEach, describe, expect, it, vi, type Mock } from "vitest";
 
 // Mock dependencies - must be before imports
-jest.mock("next/cache", () => ({
-  revalidatePath: jest.fn(),
+vi.mock("next/cache", () => ({
+  revalidatePath: vi.fn(),
 }));
 
-jest.mock("@project-bd-client/auth/session", () => ({
-  getSession: jest.fn(),
+vi.mock("@project-bd-client/auth/session", () => ({
+  getSession: vi.fn(),
 }));
 
-jest.mock("@/functions/db/category", () => ({
-  getCategoryByName: jest.fn(),
-  createCategory: jest.fn(),
+vi.mock("@/functions/db/category", () => ({
+  getCategoryByName: vi.fn(),
+  createCategory: vi.fn(),
 }));
 
 import { revalidatePath } from "next/cache";
@@ -20,17 +20,15 @@ import { createCategory, getCategoryByName } from "@/functions/db/category";
 import { getSession } from "@project-bd-client/auth/session";
 import { createCategoryAction } from "./categories.action";
 
-const mockRevalidatePath = revalidatePath as jest.MockedFunction<typeof revalidatePath>;
+const mockRevalidatePath = vi.mocked(revalidatePath);
 
-const mockGetSession = getSession as unknown as jest.MockedFunction<() => Promise<Session | null>>;
-const mockGetCategoryByName = getCategoryByName as jest.MockedFunction<
-  () => Promise<Category | null>
->;
-const mockCreateCategory = createCategory as jest.MockedFunction<() => Promise<Category | null>>;
+const mockGetSession = getSession as unknown as Mock<() => Promise<Session | null>>;
+const mockGetCategoryByName = vi.mocked(getCategoryByName);
+const mockCreateCategory = vi.mocked(createCategory);
 
 describe("createCategoryAction", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe("authorization", () => {

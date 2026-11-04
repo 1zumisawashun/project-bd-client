@@ -1,21 +1,20 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { CategoryForm } from "./CategoryForm";
 
 // Mock the server action
-jest.mock("../categories.action", () => ({
-  createCategoryAction: jest.fn(),
+vi.mock("../categories.action", () => ({
+  createCategoryAction: vi.fn(),
 }));
 
 import { createCategoryAction } from "../categories.action";
 
-const mockCreateCategoryAction = createCategoryAction as jest.MockedFunction<
-  typeof createCategoryAction
->;
+const mockCreateCategoryAction = vi.mocked(createCategoryAction);
 
 describe("CategoryForm", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe("rendering", () => {
@@ -104,7 +103,7 @@ describe("CategoryForm", () => {
         message: "成功しました",
       });
 
-      const onSuccess = jest.fn();
+      const onSuccess = vi.fn();
       const user = userEvent.setup();
       render(<CategoryForm onSuccess={onSuccess} />);
 

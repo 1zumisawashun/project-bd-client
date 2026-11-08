@@ -26,10 +26,8 @@
     "lint:oxlint:fix": "npx oxlint --type-aware --type-check --tsconfig ./tsconfig.json --fix",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
-    "test": "jest",
-    "test:vitest": "vitest run",
-    "test:vitest:watch": "vitest",
-    "test:watch": "jest --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "typecheck": "npx tsc --noEmit",
     "vercel-build": "next build"
   },
